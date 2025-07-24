@@ -73,6 +73,7 @@ namespace UI {
     void showLoadingSpinner(bool show);
     void showSigningConfirmation(const String& eventKind, const String& content);
     void showPairingQRCode();
+    void showEventSignedNotification(const String& eventKind, const String& content);
     
     // Settings integration
     void updateShopNameDisplay();

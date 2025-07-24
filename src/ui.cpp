@@ -159,12 +159,11 @@ namespace UI {
         // Action buttons for remote signer
         const int button_width = 140;
         const int button_height = 50;
-        const int button_spacing = 20;
 
         // Show Pairing QR Code button
         lv_obj_t *qr_btn = lv_btn_create(lv_scr_act());
         lv_obj_set_size(qr_btn, button_width, button_height);
-        lv_obj_align(qr_btn, LV_ALIGN_BOTTOM_LEFT, button_spacing, -10);
+        lv_obj_align(qr_btn, LV_ALIGN_BOTTOM_LEFT, 0, -10);
         lv_obj_add_event_cb(qr_btn, [](lv_event_t* e) {
             lv_event_code_t code = lv_event_get_code(e);
             if (code == LV_EVENT_CLICKED) {
@@ -173,7 +172,7 @@ namespace UI {
         }, LV_EVENT_CLICKED, NULL);
         
         lv_obj_t *qr_label = lv_label_create(qr_btn);
-        lv_label_set_text(qr_label, "📱 Pairing QR");
+        lv_label_set_text(qr_label, "Pairing QR");
         lv_obj_set_style_text_font(qr_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
         lv_obj_center(qr_label);
         
@@ -184,7 +183,7 @@ namespace UI {
         // Settings button
         lv_obj_t *settings_btn = lv_btn_create(lv_scr_act());
         lv_obj_set_size(settings_btn, button_width, button_height);
-        lv_obj_align(settings_btn, LV_ALIGN_BOTTOM_RIGHT, -button_spacing, -10);
+        lv_obj_align(settings_btn, LV_ALIGN_BOTTOM_RIGHT, 0, -10);
         lv_obj_add_event_cb(settings_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS);
 
         lv_obj_t *settings_label = lv_label_create(settings_btn);
@@ -1328,5 +1327,51 @@ namespace UI {
         
         // Use existing QR code display functionality
         Display::displayQRCode(bunkerUrl);
+    }
+    
+    void showEventSignedNotification(const String& eventKind, const String& content) {
+        // Update the main status display to show the signing success
+        if (display_label && lv_obj_is_valid(display_label)) {
+            // Create a nice big checkmark and success message
+            String notification = LV_SYMBOL_OK " Event Signed!\n\n";
+            notification += "Kind: " + eventKind + "\n\n";
+            
+            // Truncate content to first 100 characters for display
+            String truncatedContent = content;
+            if (truncatedContent.length() > 100) {
+                truncatedContent = truncatedContent.substring(0, 97) + "...";
+            }
+            
+            // Clean up content for display (remove newlines, etc)
+            truncatedContent.replace("\n", " ");
+            truncatedContent.replace("\r", " ");
+            truncatedContent.replace("\"", "'");
+            
+            notification += "Content: " + truncatedContent + "\n\n";
+            
+            // Add timestamp
+            time_t now;
+            time(&now);
+            struct tm * timeinfo = localtime(&now);
+            char timeStr[64];
+            strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", timeinfo);
+            notification += "Signed at: " + String(timeStr);
+            
+            // Update the display label with success styling
+            lv_label_set_text(display_label, notification.c_str());
+            lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
+            lv_obj_set_style_text_align(display_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+            
+            Serial.println("Event signed notification displayed");
+            
+            // Auto-clear after 5 seconds
+            lv_timer_create([](lv_timer_t *timer) {
+                if (display_label && lv_obj_is_valid(display_label)) {
+                    lv_label_set_text(display_label, "Ready to sign Nostr events\n\nWaiting for signing requests...");
+                    lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+                }
+                lv_timer_del(timer);
+            }, 5000, NULL);
+        }
     }
 }
