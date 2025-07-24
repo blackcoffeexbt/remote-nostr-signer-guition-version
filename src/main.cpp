@@ -24,7 +24,14 @@
 #include "freertos/queue.h"
 #include "app.h"
 
+// Import Nostr library for memory initialization
+#include "../lib/nostr/nostr.h"
+
 static const String SOFTWARE_VERSION = "v1.0.0";
+
+// Memory space definitions for Nostr operations to prevent heap fragmentation
+#define EVENT_NOTE_SIZE 2000000
+#define ENCRYPTED_MESSAGE_BIN_SIZE 100000
 
 // Remaining global variables that main.cpp still needs
 static unsigned long wifi_connect_start_time = 0;
@@ -86,6 +93,11 @@ void setup(void)
     Serial.begin(115200);
     Serial.println("=== NWC Point of Sale Device Starting ===");
     Serial.println("Software Version: " + SOFTWARE_VERSION);
+    
+    // Initialize PSRAM memory space for Nostr operations to prevent heap fragmentation
+    Serial.println("Initializing Nostr memory space...");
+    nostr::initMemorySpace(EVENT_NOTE_SIZE, ENCRYPTED_MESSAGE_BIN_SIZE);
+    Serial.println("Nostr memory space initialized");
     
     // Initialize all application modules through the App coordinator
     App::init();

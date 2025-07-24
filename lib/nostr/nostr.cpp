@@ -212,8 +212,11 @@ namespace nostr
     {
         _startTimer("nip44Decrypt: nip44Decrypt");
         auto result = getPubKeyAndContent(serialisedJson);
+        Serial.println("nip44Decrypt: result is: " + result.first + " " + result.second);
         String senderPubKeyHex = result.first;
+        Serial.println("nip44Decrypt: senderPubKeyHex is: " + senderPubKeyHex);
         String content = result.second;
+        Serial.println("nip44Decrypt: content is: " + content);
         _stopTimer("nip44Decrypt: Got result from getPubKeyAndContent");
 
         return executeDecryptMessageNip44(content, privateKeyHex, senderPubKeyHex);
