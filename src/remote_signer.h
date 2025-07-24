@@ -87,7 +87,7 @@ namespace RemoteSigner {
     
     // Constants
     namespace Config {
-        const unsigned long WS_PING_INTERVAL = 10000; // 10 seconds
+        const unsigned long WS_PING_INTERVAL = 5000; // 10 seconds
         const unsigned long WS_FRAGMENT_TIMEOUT = 30000; // 30 seconds
         const size_t WS_MAX_FRAGMENT_SIZE = 1024 * 1024; // 1MB
         const unsigned long CONNECTION_TIMEOUT = 30000; // 30 seconds

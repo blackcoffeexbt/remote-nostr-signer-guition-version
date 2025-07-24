@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <time.h>
+#include <vector>
 
 #include "ui.h"
 #include "settings.h"
@@ -27,6 +29,10 @@ namespace UI {
     static lv_obj_t* invoice_label = NULL;
     static lv_obj_t* invoice_spinner = NULL;
     static lv_obj_t* main_wifi_status_label = NULL;
+    
+    // Signed events list
+    static std::vector<SignedEvent> signed_events;
+    static lv_obj_t* signed_events_list = NULL;
     
     // Invoice overlay elements
     static lv_obj_t* invoice_overlay = NULL;
@@ -67,6 +73,7 @@ namespace UI {
         ap_password_keyboard = NULL;
         settings_pin_btn = NULL;
         settings_save_btn = NULL;
+        signed_events_list = NULL;
     }
     
     void loadScreen(screen_state_t screen) {
@@ -125,26 +132,46 @@ namespace UI {
 
         // Main title
         lv_obj_t *title_label = lv_label_create(lv_scr_act());
-        lv_label_set_text(title_label, "🔐 Nostr Remote Signer");
+        lv_label_set_text(title_label, "Nostr Remote Signer");
         lv_obj_set_style_text_color(title_label, lv_color_hex(Colors::PRIMARY), 0);
         lv_obj_set_style_text_font(title_label, Fonts::FONT_XLARGE, 0);
         lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 40);
 
-        // Status display area
-        lv_obj_t *status_panel = lv_obj_create(lv_scr_act());
-        lv_obj_set_size(status_panel, 300, 120);
-        lv_obj_align(status_panel, LV_ALIGN_CENTER, 0, -20);
-        lv_obj_set_style_bg_color(status_panel, lv_color_hex(0x1a1a1a), LV_PART_MAIN);
-        lv_obj_set_style_border_width(status_panel, 2, LV_PART_MAIN);
-        lv_obj_set_style_border_color(status_panel, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
-        lv_obj_set_style_radius(status_panel, 10, LV_PART_MAIN);
+        // Signed events list container (taller to fill more space)
+        lv_obj_t *events_container = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(events_container, 300, 280);  // Made much taller
+        lv_obj_align(events_container, LV_ALIGN_CENTER, 0, 10);  // Moved down slightly
+        lv_obj_set_style_bg_color(events_container, lv_color_hex(0x1a1a1a), LV_PART_MAIN);
+        lv_obj_set_style_border_width(events_container, 2, LV_PART_MAIN);
+        lv_obj_set_style_border_color(events_container, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_set_style_radius(events_container, 10, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(events_container, 8, LV_PART_MAIN);
         
-        display_label = lv_label_create(status_panel);
-        lv_label_set_text(display_label, "Ready to sign Nostr events\n\nWaiting for signing requests...");
-        lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
-        lv_obj_set_style_text_font(display_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
-        lv_obj_set_style_text_align(display_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
-        lv_obj_align(display_label, LV_ALIGN_CENTER, 0, 0);
+        // Create scrollable list for signed events
+        signed_events_list = lv_list_create(events_container);
+        lv_obj_set_size(signed_events_list, lv_pct(100), lv_pct(100));
+        lv_obj_center(signed_events_list);
+        lv_obj_set_style_bg_color(signed_events_list, lv_color_hex(0x1a1a1a), LV_PART_MAIN);
+        lv_obj_set_style_border_width(signed_events_list, 0, LV_PART_MAIN);
+        
+        // Initial message when no events are signed yet
+        if (signed_events.empty()) {
+            lv_obj_t* initial_btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_REFRESH, "Ready to sign Nostr events");
+            lv_obj_t* initial_label = lv_obj_get_child(initial_btn, 1); // Get the label child
+            lv_obj_set_style_text_color(initial_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+            lv_obj_set_style_text_align(initial_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+            lv_obj_clear_flag(initial_btn, LV_OBJ_FLAG_CLICKABLE); // Make it non-clickable
+        } else {
+            // Populate with existing signed events
+            for (const auto& event : signed_events) {
+                String item_text = "Kind " + event.eventKind + " - " + event.timestamp;
+                lv_obj_t* btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_OK, item_text.c_str());
+                lv_obj_set_style_bg_color(btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+                lv_obj_set_style_text_color(btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
+                lv_obj_clear_flag(btn, LV_OBJ_FLAG_CLICKABLE);
+            }
+        }
 
         // Create QR canvas for pairing code display (initially hidden)
         qr_canvas = lv_obj_create(lv_scr_act());
@@ -163,7 +190,7 @@ namespace UI {
         // Show Pairing QR Code button
         lv_obj_t *qr_btn = lv_btn_create(lv_scr_act());
         lv_obj_set_size(qr_btn, button_width, button_height);
-        lv_obj_align(qr_btn, LV_ALIGN_BOTTOM_LEFT, 0, -10);
+        lv_obj_align(qr_btn, LV_ALIGN_BOTTOM_LEFT, 10, -10);
         lv_obj_add_event_cb(qr_btn, [](lv_event_t* e) {
             lv_event_code_t code = lv_event_get_code(e);
             if (code == LV_EVENT_CLICKED) {
@@ -183,7 +210,7 @@ namespace UI {
         // Settings button
         lv_obj_t *settings_btn = lv_btn_create(lv_scr_act());
         lv_obj_set_size(settings_btn, button_width, button_height);
-        lv_obj_align(settings_btn, LV_ALIGN_BOTTOM_RIGHT, 0, -10);
+        lv_obj_align(settings_btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
         lv_obj_add_event_cb(settings_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS);
 
         lv_obj_t *settings_label = lv_label_create(settings_btn);
@@ -1329,49 +1356,67 @@ namespace UI {
         Display::displayQRCode(bunkerUrl);
     }
     
-    void showEventSignedNotification(const String& eventKind, const String& content) {
-        // Update the main status display to show the signing success
-        if (display_label && lv_obj_is_valid(display_label)) {
-            // Create a nice big checkmark and success message
-            String notification = LV_SYMBOL_OK " Event Signed!\n\n";
-            notification += "Kind: " + eventKind + "\n\n";
+    void addSignedEvent(const String& eventKind, const String& content, const String& timestamp) {
+        // Add to the vector
+        SignedEvent event;
+        event.eventKind = eventKind;
+        event.content = content;
+        event.timestamp = timestamp;
+        signed_events.push_back(event);
+        
+        // Limit to last 20 events to prevent memory issues
+        if (signed_events.size() > 20) {
+            signed_events.erase(signed_events.begin());
+        }
+        
+        // Update the list if it exists and is valid
+        if (signed_events_list && lv_obj_is_valid(signed_events_list)) {
+            // Clear the list first
+            lv_obj_clean(signed_events_list);
             
-            // Truncate content to first 100 characters for display
-            String truncatedContent = content;
-            if (truncatedContent.length() > 100) {
-                truncatedContent = truncatedContent.substring(0, 97) + "...";
+            // Add all events back
+            for (const auto& evt : signed_events) {
+                String item_text = "Kind " + evt.eventKind + " - " + evt.timestamp;
+                lv_obj_t* btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_OK, item_text.c_str());
+                lv_obj_set_style_bg_color(btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+                lv_obj_set_style_text_color(btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
+                lv_obj_clear_flag(btn, LV_OBJ_FLAG_CLICKABLE);
             }
             
-            // Clean up content for display (remove newlines, etc)
-            truncatedContent.replace("\n", " ");
-            truncatedContent.replace("\r", " ");
-            truncatedContent.replace("\"", "'");
-            
-            notification += "Content: " + truncatedContent + "\n\n";
-            
-            // Add timestamp
-            time_t now;
-            time(&now);
-            struct tm * timeinfo = localtime(&now);
-            char timeStr[64];
-            strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", timeinfo);
-            notification += "Signed at: " + String(timeStr);
-            
-            // Update the display label with success styling
-            lv_label_set_text(display_label, notification.c_str());
-            lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
-            lv_obj_set_style_text_align(display_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
-            
-            Serial.println("Event signed notification displayed");
-            
-            // Auto-clear after 5 seconds
-            lv_timer_create([](lv_timer_t *timer) {
-                if (display_label && lv_obj_is_valid(display_label)) {
-                    lv_label_set_text(display_label, "Ready to sign Nostr events\n\nWaiting for signing requests...");
-                    lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
-                }
-                lv_timer_del(timer);
-            }, 5000, NULL);
+            // Scroll to bottom to show latest event
+            lv_obj_scroll_to_y(signed_events_list, LV_COORD_MAX, LV_ANIM_ON);
         }
+        
+        Serial.println("Added signed event to list: Kind " + eventKind + " at " + timestamp);
+    }
+    
+    void clearSignedEvents() {
+        signed_events.clear();
+        
+        if (signed_events_list && lv_obj_is_valid(signed_events_list)) {
+            lv_obj_clean(signed_events_list);
+            
+            // Add initial message
+            lv_obj_t* initial_btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_REFRESH, "Ready to sign Nostr events");
+            lv_obj_t* initial_label = lv_obj_get_child(initial_btn, 1);
+            lv_obj_set_style_text_color(initial_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+            lv_obj_set_style_text_align(initial_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+            lv_obj_clear_flag(initial_btn, LV_OBJ_FLAG_CLICKABLE);
+        }
+    }
+    
+    void showEventSignedNotification(const String& eventKind, const String& content) {
+        // Create timestamp
+        time_t now;
+        time(&now);
+        struct tm * timeinfo = localtime(&now);
+        char timeStr[64];
+        strftime(timeStr, sizeof(timeStr), "%H:%M:%S", timeinfo);
+        
+        // Add event to the persistent list instead of temporary notification
+        addSignedEvent(eventKind, content, String(timeStr));
+        
+        Serial.println("Event signed and added to persistent list: Kind " + eventKind);
     }
 }

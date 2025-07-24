@@ -68,6 +68,16 @@ namespace UI {
     void invoiceCloseButtonEventHandler(lv_event_t* e);
     void rebootDeviceEventHandler(lv_event_t* e);
     
+    // Signed events management
+    struct SignedEvent {
+        String eventKind;
+        String content;
+        String timestamp;
+    };
+    
+    void addSignedEvent(const String& eventKind, const String& content, const String& timestamp);
+    void clearSignedEvents();
+    
     // Utility functions
     void updateStatusDisplay(const String& status);
     void showLoadingSpinner(bool show);
