@@ -14,7 +14,7 @@
 #include "display.h"
 #include "wifi_manager.h"
 #include "ui.h"
-#include "nwc.h"
+#include "remote_signer.h"
 
 namespace App {
     /**
@@ -52,10 +52,9 @@ namespace App {
      * Inter-Module Communication
      */
     void notifyWiFiStatusChanged(bool connected);
-    void notifyNWCStatusChanged(bool connected);
-    void notifyPricesUpdated();
-    void notifyInvoiceCreated(const String& invoice);
-    void notifyPaymentReceived();
+    void notifySignerStatusChanged(bool connected);
+    void notifySigningRequest(const String& eventKind, const String& content);
+    void notifySigningCompleted(bool success);
     
     /**
      * Configuration Management
@@ -72,29 +71,10 @@ namespace App {
     void printSystemInfo();
     
     /**
-     * Power Management
+     * Power Management (Sleep modes removed for continuous monitoring)
      */
-    void enterSleepMode();
-    void exitSleepMode();
-    void enterLightSleepMode();
-    void exitLightSleepMode();
-    
-    /**
-     * Sleep Management
-     */
-    void initSleepMode();
-    void cleanupSleepMode();
     void resetActivityTimer();
-    void sleepCheckCallback(lv_timer_t* timer);
-    void setSleepEnabled(bool enabled);
-    bool isSleepEnabled();
-    bool isInLightSleep();
-    bool isBacklightOff();
-    unsigned long getInactiveTime();
-    unsigned long getLightSleepTimeout();
-    unsigned long getDeepSleepTimeout();
     void handleTouchWake();
-    bool isInWakeGracePeriod();
     
     /**
      * Module Health Monitoring
@@ -131,12 +111,7 @@ namespace App {
         const unsigned long HEALTH_CHECK_INTERVAL = 30000; // 30 seconds
         const unsigned long STATUS_REPORT_INTERVAL = 300000; // 5 minutes
         
-        // Deep Sleep Configuration
-        const unsigned long SLEEP_TIMEOUT = 30 * 1000; // 30 seconds
-        const gpio_num_t WAKE_PIN = GPIO_NUM_10; // GPIO for wake up
-        const unsigned long SLEEP_CHECK_INTERVAL = 1000; // Check every second
-        
-        // Wake Grace Period Configuration
-        const unsigned long WAKE_GRACE_PERIOD = 300; // 300ms grace period after wake
+        // Touch handling configuration
+        const unsigned long TOUCH_DEBOUNCE_TIME = 50; // 50ms debounce
     }
 }

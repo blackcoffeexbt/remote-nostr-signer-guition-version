@@ -6,7 +6,7 @@
 namespace UI {
     // Screen state enumeration
     typedef enum {
-        SCREEN_KEYPAD,
+        SCREEN_SIGNER_STATUS,
         SCREEN_SETTINGS,
         SCREEN_WIFI,
         SCREEN_WIFI_PASSWORD,
@@ -19,7 +19,7 @@ namespace UI {
     void cleanup();
     
     // Screen creation functions
-    void createKeypadScreen();
+    void createSignerStatusScreen();
     void createSettingsScreen();
     void createWiFiScreen();
     void createWiFiPasswordScreen(const char* ssid);
@@ -69,9 +69,10 @@ namespace UI {
     void rebootDeviceEventHandler(lv_event_t* e);
     
     // Utility functions
-    void updateAmountDisplay(const String& amount);
     void updateStatusDisplay(const String& status);
     void showLoadingSpinner(bool show);
+    void showSigningConfirmation(const String& eventKind, const String& content);
+    void showPairingQRCode();
     
     // Settings integration
     void updateShopNameDisplay();

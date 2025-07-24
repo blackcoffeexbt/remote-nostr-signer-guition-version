@@ -199,12 +199,7 @@ namespace Display {
             // Handle touch wake from light sleep first
             App::handleTouchWake();
             
-            // Check if we're in wake grace period - if so, ignore touch events
-            if (App::isInWakeGracePeriod()) {
-                data->state = LV_INDEV_STATE_RELEASED;
-                last_touch_state = currently_touched;
-                return;
-            }
+            // No wake grace period needed for continuous monitoring
             
             // Read touched point from touch module
             touch.readData(&touchX, &touchY);

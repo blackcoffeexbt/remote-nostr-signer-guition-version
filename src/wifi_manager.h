@@ -118,5 +118,6 @@ namespace WiFiManager {
     // AP mode web server handlers
     void handleAPRoot();
     void handleAPConfig();
+    void handleCurrentConfig();
     void updateSettingsScreenForAPMode();
 }

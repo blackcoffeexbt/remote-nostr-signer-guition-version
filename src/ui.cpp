@@ -4,13 +4,11 @@
 #include "settings.h"
 #include "wifi_manager.h"
 #include "display.h"
-#include "nwc.h"
+#include "remote_signer.h"
 #include "app.h"
 
 // Forward declarations for external functions
 extern lv_obj_t* wifi_list;
-extern bool nwc_initialized;
-extern String nwcPairingUrl;
 
 namespace UI {
     // Font definitions
@@ -20,7 +18,7 @@ namespace UI {
     const lv_font_t* Fonts::FONT_SMALL = &lv_font_montserrat_12;
     
     // Current screen state
-    static screen_state_t current_screen = SCREEN_KEYPAD;
+    static screen_state_t current_screen = SCREEN_SIGNER_STATUS;
     
     // Global UI elements
     static lv_obj_t* display_label = NULL;
@@ -46,8 +44,8 @@ namespace UI {
     void init() {
         // UI is initialized through Display::init()
         // This function can be used for additional UI setup
-        current_screen = SCREEN_KEYPAD;
-        loadScreen(SCREEN_KEYPAD);
+        current_screen = SCREEN_SIGNER_STATUS;
+        loadScreen(SCREEN_SIGNER_STATUS);
     }
     
     void cleanup() {
@@ -82,8 +80,8 @@ namespace UI {
         lv_timer_handler();
         
         switch (screen) {
-            case SCREEN_KEYPAD:
-                createKeypadScreen();
+            case SCREEN_SIGNER_STATUS:
+                createSignerStatusScreen();
                 break;
             case SCREEN_SETTINGS:
                 createSettingsScreen();
@@ -106,7 +104,7 @@ namespace UI {
         lv_timer_handler();
     }
     
-    void createKeypadScreen() {
+    void createSignerStatusScreen() {
         // Set black background for the main screen
         lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
         
@@ -122,156 +120,81 @@ namespace UI {
         lv_label_set_text(relay_status_label, "Relay: Disconnected");
         lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x9E9E9E), 0);
         
-        // Set reference for NWC module to update
-        NWC::setRelayStatusLabel(relay_status_label);
+        // Set reference for RemoteSigner module to update
+        RemoteSigner::setStatusLabel(relay_status_label);
 
-        // Create display area at the top
-        lv_obj_t *display_panel = lv_obj_create(lv_scr_act());
-        lv_obj_set_size(display_panel, 300, 80);
-        lv_obj_set_pos(display_panel, 10, 30);
-        lv_obj_set_style_bg_color(display_panel, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_border_width(display_panel, 2, LV_PART_MAIN);
-        lv_obj_set_style_border_color(display_panel, lv_color_hex(0x666666), LV_PART_MAIN);
+        // Main title
+        lv_obj_t *title_label = lv_label_create(lv_scr_act());
+        lv_label_set_text(title_label, "🔐 Nostr Remote Signer");
+        lv_obj_set_style_text_color(title_label, lv_color_hex(Colors::PRIMARY), 0);
+        lv_obj_set_style_text_font(title_label, Fonts::FONT_XLARGE, 0);
+        lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 40);
+
+        // Status display area
+        lv_obj_t *status_panel = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(status_panel, 300, 120);
+        lv_obj_align(status_panel, LV_ALIGN_CENTER, 0, -20);
+        lv_obj_set_style_bg_color(status_panel, lv_color_hex(0x1a1a1a), LV_PART_MAIN);
+        lv_obj_set_style_border_width(status_panel, 2, LV_PART_MAIN);
+        lv_obj_set_style_border_color(status_panel, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_set_style_radius(status_panel, 10, LV_PART_MAIN);
         
-        display_label = lv_label_create(display_panel);
-        lv_label_set_text(display_label, ("0 " + Settings::getCurrency()).c_str());
-        lv_obj_set_style_text_color(display_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_set_style_text_font(display_label, &lv_font_montserrat_24, LV_PART_MAIN);
+        display_label = lv_label_create(status_panel);
+        lv_label_set_text(display_label, "Ready to sign Nostr events\n\nWaiting for signing requests...");
+        lv_obj_set_style_text_color(display_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_text_font(display_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_set_style_text_align(display_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
         lv_obj_align(display_label, LV_ALIGN_CENTER, 0, 0);
 
-        // Keypad layout parameters
-        const int num_button_spacing = 5;
-        const int num_button_width = (320 - (4 * num_button_spacing)) / 3;
-        const int num_button_height = 65;
-        const int start_y = 120;
+        // Create QR canvas for pairing code display (initially hidden)
+        qr_canvas = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(qr_canvas, 300, 300);
+        lv_obj_align(qr_canvas, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_style_bg_color(qr_canvas, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_border_width(qr_canvas, 2, LV_PART_MAIN);
+        lv_obj_set_style_border_color(qr_canvas, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN); // Hidden by default
+        Display::setQRCanvas(qr_canvas);
         
-        // Create number buttons 1-9
-        const char* numbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        int row = 0, col = 0;
-        
-        for (int i = 0; i < 9; i++) {
-            lv_obj_t *btn = lv_btn_create(lv_scr_act());
-            lv_obj_set_size(btn, num_button_width, num_button_height);
-            lv_obj_set_pos(btn, num_button_spacing + col * (num_button_width + num_button_spacing), 
-                           start_y + row * (num_button_height + num_button_spacing));
-            
-            lv_obj_add_event_cb(btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-            
-            lv_obj_t *label = lv_label_create(btn);
-            lv_label_set_text(label, numbers[i]);
-            lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_PART_MAIN);
-            lv_obj_center(label);
+        // Action buttons for remote signer
+        const int button_width = 140;
+        const int button_height = 50;
+        const int button_spacing = 20;
 
-            // Style for number buttons
-            lv_obj_set_style_bg_color(btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
-            lv_obj_set_style_text_color(btn, lv_color_hex(0x000000), LV_PART_MAIN);
-            lv_obj_set_style_bg_color(btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
-            lv_obj_set_style_text_color(btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
-            
-            col++;
-            if (col >= 3) {
-                col = 0;
-                row++;
+        // Show Pairing QR Code button
+        lv_obj_t *qr_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(qr_btn, button_width, button_height);
+        lv_obj_align(qr_btn, LV_ALIGN_BOTTOM_LEFT, button_spacing, -10);
+        lv_obj_add_event_cb(qr_btn, [](lv_event_t* e) {
+            lv_event_code_t code = lv_event_get_code(e);
+            if (code == LV_EVENT_CLICKED) {
+                showPairingQRCode();
             }
-        }
+        }, LV_EVENT_CLICKED, NULL);
         
-        // Bottom row: Decimal, 0, Backspace
-        int bottom_row_y = start_y + 3 * (num_button_height + num_button_spacing);
+        lv_obj_t *qr_label = lv_label_create(qr_btn);
+        lv_label_set_text(qr_label, "📱 Pairing QR");
+        lv_obj_set_style_text_font(qr_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_center(qr_label);
         
-        // Decimal button (.)
-        lv_obj_t *decimal_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(decimal_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(decimal_btn, num_button_spacing, bottom_row_y);
-        lv_obj_add_event_cb(decimal_btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t *decimal_label = lv_label_create(decimal_btn);
-        lv_label_set_text(decimal_label, ".");
-        lv_obj_set_style_text_font(decimal_label, &lv_font_montserrat_24, LV_PART_MAIN);
-        lv_obj_center(decimal_label);
-        
-        // Style for decimal button
-        lv_obj_set_style_bg_color(decimal_btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
-        lv_obj_set_style_text_color(decimal_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(decimal_btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(decimal_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
-
-        // Zero button (0)
-        lv_obj_t *zero_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(zero_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(zero_btn, num_button_spacing + (num_button_width + num_button_spacing), bottom_row_y);
-        lv_obj_add_event_cb(zero_btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t *zero_label = lv_label_create(zero_btn);
-        lv_label_set_text(zero_label, "0");
-        lv_obj_set_style_text_font(zero_label, &lv_font_montserrat_24, LV_PART_MAIN);
-        lv_obj_center(zero_label);
-        
-        // Style for zero button
-        lv_obj_set_style_bg_color(zero_btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
-        lv_obj_set_style_text_color(zero_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(zero_btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(zero_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
-
-        // Backspace button
-        lv_obj_t *backspace_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(backspace_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(backspace_btn, num_button_spacing + 2 * (num_button_width + num_button_spacing), bottom_row_y);
-        lv_obj_add_event_cb(backspace_btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t *backspace_label = lv_label_create(backspace_btn);
-        lv_label_set_text(backspace_label, LV_SYMBOL_BACKSPACE);
-        lv_obj_center(backspace_label);
-
-        // Style for backspace button (Yellow)
-        lv_obj_set_style_bg_color(backspace_btn, lv_color_hex(0xFFC107), LV_PART_MAIN);
-        lv_obj_set_style_text_color(backspace_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(backspace_btn, lv_color_hex(0xFFA000), LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(backspace_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
-
-        // Last row: Settings, Clear, and Go
-        int last_row_y = bottom_row_y + num_button_height + num_button_spacing;
+        // Style for QR button (Blue)
+        lv_obj_set_style_bg_color(qr_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_set_style_text_color(qr_btn, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
 
         // Settings button
         lv_obj_t *settings_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(settings_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(settings_btn, num_button_spacing, last_row_y);
+        lv_obj_set_size(settings_btn, button_width, button_height);
+        lv_obj_align(settings_btn, LV_ALIGN_BOTTOM_RIGHT, -button_spacing, -10);
         lv_obj_add_event_cb(settings_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS);
 
-        lv_obj_t * settings_label = lv_label_create(settings_btn);
-        lv_label_set_text(settings_label, LV_SYMBOL_SETTINGS);
+        lv_obj_t *settings_label = lv_label_create(settings_btn);
+        lv_label_set_text(settings_label, LV_SYMBOL_SETTINGS " Settings");
+        lv_obj_set_style_text_font(settings_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
         lv_obj_center(settings_label);
         
         // Style for settings button (Grey)
         lv_obj_set_style_bg_color(settings_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
         lv_obj_set_style_text_color(settings_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(settings_btn, lv_color_hex(0x616161), LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(settings_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
-
-        // Clear button
-        lv_obj_t *clear_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(clear_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(clear_btn, num_button_spacing + (num_button_width + num_button_spacing), last_row_y);
-        lv_obj_add_event_cb(clear_btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-        lv_obj_set_style_bg_color(clear_btn, lv_color_hex(0xFF0000), LV_PART_MAIN);
-        
-        lv_obj_t *clear_label = lv_label_create(clear_btn);
-        lv_label_set_text(clear_label, "Clear");
-        lv_obj_set_style_text_font(clear_label, &lv_font_montserrat_14, LV_PART_MAIN);
-        lv_obj_set_style_text_color(clear_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_center(clear_label);
-
-        // Go button - Green
-        lv_obj_t *go_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(go_btn, num_button_width, num_button_height);
-        lv_obj_set_pos(go_btn, num_button_spacing + 2 * (num_button_width + num_button_spacing), last_row_y);
-        lv_obj_add_event_cb(go_btn, keypadEventHandler, LV_EVENT_CLICKED, NULL);
-        lv_obj_set_style_bg_color(go_btn, lv_color_hex(0x00FF00), LV_PART_MAIN);
-        
-        lv_obj_t *go_label = lv_label_create(go_btn);
-        lv_label_set_text(go_label, "Go");
-        lv_obj_set_style_text_font(go_label, &lv_font_montserrat_14, LV_PART_MAIN);
-        lv_obj_set_style_text_color(go_label, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_center(go_label);
         
         // Set WiFi status label reference for WiFi module
         WiFiManager::setMainStatusLabel(main_wifi_status_label);
@@ -382,7 +305,7 @@ namespace UI {
         lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
         lv_obj_set_size(back_btn, 40, 40);
         lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
-        lv_obj_add_event_cb(back_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_KEYPAD);
+        lv_obj_add_event_cb(back_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SIGNER_STATUS);
         
         lv_obj_t* back_label = lv_label_create(back_btn);
         lv_label_set_text(back_label, LV_SYMBOL_LEFT);
@@ -726,7 +649,7 @@ namespace UI {
         lv_obj_set_style_text_color(relay_info_label, lv_color_hex(Colors::TEXT), 0);
         
         lv_obj_t* relay_url_label = lv_label_create(main_container);
-        lv_label_set_text(relay_url_label, NWC::getRelayUrl().c_str());
+        lv_label_set_text(relay_url_label, RemoteSigner::getRelayUrl().c_str());
         lv_obj_align(relay_url_label, LV_ALIGN_TOP_LEFT, 0, 80);
         lv_obj_set_style_text_font(relay_url_label, Fonts::FONT_SMALL, LV_PART_MAIN);
         lv_obj_set_style_text_color(relay_url_label, lv_color_hex(Colors::TEXT), 0);
@@ -741,7 +664,7 @@ namespace UI {
         lv_obj_set_style_text_color(wallet_pubkey_label, lv_color_hex(Colors::TEXT), 0);
         
         lv_obj_t* wallet_pubkey_value = lv_label_create(main_container);
-        lv_label_set_text(wallet_pubkey_value, NWC::getWalletPubKey().c_str());
+        lv_label_set_text(wallet_pubkey_value, RemoteSigner::getPublicKey().c_str());
         lv_obj_align(wallet_pubkey_value, LV_ALIGN_TOP_LEFT, 0, 135);
         lv_obj_set_style_text_font(wallet_pubkey_value, Fonts::FONT_SMALL, LV_PART_MAIN);
         lv_obj_set_style_text_color(wallet_pubkey_value, lv_color_hex(Colors::TEXT), 0);
@@ -756,7 +679,7 @@ namespace UI {
         lv_obj_set_style_text_color(device_pubkey_label, lv_color_hex(Colors::TEXT), 0);
         
         lv_obj_t* device_pubkey_value = lv_label_create(main_container);
-        lv_label_set_text(device_pubkey_value, NWC::getNpubHex().c_str());
+        lv_label_set_text(device_pubkey_value, RemoteSigner::getPublicKey().c_str());
         lv_obj_align(device_pubkey_value, LV_ALIGN_TOP_LEFT, 0, 190);
         lv_obj_set_style_text_font(device_pubkey_value, Fonts::FONT_SMALL, LV_PART_MAIN);
         lv_obj_set_style_text_color(device_pubkey_value, lv_color_hex(Colors::TEXT), 0);
@@ -895,8 +818,7 @@ namespace UI {
         invoice_processing = false;
         
         // Stop NWC timers when overlay is closed
-        NWC::stopInvoiceLookupTimer();
-        NWC::stopInvoiceNotificationWatchdog();
+        // No invoice timers to stop for signer mode
     }
     
     void updateInvoiceDisplay(const String& invoice, int amount_sats) {
@@ -917,26 +839,7 @@ namespace UI {
             String currency = Settings::getCurrency();
             String amount_text = "Please pay\n" + String(amount_sats) + " sats";
             
-            // Add fiat conversion if not in sats currency and Bitcoin prices are available
-            if (currency != "sats" && NWC::arePricesLoaded()) {
-                long* btc_prices = NWC::getBitcoinPrices();
-                long btc_price = 0;
-                
-                // Get price based on currency
-                if (currency == "USD") btc_price = btc_prices[0];
-                else if (currency == "EUR") btc_price = btc_prices[1];
-                else if (currency == "GBP") btc_price = btc_prices[2];
-                else if (currency == "CAD") btc_price = btc_prices[3];
-                else if (currency == "CHF") btc_price = btc_prices[4];
-                else if (currency == "AUD") btc_price = btc_prices[5];
-                else if (currency == "JPY") btc_price = btc_prices[6];
-                
-                if (btc_price > 0) {
-                    // Convert sats to fiat: (sats / 100,000,000) * btc_price
-                    float fiat_amount = (float)amount_sats / 100000000.0 * btc_price;
-                    amount_text += "\n(" + String(fiat_amount, 2) + " " + currency + ")";
-                }
-            }
+            // Price conversion disabled for signer mode
             
             lv_label_set_text(invoice_amount_label, amount_text.c_str());
             lv_obj_clear_flag(invoice_amount_label, LV_OBJ_FLAG_HIDDEN);
@@ -1079,7 +982,8 @@ namespace UI {
                 // Request invoice creation through NWC module
                 if (entered_number.length() > 0) {
                     float amount = entered_number.toFloat();
-                    NWC::makeInvoice(amount, Settings::getCurrency());
+                    // No invoice creation for signer mode
+                    Serial.println("Signer mode - no invoice creation");
                 }
             }
             else if (strcmp(button_text, ".") == 0) {
@@ -1358,5 +1262,71 @@ namespace UI {
         if (ap_password_textarea != NULL) {
             lv_textarea_set_text(ap_password_textarea, Settings::getAPPassword().c_str());
         }
+    }
+    
+    void showSigningConfirmation(const String& eventKind, const String& content) {
+        // Create a simple signing confirmation overlay
+        lv_obj_t* overlay = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(overlay, LV_HOR_RES, LV_VER_RES);
+        lv_obj_set_style_bg_color(overlay, lv_color_hex(0x000000), 0);
+        lv_obj_set_style_bg_opa(overlay, 200, 0);
+        
+        lv_obj_t* container = lv_obj_create(overlay);
+        lv_obj_set_size(container, 280, 200);
+        lv_obj_center(container);
+        lv_obj_set_style_bg_color(container, lv_color_hex(Colors::BACKGROUND), 0);
+        lv_obj_set_style_border_color(container, lv_color_hex(Colors::PRIMARY), 0);
+        lv_obj_set_style_border_width(container, 2, 0);
+        
+        lv_obj_t* title = lv_label_create(container);
+        lv_label_set_text(title, ("Signing " + eventKind).c_str());
+        lv_obj_set_style_text_color(title, lv_color_hex(Colors::PRIMARY), 0);
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 10);
+        
+        lv_obj_t* content_label = lv_label_create(container);
+        lv_label_set_text(content_label, content.c_str());
+        lv_obj_set_style_text_color(content_label, lv_color_hex(Colors::TEXT), 0);
+        lv_obj_align(content_label, LV_ALIGN_CENTER, 0, -20);
+        lv_label_set_long_mode(content_label, LV_LABEL_LONG_WRAP);
+        lv_obj_set_width(content_label, 250);
+        
+        lv_obj_t* approve_btn = lv_btn_create(container);
+        lv_obj_set_size(approve_btn, 100, 40);
+        lv_obj_align(approve_btn, LV_ALIGN_BOTTOM_LEFT, 20, -10);
+        lv_obj_set_style_bg_color(approve_btn, lv_color_hex(Colors::SUCCESS), 0);
+        
+        lv_obj_t* approve_label = lv_label_create(approve_btn);
+        lv_label_set_text(approve_label, "Approve");
+        lv_obj_center(approve_label);
+        
+        lv_obj_t* reject_btn = lv_btn_create(container);
+        lv_obj_set_size(reject_btn, 100, 40);
+        lv_obj_align(reject_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -10);
+        lv_obj_set_style_bg_color(reject_btn, lv_color_hex(Colors::ERROR), 0);
+        
+        lv_obj_t* reject_label = lv_label_create(reject_btn);
+        lv_label_set_text(reject_label, "Reject");
+        lv_obj_center(reject_label);
+        
+        // For now, auto-approve after 3 seconds (TODO: Add proper touch handling)
+        // This will be implemented when we need proper confirmation UI
+        lv_timer_t* auto_approve_timer = lv_timer_create([](lv_timer_t* timer) {
+            lv_obj_t* overlay = (lv_obj_t*)timer->user_data;
+            lv_obj_del(overlay);
+            lv_timer_del(timer);
+        }, 3000, overlay);
+    }
+    
+    void showPairingQRCode() {
+        // Get bunker URL from RemoteSigner
+        String bunkerUrl = RemoteSigner::getBunkerUrl();
+        
+        if (bunkerUrl.length() == 0) {
+            showMessage("Error", "No bunker URL available. Check configuration.");
+            return;
+        }
+        
+        // Use existing QR code display functionality
+        Display::displayQRCode(bunkerUrl);
     }
 }

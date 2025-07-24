@@ -12,24 +12,12 @@ namespace App
     static unsigned long last_health_check = 0;
     static unsigned long last_status_report = 0;
 
-    // Sleep management
+    // Activity tracking (for diagnostics only)
     static unsigned long last_activity_time = 0;
-    static bool sleep_enabled = true;
-    static lv_timer_t *sleep_check_timer = NULL;
-    static bool in_light_sleep = false;
-    static bool backlight_off = false;
-    
-    // Wake grace period management
-    static unsigned long wake_grace_start_time = 0;
-    static bool in_wake_grace_period = false;
-
-    // Sleep timing constants
-    static const unsigned long LIGHT_SLEEP_TIMEOUT = 10 * 1000; // 10 seconds
-    static const unsigned long DEEP_SLEEP_TIMEOUT = 2 * 60 * 1000; // 2 minutes
 
     void init()
     {
-        Serial.println("=== NWC Point of Sale Device Initializing ===");
+        Serial.println("=== Remote Nostr Signer Initializing ===");
         Serial.println("Version: " + Config::VERSION);
         Serial.println("Build Date: " + Config::BUILD_DATE);
 
@@ -54,26 +42,22 @@ namespace App
             Serial.println("Initializing UI module...");
             UI::init();
 
-            Serial.println("Initializing NWC module...");
-            NWC::init();
+            Serial.println("Initializing Remote Signer module...");
+            RemoteSigner::init();
 
-            // Set up NWC status callback
-            NWC::setStatusCallback([](bool connected, const String &status)
-                                   { App::notifyNWCStatusChanged(connected); });
+            // Set up Remote Signer status callback
+            RemoteSigner::setStatusCallback([](bool connected, const String &status)
+                                           { App::notifySignerStatusChanged(connected); });
 
-            // Load the initial screen
-            UI::loadScreen(UI::SCREEN_KEYPAD);
+            // Load the initial signer screen
+            UI::loadScreen(UI::SCREEN_SIGNER_STATUS);
 
-            // Check if WiFi is already connected and trigger NWC connection if needed
+            // Check if WiFi is already connected and trigger signer connection if needed
             if (WiFiManager::isConnected())
             {
-                Serial.println("WiFi already connected during initialization - connecting to NWC relay");
+                Serial.println("WiFi already connected during initialization - connecting to relay");
                 notifyWiFiStatusChanged(true);
             }
-
-            // Initialize sleep functionality
-            Serial.println("Initializing sleep management...");
-            initSleepMode();
 
             setState(APP_STATE_READY);
             Serial.println("=== Application initialized successfully ===");
@@ -90,11 +74,8 @@ namespace App
     {
         Serial.println("=== Application cleanup starting ===");
 
-        // Cleanup sleep management
-        cleanupSleepMode();
-
         // Cleanup modules in reverse dependency order
-        NWC::cleanup();
+        RemoteSigner::cleanup();
         UI::cleanup();
         WiFiManager::cleanup();
         Settings::cleanup();
@@ -123,18 +104,11 @@ namespace App
             Serial.println("ERROR: WiFiManager::processLoop() threw exception");
         }
 
-        // Process NWC WebSocket events (with error handling)
+        // Process Remote Signer WebSocket events (with error handling)
         try {
-            NWC::processLoop();
+            RemoteSigner::processLoop();
         } catch (...) {
-            Serial.println("ERROR: NWC::processLoop() threw exception");
-        }
-
-        // Update NWC time synchronization (with error handling)
-        try {
-            NWC::updateTime();
-        } catch (...) {
-            Serial.println("ERROR: NWC::updateTime() threw exception");
+            Serial.println("ERROR: RemoteSigner::processLoop() threw exception");
         }
 
         // Periodic health checks
@@ -151,12 +125,7 @@ namespace App
             last_status_report = current_time;
         }
 
-        // Handle reconnection attempts (with error handling)
-        try {
-            NWC::attemptReconnectionIfNeeded();
-        } catch (...) {
-            Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
-        }
+        // No additional processing needed for continuous monitoring
 
         // Small delay to prevent watchdog triggers
         delay(1);
@@ -234,62 +203,52 @@ namespace App
 
         if (connected)
         {
-            // WiFi connected - attempt NWC connection
-            if (!NWC::isConnected())
+            // WiFi connected - attempt Remote Signer connection
+            if (!RemoteSigner::isConnected())
             {
-                Serial.println("WiFi connected, attempting NWC relay connection...");
-                NWC::connectToRelay();
+                Serial.println("WiFi connected, attempting relay connection...");
+                RemoteSigner::connectToRelay();
             }
-
-            // Fetch Bitcoin prices
-            NWC::fetchBitcoinPrices();
         }
         else
         {
-            // WiFi disconnected - notify NWC module
-            Serial.println("WiFi disconnected, disconnecting NWC...");
-            NWC::disconnect();
+            // WiFi disconnected - notify Remote Signer module
+            Serial.println("WiFi disconnected, disconnecting from relay...");
+            RemoteSigner::disconnect();
         }
 
         fireEvent("wifi_status", connected ? "connected" : "disconnected");
     }
 
-    void notifyNWCStatusChanged(bool connected)
+    void notifySignerStatusChanged(bool connected)
     {
-        static bool last_nwc_status = false;
+        static bool last_signer_status = false;
 
         // Prevent duplicate notifications
-        if (last_nwc_status == connected)
+        if (last_signer_status == connected)
         {
             return;
         }
-        last_nwc_status = connected;
+        last_signer_status = connected;
 
-        Serial.println("NWC status changed: " + String(connected ? "Connected" : "Disconnected"));
-        NWC::updateRelayStatusDisplay(connected);
-        fireEvent("nwc_status", connected ? "connected" : "disconnected");
+        Serial.println("Remote Signer status changed: " + String(connected ? "Connected" : "Disconnected"));
+        RemoteSigner::displayConnectionStatus(connected);
+        fireEvent("signer_status", connected ? "connected" : "disconnected");
     }
 
-    void notifyPricesUpdated()
+    void notifySigningRequest(const String& eventKind, const String& content)
     {
-        Serial.println("Bitcoin prices updated");
-        fireEvent("prices_updated", "success");
+        Serial.println("Signing request received: " + eventKind);
+        UI::showSigningConfirmation(eventKind, content);
+        fireEvent("signing_request", eventKind);
     }
 
-    void notifyInvoiceCreated(const String &invoice)
+    void notifySigningCompleted(bool success)
     {
-        Serial.println("Invoice created: " + invoice.substring(0, 20) + "...");
-        NWC::setCurrentInvoice(invoice);
-        UI::createInvoiceOverlay();
-        fireEvent("invoice_created", invoice);
-    }
-
-    void notifyPaymentReceived()
-    {
-        Serial.println("Payment received!");
-        UI::closeInvoiceOverlay();
-        UI::showMessage("Payment Received", "Transaction completed successfully!");
-        fireEvent("payment_received", "success");
+        Serial.println("Signing completed: " + String(success ? "Success" : "Failed"));
+        UI::showMessage(success ? "Event Signed" : "Signing Failed", 
+                       success ? "Event signed successfully!" : "Failed to sign event");
+        fireEvent("signing_completed", success ? "success" : "failed");
     }
 
     bool loadConfiguration()
@@ -344,115 +303,14 @@ namespace App
         Serial.println("==========================");
     }
 
-    void enterSleepMode()
+    void resetActivityTimer()
     {
-        Serial.println("=== Entering deep sleep mode ===");
-
-        // Disable sleep monitoring timer
-        if (sleep_check_timer)
-        {
-            lv_timer_del(sleep_check_timer);
-            sleep_check_timer = NULL;
-        }
-
-        // Close any active invoice overlays and stop timers
-        if (UI::isInvoiceProcessing())
-        {
-            UI::closeInvoiceOverlay();
-        }
-
-        // Stop all NWC timers and disconnect
-        NWC::stopInvoiceLookupTimer();
-        NWC::stopInvoiceNotificationWatchdog();
-
-        // Turn off display backlight for power saving
-        Display::turnOffBacklight();
-
-        // Set Config::WAKE_PIN as input with pulldown (to default LOW)
-        // pinMode(Config::WAKE_PIN, INPUT);
-        // rtc_gpio_pulldown_en(Config::WAKE_PIN);
-        // rtc_gpio_pullup_dis(Config::WAKE_PIN);
-
-        // // Enable EXT1 wakeup when GPIO12 goes HIGH
-        // esp_sleep_enable_ext1_wakeup(1ULL << Config::WAKE_PIN, ESP_EXT1_WAKEUP_ANY_HIGH);
-
-        // Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
-        Serial.flush();
-        esp_deep_sleep_start();
+        last_activity_time = millis();
     }
-
-    void enterLightSleepMode()
+    
+    void handleTouchWake()
     {
-        Serial.println("=== Entering light sleep mode (backlight off) ===");
-        
-        in_light_sleep = true;
-        backlight_off = true;
-        
-        // Turn off display backlight
-        Display::turnOffBacklight();
-        
-        // Stop invoice lookup timer if no invoice is being processed
-        if (!UI::isInvoiceProcessing()) {
-            Serial.println("Stopping invoice lookup timer for light sleep");
-            NWC::stopInvoiceLookupTimer();
-            NWC::stopInvoiceNotificationWatchdog();
-        }
-        
-        fireEvent("light_sleep", "entered");
-    }
-
-    void exitLightSleepMode()
-    {
-        Serial.println("=== Exiting light sleep mode ===");
-        
-        in_light_sleep = false;
-        backlight_off = false;
-        
-        // Turn display backlight back on
-        Display::turnOnBacklight();
-        
-        // Reset activity timer
         resetActivityTimer();
-        
-        fireEvent("light_sleep", "exited");
-    }
-
-    void exitSleepMode()
-    {
-        Serial.println("=== Exiting sleep mode (wake up) ===");
-
-        // Print wake up reason
-        esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
-        switch (wakeup_reason)
-        {
-        case ESP_SLEEP_WAKEUP_EXT0:
-            Serial.println("Wake up caused by external signal using RTC_IO");
-            break;
-        case ESP_SLEEP_WAKEUP_TOUCHPAD:
-            Serial.println("Wake up caused by touchpad");
-            break;
-        case ESP_SLEEP_WAKEUP_TIMER:
-            Serial.println("Wake up caused by timer");
-            break;
-        default:
-            Serial.println("Wake up was not caused by deep sleep: " + String(wakeup_reason));
-            break;
-        }
-
-        // Turn display backlight back on
-        Display::turnOnBacklight();
-        backlight_off = false;
-
-        // Reset activity timer
-        resetActivityTimer();
-
-        // Restart sleep monitoring
-        if (sleep_enabled && sleep_check_timer == NULL)
-        {
-            sleep_check_timer = lv_timer_create(sleepCheckCallback, Config::SLEEP_CHECK_INTERVAL, NULL);
-        }
-
-        fireEvent("sleep_mode", "exited");
     }
 
     bool checkModuleHealth()
@@ -466,10 +324,10 @@ namespace App
             health_ok = false;
         }
 
-        // Check NWC module health
-        if (NWC::isInitialized() && !NWC::isConnected())
+        // Check Remote Signer module health
+        if (RemoteSigner::isInitialized() && !RemoteSigner::isConnected())
         {
-            Serial.println("NWC module health check warning - not connected");
+            Serial.println("Remote Signer module health check warning - not connected");
             // This is a warning, not a failure
         }
 
@@ -492,10 +350,10 @@ namespace App
             Serial.println("  SSID: " + WiFiManager::getSSID());
             Serial.println("  IP: " + WiFiManager::getLocalIP());
         }
-        Serial.println("NWC: " + String(NWC::isConnected() ? "Connected" : "Disconnected"));
-        if (NWC::isConnected())
+        Serial.println("Remote Signer: " + String(RemoteSigner::isConnected() ? "Connected" : "Disconnected"));
+        if (RemoteSigner::isConnected())
         {
-            Serial.println("  Relay: " + NWC::getRelayUrl());
+            Serial.println("  Relay: " + RemoteSigner::getRelayUrl());
         }
         Serial.println("Current Screen: " + String(UI::getCurrentScreen()));
         Serial.println("Free Heap: " + String(ESP.getFreeHeap()));
@@ -543,14 +401,14 @@ namespace App
             Serial.println("WiFi diagnostic: FAIL - Not connected");
         }
 
-        // Test NWC connection
-        if (NWC::isConnected())
+        // Test Remote Signer connection
+        if (RemoteSigner::isConnected())
         {
-            Serial.println("NWC diagnostic: PASS");
+            Serial.println("Remote Signer diagnostic: PASS");
         }
         else
         {
-            Serial.println("NWC diagnostic: FAIL - Not connected");
+            Serial.println("Remote Signer diagnostic: FAIL - Not connected");
         }
 
         Serial.println("=== Diagnostics Complete ===");
@@ -564,7 +422,7 @@ namespace App
         report += "Version: " + getVersion() + "\\n";
         report += "State: " + getStateString() + "\\n";
         report += "WiFi: " + String(WiFiManager::isConnected() ? "OK" : "FAIL") + "\\n";
-        report += "NWC: " + String(NWC::isConnected() ? "OK" : "FAIL") + "\\n";
+        report += "Signer: " + String(RemoteSigner::isConnected() ? "OK" : "FAIL") + "\\n";
         report += "Heap: " + String(ESP.getFreeHeap()) + "\\n";
 
         if (last_error.length() > 0)
@@ -587,189 +445,5 @@ namespace App
         {
             event_callback(event, data);
         }
-
-        // Log event
-        Serial.println("EVENT: " + event + " - " + data);
-    }
-
-    // ========== Sleep Management Functions ==========
-
-    void initSleepMode()
-    {
-        // Configure GPIO 12 as input with pulldown for wake button
-        gpio_config_t io_conf;
-        io_conf.intr_type = GPIO_INTR_DISABLE;
-        io_conf.mode = GPIO_MODE_INPUT;
-        io_conf.pin_bit_mask = (1ULL << Config::WAKE_PIN);
-        io_conf.pull_down_en = GPIO_PULLDOWN_ENABLE;
-        io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-        gpio_config(&io_conf);
-
-        // Initialize activity timer
-        resetActivityTimer();
-
-        // Start sleep monitoring timer if enabled
-        if (sleep_enabled)
-        {
-            sleep_check_timer = lv_timer_create(sleepCheckCallback, Config::SLEEP_CHECK_INTERVAL, NULL);
-        }
-
-        // Check if we're waking up from deep sleep
-        esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
-        if (wakeup_reason != ESP_SLEEP_WAKEUP_UNDEFINED)
-        {
-            exitSleepMode(); // Handle wake up
-        }
-
-        Serial.println("Sleep management initialized");
-        Serial.println("Wake pin: GPIO " + String(Config::WAKE_PIN));
-        Serial.println("Light sleep timeout: " + String(LIGHT_SLEEP_TIMEOUT / 1000) + " seconds");
-        Serial.println("Deep sleep timeout: " + String(DEEP_SLEEP_TIMEOUT / 1000) + " seconds");
-    }
-
-    void cleanupSleepMode()
-    {
-        if (sleep_check_timer)
-        {
-            lv_timer_del(sleep_check_timer);
-            sleep_check_timer = NULL;
-        }
-        Serial.println("Sleep management cleaned up");
-    }
-
-    void resetActivityTimer()
-    {
-        last_activity_time = millis();
-        
-        // If we were in light sleep, exit it
-        if (in_light_sleep)
-        {
-            exitLightSleepMode();
-        }
-        
-        Serial.println("Activity timer reset");
-    }
-
-    void sleepCheckCallback(lv_timer_t *timer)
-    {
-        if (!sleep_enabled)
-        {
-            return;
-        }
-
-        unsigned long current_time = millis();
-        unsigned long inactive_time = current_time - last_activity_time;
-
-        // Don't sleep if invoice processing is active
-        if (UI::isInvoiceProcessing())
-        {
-            return;
-        }
-
-        // Don't sleep if WiFi is not connected (may be in setup mode)
-        if (!WiFiManager::isConnected())
-        {
-            return;
-        }
-
-        // Only allow sleep from the keypad screen
-        if (UI::getCurrentScreen() != UI::SCREEN_KEYPAD)
-        {
-            return;
-        }
-
-        // Check for deep sleep timeout (2 minutes)
-        if (inactive_time >= DEEP_SLEEP_TIMEOUT)
-        {
-            Serial.println("Deep sleep timeout reached (" + String(inactive_time / 1000) + "s), entering deep sleep");
-            enterSleepMode();
-        }
-        // Check for light sleep timeout (10 seconds) - only if not already in light sleep
-        else if (!in_light_sleep && inactive_time >= LIGHT_SLEEP_TIMEOUT)
-        {
-            Serial.println("Light sleep timeout reached (" + String(inactive_time / 1000) + "s), entering light sleep");
-            enterLightSleepMode();
-        }
-    }
-
-    void setSleepEnabled(bool enabled)
-    {
-        sleep_enabled = enabled;
-
-        if (enabled && sleep_check_timer == NULL)
-        {
-            sleep_check_timer = lv_timer_create(sleepCheckCallback, Config::SLEEP_CHECK_INTERVAL, NULL);
-            Serial.println("Sleep mode enabled");
-        }
-        else if (!enabled && sleep_check_timer != NULL)
-        {
-            lv_timer_del(sleep_check_timer);
-            sleep_check_timer = NULL;
-            Serial.println("Sleep mode disabled");
-        }
-    }
-
-    bool isSleepEnabled()
-    {
-        return sleep_enabled;
-    }
-
-    bool isInLightSleep()
-    {
-        return in_light_sleep;
-    }
-
-    bool isBacklightOff()
-    {
-        return backlight_off;
-    }
-
-    unsigned long getInactiveTime()
-    {
-        return millis() - last_activity_time;
-    }
-
-    unsigned long getLightSleepTimeout()
-    {
-        return LIGHT_SLEEP_TIMEOUT;
-    }
-
-    unsigned long getDeepSleepTimeout()
-    {
-        return DEEP_SLEEP_TIMEOUT;
-    }
-
-    // Touch wake handler - should be called from Display::touchpadRead when touch is detected
-    void handleTouchWake()
-    {
-        if (in_light_sleep || backlight_off)
-        {
-            Serial.println("Touch detected - waking from light sleep");
-            exitLightSleepMode();
-            
-            // Start wake grace period to prevent accidental keypad presses
-            wake_grace_start_time = millis();
-            in_wake_grace_period = true;
-            Serial.println("Wake grace period started");
-        }
-    }
-    
-    // Check if device is currently in wake grace period
-    bool isInWakeGracePeriod()
-    {
-        if (!in_wake_grace_period)
-        {
-            return false;
-        }
-        
-        // Check if grace period has expired
-        if (millis() - wake_grace_start_time >= Config::WAKE_GRACE_PERIOD)
-        {
-            in_wake_grace_period = false;
-            Serial.println("Wake grace period ended");
-            return false;
-        }
-        
-        return true;
     }
 }

@@ -4,7 +4,10 @@
 #include "app.h"
 
 #include "ui.h"
-#include "nwc.h"
+#include "remote_signer.h"
+
+// Import Nostr library components for key derivation
+#include "../lib/nostr/nostr.h"
 
 namespace WiFiManager {
     // Global WiFi state
@@ -497,7 +500,7 @@ namespace WiFiManager {
         
         Serial.println("Starting Access Point mode...");
         
-        if (NWC::isInitialized()) {
+        if (RemoteSigner::isInitialized()) {
             // webSocket.disconnect();
             // webSocket.setReconnectInterval(0);
             // NWC disconnection handled by NWC module
@@ -525,9 +528,7 @@ namespace WiFiManager {
         
         ap_server.on("/", HTTP_GET, handleAPRoot);
         ap_server.on("/config", HTTP_POST, handleAPConfig);
-        ap_server.on("/current-url", HTTP_GET, []() {
-            ap_server.send(200, "text/plain", NWC::getPairingUrl());
-        });
+        ap_server.on("/current-config", HTTP_GET, handleCurrentConfig);
         ap_server.onNotFound([]() {
             ap_server.sendHeader("Location", "http://" + String(ap_ip), true);
             ap_server.send(302, "text/plain", "");
@@ -589,7 +590,8 @@ namespace WiFiManager {
         preferences.end();
         
         if (saved_url.length() > 0) {
-            NWC::setPairingUrl(saved_url);
+            // Signer configuration loaded separately
+            Serial.println("Signer config will be loaded from preferences");
             Serial.println("Loaded NWC URL from preferences: " + saved_url);
         } else {
             Serial.println("No saved NWC URL found, using default");
@@ -604,11 +606,12 @@ namespace WiFiManager {
     }
     
     String getNWCUrl() {
-        return NWC::getPairingUrl();
+        return RemoteSigner::getBunkerUrl();
     }
     
     void setNWCUrl(const String& url) {
-        NWC::setPairingUrl(url);
+        // Signer configuration set separately
+        Serial.println("Signer URL configuration: " + url);
         saveNWCUrl(url);
     }
     
@@ -776,48 +779,64 @@ namespace WiFiManager {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NWC Pairing Code Settings</title>
+    <title>Nostr Remote Signer Configuration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 500px; margin: 0 auto; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input[type="text"], input[type="password"], textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        textarea { height: 60px; resize: vertical; }
+        button { background-color: #4CAF50; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background-color: #45a049; }
-        .info { background-color: #e7f3ff; padding: 10px; border-radius: 4px; margin-bottom: 20px; word-wrap: break-word; }
+        .info { background-color: #e7f3ff; padding: 15px; border-radius: 4px; margin-bottom: 20px; word-wrap: break-word; }
+        .warning { background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+        .generate-btn { background-color: #2196F3; margin-left: 10px; padding: 8px 16px; font-size: 14px; }
+        .generate-btn:hover { background-color: #1976D2; }
+        .form-row { display: flex; align-items: end; gap: 10px; }
+        .form-row input { flex: 1; }
+        h1 { color: #333; text-align: center; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .current-config { font-family: monospace; font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>NWC Pairing Code Settings</h1>
-        <p>Set the NWC pairing code for your NWC POS device in the NWC Pairing URL field below and click the Save Configuration button.</p>
+        <h1>🔐 Nostr Remote Signer</h1>
+        <p class="subtitle">Configure your device to act as a secure remote signer for Nostr applications</p>
+        
+        <div class="warning">
+            <strong>⚠️ Security Notice:</strong> Your private key will be stored securely on this device. Never share it with anyone or enter it on untrusted websites.
+        </div>
         
         <div class="info">
-            <strong>Current NWC Pairing Code:</strong><br>
-            <span id="current-url">Loading...</span>
+            <strong>Current Bunker URL:</strong><br>
+            <span id="current-url" class="current-config">Loading...</span>
         </div>
         
         <form action="/config" method="post">
             <div class="form-group">
-                <label for="nwc_url">NWC Pairing URL:</label>
-                <input type="text" id="nwc_url" name="nwc_url" placeholder="nostr+walletconnect://..." required>
+                <label for="private_key">Nostr Private Key (64-character hex):</label>
+                <input type="password" id="private_key" name="private_key" placeholder="64-character hex private key" required>
+                <small style="color: #666;">Enter your Nostr private key as 64 hex characters</small>
             </div>
-            <button type="submit">Save Configuration</button>
+            
+            <div class="form-group">
+                <label for="relay_url">Nostr Relay URL:</label>
+                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.damus.io" required>
+                <small style="color: #666;">WebSocket URL of the Nostr relay to connect to</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="public_key">Public Key (readonly):</label>
+                <input type="text" id="public_key" name="public_key" readonly style="background-color: #f8f9fa;">
+                <small style="color: #666;">This will be automatically calculated from your private key</small>
+            </div>
+            
+            <button type="submit" style="width: 100%;">Save Configuration</button>
         </form>
     </div>
-    
-    <script>
-        window.onload = function() {
-            fetch('/current-url')
-                .then(response => response.text())
-                .then(url => {
-                    document.getElementById('current-url').textContent = url || 'Not configured';
-                    document.getElementById('nwc_url').value = url || '';
-                });
-        };
-    </script>
 </body>
 </html>
         )";
@@ -826,38 +845,118 @@ namespace WiFiManager {
     }
     
     void handleAPConfig() {
-        if (ap_server.hasArg("nwc_url")) {
-            String nwc_url = ap_server.arg("nwc_url");
-            NWC::setPairingUrl(nwc_url);
-            
-            // NWC connection restart will be handled by external modules
-            Serial.println("NWC URL updated - restart will be handled externally");
-            
-            String html = R"(
+        if (!ap_server.hasArg("private_key") || !ap_server.hasArg("relay_url")) {
+            ap_server.send(400, "text/plain", "Missing required parameters");
+            return;
+        }
+        
+        String privateKey = ap_server.arg("private_key");
+        String relayUrl = ap_server.arg("relay_url");
+        
+        Serial.println("Configuring Remote Signer...");
+        Serial.println("Private Key length: " + String(privateKey.length()));
+        Serial.println("Relay URL: " + relayUrl);
+        
+        // Validate private key format
+        if (privateKey.length() != 64 && !privateKey.startsWith("nsec1")) {
+            ap_server.send(400, "text/plain", "Invalid private key format");
+            return;
+        }
+        
+        // Convert nsec to hex if needed
+        String privateKeyHex = privateKey;
+        if (privateKey.startsWith("nsec1")) {
+            // TODO: Add nsec to hex conversion if needed
+            Serial.println("WARNING: nsec format not yet supported, use hex format");
+            ap_server.send(400, "text/plain", "Please use hex format for private key");
+            return;
+        }
+        
+        // Derive public key using nostr library
+        String publicKeyHex = "";
+        try {
+            int byteSize = 32;
+            byte privateKeyBytes[byteSize];
+            fromHex(privateKeyHex, privateKeyBytes, byteSize);
+            PrivateKey privKey(privateKeyBytes);
+            PublicKey pub = privKey.publicKey();
+            publicKeyHex = pub.toString();
+            // remove leading 2 bytes from public key
+            publicKeyHex = publicKeyHex.substring(2);
+            Serial.println("Derived public key: " + publicKeyHex);
+        } catch (...) {
+            Serial.println("ERROR: Failed to derive public key");
+            ap_server.send(400, "text/plain", "Invalid private key - could not derive public key");
+            return;
+        }
+        
+        // Save configuration to RemoteSigner
+        RemoteSigner::setRelayUrl(relayUrl);
+        RemoteSigner::setPrivateKey(privateKeyHex);
+        
+        // Save to preferences
+        Preferences prefs;
+        prefs.begin("signer", false);
+        prefs.putString("private_key", privateKeyHex);
+        prefs.putString("public_key", publicKeyHex);
+        prefs.putString("relay_url", relayUrl);
+        prefs.end();
+        
+        Serial.println("Remote Signer configuration saved successfully");
+        
+        String html = R"(
 <!DOCTYPE html>
 <html>
 <head>
     <title>Configuration Saved</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
-        .success { color: #4CAF50; font-size: 18px; margin: 20px 0; }
-        .back-btn { background-color: #2196F3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 20px; }
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; background-color: #f5f5f5; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .success { color: #4CAF50; font-size: 24px; margin: 20px 0; }
+        .info { background-color: #e7f3ff; padding: 15px; border-radius: 4px; margin: 20px 0; }
+        .back-btn { background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 20px; }
+        .config-item { margin: 10px 0; text-align: left; }
+        .config-label { font-weight: bold; color: #333; }
+        .config-value { font-family: monospace; font-size: 12px; word-break: break-all; color: #666; }
     </style>
 </head>
 <body>
-    <div class="success">✓ Configuration saved successfully!</div>
-    <p>The NWC pairing URL has been updated.</p>
-    <a href="/" class="back-btn">Back to Configuration</a>
+    <div class="container">
+        <div class="success">✓ Configuration saved successfully!</div>
+        
+        <div class="info">
+            <div class="config-item">
+                <div class="config-label">Public Key:</div>
+                <div class="config-value">)" + publicKeyHex + R"(</div>
+            </div>
+            <div class="config-item">
+                <div class="config-label">Relay:</div>
+                <div class="config-value">)" + relayUrl + R"(</div>
+            </div>
+        </div>
+        
+        <p>Your remote signer is now configured and ready to use.</p>
+        <a href="/" class="back-btn">Back to Configuration</a>
+    </div>
 </body>
 </html>
-            )";
-            
-            ap_server.send(200, "text/html", html);
-            Serial.println("NWC URL updated: " + nwc_url);
-        } else {
-            ap_server.send(400, "text/plain", "Missing NWC URL parameter");
-        }
+        )";
+        
+        ap_server.send(200, "text/html", html);
+    }
+    
+    void handleCurrentConfig() {
+        String response = "{";
+        response += "\"bunker_url\":\"" + RemoteSigner::getBunkerUrl() + "\",";
+        response += "\"relay_url\":\"" + RemoteSigner::getRelayUrl() + "\",";
+        response += "\"public_key\":\"" + RemoteSigner::getPublicKey() + "\",";
+        response += "\"private_key\":\"";
+        response += (RemoteSigner::getPrivateKey().length() > 0 ? "configured" : "");
+        response += "\"";
+        response += "}";
+        
+        ap_server.send(200, "application/json", response);
     }
     
     void updateSettingsScreenForAPMode() {
