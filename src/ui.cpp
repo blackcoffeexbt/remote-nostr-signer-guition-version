@@ -247,16 +247,16 @@ namespace UI {
         lv_obj_align(main_wifi_status_label, LV_ALIGN_TOP_RIGHT, 0, 13);
         lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x9E9E9E), 0);
         
-        // Device Settings button
-        lv_obj_t* shop_btn = lv_btn_create(main_container);
-        lv_obj_set_size(shop_btn, lv_pct(100), 50);
-        lv_obj_align(shop_btn, LV_ALIGN_TOP_MID, 0, 60);
-        lv_obj_set_style_bg_color(shop_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
-        lv_obj_add_event_cb(shop_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS_SUB);
+        // // Device Settings button
+        // lv_obj_t* shop_btn = lv_btn_create(main_container);
+        // lv_obj_set_size(shop_btn, lv_pct(100), 50);
+        // lv_obj_align(shop_btn, LV_ALIGN_TOP_MID, 0, 60);
+        // lv_obj_set_style_bg_color(shop_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        // lv_obj_add_event_cb(shop_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS_SUB);
         
-        lv_obj_t* shop_label = lv_label_create(shop_btn);
-        lv_label_set_text(shop_label, "Device Settings");
-        lv_obj_center(shop_label);
+        // lv_obj_t* shop_label = lv_label_create(shop_btn);
+        // lv_label_set_text(shop_label, "Device Settings");
+        // lv_obj_center(shop_label);
         
         // WiFi settings button
         lv_obj_t* wifi_btn = lv_btn_create(main_container);
@@ -323,7 +323,7 @@ namespace UI {
             lv_obj_add_event_cb(launch_ap_btn, WiFiManager::launchAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
             lv_obj_t* launch_ap_label = lv_label_create(launch_ap_btn);
-            lv_label_set_text(launch_ap_label, "Set NWC Pairing Code");
+            lv_label_set_text(launch_ap_label, "Key and Relay Settings");
             lv_obj_center(launch_ap_label);
         }
         
@@ -684,7 +684,7 @@ namespace UI {
         
         // Wallet Service Public Key
         lv_obj_t* wallet_pubkey_label = lv_label_create(main_container);
-        lv_label_set_text(wallet_pubkey_label, "Wallet Service Public Key:");
+        lv_label_set_text(wallet_pubkey_label, "User Public Key:");
         lv_obj_align(wallet_pubkey_label, LV_ALIGN_TOP_LEFT, 0, 115);
         lv_obj_set_style_text_font(wallet_pubkey_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
         lv_obj_set_style_text_color(wallet_pubkey_label, lv_color_hex(Colors::TEXT), 0);
@@ -696,21 +696,6 @@ namespace UI {
         lv_obj_set_style_text_color(wallet_pubkey_value, lv_color_hex(Colors::TEXT), 0);
         lv_label_set_long_mode(wallet_pubkey_value, LV_LABEL_LONG_WRAP);
         lv_obj_set_width(wallet_pubkey_value, lv_pct(90));
-        
-        // Device Public Key
-        lv_obj_t* device_pubkey_label = lv_label_create(main_container);
-        lv_label_set_text(device_pubkey_label, "Device Public Key:");
-        lv_obj_align(device_pubkey_label, LV_ALIGN_TOP_LEFT, 0, 170);
-        lv_obj_set_style_text_font(device_pubkey_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
-        lv_obj_set_style_text_color(device_pubkey_label, lv_color_hex(Colors::TEXT), 0);
-        
-        lv_obj_t* device_pubkey_value = lv_label_create(main_container);
-        lv_label_set_text(device_pubkey_value, RemoteSigner::getPublicKey().c_str());
-        lv_obj_align(device_pubkey_value, LV_ALIGN_TOP_LEFT, 0, 190);
-        lv_obj_set_style_text_font(device_pubkey_value, Fonts::FONT_SMALL, LV_PART_MAIN);
-        lv_obj_set_style_text_color(device_pubkey_value, lv_color_hex(Colors::TEXT), 0);
-        lv_label_set_long_mode(device_pubkey_value, LV_LABEL_LONG_WRAP);
-        lv_obj_set_width(device_pubkey_value, lv_pct(90));
         
         // Software Version
         lv_obj_t* version_label = lv_label_create(main_container);
