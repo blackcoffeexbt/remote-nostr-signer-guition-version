@@ -55,7 +55,7 @@ var namespaces_dup =
       [ "encryptedMessageBin", "namespacenostr.html#a7b3cf922a571a696433d63e675ecaa38", null ],
       [ "timer", "namespacenostr.html#ac528623a09925500b6b787d0ddc5c9c7", null ]
     ] ],
-    [ "NWC", "namespace_n_w_c.html", "namespace_n_w_c" ],
+    [ "RemoteSigner", "namespace_remote_signer.html", "namespace_remote_signer" ],
     [ "Settings", "namespace_settings.html", [
       [ "apPasswordKBEventHandler", "namespace_settings.html#a29d99f08b185214732f7a74eb370a143", null ],
       [ "cleanup", "namespace_settings.html#adfd716c322069bdb999ecb9e6fb06635", null ],

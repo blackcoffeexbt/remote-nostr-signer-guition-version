@@ -1,21 +1,22 @@
-# Nostr Wallet Connect Point of Sale Device
+# Nostr Remote Signer Device
 
-A Bitcoin Lightning point of Sale Device that uses NWC for wallet communications
+A hardware Nostr remote signer implementing NIP-46 (Nostr Connect) protocol for secure event signing
 
 ## Overview
 
-This is a Bitcoin Lightning Network point of sale device built for the Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display. The device enables Bitcoin payments using Nostr Wallet Connect (NWC) protocol for wallet communications.
+This is a hardware-based Nostr remote signer built for the Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display. The device implements the NIP-46 (Nostr Connect) protocol to provide secure remote signing services for Nostr events while keeping private keys isolated on the hardware device.
 
 ## Features
 
-- **Lightning Network Payments**: Accept Bitcoin payments via Lightning Network
-- **Touch Screen Interface**: 320x480 color touchscreen
-- **Nostr Wallet Connect**: Wallet communication using NWC protocol
-- **Multi-Currency Support**: USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY with automatic Bitcoin price conversion
-- **WiFi Setup**: Easy configuration on device with AP mode for NWC pairing code setup
+- **NIP-46 Remote Signer**: Secure implementation of Nostr Connect protocol
+- **Touch Screen Interface**: 320x480 color touchscreen for user interaction
+- **Hardware Key Storage**: Private keys stored securely on device
+- **Client Authorization**: Manual approval system for connecting applications
+- **Event Signing Confirmation**: User approval required for each signing request
+- **WiFi Connectivity**: Connect to Nostr relays via WiFi
 - **PIN Protection**: Secure access to settings and configuration
-- **Power Management**: Light sleep after a short period of inactivity and deep sleep mode after a longer period of inactivity  
-- **QR Code Display**: Shows Lightning invoices for customer payments
+- **Power Management**: Light sleep after a short period of inactivity and deep sleep mode after a longer period of inactivity
+- **Real-time Status**: Connection status and signing request notifications
 
 ## Hardware Requirements
 
@@ -53,18 +54,29 @@ pio device monitor
 pio run -t docs
 ```
 
-
 ### Initial Setup
 
 1. Power on the device
-2. Enter settings using the Settings icon at the bottom left corner of the keypad
-3. Enter WiFi settings and connect to your WiFi network
-4. In your NWC compatible wallet, create a new connection and copy the pairing code to your clip board
-1. In settings, enable the NWC Pairing Code settings, use the default pin code "1234"
-3. Connect to the WiFi AP created by the device and open the portal in your browser
-4. Paste the pairing code you copied from your wallet
-5. Set a new PIN number using the default pin code "1234"
-6. Start accepting payments
+2. Use the touch screen interface to navigate to settings
+3. Configure WiFi connection to connect to your network
+4. Generate or import a Nostr private key (nsec format)
+5. Configure relay connection settings
+6. The device will display a bunker URL that applications can use to connect
+7. When applications request to connect, approve them via the touch interface
+8. Authorize signing requests as they come in from connected applications
+
+### Usage
+
+**Connecting Applications:**
+1. Applications use the bunker URL to initiate NIP-46 connections
+2. Device prompts for user authorization of new connections
+3. Approved applications are stored in authorized clients list
+
+**Signing Events:**
+1. Connected applications send signing requests via NIP-46
+2. Device displays event details and prompts for user confirmation
+3. User approves or rejects each signing request individually
+4. Private key never leaves the device
 
 ## Architecture
 
@@ -73,7 +85,7 @@ The application uses a modular architecture with the following components:
 - **App**: Central coordinator managing all modules
 - **Display**: LVGL-based UI with LovyanGFX driver
 - **WiFi**: Network connectivity management
-- **NWC**: Nostr Wallet Connect protocol implementation
+- **RemoteSigner**: NIP-46 protocol implementation and event signing
 - **Settings**: Persistent configuration storage
 - **UI**: User interface screens and interactions
 
@@ -83,8 +95,9 @@ Built with:
 - PlatformIO Arduino framework
 - LVGL graphics library
 - LovyanGFX display driver
-- Nostr protocol implementation
-- WebSocket communication
+- Custom Nostr protocol implementation (NIP-01, NIP-44, NIP-46)
+- WebSocket communication for relay connections
+- Secp256k1 cryptography for Schnorr signatures
 
 ## License
 

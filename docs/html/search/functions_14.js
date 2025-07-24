@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['websocketevent_0',['websocketEvent',['../namespace_n_w_c.html#aa137fc6f2c6092d4b9464c4246e851c6',1,'NWC']]]
+  ['websocketevent_0',['websocketEvent',['../namespace_remote_signer.html#ac1e46c8aceaf55c3b831c4d3b9547992',1,'RemoteSigner']]]
 ];

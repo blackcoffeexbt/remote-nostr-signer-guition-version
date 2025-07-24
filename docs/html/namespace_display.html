@@ -258,50 +258,50 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00286">286</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  286</span>                                                           {</div>
-<div class="line"><span class="lineno">  287</span>        lv_obj_t* label = <a class="code hl_function" href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a>();</div>
-<div class="line"><span class="lineno">  288</span>        <span class="keywordflow">if</span> (label == <span class="keyword">nullptr</span> || !lv_obj_is_valid(label)) {</div>
-<div class="line"><span class="lineno">  289</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  290</span>        }</div>
-<div class="line"><span class="lineno">  291</span>        </div>
-<div class="line"><span class="lineno">  292</span>        <span class="comment">// Enhanced display for long invoices that can&#39;t be QR encoded</span></div>
-<div class="line"><span class="lineno">  293</span>        String displayText;</div>
-<div class="line"><span class="lineno">  294</span>        <span class="keywordflow">if</span> (invoice.length() &gt; 300) {</div>
-<div class="line"><span class="lineno">  295</span>            displayText = <span class="stringliteral">&quot;⚡ LIGHTNING INVOICE ⚡\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  296</span>            displayText += String(invoice.length()) + <span class="stringliteral">&quot; characters\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  297</span>            displayText += <span class="stringliteral">&quot;FULL INVOICE:\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  298</span>            displayText += invoice;</div>
-<div class="line"><span class="lineno">  299</span>            displayText += <span class="stringliteral">&quot;\n\n📱 PAYMENT OPTIONS:\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  300</span>            displayText += <span class="stringliteral">&quot;• Copy invoice text\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  301</span>            displayText += <span class="stringliteral">&quot;• Use NFC/Bluetooth\n&quot;</span>; </div>
-<div class="line"><span class="lineno">  302</span>            displayText += <span class="stringliteral">&quot;• Manual wallet paste\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  303</span>            displayText += <span class="stringliteral">&quot;⚠️ Too long for QR display&quot;</span>;</div>
-<div class="line"><span class="lineno">  304</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  305</span>            displayText = <span class="stringliteral">&quot;⚡ Lightning Invoice:\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  306</span>            displayText += invoice;</div>
-<div class="line"><span class="lineno">  307</span>            displayText += <span class="stringliteral">&quot;\n\n📱 Scan with Lightning wallet&quot;</span>;</div>
-<div class="line"><span class="lineno">  308</span>        }</div>
-<div class="line"><span class="lineno">  309</span>        </div>
-<div class="line"><span class="lineno">  310</span>        lv_label_set_text(label, displayText.c_str());</div>
-<div class="line"><span class="lineno">  311</span>        lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);</div>
-<div class="line"><span class="lineno">  312</span>        lv_obj_set_width(label, 280);</div>
-<div class="line"><span class="lineno">  313</span>        </div>
-<div class="line"><span class="lineno">  314</span>        <span class="comment">// Hide spinner</span></div>
-<div class="line"><span class="lineno">  315</span>        lv_obj_t* spinner = <a class="code hl_function" href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a>();</div>
-<div class="line"><span class="lineno">  316</span>        <span class="keywordflow">if</span> (spinner != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(spinner)) {</div>
-<div class="line"><span class="lineno">  317</span>            lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);</div>
-<div class="line"><span class="lineno">  318</span>        }</div>
-<div class="line"><span class="lineno">  319</span>        </div>
-<div class="line"><span class="lineno">  320</span>        <span class="comment">// Hide QR canvas since we&#39;re not using it</span></div>
-<div class="line"><span class="lineno">  321</span>        <span class="keywordflow">if</span> (qr_canvas != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(qr_canvas)) {</div>
-<div class="line"><span class="lineno">  322</span>            lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);</div>
-<div class="line"><span class="lineno">  323</span>        }</div>
-<div class="line"><span class="lineno">  324</span>        </div>
-<div class="line"><span class="lineno">  325</span>        Serial.println(<span class="stringliteral">&quot;Text fallback display configured for long invoice&quot;</span>);</div>
-<div class="line"><span class="lineno">  326</span>    }</div>
-<div class="ttc" id="anamespace_u_i_html_a68428dcbd48587cb1e1e8af2e5b5ba26"><div class="ttname"><a href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a></div><div class="ttdeci">lv_obj_t * getInvoiceSpinner()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8cpp_source.html#l01321">ui.cpp:1321</a></div></div>
-<div class="ttc" id="anamespace_u_i_html_ac9299fb81be88e44c1a7cd5e19db5413"><div class="ttname"><a href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a></div><div class="ttdeci">lv_obj_t * getInvoiceLabel()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8cpp_source.html#l01320">ui.cpp:1320</a></div></div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00288">288</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  288</span>                                                           {</div>
+<div class="line"><span class="lineno">  289</span>        lv_obj_t* label = <a class="code hl_function" href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a>();</div>
+<div class="line"><span class="lineno">  290</span>        <span class="keywordflow">if</span> (label == <span class="keyword">nullptr</span> || !lv_obj_is_valid(label)) {</div>
+<div class="line"><span class="lineno">  291</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  292</span>        }</div>
+<div class="line"><span class="lineno">  293</span>        </div>
+<div class="line"><span class="lineno">  294</span>        <span class="comment">// Enhanced display for long invoices that can&#39;t be QR encoded</span></div>
+<div class="line"><span class="lineno">  295</span>        String displayText;</div>
+<div class="line"><span class="lineno">  296</span>        <span class="keywordflow">if</span> (invoice.length() &gt; 300) {</div>
+<div class="line"><span class="lineno">  297</span>            displayText = <span class="stringliteral">&quot;⚡ LIGHTNING INVOICE ⚡\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  298</span>            displayText += String(invoice.length()) + <span class="stringliteral">&quot; characters\n\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  299</span>            displayText += <span class="stringliteral">&quot;FULL INVOICE:\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  300</span>            displayText += invoice;</div>
+<div class="line"><span class="lineno">  301</span>            displayText += <span class="stringliteral">&quot;\n\n📱 PAYMENT OPTIONS:\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  302</span>            displayText += <span class="stringliteral">&quot;• Copy invoice text\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  303</span>            displayText += <span class="stringliteral">&quot;• Use NFC/Bluetooth\n&quot;</span>; </div>
+<div class="line"><span class="lineno">  304</span>            displayText += <span class="stringliteral">&quot;• Manual wallet paste\n\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  305</span>            displayText += <span class="stringliteral">&quot;⚠️ Too long for QR display&quot;</span>;</div>
+<div class="line"><span class="lineno">  306</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  307</span>            displayText = <span class="stringliteral">&quot;⚡ Lightning Invoice:\n\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  308</span>            displayText += invoice;</div>
+<div class="line"><span class="lineno">  309</span>            displayText += <span class="stringliteral">&quot;\n\n📱 Scan with Lightning wallet&quot;</span>;</div>
+<div class="line"><span class="lineno">  310</span>        }</div>
+<div class="line"><span class="lineno">  311</span>        </div>
+<div class="line"><span class="lineno">  312</span>        lv_label_set_text(label, displayText.c_str());</div>
+<div class="line"><span class="lineno">  313</span>        lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);</div>
+<div class="line"><span class="lineno">  314</span>        lv_obj_set_width(label, 280);</div>
+<div class="line"><span class="lineno">  315</span>        </div>
+<div class="line"><span class="lineno">  316</span>        <span class="comment">// Hide spinner</span></div>
+<div class="line"><span class="lineno">  317</span>        lv_obj_t* spinner = <a class="code hl_function" href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a>();</div>
+<div class="line"><span class="lineno">  318</span>        <span class="keywordflow">if</span> (spinner != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(spinner)) {</div>
+<div class="line"><span class="lineno">  319</span>            lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);</div>
+<div class="line"><span class="lineno">  320</span>        }</div>
+<div class="line"><span class="lineno">  321</span>        </div>
+<div class="line"><span class="lineno">  322</span>        <span class="comment">// Hide QR canvas since we&#39;re not using it</span></div>
+<div class="line"><span class="lineno">  323</span>        <span class="keywordflow">if</span> (qr_canvas != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(qr_canvas)) {</div>
+<div class="line"><span class="lineno">  324</span>            lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);</div>
+<div class="line"><span class="lineno">  325</span>        }</div>
+<div class="line"><span class="lineno">  326</span>        </div>
+<div class="line"><span class="lineno">  327</span>        Serial.println(<span class="stringliteral">&quot;Text fallback display configured for long invoice&quot;</span>);</div>
+<div class="line"><span class="lineno">  328</span>    }</div>
+<div class="ttc" id="anamespace_u_i_html_a68428dcbd48587cb1e1e8af2e5b5ba26"><div class="ttname"><a href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a></div><div class="ttdeci">lv_obj_t * getInvoiceSpinner()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8cpp_source.html#l01236">ui.cpp:1236</a></div></div>
+<div class="ttc" id="anamespace_u_i_html_ac9299fb81be88e44c1a7cd5e19db5413"><div class="ttname"><a href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a></div><div class="ttdeci">lv_obj_t * getInvoiceLabel()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8cpp_source.html#l01235">ui.cpp:1235</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -321,68 +321,68 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00224">224</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  224</span>                                              {</div>
-<div class="line"><span class="lineno">  225</span>        Serial.println(<span class="stringliteral">&quot;=== Display::displayQRCode starting ===&quot;</span>);</div>
-<div class="line"><span class="lineno">  226</span>        Serial.println(<span class="stringliteral">&quot;Free heap: &quot;</span> + String(ESP.getFreeHeap()));</div>
-<div class="line"><span class="lineno">  227</span>        Serial.println(<span class="stringliteral">&quot;Invoice length: &quot;</span> + String(invoice.length()));</div>
-<div class="line"><span class="lineno">  228</span>        </div>
-<div class="line"><span class="lineno">  229</span>        <span class="keywordflow">if</span> (qr_canvas == <span class="keyword">nullptr</span> || !lv_obj_is_valid(qr_canvas)) {</div>
-<div class="line"><span class="lineno">  230</span>            Serial.println(<span class="stringliteral">&quot;ERROR: QR canvas not available&quot;</span>);</div>
-<div class="line"><span class="lineno">  231</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
-<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  233</span>        }</div>
-<div class="line"><span class="lineno">  234</span>        </div>
-<div class="line"><span class="lineno">  235</span>        <span class="comment">// Safety check - ensure invoice is not empty</span></div>
-<div class="line"><span class="lineno">  236</span>        <span class="keywordflow">if</span> (invoice.length() == 0) {</div>
-<div class="line"><span class="lineno">  237</span>            Serial.println(<span class="stringliteral">&quot;ERROR: Empty invoice string&quot;</span>);</div>
-<div class="line"><span class="lineno">  238</span>            displayInvoiceTextFallback(invoice);</div>
-<div class="line"><span class="lineno">  239</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  240</span>        }</div>
-<div class="line"><span class="lineno">  241</span>        </div>
-<div class="line"><span class="lineno">  242</span>        <span class="comment">// Calculate QR code size - LVGL handles sizing automatically</span></div>
-<div class="line"><span class="lineno">  243</span>        uint16_t qr_size = 280; <span class="comment">// QR pixel size</span></div>
-<div class="line"><span class="lineno">  244</span>        </div>
-<div class="line"><span class="lineno">  245</span>        Serial.printf(<span class="stringliteral">&quot;Creating LVGL QR code with size %dx%d for %d character invoice\n&quot;</span>, </div>
-<div class="line"><span class="lineno">  246</span>                     qr_size, qr_size, invoice.length());</div>
-<div class="line"><span class="lineno">  247</span>        </div>
-<div class="line"><span class="lineno">  248</span>        <span class="comment">// Create LVGL QR code object with all parameters</span></div>
-<div class="line"><span class="lineno">  249</span>        lv_obj_t* qr = lv_qrcode_create(qr_canvas, qr_size, lv_color_black(), lv_color_white());</div>
-<div class="line"><span class="lineno">  250</span>        <span class="keywordflow">if</span> (qr == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  251</span>            Serial.println(<span class="stringliteral">&quot;ERROR: Failed to create LVGL QR code object&quot;</span>);</div>
-<div class="line"><span class="lineno">  252</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
-<div class="line"><span class="lineno">  253</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  254</span>        }</div>
-<div class="line"><span class="lineno">  255</span>        </div>
-<div class="line"><span class="lineno">  256</span>        <span class="comment">// Set QR code data - LVGL handles all the complexity</span></div>
-<div class="line"><span class="lineno">  257</span>        lv_res_t result = lv_qrcode_update(qr, invoice.c_str(), invoice.length());</div>
-<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">if</span> (result != LV_RES_OK) {</div>
-<div class="line"><span class="lineno">  259</span>            Serial.printf(<span class="stringliteral">&quot;ERROR: Failed to update QR code data, result: %d\n&quot;</span>, result);</div>
-<div class="line"><span class="lineno">  260</span>            lv_obj_del(qr);</div>
-<div class="line"><span class="lineno">  261</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
-<div class="line"><span class="lineno">  262</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  263</span>        }</div>
-<div class="line"><span class="lineno">  264</span>        </div>
-<div class="line"><span class="lineno">  265</span>        <span class="comment">// Center the QR code in the canvas</span></div>
-<div class="line"><span class="lineno">  266</span>        lv_obj_center(qr);</div>
-<div class="line"><span class="lineno">  267</span>        </div>
-<div class="line"><span class="lineno">  268</span>        <span class="comment">// Hide spinner and text label since we have QR code</span></div>
-<div class="line"><span class="lineno">  269</span>        lv_obj_t* spinner = <a class="code hl_function" href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a>();</div>
-<div class="line"><span class="lineno">  270</span>        <span class="keywordflow">if</span> (spinner != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(spinner)) {</div>
-<div class="line"><span class="lineno">  271</span>            lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);</div>
-<div class="line"><span class="lineno">  272</span>        }</div>
-<div class="line"><span class="lineno">  273</span>        </div>
-<div class="line"><span class="lineno">  274</span>        lv_obj_t* label = <a class="code hl_function" href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a>();</div>
-<div class="line"><span class="lineno">  275</span>        <span class="keywordflow">if</span> (label != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(label)) {</div>
-<div class="line"><span class="lineno">  276</span>            lv_obj_add_flag(label, LV_OBJ_FLAG_HIDDEN);</div>
-<div class="line"><span class="lineno">  277</span>        }</div>
-<div class="line"><span class="lineno">  278</span>        </div>
-<div class="line"><span class="lineno">  279</span>        <span class="comment">// Show QR canvas</span></div>
-<div class="line"><span class="lineno">  280</span>        lv_obj_clear_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);</div>
-<div class="line"><span class="lineno">  281</span>        </div>
-<div class="line"><span class="lineno">  282</span>        Serial.println(<span class="stringliteral">&quot;QR code successfully created and displayed using LVGL&quot;</span>);</div>
-<div class="line"><span class="lineno">  283</span>    }</div>
-<div class="ttc" id="anamespace_display_html_ace6d523c48cf82aef610774be829b85b"><div class="ttname"><a href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">Display::displayInvoiceTextFallback</a></div><div class="ttdeci">void displayInvoiceTextFallback(const String &amp;invoice)</div><div class="ttdef"><b>Definition:</b> <a href="display_8cpp_source.html#l00286">display.cpp:286</a></div></div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00226">226</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  226</span>                                              {</div>
+<div class="line"><span class="lineno">  227</span>        Serial.println(<span class="stringliteral">&quot;=== Display::displayQRCode starting ===&quot;</span>);</div>
+<div class="line"><span class="lineno">  228</span>        Serial.println(<span class="stringliteral">&quot;Free heap: &quot;</span> + String(ESP.getFreeHeap()));</div>
+<div class="line"><span class="lineno">  229</span>        Serial.println(<span class="stringliteral">&quot;Invoice length: &quot;</span> + String(invoice.length()));</div>
+<div class="line"><span class="lineno">  230</span>        </div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">if</span> (qr_canvas == <span class="keyword">nullptr</span> || !lv_obj_is_valid(qr_canvas)) {</div>
+<div class="line"><span class="lineno">  232</span>            Serial.println(<span class="stringliteral">&quot;ERROR: QR canvas not available&quot;</span>);</div>
+<div class="line"><span class="lineno">  233</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
+<div class="line"><span class="lineno">  234</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  235</span>        }</div>
+<div class="line"><span class="lineno">  236</span>        </div>
+<div class="line"><span class="lineno">  237</span>        <span class="comment">// Safety check - ensure invoice is not empty</span></div>
+<div class="line"><span class="lineno">  238</span>        <span class="keywordflow">if</span> (invoice.length() == 0) {</div>
+<div class="line"><span class="lineno">  239</span>            Serial.println(<span class="stringliteral">&quot;ERROR: Empty invoice string&quot;</span>);</div>
+<div class="line"><span class="lineno">  240</span>            displayInvoiceTextFallback(invoice);</div>
+<div class="line"><span class="lineno">  241</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  242</span>        }</div>
+<div class="line"><span class="lineno">  243</span>        </div>
+<div class="line"><span class="lineno">  244</span>        <span class="comment">// Calculate QR code size - LVGL handles sizing automatically</span></div>
+<div class="line"><span class="lineno">  245</span>        uint16_t qr_size = 280; <span class="comment">// QR pixel size</span></div>
+<div class="line"><span class="lineno">  246</span>        </div>
+<div class="line"><span class="lineno">  247</span>        Serial.printf(<span class="stringliteral">&quot;Creating LVGL QR code with size %dx%d for %d character invoice\n&quot;</span>, </div>
+<div class="line"><span class="lineno">  248</span>                     qr_size, qr_size, invoice.length());</div>
+<div class="line"><span class="lineno">  249</span>        </div>
+<div class="line"><span class="lineno">  250</span>        <span class="comment">// Create LVGL QR code object with all parameters</span></div>
+<div class="line"><span class="lineno">  251</span>        lv_obj_t* qr = lv_qrcode_create(qr_canvas, qr_size, lv_color_black(), lv_color_white());</div>
+<div class="line"><span class="lineno">  252</span>        <span class="keywordflow">if</span> (qr == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  253</span>            Serial.println(<span class="stringliteral">&quot;ERROR: Failed to create LVGL QR code object&quot;</span>);</div>
+<div class="line"><span class="lineno">  254</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
+<div class="line"><span class="lineno">  255</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  256</span>        }</div>
+<div class="line"><span class="lineno">  257</span>        </div>
+<div class="line"><span class="lineno">  258</span>        <span class="comment">// Set QR code data - LVGL handles all the complexity</span></div>
+<div class="line"><span class="lineno">  259</span>        lv_res_t result = lv_qrcode_update(qr, invoice.c_str(), invoice.length());</div>
+<div class="line"><span class="lineno">  260</span>        <span class="keywordflow">if</span> (result != LV_RES_OK) {</div>
+<div class="line"><span class="lineno">  261</span>            Serial.printf(<span class="stringliteral">&quot;ERROR: Failed to update QR code data, result: %d\n&quot;</span>, result);</div>
+<div class="line"><span class="lineno">  262</span>            lv_obj_del(qr);</div>
+<div class="line"><span class="lineno">  263</span>            <a class="code hl_function" href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">displayInvoiceTextFallback</a>(invoice);</div>
+<div class="line"><span class="lineno">  264</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  265</span>        }</div>
+<div class="line"><span class="lineno">  266</span>        </div>
+<div class="line"><span class="lineno">  267</span>        <span class="comment">// Center the QR code in the canvas</span></div>
+<div class="line"><span class="lineno">  268</span>        lv_obj_center(qr);</div>
+<div class="line"><span class="lineno">  269</span>        </div>
+<div class="line"><span class="lineno">  270</span>        <span class="comment">// Hide spinner and text label since we have QR code</span></div>
+<div class="line"><span class="lineno">  271</span>        lv_obj_t* spinner = <a class="code hl_function" href="namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26">UI::getInvoiceSpinner</a>();</div>
+<div class="line"><span class="lineno">  272</span>        <span class="keywordflow">if</span> (spinner != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(spinner)) {</div>
+<div class="line"><span class="lineno">  273</span>            lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);</div>
+<div class="line"><span class="lineno">  274</span>        }</div>
+<div class="line"><span class="lineno">  275</span>        </div>
+<div class="line"><span class="lineno">  276</span>        lv_obj_t* label = <a class="code hl_function" href="namespace_u_i.html#ac9299fb81be88e44c1a7cd5e19db5413">UI::getInvoiceLabel</a>();</div>
+<div class="line"><span class="lineno">  277</span>        <span class="keywordflow">if</span> (label != <span class="keyword">nullptr</span> &amp;&amp; lv_obj_is_valid(label)) {</div>
+<div class="line"><span class="lineno">  278</span>            lv_obj_add_flag(label, LV_OBJ_FLAG_HIDDEN);</div>
+<div class="line"><span class="lineno">  279</span>        }</div>
+<div class="line"><span class="lineno">  280</span>        </div>
+<div class="line"><span class="lineno">  281</span>        <span class="comment">// Show QR canvas</span></div>
+<div class="line"><span class="lineno">  282</span>        lv_obj_clear_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);</div>
+<div class="line"><span class="lineno">  283</span>        </div>
+<div class="line"><span class="lineno">  284</span>        Serial.println(<span class="stringliteral">&quot;QR code successfully created and displayed using LVGL&quot;</span>);</div>
+<div class="line"><span class="lineno">  285</span>    }</div>
+<div class="ttc" id="anamespace_display_html_ace6d523c48cf82aef610774be829b85b"><div class="ttname"><a href="namespace_display.html#ace6d523c48cf82aef610774be829b85b">Display::displayInvoiceTextFallback</a></div><div class="ttdeci">void displayInvoiceTextFallback(const String &amp;invoice)</div><div class="ttdef"><b>Definition:</b> <a href="display_8cpp_source.html#l00288">display.cpp:288</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -401,10 +401,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00329">329</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  329</span>                          {</div>
-<div class="line"><span class="lineno">  330</span>        <span class="keywordflow">return</span> *<a class="code hl_variable" href="namespace_display.html#a6c60868b4fdb5a872686070ea0607be3">gfx</a>;</div>
-<div class="line"><span class="lineno">  331</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00331">331</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>                          {</div>
+<div class="line"><span class="lineno">  332</span>        <span class="keywordflow">return</span> *<a class="code hl_variable" href="namespace_display.html#a6c60868b4fdb5a872686070ea0607be3">gfx</a>;</div>
+<div class="line"><span class="lineno">  333</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -434,11 +434,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00341">341</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  341</span>                                              {</div>
-<div class="line"><span class="lineno">  342</span>        x = last_x;</div>
-<div class="line"><span class="lineno">  343</span>        y = last_y;</div>
-<div class="line"><span class="lineno">  344</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00343">343</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  343</span>                                              {</div>
+<div class="line"><span class="lineno">  344</span>        x = last_x;</div>
+<div class="line"><span class="lineno">  345</span>        y = last_y;</div>
+<div class="line"><span class="lineno">  346</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -457,10 +457,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00333">333</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  333</span>                            {</div>
-<div class="line"><span class="lineno">  334</span>        <span class="keywordflow">return</span> qr_canvas;</div>
-<div class="line"><span class="lineno">  335</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00335">335</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  335</span>                            {</div>
+<div class="line"><span class="lineno">  336</span>        <span class="keywordflow">return</span> qr_canvas;</div>
+<div class="line"><span class="lineno">  337</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -582,12 +582,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00347">347</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  347</span>                                                    {</div>
-<div class="line"><span class="lineno">  348</span>        <span class="comment">// ArduinoGFX doesn&#39;t have built-in brightness control</span></div>
-<div class="line"><span class="lineno">  349</span>        <span class="comment">// Use PWM on backlight pin for brightness control</span></div>
-<div class="line"><span class="lineno">  350</span>        analogWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, brightness);</div>
-<div class="line"><span class="lineno">  351</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00349">349</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  349</span>                                                    {</div>
+<div class="line"><span class="lineno">  350</span>        <span class="comment">// ArduinoGFX doesn&#39;t have built-in brightness control</span></div>
+<div class="line"><span class="lineno">  351</span>        <span class="comment">// Use PWM on backlight pin for brightness control</span></div>
+<div class="line"><span class="lineno">  352</span>        analogWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, brightness);</div>
+<div class="line"><span class="lineno">  353</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -607,10 +607,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00337">337</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  337</span>                                       {</div>
-<div class="line"><span class="lineno">  338</span>        qr_canvas = canvas;</div>
-<div class="line"><span class="lineno">  339</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00339">339</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  339</span>                                       {</div>
+<div class="line"><span class="lineno">  340</span>        qr_canvas = canvas;</div>
+<div class="line"><span class="lineno">  341</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -739,32 +739,34 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  196</span>        <span class="keywordtype">bool</span> currently_touched = <a class="code hl_variable" href="namespace_display.html#a0c9cc8a26de50584375ead7c4553f30b">touch</a>.<a class="code hl_function" href="class_a_x_s15231_b___touch.html#a96f053e30928d0fd8046a281a5cdaefb">touched</a>();</div>
 <div class="line"><span class="lineno">  197</span>        </div>
 <div class="line"><span class="lineno">  198</span>        <span class="keywordflow">if</span> (currently_touched) {</div>
-<div class="line"><span class="lineno">  199</span>            <span class="comment">// Read touched point from touch module</span></div>
-<div class="line"><span class="lineno">  200</span>            <a class="code hl_variable" href="namespace_display.html#a0c9cc8a26de50584375ead7c4553f30b">touch</a>.<a class="code hl_function" href="class_a_x_s15231_b___touch.html#a986f12df1baa1ade792189af93c08086">readData</a>(&amp;touchX, &amp;touchY);</div>
-<div class="line"><span class="lineno">  201</span> </div>
-<div class="line"><span class="lineno">  202</span>            <span class="comment">// Set the coordinates (LVGL will handle object detection and events automatically)</span></div>
-<div class="line"><span class="lineno">  203</span>            data-&gt;point.x = touchX;</div>
-<div class="line"><span class="lineno">  204</span>            data-&gt;point.y = touchY;</div>
-<div class="line"><span class="lineno">  205</span>            data-&gt;state = LV_INDEV_STATE_PRESSED;</div>
-<div class="line"><span class="lineno">  206</span>            last_x = touchX;</div>
-<div class="line"><span class="lineno">  207</span>            last_y = touchY;</div>
-<div class="line"><span class="lineno">  208</span>            </div>
-<div class="line"><span class="lineno">  209</span>            <span class="comment">// // Simple debug output for new touches</span></div>
-<div class="line"><span class="lineno">  210</span>            <span class="comment">// if (!last_touch_state) {</span></div>
-<div class="line"><span class="lineno">  211</span>            <span class="comment">//     Serial.printf(&quot;Touch: X=%d, Y=%d\n&quot;, touchX, touchY);</span></div>
-<div class="line"><span class="lineno">  212</span>            <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  199</span>            <span class="comment">// Handle touch wake from light sleep first</span></div>
+<div class="line"><span class="lineno">  200</span>            <a class="code hl_function" href="namespace_app.html#afebab729ad90b87d5c556255298b5f8b">App::handleTouchWake</a>();</div>
+<div class="line"><span class="lineno">  201</span>            </div>
+<div class="line"><span class="lineno">  202</span>            <span class="comment">// No wake grace period needed for continuous monitoring</span></div>
+<div class="line"><span class="lineno">  203</span>            </div>
+<div class="line"><span class="lineno">  204</span>            <span class="comment">// Read touched point from touch module</span></div>
+<div class="line"><span class="lineno">  205</span>            <a class="code hl_variable" href="namespace_display.html#a0c9cc8a26de50584375ead7c4553f30b">touch</a>.<a class="code hl_function" href="class_a_x_s15231_b___touch.html#a986f12df1baa1ade792189af93c08086">readData</a>(&amp;touchX, &amp;touchY);</div>
+<div class="line"><span class="lineno">  206</span> </div>
+<div class="line"><span class="lineno">  207</span>            <span class="comment">// Set the coordinates (LVGL will handle object detection and events automatically)</span></div>
+<div class="line"><span class="lineno">  208</span>            data-&gt;point.x = touchX;</div>
+<div class="line"><span class="lineno">  209</span>            data-&gt;point.y = touchY;</div>
+<div class="line"><span class="lineno">  210</span>            data-&gt;state = LV_INDEV_STATE_PRESSED;</div>
+<div class="line"><span class="lineno">  211</span>            last_x = touchX;</div>
+<div class="line"><span class="lineno">  212</span>            last_y = touchY;</div>
 <div class="line"><span class="lineno">  213</span>            </div>
-<div class="line"><span class="lineno">  214</span>            <span class="comment">// Handle touch wake from light sleep</span></div>
-<div class="line"><span class="lineno">  215</span>            <a class="code hl_function" href="namespace_app.html#afebab729ad90b87d5c556255298b5f8b">App::handleTouchWake</a>();</div>
-<div class="line"><span class="lineno">  216</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  217</span>            data-&gt;state = LV_INDEV_STATE_RELEASED;</div>
-<div class="line"><span class="lineno">  218</span>        }</div>
-<div class="line"><span class="lineno">  219</span>        </div>
-<div class="line"><span class="lineno">  220</span>        last_touch_state = currently_touched;</div>
-<div class="line"><span class="lineno">  221</span>    }</div>
+<div class="line"><span class="lineno">  214</span>            <span class="comment">// // Simple debug output for new touches</span></div>
+<div class="line"><span class="lineno">  215</span>            <span class="comment">// if (!last_touch_state) {</span></div>
+<div class="line"><span class="lineno">  216</span>            <span class="comment">//     Serial.printf(&quot;Touch: X=%d, Y=%d\n&quot;, touchX, touchY);</span></div>
+<div class="line"><span class="lineno">  217</span>            <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  218</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  219</span>            data-&gt;state = LV_INDEV_STATE_RELEASED;</div>
+<div class="line"><span class="lineno">  220</span>        }</div>
+<div class="line"><span class="lineno">  221</span>        </div>
+<div class="line"><span class="lineno">  222</span>        last_touch_state = currently_touched;</div>
+<div class="line"><span class="lineno">  223</span>    }</div>
 <div class="ttc" id="aclass_a_x_s15231_b___touch_html_a96f053e30928d0fd8046a281a5cdaefb"><div class="ttname"><a href="class_a_x_s15231_b___touch.html#a96f053e30928d0fd8046a281a5cdaefb">AXS15231B_Touch::touched</a></div><div class="ttdeci">bool touched()</div><div class="ttdef"><b>Definition:</b> <a href="_a_x_s15231_b__touch_8cpp_source.html#l00038">AXS15231B_touch.cpp:38</a></div></div>
 <div class="ttc" id="aclass_a_x_s15231_b___touch_html_a986f12df1baa1ade792189af93c08086"><div class="ttname"><a href="class_a_x_s15231_b___touch.html#a986f12df1baa1ade792189af93c08086">AXS15231B_Touch::readData</a></div><div class="ttdeci">void readData(uint16_t *, uint16_t *)</div><div class="ttdef"><b>Definition:</b> <a href="_a_x_s15231_b__touch_8cpp_source.html#l00043">AXS15231B_touch.cpp:43</a></div></div>
-<div class="ttc" id="anamespace_app_html_afebab729ad90b87d5c556255298b5f8b"><div class="ttname"><a href="namespace_app.html#afebab729ad90b87d5c556255298b5f8b">App::handleTouchWake</a></div><div class="ttdeci">void handleTouchWake()</div><div class="ttdef"><b>Definition:</b> <a href="app_8cpp_source.html#l00739">app.cpp:739</a></div></div>
+<div class="ttc" id="anamespace_app_html_afebab729ad90b87d5c556255298b5f8b"><div class="ttname"><a href="namespace_app.html#afebab729ad90b87d5c556255298b5f8b">App::handleTouchWake</a></div><div class="ttdeci">void handleTouchWake()</div><div class="ttdef"><b>Definition:</b> <a href="app_8cpp_source.html#l00311">app.cpp:311</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -783,11 +785,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00353">353</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  353</span>                            {</div>
-<div class="line"><span class="lineno">  354</span>        Serial.println(<span class="stringliteral">&quot;Turning off display backlight&quot;</span>);</div>
-<div class="line"><span class="lineno">  355</span>        digitalWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, LOW);</div>
-<div class="line"><span class="lineno">  356</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00355">355</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  355</span>                            {</div>
+<div class="line"><span class="lineno">  356</span>        Serial.println(<span class="stringliteral">&quot;Turning off display backlight&quot;</span>);</div>
+<div class="line"><span class="lineno">  357</span>        digitalWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, LOW);</div>
+<div class="line"><span class="lineno">  358</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -806,11 +808,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00358">358</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  358</span>                           {</div>
-<div class="line"><span class="lineno">  359</span>        Serial.println(<span class="stringliteral">&quot;Turning on display backlight&quot;</span>);</div>
-<div class="line"><span class="lineno">  360</span>        digitalWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, HIGH);</div>
-<div class="line"><span class="lineno">  361</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="display_8cpp_source.html#l00360">360</a> of file <a class="el" href="display_8cpp_source.html">display.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  360</span>                           {</div>
+<div class="line"><span class="lineno">  361</span>        Serial.println(<span class="stringliteral">&quot;Turning on display backlight&quot;</span>);</div>
+<div class="line"><span class="lineno">  362</span>        digitalWrite(<a class="code hl_define" href="pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80">TFT_BL</a>, HIGH);</div>
+<div class="line"><span class="lineno">  363</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>

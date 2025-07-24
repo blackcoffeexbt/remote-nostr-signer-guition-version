@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cad_0',['CAD',['../namespace_n_w_c_1_1_currency.html#ab2da9533ddd7b9fd2e01c8c32281901a',1,'NWC::Currency']]],
-  ['chf_1',['CHF',['../namespace_n_w_c_1_1_currency.html#a5b003baf292042a6ccf3d56dedab8754',1,'NWC::Currency']]],
-  ['cny_2',['CNY',['../namespace_n_w_c_1_1_currency.html#afa58df12dc21a7990fe2344def8b455e',1,'NWC::Currency']]]
+  ['connect_0',['CONNECT',['../namespace_remote_signer_1_1_methods.html#a8f4ae7196fa393c20cd7d643f8edb862',1,'RemoteSigner::Methods']]],
+  ['connection_5ftimeout_1',['CONNECTION_TIMEOUT',['../namespace_remote_signer_1_1_config.html#a46c15d63fc0d7ff5623bbd8a46985dff',1,'RemoteSigner::Config']]],
+  ['content_2',['content',['../struct_u_i_1_1_signed_event.html#a50d65b50da8e6937c1da6abc77da1d57',1,'UI::SignedEvent']]]
 ];

@@ -98,11 +98,13 @@ $(document).ready(function(){initNavTree('ui_8cpp.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="ui_8h_source.html">ui.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="settings_8h_source.html">settings.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="wifi__manager_8h_source.html">wifi_manager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="display_8h_source.html">display.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="nwc_8h_source.html">nwc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="remote__signer_8h_source.html">remote_signer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="app_8h_source.html">app.h</a>&quot;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for ui.cpp:</div>
@@ -111,42 +113,34 @@ $(document).ready(function(){initNavTree('ui_8cpp.html',''); initResizable(); })
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="ui_8cpp__incl.png" border="0" usemap="#asrc_2ui_8cpp" alt=""/></div>
 <map name="asrc_2ui_8cpp" id="asrc_2ui_8cpp">
-<area shape="rect" title=" " alt="" coords="747,5,825,31"/>
-<area shape="rect" title=" " alt="" coords="680,300,756,326"/>
-<area shape="rect" href="ui_8h.html" title=" " alt="" coords="605,153,647,178"/>
-<area shape="rect" href="settings_8h.html" title=" " alt="" coords="671,153,749,178"/>
-<area shape="rect" href="wifi__manager_8h.html" title=" " alt="" coords="1612,153,1720,178"/>
-<area shape="rect" href="display_8h.html" title=" " alt="" coords="474,153,546,178"/>
-<area shape="rect" href="nwc_8h.html" title=" " alt="" coords="1247,153,1303,178"/>
-<area shape="rect" href="app_8h.html" title=" " alt="" coords="759,79,812,105"/>
-<area shape="rect" title=" " alt="" coords="692,226,744,252"/>
-<area shape="rect" title=" " alt="" coords="819,226,921,252"/>
-<area shape="rect" title=" " alt="" coords="1448,226,1532,252"/>
-<area shape="rect" title=" " alt="" coords="1798,226,1894,252"/>
-<area shape="rect" title=" " alt="" coords="1918,226,2016,252"/>
-<area shape="rect" title=" " alt="" coords="1555,226,1656,252"/>
-<area shape="rect" title=" " alt="" coords="1680,226,1774,252"/>
-<area shape="rect" title=" " alt="" coords="2040,226,2097,252"/>
-<area shape="rect" title=" " alt="" coords="2121,226,2264,252"/>
-<area shape="rect" title=" " alt="" coords="2288,226,2393,252"/>
-<area shape="rect" title=" " alt="" coords="2418,226,2533,252"/>
-<area shape="rect" title=" " alt="" coords="171,226,326,252"/>
-<area shape="rect" href="pincfg_8h.html" title=" " alt="" coords="350,226,417,252"/>
-<area shape="rect" href="dispcfg_8h.html" title=" " alt="" coords="441,226,515,252"/>
-<area shape="rect" href="_a_x_s15231_b__touch_8h.html" title=" " alt="" coords="5,226,148,252"/>
-<area shape="rect" title=" " alt="" coords="47,300,106,326"/>
-<area shape="rect" title=" " alt="" coords="1046,226,1187,252"/>
-<area shape="rect" title=" " alt="" coords="994,300,1098,326"/>
-<area shape="rect" href="nostr_8h.html" title=" " alt="" coords="1313,226,1373,252"/>
-<area shape="rect" title=" " alt="" coords="1567,300,1639,326"/>
-<area shape="rect" title=" " alt="" coords="1394,300,1458,326"/>
-<area shape="rect" title=" " alt="" coords="1482,300,1543,326"/>
-<area shape="rect" title=" " alt="" coords="1122,300,1194,326"/>
-<area shape="rect" title=" " alt="" coords="1218,300,1292,326"/>
-<area shape="rect" href="aes_8h.html" title=" " alt="" coords="1316,300,1370,326"/>
-<area shape="rect" title=" " alt="" coords="1266,374,1330,399"/>
-<area shape="rect" title=" " alt="" coords="1354,374,1423,399"/>
-<area shape="rect" title=" " alt="" coords="824,153,916,178"/>
+<area shape="rect" title=" " alt="" coords="1558,5,1636,31"/>
+<area shape="rect" title=" " alt="" coords="1766,300,1843,326"/>
+<area shape="rect" title=" " alt="" coords="1400,79,1457,105"/>
+<area shape="rect" title=" " alt="" coords="5,226,63,252"/>
+<area shape="rect" href="ui_8h.html" title=" " alt="" coords="1817,153,1859,178"/>
+<area shape="rect" href="settings_8h.html" title=" " alt="" coords="1547,153,1625,178"/>
+<area shape="rect" href="wifi__manager_8h.html" title=" " alt="" coords="808,153,916,178"/>
+<area shape="rect" href="display_8h.html" title=" " alt="" coords="1902,153,1974,178"/>
+<area shape="rect" href="remote__signer_8h.html" title=" " alt="" coords="1409,153,1523,178"/>
+<area shape="rect" href="app_8h.html" title=" " alt="" coords="1646,79,1699,105"/>
+<area shape="rect" title=" " alt="" coords="1689,226,1742,252"/>
+<area shape="rect" title=" " alt="" coords="1167,226,1269,252"/>
+<area shape="rect" title=" " alt="" coords="1059,226,1142,252"/>
+<area shape="rect" title=" " alt="" coords="649,226,744,252"/>
+<area shape="rect" title=" " alt="" coords="769,226,867,252"/>
+<area shape="rect" title=" " alt="" coords="87,226,189,252"/>
+<area shape="rect" title=" " alt="" coords="942,226,1035,252"/>
+<area shape="rect" title=" " alt="" coords="213,226,356,252"/>
+<area shape="rect" title=" " alt="" coords="380,226,485,252"/>
+<area shape="rect" title=" " alt="" coords="510,226,625,252"/>
+<area shape="rect" title=" " alt="" coords="2017,226,2171,252"/>
+<area shape="rect" href="pincfg_8h.html" title=" " alt="" coords="2195,226,2262,252"/>
+<area shape="rect" href="dispcfg_8h.html" title=" " alt="" coords="1918,226,1992,252"/>
+<area shape="rect" href="_a_x_s15231_b__touch_8h.html" title=" " alt="" coords="2287,226,2429,252"/>
+<area shape="rect" title=" " alt="" coords="2328,300,2388,326"/>
+<area shape="rect" title=" " alt="" coords="1422,226,1563,252"/>
+<area shape="rect" title=" " alt="" coords="1294,226,1398,252"/>
+<area shape="rect" title=" " alt="" coords="1649,153,1742,178"/>
 </map>
 </div>
 </div>
@@ -167,8 +161,8 @@ Functions</h2></td></tr>
 <tr class="separator:a7b5471425bfe6a966057aa4e72537a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0c6d0535a2e6dbc2c61c83a22dcfb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a7a0c6d0535a2e6dbc2c61c83a22dcfb0">UI::loadScreen</a> (<a class="el" href="group___screen_states.html#gac99fecebca9e3a20e926681fe9e5beb9">screen_state_t</a> screen)</td></tr>
 <tr class="separator:a7a0c6d0535a2e6dbc2c61c83a22dcfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d8ca1ecf0a566260451af9087f396f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a2d8ca1ecf0a566260451af9087f396f3">UI::createKeypadScreen</a> ()</td></tr>
-<tr class="separator:a2d8ca1ecf0a566260451af9087f396f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd4d4788cdc8d3edb520fe2394fe355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#aabd4d4788cdc8d3edb520fe2394fe355">UI::createSignerStatusScreen</a> ()</td></tr>
+<tr class="separator:aabd4d4788cdc8d3edb520fe2394fe355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a65423af3051eca667c6210a4fd4e3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a1a65423af3051eca667c6210a4fd4e3b">UI::createSettingsScreen</a> ()</td></tr>
 <tr class="separator:a1a65423af3051eca667c6210a4fd4e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92289f2675af6be72bb29192132034af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a92289f2675af6be72bb29192132034af">UI::createWiFiScreen</a> ()</td></tr>
@@ -251,61 +245,23 @@ Functions</h2></td></tr>
 <tr class="separator:ae20486f26830f5a8d6312a32e1a5dfec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e3bb2b3151c48de6d865b4eab54f5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a4e3bb2b3151c48de6d865b4eab54f5e3">UI::updateAPPasswordDisplay</a> ()</td></tr>
 <tr class="separator:a4e3bb2b3151c48de6d865b4eab54f5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0171e1f44ebe2745721fe6a80d3e2963"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a0171e1f44ebe2745721fe6a80d3e2963">UI::showSigningConfirmation</a> (const String &amp;eventKind, const String &amp;content)</td></tr>
+<tr class="separator:a0171e1f44ebe2745721fe6a80d3e2963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0d2d698d97a9a368600ae08b0af6f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a1d0d2d698d97a9a368600ae08b0af6f5">UI::showPairingQRCode</a> ()</td></tr>
+<tr class="separator:a1d0d2d698d97a9a368600ae08b0af6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcb1735f63dd0a530f3c828a5f2ce37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a1fcb1735f63dd0a530f3c828a5f2ce37">UI::addSignedEvent</a> (const String &amp;eventKind, const String &amp;content, const String &amp;timestamp)</td></tr>
+<tr class="separator:a1fcb1735f63dd0a530f3c828a5f2ce37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0580ac3c721a34070f4ecfdfd156ca43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a0580ac3c721a34070f4ecfdfd156ca43">UI::clearSignedEvents</a> ()</td></tr>
+<tr class="separator:a0580ac3c721a34070f4ecfdfd156ca43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e86a09bb46232f85060b53f5060a2ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a3e86a09bb46232f85060b53f5060a2ca">UI::showEventSignedNotification</a> (const String &amp;eventKind, const String &amp;content)</td></tr>
+<tr class="separator:a3e86a09bb46232f85060b53f5060a2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a5b518d962393001f14164f519fc2b61c"><td class="memItemLeft" align="right" valign="top">lv_obj_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8cpp.html#a5b518d962393001f14164f519fc2b61c">wifi_list</a></td></tr>
 <tr class="separator:a5b518d962393001f14164f519fc2b61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a948b1584cfc5c1cf91af9d43729abf48"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8cpp.html#a948b1584cfc5c1cf91af9d43729abf48">nwc_initialized</a></td></tr>
-<tr class="separator:a948b1584cfc5c1cf91af9d43729abf48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaf5a5f752292b6ed1aa766532cd6bc0"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8cpp.html#aeaf5a5f752292b6ed1aa766532cd6bc0">nwcPairingUrl</a></td></tr>
-<tr class="separator:aeaf5a5f752292b6ed1aa766532cd6bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a948b1584cfc5c1cf91af9d43729abf48" name="a948b1584cfc5c1cf91af9d43729abf48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a948b1584cfc5c1cf91af9d43729abf48">&#9670;&#160;</a></span>nwc_initialized</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool nwc_initialized</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aeaf5a5f752292b6ed1aa766532cd6bc0" name="aeaf5a5f752292b6ed1aa766532cd6bc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaf5a5f752292b6ed1aa766532cd6bc0">&#9670;&#160;</a></span>nwcPairingUrl</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">String nwcPairingUrl</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a5b518d962393001f14164f519fc2b61c" name="a5b518d962393001f14164f519fc2b61c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b518d962393001f14164f519fc2b61c">&#9670;&#160;</a></span>wifi_list</h2>
 

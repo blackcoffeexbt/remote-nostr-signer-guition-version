@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NWC Point of Sale: Nostr Wallet Connect Point of Sale Device</title>
+<title>NWC Point of Sale: Nostr Remote Signer Device</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,24 +90,25 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Nostr Wallet Connect Point of Sale Device </div></div>
+  <div class="headertitle"><div class="title">Nostr Remote Signer Device </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> A Bitcoin Lightning point of Sale Device that uses <a class="el" href="namespace_n_w_c.html">NWC</a> for wallet communications</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> A hardware Nostr remote signer implementing NIP-46 (Nostr Connect) protocol for secure event signing</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
-<p>This is a Bitcoin Lightning Network point of sale device built for the Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display. The device enables Bitcoin payments using Nostr Wallet Connect (NWC) protocol for wallet communications.
+<p>This is a hardware-based Nostr remote signer built for the Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display. The device implements the NIP-46 (Nostr Connect) protocol to provide secure remote signing services for Nostr events while keeping private keys isolated on the hardware device.
 
 @section autotoc_md2 Features
 
-- &lt;strong&gt;Lightning Network Payments&lt;/strong&gt;: Accept Bitcoin payments via Lightning Network
-- &lt;strong&gt;Touch Screen Interface&lt;/strong&gt;: 320x480 color touchscreen
-- &lt;strong&gt;Nostr Wallet Connect&lt;/strong&gt;: Wallet communication using NWC protocol
-- &lt;strong&gt;Multi-Currency Support&lt;/strong&gt;: USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY with automatic Bitcoin price conversion
-- &lt;strong&gt;WiFi Setup&lt;/strong&gt;: Easy configuration on device with AP mode for NWC pairing code setup
+- &lt;strong&gt;NIP-46 Remote Signer&lt;/strong&gt;: Secure implementation of Nostr Connect protocol
+- &lt;strong&gt;Touch Screen Interface&lt;/strong&gt;: 320x480 color touchscreen for user interaction
+- &lt;strong&gt;Hardware Key Storage&lt;/strong&gt;: Private keys stored securely on device
+- &lt;strong&gt;Client Authorization&lt;/strong&gt;: Manual approval system for connecting applications
+- &lt;strong&gt;Event Signing Confirmation&lt;/strong&gt;: User approval required for each signing request
+- &lt;strong&gt;WiFi Connectivity&lt;/strong&gt;: Connect to Nostr relays via WiFi
 - &lt;strong&gt;PIN Protection&lt;/strong&gt;: Secure access to settings and configuration
-- &lt;strong&gt;Power Management&lt;/strong&gt;: Light sleep after a short period of inactivity and deep sleep mode after a longer period of inactivity  &lt;br&gt;
-- &lt;strong&gt;QR Code Display&lt;/strong&gt;: Shows Lightning invoices for customer payments
+- &lt;strong&gt;Power Management&lt;/strong&gt;: Light sleep after a short period of inactivity and deep sleep mode after a longer period of inactivity
+- &lt;strong&gt;Real-time Status&lt;/strong&gt;: Connection status and signing request notifications
 
 @section autotoc_md3 Hardware Requirements
 
@@ -120,68 +121,73 @@ Getting Started</h1>
 Prerequisites</h2>
 <ul>
 <li><a href="https://platformio.org/">PlatformIO</a> installed</li>
-<li>Guition JC3248W535 3.5" touch screen display (320x480)
-
-@subsection autotoc_md6 Building and Flashing
-
-@icode{bash} 
-# Clone the repository
-git clone &lt;repository-url&gt;
-cd nwc-pos
-
-# Build the project
-pio run
-
-# Upload to device
-pio run --target upload
-
-# Monitor serial output
-pio device monitor
-@endicode
-
-@subsection autotoc_md7 Documentation
-
-@icode{bash} 
-# Generate documentation
-pio run -t docs
-@endicode
-
-
-@subsection autotoc_md8 Initial Setup
-
-1. Power on the device
-2. Enter settings using the Settings icon at the bottom left corner of the keypad
-3. Enter WiFi settings and connect to your WiFi network
-4. In your NWC compatible wallet, create a new connection and copy the pairing code to your clip board
-1. In settings, enable the NWC Pairing Code settings, use the default pin code "1234"
-3. Connect to the WiFi AP created by the device and open the portal in your browser
-4. Paste the pairing code you copied from your wallet
-5. Set a new PIN number using the default pin code "1234"</li>
+<li>Guition JC3248W535 3.5" touch screen display (320x480)</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Building and Flashing</h2>
+<div class="fragment"><div class="line"># Clone the repository</div>
+<div class="line">git clone &lt;repository-url&gt;</div>
+<div class="line">cd nwc-pos</div>
+<div class="line"> </div>
+<div class="line"># Build the project</div>
+<div class="line">pio run</div>
+<div class="line"> </div>
+<div class="line"># Upload to device</div>
+<div class="line">pio run --target upload</div>
+<div class="line"> </div>
+<div class="line"># Monitor serial output</div>
+<div class="line">pio device monitor</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Documentation</h2>
+<div class="fragment"><div class="line"># Generate documentation</div>
+<div class="line">pio run -t docs</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+Initial Setup</h2>
 <ol type="1">
-<li>Start accepting payments</li>
+<li>Power on the device</li>
+<li>Use the touch screen interface to navigate to settings</li>
+<li>Configure WiFi connection to connect to your network</li>
+<li>Generate or import a Nostr private key (nsec format)</li>
+<li>Configure relay connection settings</li>
+<li>The device will display a bunker URL that applications can use to connect</li>
+<li>When applications request to connect, approve them via the touch interface</li>
+<li>Authorize signing requests as they come in from connected applications</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Usage</h2>
+<p><b>Connecting Applications:</b></p><ol type="1">
+<li>Applications use the bunker URL to initiate NIP-46 connections</li>
+<li>Device prompts for user authorization of new connections</li>
+<li>Approved applications are stored in authorized clients list</li>
+</ol>
+<p><b>Signing Events:</b></p><ol type="1">
+<li>Connected applications send signing requests via NIP-46</li>
+<li>Device displays event details and prompts for user confirmation</li>
+<li>User approves or rejects each signing request individually</li>
+<li>Private key never leaves the device</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Architecture</h1>
 <p>The application uses a modular architecture with the following components:</p>
 <ul>
 <li><b><a class="el" href="namespace_app.html">App</a></b>: Central coordinator managing all modules</li>
 <li><b><a class="el" href="namespace_display.html">Display</a></b>: LVGL-based <a class="el" href="namespace_u_i.html">UI</a> with LovyanGFX driver</li>
 <li><b>WiFi</b>: Network connectivity management</li>
-<li><b><a class="el" href="namespace_n_w_c.html">NWC</a></b>: Nostr Wallet Connect protocol implementation</li>
+<li><b><a class="el" href="namespace_remote_signer.html">RemoteSigner</a></b>: NIP-46 protocol implementation and event signing</li>
 <li><b><a class="el" href="namespace_settings.html">Settings</a></b>: Persistent configuration storage</li>
 <li><b><a class="el" href="namespace_u_i.html">UI</a></b>: User interface screens and interactions</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Development</h1>
 <p>Built with:</p><ul>
 <li>PlatformIO Arduino framework</li>
 <li>LVGL graphics library</li>
 <li>LovyanGFX display driver</li>
-<li>Nostr protocol implementation</li>
-<li>WebSocket communication</li>
+<li>Custom Nostr protocol implementation (NIP-01, NIP-44, NIP-46)</li>
+<li>WebSocket communication for relay connections</li>
+<li>Secp256k1 cryptography for Schnorr signatures</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 License</h1>
 <p>MIT License </p>
 </div></div><!-- PageDoc -->

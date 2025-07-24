@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jpy_0',['JPY',['../namespace_n_w_c_1_1_currency.html#a77c8f472c8dd21ea02788aae0ee4d3f0',1,'NWC::Currency']]]
+  ['lastlogtime_0',['lastLogTime',['../helpers_8cpp.html#abd261086b545b7803a5bd9d26ea11ec2',1,'helpers.cpp']]]
 ];

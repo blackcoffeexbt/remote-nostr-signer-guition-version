@@ -220,6 +220,8 @@ Functions</h2></td></tr>
 <tr class="separator:acee34f68f7c76be57917ada674c087c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83adf4c440290cc3d725fbb7521dc5f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_wi_fi_manager.html#a83adf4c440290cc3d725fbb7521dc5f1">handleAPConfig</a> ()</td></tr>
 <tr class="separator:a83adf4c440290cc3d725fbb7521dc5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fcac4975c9a54e61aacee344294a87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_wi_fi_manager.html#a42fcac4975c9a54e61aacee344294a87">handleCurrentConfig</a> ()</td></tr>
+<tr class="separator:a42fcac4975c9a54e61aacee344294a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6cbe35aefb4d1a58ba6b38fa0a8f9ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_wi_fi_manager.html#af6cbe35aefb4d1a58ba6b38fa0a8f9ec">updateSettingsScreenForAPMode</a> ()</td></tr>
 <tr class="separator:af6cbe35aefb4d1a58ba6b38fa0a8f9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -266,11 +268,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   23</span>        <a class="code hl_enumvalue" href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62">WIFI_DISCONNECT</a>,</div>
 <div class="line"><span class="lineno">   24</span>        <a class="code hl_enumvalue" href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c">WIFI_STOP_SCAN</a></div>
 <div class="line"><span class="lineno">   25</span>    } <a class="code hl_enumeration" href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0c">wifi_command_type_t</a>;</div>
-<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0c"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0c">wifi_command_type_t</a></div><div class="ttdeci">wifi_command_type_t</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00037">main.cpp:37</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c">WIFI_STOP_SCAN</a></div><div class="ttdeci">@ WIFI_STOP_SCAN</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00042">main.cpp:41</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363">WIFI_SCAN</a></div><div class="ttdeci">@ WIFI_SCAN</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00038">main.cpp:38</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62">WIFI_DISCONNECT</a></div><div class="ttdeci">@ WIFI_DISCONNECT</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00040">main.cpp:40</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224">WIFI_CONNECT</a></div><div class="ttdeci">@ WIFI_CONNECT</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00039">main.cpp:39</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0c"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0c">wifi_command_type_t</a></div><div class="ttdeci">wifi_command_type_t</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00044">main.cpp:44</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c">WIFI_STOP_SCAN</a></div><div class="ttdeci">@ WIFI_STOP_SCAN</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00049">main.cpp:48</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363">WIFI_SCAN</a></div><div class="ttdeci">@ WIFI_SCAN</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00045">main.cpp:45</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62">WIFI_DISCONNECT</a></div><div class="ttdeci">@ WIFI_DISCONNECT</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00047">main.cpp:47</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224"><div class="ttname"><a href="main_8cpp.html#a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224">WIFI_CONNECT</a></div><div class="ttdeci">@ WIFI_CONNECT</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00046">main.cpp:46</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -704,6 +706,23 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void WiFiManager::handleAPRoot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a42fcac4975c9a54e61aacee344294a87" name="a42fcac4975c9a54e61aacee344294a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42fcac4975c9a54e61aacee344294a87">&#9670;&#160;</a></span>handleCurrentConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiManager::handleCurrentConfig </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

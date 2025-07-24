@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NWC Point of Sale: NWC Point of Sale Device Architecture</title>
+<title>NWC Point of Sale: Nostr Remote Signer Device Architecture</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,33 +90,34 @@ $(document).ready(function(){initNavTree('md__a_r_c_h_i_t_e_c_t_u_r_e.html','');
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title"><a class="el" href="namespace_n_w_c.html">NWC</a> Point of Sale Device Architecture </div></div>
+  <div class="headertitle"><div class="title">Nostr Remote Signer Device Architecture </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md13"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md14"></a>
 Project Overview</h1>
-<p>This is a <b>Nostr Wallet Connect (<a class="el" href="namespace_n_w_c.html">NWC</a>) powered Point of Sale device</b> built for the ESP32-S3 Guition JC3248W535 touch screen display. The device enables merchants to accept Bitcoin Lightning Network payments using the Nostr protocol NIP-47 for wallet communication.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<p>This is a <b>Nostr Remote Signer device</b> built for the ESP32-S3 Guition JC3248W535 touch screen display. The device implements NIP-46 (Nostr Connect) protocol to provide secure remote signing services for Nostr events while keeping private keys isolated on the hardware device.</p>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Key Features</h2>
 <ul>
-<li>Nostr Wallet Connect integration for Lightning payments</li>
-<li>Touch screen interface</li>
-<li>WiFi connectivity with AP mode for <a class="el" href="namespace_n_w_c.html">NWC</a> Pairing Code configuration</li>
-<li>Bitcoin price fetching from multiple fiat currencies</li>
-<li>QR code generation for Lightning invoices</li>
-<li>Real-time payment notifications</li>
+<li>NIP-46 (Nostr Connect) remote signer implementation</li>
+<li>Hardware-isolated private key storage</li>
+<li>Touch screen interface for user confirmation</li>
+<li>Client authorization management</li>
+<li>Event signing with user approval</li>
+<li>WiFi connectivity for Nostr relay communication</li>
+<li>Real-time signing request notifications</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Technology Stack</h2>
 <ul>
 <li><b>Device</b>: ESP32-S3 Guition JC3248W535 with 3.5" touch screen display (320x480)</li>
 <li><b>GUI Framework</b>: LVGL (Light and Versatile Graphics Library)</li>
-<li><b><a class="el" href="namespace_display.html">Display</a> Driver</b>: ArduinoGFX</li>
-<li><b>Protocols</b>: Nostr, WebSocket, HTTP/HTTPS, NTP</li>
-<li><b>Cryptography</b>: Bitcoin secp256k1 with Schnorr sigs, AES encryption</li>
+<li><b><a class="el" href="namespace_display.html">Display</a> Driver</b>: LovyanGFX</li>
+<li><b>Protocols</b>: Nostr (NIP-01, NIP-44, NIP-46), WebSocket, NTP</li>
+<li><b>Cryptography</b>: Secp256k1 with Schnorr signatures, NIP-44 encryption</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Architecture Overview</h1>
 <p>The application follows a <b>modular architecture</b> with clear separation of concerns. The <code><a class="el" href="namespace_app.html">App</a></code> namespace serves as the central coordinator, managing initialization, inter-module communication, and application lifecycle.</p>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
@@ -126,16 +127,16 @@ Architecture Overview</h1>
 <div class="line">      │</div>
 <div class="line">┌─────┴───────────────────────────────────────┐</div>
 <div class="line">│  Module Layer                               │</div>
-<div class="line">├─────────┬─────────┬─────────┬─────────┬─────┴──┐</div>
-<div class="line">│Display  │Settings │WiFiMgr  │   UI    │  NWC   │</div>
-<div class="line">│         │         │         │         │        │</div>
-<div class="line">└─────────┴─────────┴─────────┴─────────┴────────┘</div>
+<div class="line">├─────────┬─────────┬─────────┬─────────┬──────────────┐</div>
+<div class="line">│Display  │Settings │WiFiMgr  │   UI    │RemoteSigner  │</div>
+<div class="line">│         │         │         │         │              │</div>
+<div class="line">└─────────┴─────────┴─────────┴─────────┴──────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 File Structure and Module Descriptions</h1>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Core Application Files</h2>
-<h3><a class="anchor" id="autotoc_md21"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 &lt;tt&gt;src/main.cpp&lt;/tt&gt;</h3>
 <p><b>Entry point and main loop controller</b></p><ul>
 <li>Initializes the entire application via <code><a class="el" href="namespace_app.html#a36c71ca6134247ab51d1a7a2d0a02cd4">App::init()</a></code></li>
@@ -148,7 +149,7 @@ Core Application Files</h2>
 <li><code><a class="el" href="main_8cpp.html#a0b33edabd7f1c4e4a0bf32c67269be2f">loop()</a></code>: Main application event loop</li>
 <li><code>wifi_main_status_updater_cb()</code>: WiFi connection timeout handling</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md22"></a>
+<h3><a class="anchor" id="autotoc_md23"></a>
 &lt;tt&gt;src/app.cpp&lt;/tt&gt; / &lt;tt&gt;src/app.h&lt;/tt&gt;</h3>
 <p><b>Central application coordinator and state manager</b></p><ul>
 <li>Coordinates initialization and cleanup of all modules</li>
@@ -161,7 +162,7 @@ Core Application Files</h2>
 <li><code>init()</code>: Initialize all modules in dependency order</li>
 <li><code>run()</code>: Main application loop with health checks</li>
 <li><code>notifyWiFiStatusChanged()</code>: Coordinate WiFi state changes</li>
-<li><code>notifyNWCStatusChanged()</code>: Handle <a class="el" href="namespace_n_w_c.html">NWC</a> connection events</li>
+<li><code>notifyNWCStatusChanged()</code>: Handle NWC connection events</li>
 <li><code>enterSleepMode()</code>/<code>exitSleepMode()</code>: Power management</li>
 <li><code>checkModuleHealth()</code>: System diagnostics</li>
 </ul>
@@ -170,9 +171,9 @@ Core Application Files</h2>
 <li>Implements 30-second inactivity timeout</li>
 <li>Handles wake-up reason detection and display backlight control</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Display and UI Modules</h2>
-<h3><a class="anchor" id="autotoc_md24"></a>
+<h3><a class="anchor" id="autotoc_md25"></a>
 &lt;tt&gt;src/display.cpp&lt;/tt&gt; / &lt;tt&gt;src/display.h&lt;/tt&gt;</h3>
 <p><b>Hardware display driver and LVGL integration</b></p><ul>
 <li>Custom LGFX driver implementation for WT32-SC01</li>
@@ -188,7 +189,7 @@ Display and UI Modules</h2>
 <li><code>displayQRCode()</code>: Lightning invoice QR code generation</li>
 <li><code>turnOffBacklight()</code>/<code>turnOnBacklight()</code>: Power management</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md25"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 &lt;tt&gt;src/ui.cpp&lt;/tt&gt; / &lt;tt&gt;src/ui.h&lt;/tt&gt;</h3>
 <p><b>User interface screens and interaction handling</b></p><ul>
 <li>Implements multiple screen states (keypad, settings, WiFi, etc.)</li>
@@ -210,9 +211,9 @@ Display and UI Modules</h2>
 <li><code>updateInvoiceDisplay()</code>: Real-time invoice updates</li>
 <li><code>showPaymentReceived()</code>: Payment confirmation <a class="el" href="namespace_u_i.html">UI</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Connectivity Modules</h2>
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 &lt;tt&gt;src/wifi.cpp&lt;/tt&gt; / &lt;tt&gt;src/wifi.h&lt;/tt&gt;</h3>
 <p><b>WiFi connection and access point management</b></p><ul>
 <li>Manages WiFi station and AP mode operation</li>
@@ -230,35 +231,36 @@ Connectivity Modules</h2>
 </ul>
 <p><b>AP Mode Configuration:</b></p><ul>
 <li>Creates web server for device setup</li>
-<li>Handles <a class="el" href="namespace_n_w_c.html">NWC</a> URL configuration via web interface</li>
+<li>Handles NWC URL configuration via web interface</li>
 <li>Provides WiFi network selection and credential entry</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md28"></a>
-&lt;tt&gt;src/nwc.cpp&lt;/tt&gt; / &lt;tt&gt;src/nwc.h&lt;/tt&gt;</h3>
-<p><b>Nostr Wallet Connect protocol implementation</b></p><ul>
-<li>Implements <a class="el" href="namespace_n_w_c.html">NWC</a> protocol over WebSocket connections</li>
-<li>Handles Nostr event encryption/decryption (NIP-04)</li>
-<li>Manages Lightning invoice creation and payment monitoring</li>
-<li>Fetches Bitcoin price data from external APIs</li>
-<li>Provides automatic reconnection and connection health monitoring</li>
+<h3><a class="anchor" id="autotoc_md29"></a>
+&lt;tt&gt;src/remote_signer.cpp&lt;/tt&gt; / &lt;tt&gt;src/remote_signer.h&lt;/tt&gt;</h3>
+<p><b>NIP-46 Remote Signer protocol implementation</b></p><ul>
+<li>Implements NIP-46 (Nostr Connect) protocol over WebSocket connections</li>
+<li>Handles Nostr event encryption/decryption using NIP-44</li>
+<li>Manages client authorization and event signing requests</li>
+<li>Provides secure private key storage and management</li>
+<li>Implements automatic reconnection and connection health monitoring</li>
 </ul>
 <p><b>Key Functions:</b></p><ul>
-<li><code>setupData()</code>: Parse <a class="el" href="namespace_n_w_c.html">NWC</a> pairing URL and extract credentials</li>
 <li><code>connectToRelay()</code>: Establish WebSocket connection to Nostr relay</li>
-<li><code>makeInvoice()</code>: Create Lightning payment request</li>
-<li><code>sendInvoiceLookupRequest()</code>: Check payment status</li>
-<li><code>fetchBitcoinPrices()</code>: Update exchange rates</li>
+<li><code>handleSigningRequestEvent()</code>: Process incoming signing requests</li>
+<li><code>handleConnect()</code>: Handle client connection requests</li>
+<li><code>handleSignEvent()</code>: Process event signing requests with user confirmation</li>
+<li><code>loadConfigFromPreferences()</code>: Load signer configuration</li>
 <li><code>websocketEvent()</code>: Handle WebSocket events and Nostr messages</li>
 </ul>
 <p><b>Protocol Features:</b></p><ul>
-<li>Supports multiple fiat currencies (USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY)</li>
-<li>Implements WebSocket fragmentation handling</li>
-<li>Provides connection health monitoring with automatic reconnection</li>
-<li>Handles encrypted Nostr events (kinds 23194, 23195, 23196, 23197)</li>
+<li>Full NIP-46 method support (connect, sign_event, get_public_key, etc.)</li>
+<li>NIP-44 encryption for all client communications</li>
+<li>Client authorization management with user approval</li>
+<li>Event signing confirmation via touch interface</li>
+<li>Hardware-isolated private key storage</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 Configuration and Storage</h2>
-<h3><a class="anchor" id="autotoc_md30"></a>
+<h3><a class="anchor" id="autotoc_md31"></a>
 &lt;tt&gt;src/settings.cpp&lt;/tt&gt; / &lt;tt&gt;src/settings.h&lt;/tt&gt;</h3>
 <p><b>Application settings and persistent storage</b></p><ul>
 <li>Manages device configuration using ESP32 Preferences</li>
@@ -274,7 +276,7 @@ Configuration and Storage</h2>
 <li><code>verifyPin()</code>: Security access control</li>
 <li><code>resetToDefaults()</code>: Factory reset</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md31"></a>
+<h3><a class="anchor" id="autotoc_md32"></a>
 &lt;tt&gt;src/config.h&lt;/tt&gt;</h3>
 <p><b>System constants and configuration definitions</b></p><ul>
 <li><a class="el" href="namespace_display.html">Display</a> resolution and buffer size constants</li>
@@ -282,9 +284,9 @@ Configuration and Storage</h2>
 <li>Screen state enumeration</li>
 <li>Hardware-specific configurations</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 External Libraries</h2>
-<h3><a class="anchor" id="autotoc_md33"></a>
+<h3><a class="anchor" id="autotoc_md34"></a>
 &lt;tt&gt;lib/TFT_eSPI/&lt;/tt&gt;</h3>
 <p><b>Enhanced display driver library</b></p><ul>
 <li>Comprehensive TFT display driver with touch support</li>
@@ -292,13 +294,13 @@ External Libraries</h2>
 <li>Font rendering and graphics primitives</li>
 <li>Hardware-specific optimizations for ESP32</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md34"></a>
+<h3><a class="anchor" id="autotoc_md35"></a>
 &lt;tt&gt;lib/aes/&lt;/tt&gt;</h3>
 <p><b>AES encryption implementation</b></p><ul>
 <li>Provides cryptographic functions for secure communication</li>
-<li>Used by <a class="el" href="namespace_n_w_c.html">NWC</a> module for Nostr message encryption</li>
+<li>Used by NWC module for Nostr message encryption</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md35"></a>
+<h3><a class="anchor" id="autotoc_md36"></a>
 &lt;tt&gt;lib/nostr/&lt;/tt&gt;</h3>
 <p><b>Nostr protocol implementation</b></p><ul>
 <li>NIP-19 bech32 encoding/decoding (<code><a class="el" href="nip19_8cpp.html">nip19.cpp</a></code>)</li>
@@ -307,52 +309,55 @@ External Libraries</h2>
 <li>Integration with Bitcoin cryptographic functions</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 Data Flow and Module Interactions</h1>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 1. &lt;strong&gt;Application Startup&lt;/strong&gt;</h2>
-<div class="fragment"><div class="line">main.cpp → App::init() → Display::init() → Settings::init() → WiFiManager::init() → UI::init() → NWC::init()</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md39"></a>
-2. &lt;strong&gt;Payment Processing Flow&lt;/strong&gt;</h2>
-<div class="fragment"><div class="line">UI (amount entry) → NWC::makeInvoice() → Nostr relay → Lightning wallet → </div>
-<div class="line">Payment notification → NWC::handleNwcResponseEvent() → UI::showPaymentReceived()</div>
+<div class="fragment"><div class="line">main.cpp → App::init() → Display::init() → Settings::init() → WiFiManager::init() → UI::init() → RemoteSigner::init()</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md40"></a>
-3. &lt;strong&gt;WiFi Configuration Flow&lt;/strong&gt;</h2>
-<div class="fragment"><div class="line">UI (WiFi screen) → WiFiManager::startScan() → UI (network list) → </div>
-<div class="line">WiFiManager::startConnection() → App::notifyWiFiStatusChanged() → NWC::connectToRelay()</div>
+2. &lt;strong&gt;Client Connection Flow&lt;/strong&gt;</h2>
+<div class="fragment"><div class="line">Client application → NIP-46 connect request → RemoteSigner::handleConnect() → </div>
+<div class="line">UI authorization prompt → User approval → RemoteSigner::sendResponse() → Client authorized</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md41"></a>
-4. &lt;strong&gt;Settings Management Flow&lt;/strong&gt;</h2>
-<div class="fragment"><div class="line">UI (settings screen) → Settings::setShopName() → Settings::saveToPreferences() → </div>
+3. &lt;strong&gt;Event Signing Flow&lt;/strong&gt;</h2>
+<div class="fragment"><div class="line">Authorized client → NIP-46 sign_event request → RemoteSigner::handleSignEvent() → </div>
+<div class="line">UI signing confirmation → User approval → Event signed → Encrypted response to client</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md42"></a>
+4. &lt;strong&gt;WiFi Configuration Flow&lt;/strong&gt;</h2>
+<div class="fragment"><div class="line">UI (WiFi screen) → WiFiManager::startScan() → UI (network list) → </div>
+<div class="line">WiFiManager::startConnection() → App::notifyWiFiStatusChanged() → RemoteSigner::connectToRelay()</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md43"></a>
+5. &lt;strong&gt;Settings Management Flow&lt;/strong&gt;</h2>
+<div class="fragment"><div class="line">UI (settings screen) → Settings::saveToPreferences() → </div>
 <div class="line">App state update → UI refresh</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md45"></a>
 Communication Protocols</h1>
-<h2><a class="anchor" id="autotoc_md44"></a>
-Nostr Wallet Connect (NWC)</h2>
+<h2><a class="anchor" id="autotoc_md46"></a>
+NIP-46 (Nostr Connect) Protocol</h2>
 <ul>
 <li><b>WebSocket connection</b> to Nostr relay servers</li>
-<li><b>Encrypted messaging</b> using NIP-04 encryption</li>
-<li><b>Event types</b>: 23194 (requests), 23195 (responses), 23196/23197 (notifications)</li>
-<li><b>Lightning integration</b> for invoice creation and payment monitoring</li>
+<li><b>Encrypted messaging</b> using NIP-44 encryption</li>
+<li><b>Event types</b>: Kind 24133 for remote signer requests and responses</li>
+<li><b>Method support</b>: connect, sign_event, get_public_key, ping, nip04/nip44 encrypt/decrypt</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md45"></a>
-Lightning Network</h2>
+<h2><a class="anchor" id="autotoc_md47"></a>
+Nostr Protocol Integration</h2>
 <ul>
-<li><b>BOLT-11 invoices</b> for payment requests</li>
-<li><b>Real-time payment notifications</b> via <a class="el" href="namespace_n_w_c.html">NWC</a> protocol</li>
-<li><b>Multi-currency support</b> with automatic satoshi conversion</li>
+<li><b>Event signing</b> with secp256k1 Schnorr signatures</li>
+<li><b>Real-time communication</b> via WebSocket connections to relays</li>
+<li><b>Client authorization</b> with persistent storage of approved clients</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 External APIs</h2>
 <ul>
-<li><b>Mempool.space API</b> for Bitcoin price data</li>
 <li><b>NTP synchronization</b> for accurate timestamps</li>
 <li><b>HTTPS requests</b> for secure API communication</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md48"></a>
+<h1><a class="anchor" id="autotoc_md50"></a>
 Hardware Configuration</h1>
-<h2><a class="anchor" id="autotoc_md49"></a>
+<h2><a class="anchor" id="autotoc_md51"></a>
 ESP32 Pin Mapping</h2>
 <ul>
 <li><b>GPIO 12</b>: Wake-up button for deep sleep</li>
@@ -360,7 +365,7 @@ ESP32 Pin Mapping</h2>
 <li><b>Touch interface</b>: I2C (FT5x06)</li>
 <li><b>WiFi</b>: Built-in ESP32 radio</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md50"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 Power Management</h2>
 <ul>
 <li><b>Deep sleep mode</b> with GPIO wake-up</li>
@@ -369,27 +374,29 @@ Power Management</h2>
 <li><b>RTC GPIO configuration</b> for wake-up functionality</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 Security Features</h1>
-<h2><a class="anchor" id="autotoc_md53"></a>
+<h2><a class="anchor" id="autotoc_md55"></a>
 Cryptographic Security</h2>
 <ul>
-<li><b>secp256k1 key pairs</b> for Nostr identity</li>
-<li><b>AES encryption</b> for sensitive communications</li>
+<li><b>secp256k1 key pairs</b> for Nostr identity and event signing</li>
+<li><b>NIP-44 encryption</b> for all client communications</li>
+<li><b>Hardware-isolated private keys</b> never leave the device</li>
 <li><b>PIN protection</b> for settings access</li>
 <li><b>Secure storage</b> of credentials in ESP32 Preferences</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 Network Security</h2>
 <ul>
 <li><b>HTTPS/WSS connections</b> for all external communications</li>
-<li><b>Encrypted Nostr messaging</b> using NIP-04 standard</li>
-<li><b>Access point password protection</b> for device configuration</li>
+<li><b>Encrypted Nostr messaging</b> using NIP-44 standard</li>
+<li><b>Client authorization</b> requiring user approval for each connection</li>
+<li><b>Event signing confirmation</b> requiring user approval for each request</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md56"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 Development and Build</h1>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 PlatformIO Configuration</h2>
 <ul>
 <li><b>ESP32 development board</b> target</li>
@@ -397,7 +404,7 @@ PlatformIO Configuration</h2>
 <li><b>Library dependencies</b> managed via platformio.ini</li>
 <li><b>Build flags</b> for debugging and optimization</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md60"></a>
 Key Dependencies</h2>
 <ul>
 <li><code>lovyan03/LovyanGFX@^0.4.14</code>: <a class="el" href="namespace_display.html">Display</a> driver</li>

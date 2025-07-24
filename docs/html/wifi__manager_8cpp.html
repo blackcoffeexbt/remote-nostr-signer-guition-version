@@ -98,7 +98,8 @@ $(document).ready(function(){initNavTree('wifi__manager_8cpp.html',''); initResi
 <code>#include &quot;<a class="el" href="settings_8h_source.html">settings.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="app_8h_source.html">app.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ui_8h_source.html">ui.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="nwc_8h_source.html">nwc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="remote__signer_8h_source.html">remote_signer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="nostr_8h_source.html">../lib/nostr/nostr.h</a>&quot;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for wifi_manager.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -106,43 +107,43 @@ $(document).ready(function(){initNavTree('wifi__manager_8cpp.html',''); initResi
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="wifi__manager_8cpp__incl.png" border="0" usemap="#asrc_2wifi__manager_8cpp" alt=""/></div>
 <map name="asrc_2wifi__manager_8cpp" id="asrc_2wifi__manager_8cpp">
-<area shape="rect" title=" " alt="" coords="823,5,967,31"/>
-<area shape="rect" href="wifi__manager_8h.html" title=" " alt="" coords="1572,153,1680,178"/>
-<area shape="rect" title=" " alt="" coords="1008,79,1068,105"/>
-<area shape="rect" href="settings_8h.html" title=" " alt="" coords="831,153,909,178"/>
-<area shape="rect" href="app_8h.html" title=" " alt="" coords="756,79,810,105"/>
-<area shape="rect" href="ui_8h.html" title=" " alt="" coords="647,153,690,178"/>
-<area shape="rect" href="nwc_8h.html" title=" " alt="" coords="1196,153,1253,178"/>
-<area shape="rect" title=" " alt="" coords="616,300,692,326"/>
-<area shape="rect" title=" " alt="" coords="1640,226,1724,252"/>
-<area shape="rect" title=" " alt="" coords="2184,226,2279,252"/>
-<area shape="rect" title=" " alt="" coords="2303,226,2402,252"/>
-<area shape="rect" title=" " alt="" coords="1398,226,1499,252"/>
-<area shape="rect" title=" " alt="" coords="819,226,921,252"/>
-<area shape="rect" title=" " alt="" coords="1523,226,1616,252"/>
-<area shape="rect" title=" " alt="" coords="2425,226,2482,252"/>
-<area shape="rect" title=" " alt="" coords="742,226,795,252"/>
-<area shape="rect" title=" " alt="" coords="1748,226,1891,252"/>
-<area shape="rect" title=" " alt="" coords="1914,226,2020,252"/>
-<area shape="rect" title=" " alt="" coords="2044,226,2160,252"/>
-<area shape="rect" title=" " alt="" coords="714,153,807,178"/>
-<area shape="rect" href="display_8h.html" title=" " alt="" coords="493,153,564,178"/>
-<area shape="rect" title=" " alt="" coords="222,226,376,252"/>
-<area shape="rect" href="pincfg_8h.html" title=" " alt="" coords="400,226,468,252"/>
-<area shape="rect" href="dispcfg_8h.html" title=" " alt="" coords="491,226,566,252"/>
-<area shape="rect" href="_a_x_s15231_b__touch_8h.html" title=" " alt="" coords="5,226,148,252"/>
-<area shape="rect" title=" " alt="" coords="47,300,106,326"/>
-<area shape="rect" title=" " alt="" coords="996,226,1136,252"/>
-<area shape="rect" title=" " alt="" coords="1542,300,1646,326"/>
-<area shape="rect" href="nostr_8h.html" title=" " alt="" coords="1262,226,1323,252"/>
-<area shape="rect" title=" " alt="" coords="1000,300,1073,326"/>
-<area shape="rect" title=" " alt="" coords="1174,300,1238,326"/>
-<area shape="rect" title=" " alt="" coords="1262,300,1323,326"/>
-<area shape="rect" title=" " alt="" coords="1348,300,1419,326"/>
-<area shape="rect" title=" " alt="" coords="1443,300,1518,326"/>
-<area shape="rect" href="aes_8h.html" title=" " alt="" coords="1096,300,1150,326"/>
-<area shape="rect" title=" " alt="" coords="1046,374,1110,399"/>
-<area shape="rect" title=" " alt="" coords="1134,374,1203,399"/>
+<area shape="rect" title=" " alt="" coords="961,5,1106,31"/>
+<area shape="rect" href="wifi__manager_8h.html" title=" " alt="" coords="1397,153,1505,178"/>
+<area shape="rect" title=" " alt="" coords="1743,79,1802,105"/>
+<area shape="rect" href="settings_8h.html" title=" " alt="" coords="730,153,809,178"/>
+<area shape="rect" href="app_8h.html" title=" " alt="" coords="702,79,755,105"/>
+<area shape="rect" href="ui_8h.html" title=" " alt="" coords="664,153,707,178"/>
+<area shape="rect" href="remote__signer_8h.html" title=" " alt="" coords="977,153,1090,178"/>
+<area shape="rect" href="nostr_8h.html" title=" " alt="" coords="1596,79,1719,105"/>
+<area shape="rect" title=" " alt="" coords="583,300,660,326"/>
+<area shape="rect" title=" " alt="" coords="1256,226,1339,252"/>
+<area shape="rect" title=" " alt="" coords="2297,226,2392,252"/>
+<area shape="rect" title=" " alt="" coords="1531,226,1629,252"/>
+<area shape="rect" title=" " alt="" coords="1654,226,1755,252"/>
+<area shape="rect" title=" " alt="" coords="786,226,889,252"/>
+<area shape="rect" title=" " alt="" coords="1363,226,1456,252"/>
+<area shape="rect" title=" " alt="" coords="1780,226,1837,252"/>
+<area shape="rect" title=" " alt="" coords="659,226,712,252"/>
+<area shape="rect" title=" " alt="" coords="1861,226,2004,252"/>
+<area shape="rect" title=" " alt="" coords="2028,226,2133,252"/>
+<area shape="rect" title=" " alt="" coords="2157,226,2273,252"/>
+<area shape="rect" title=" " alt="" coords="362,153,454,178"/>
+<area shape="rect" href="display_8h.html" title=" " alt="" coords="478,153,549,178"/>
+<area shape="rect" title=" " alt="" coords="379,226,533,252"/>
+<area shape="rect" href="pincfg_8h.html" title=" " alt="" coords="189,226,257,252"/>
+<area shape="rect" href="dispcfg_8h.html" title=" " alt="" coords="280,226,355,252"/>
+<area shape="rect" href="_a_x_s15231_b__touch_8h.html" title=" " alt="" coords="22,226,165,252"/>
+<area shape="rect" title=" " alt="" coords="64,300,123,326"/>
+<area shape="rect" title=" " alt="" coords="963,226,1104,252"/>
+<area shape="rect" title=" " alt="" coords="1128,226,1232,252"/>
+<area shape="rect" title=" " alt="" coords="1529,153,1602,178"/>
+<area shape="rect" title=" " alt="" coords="1626,153,1689,178"/>
+<area shape="rect" title=" " alt="" coords="1714,153,1775,178"/>
+<area shape="rect" title=" " alt="" coords="1799,153,1871,178"/>
+<area shape="rect" title=" " alt="" coords="1895,153,1969,178"/>
+<area shape="rect" href="aes_8h.html" title=" " alt="" coords="2423,153,2476,178"/>
+<area shape="rect" title=" " alt="" coords="2508,226,2572,252"/>
+<area shape="rect" title=" " alt="" coords="2415,226,2484,252"/>
 </map>
 </div>
 </div>

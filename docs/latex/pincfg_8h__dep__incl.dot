@@ -16,7 +16,7 @@ digraph "src/pincfg.h"
   Node3 -> Node6 [dir="back",color="steelblue1",style="solid"];
   Node6 [label="src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip="NWC Powered Point of Sale Device - Main Entry Point."];
   Node3 -> Node7 [dir="back",color="steelblue1",style="solid"];
-  Node7 [label="src/nwc.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$nwc_8cpp.html",tooltip=" "];
+  Node7 [label="src/remote_signer.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$remote__signer_8cpp.html",tooltip=" "];
   Node3 -> Node8 [dir="back",color="steelblue1",style="solid"];
   Node8 [label="src/settings.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$settings_8cpp.html",tooltip=" "];
   Node3 -> Node9 [dir="back",color="steelblue1",style="solid"];
@@ -24,5 +24,6 @@ digraph "src/pincfg.h"
   Node3 -> Node10 [dir="back",color="steelblue1",style="solid"];
   Node10 [label="src/wifi_manager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$wifi__manager_8cpp.html",tooltip=" "];
   Node2 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node2 -> Node7 [dir="back",color="steelblue1",style="solid"];
   Node2 -> Node9 [dir="back",color="steelblue1",style="solid"];
 }

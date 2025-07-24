@@ -25,58 +25,59 @@
 var NAVTREE =
 [
   [ "NWC Point of Sale", "index.html", [
-    [ "Nostr Wallet Connect Point of Sale Device", "index.html", "index" ],
-    [ "NWC Point of Sale Device Architecture", "md__a_r_c_h_i_t_e_c_t_u_r_e.html", [
-      [ "Project Overview", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md13", [
-        [ "Key Features", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md14", null ],
-        [ "Technology Stack", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md15", null ]
+    [ "Nostr Remote Signer Device", "index.html", "index" ],
+    [ "Nostr Remote Signer Device Architecture", "md__a_r_c_h_i_t_e_c_t_u_r_e.html", [
+      [ "Project Overview", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md14", [
+        [ "Key Features", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md15", null ],
+        [ "Technology Stack", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md16", null ]
       ] ],
-      [ "Architecture Overview", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md17", null ],
-      [ "File Structure and Module Descriptions", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md19", [
-        [ "Core Application Files", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md20", [
-          [ "<tt>src/main.cpp</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md21", null ],
-          [ "<tt>src/app.cpp</tt> / <tt>src/app.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md22", null ]
+      [ "Architecture Overview", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md18", null ],
+      [ "File Structure and Module Descriptions", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md20", [
+        [ "Core Application Files", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md21", [
+          [ "<tt>src/main.cpp</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md22", null ],
+          [ "<tt>src/app.cpp</tt> / <tt>src/app.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md23", null ]
         ] ],
-        [ "Display and UI Modules", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md23", [
-          [ "<tt>src/display.cpp</tt> / <tt>src/display.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md24", null ],
-          [ "<tt>src/ui.cpp</tt> / <tt>src/ui.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md25", null ]
+        [ "Display and UI Modules", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md24", [
+          [ "<tt>src/display.cpp</tt> / <tt>src/display.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md25", null ],
+          [ "<tt>src/ui.cpp</tt> / <tt>src/ui.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md26", null ]
         ] ],
-        [ "Connectivity Modules", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md26", [
-          [ "<tt>src/wifi.cpp</tt> / <tt>src/wifi.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md27", null ],
-          [ "<tt>src/nwc.cpp</tt> / <tt>src/nwc.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md28", null ]
+        [ "Connectivity Modules", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md27", [
+          [ "<tt>src/wifi.cpp</tt> / <tt>src/wifi.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md28", null ],
+          [ "<tt>src/remote_signer.cpp</tt> / <tt>src/remote_signer.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md29", null ]
         ] ],
-        [ "Configuration and Storage", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md29", [
-          [ "<tt>src/settings.cpp</tt> / <tt>src/settings.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md30", null ],
-          [ "<tt>src/config.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md31", null ]
+        [ "Configuration and Storage", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md30", [
+          [ "<tt>src/settings.cpp</tt> / <tt>src/settings.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md31", null ],
+          [ "<tt>src/config.h</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md32", null ]
         ] ],
-        [ "External Libraries", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md32", [
-          [ "<tt>lib/TFT_eSPI/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md33", null ],
-          [ "<tt>lib/aes/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md34", null ],
-          [ "<tt>lib/nostr/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md35", null ]
+        [ "External Libraries", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md33", [
+          [ "<tt>lib/TFT_eSPI/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md34", null ],
+          [ "<tt>lib/aes/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md35", null ],
+          [ "<tt>lib/nostr/</tt>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md36", null ]
         ] ]
       ] ],
-      [ "Data Flow and Module Interactions", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md37", [
-        [ "1. <strong>Application Startup</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md38", null ],
-        [ "2. <strong>Payment Processing Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md39", null ],
-        [ "3. <strong>WiFi Configuration Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md40", null ],
-        [ "4. <strong>Settings Management Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md41", null ]
+      [ "Data Flow and Module Interactions", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md38", [
+        [ "1. <strong>Application Startup</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md39", null ],
+        [ "2. <strong>Client Connection Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md40", null ],
+        [ "3. <strong>Event Signing Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md41", null ],
+        [ "4. <strong>WiFi Configuration Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md42", null ],
+        [ "5. <strong>Settings Management Flow</strong>", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md43", null ]
       ] ],
-      [ "Communication Protocols", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md43", [
-        [ "Nostr Wallet Connect (NWC)", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md44", null ],
-        [ "Lightning Network", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md45", null ],
-        [ "External APIs", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md46", null ]
+      [ "Communication Protocols", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md45", [
+        [ "NIP-46 (Nostr Connect) Protocol", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md46", null ],
+        [ "Nostr Protocol Integration", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md47", null ],
+        [ "External APIs", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md48", null ]
       ] ],
-      [ "Hardware Configuration", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md48", [
-        [ "ESP32 Pin Mapping", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md49", null ],
-        [ "Power Management", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md50", null ]
+      [ "Hardware Configuration", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md50", [
+        [ "ESP32 Pin Mapping", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md51", null ],
+        [ "Power Management", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md52", null ]
       ] ],
-      [ "Security Features", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md52", [
-        [ "Cryptographic Security", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md53", null ],
-        [ "Network Security", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md54", null ]
+      [ "Security Features", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md54", [
+        [ "Cryptographic Security", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md55", null ],
+        [ "Network Security", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md56", null ]
       ] ],
-      [ "Development and Build", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md56", [
-        [ "PlatformIO Configuration", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md57", null ],
-        [ "Key Dependencies", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md58", null ]
+      [ "Development and Build", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md58", [
+        [ "PlatformIO Configuration", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md59", null ],
+        [ "Key Dependencies", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md60", null ]
       ] ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
@@ -118,11 +119,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_x_s15231_b__touch_8cpp.html",
-"globals_d.html",
-"md__a_r_c_h_i_t_e_c_t_u_r_e.html",
-"namespace_u_i.html#a5b4ed56a4755e396af5d6c827cba06d6",
-"nostr_8cpp.html#ae7add69f32ac7f6af83399c69374cc50",
-"struct_wi_fi_manager_1_1wifi__scan__result__t.html#a2cd58f9b8af709afd9b1c380f7a62cb9"
+"globals_vars.html",
+"md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md46",
+"namespace_wi_fi_manager.html",
+"remote__signer_8cpp.html#a274b55d4777ae202a4cf5f08aeafde0a",
+"ui_8cpp.html#a801e2a6c76b5ebd8c0897b374bb01cb0"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

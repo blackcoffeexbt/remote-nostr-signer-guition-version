@@ -1,11 +1,13 @@
 \hypertarget{ui_8cpp}{}\doxysection{src/ui.cpp File Reference}
 \label{ui_8cpp}\index{src/ui.cpp@{src/ui.cpp}}
 {\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include \char`\"{}ui.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}settings.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}wifi\+\_\+manager.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}display.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}nwc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}remote\+\_\+signer.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}app.\+h\char`\"{}}\newline
 Include dependency graph for ui.\+cpp\+:
 % FIG 0
@@ -25,7 +27,7 @@ void \mbox{\hyperlink{namespace_u_i_a7b5471425bfe6a966057aa4e72537a56}{UI\+::cle
 \item 
 void \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI\+::load\+Screen}} (\mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\+\_\+state\+\_\+t}} screen)
 \item 
-void \mbox{\hyperlink{namespace_u_i_a2d8ca1ecf0a566260451af9087f396f3}{UI\+::create\+Keypad\+Screen}} ()
+void \mbox{\hyperlink{namespace_u_i_aabd4d4788cdc8d3edb520fe2394fe355}{UI\+::create\+Signer\+Status\+Screen}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a1a65423af3051eca667c6210a4fd4e3b}{UI\+::create\+Settings\+Screen}} ()
 \item 
@@ -108,31 +110,25 @@ void \mbox{\hyperlink{namespace_u_i_a5b4ed56a4755e396af5d6c827cba06d6}{UI\+::upd
 void \mbox{\hyperlink{namespace_u_i_ae20486f26830f5a8d6312a32e1a5dfec}{UI\+::update\+Currency\+Display}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a4e3bb2b3151c48de6d865b4eab54f5e3}{UI\+::update\+APPassword\+Display}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a0171e1f44ebe2745721fe6a80d3e2963}{UI\+::show\+Signing\+Confirmation}} (const String \&event\+Kind, const String \&content)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1d0d2d698d97a9a368600ae08b0af6f5}{UI\+::show\+Pairing\+QRCode}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1fcb1735f63dd0a530f3c828a5f2ce37}{UI\+::add\+Signed\+Event}} (const String \&event\+Kind, const String \&content, const String \&timestamp)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a0580ac3c721a34070f4ecfdfd156ca43}{UI\+::clear\+Signed\+Events}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a3e86a09bb46232f85060b53f5060a2ca}{UI\+::show\+Event\+Signed\+Notification}} (const String \&event\+Kind, const String \&content)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{ui_8cpp_a5b518d962393001f14164f519fc2b61c}{wifi\+\_\+list}}
-\item 
-bool \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\+\_\+initialized}}
-\item 
-String \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwc\+Pairing\+Url}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}\label{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}} 
-\index{ui.cpp@{ui.cpp}!nwc\_initialized@{nwc\_initialized}}
-\index{nwc\_initialized@{nwc\_initialized}!ui.cpp@{ui.cpp}}
-\doxysubsubsection{\texorpdfstring{nwc\_initialized}{nwc\_initialized}}
-{\footnotesize\ttfamily bool nwc\+\_\+initialized\hspace{0.3cm}{\ttfamily [extern]}}
-
-\mbox{\Hypertarget{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}\label{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}} 
-\index{ui.cpp@{ui.cpp}!nwcPairingUrl@{nwcPairingUrl}}
-\index{nwcPairingUrl@{nwcPairingUrl}!ui.cpp@{ui.cpp}}
-\doxysubsubsection{\texorpdfstring{nwcPairingUrl}{nwcPairingUrl}}
-{\footnotesize\ttfamily String nwc\+Pairing\+Url\hspace{0.3cm}{\ttfamily [extern]}}
-
 \mbox{\Hypertarget{ui_8cpp_a5b518d962393001f14164f519fc2b61c}\label{ui_8cpp_a5b518d962393001f14164f519fc2b61c}} 
 \index{ui.cpp@{ui.cpp}!wifi\_list@{wifi\_list}}
 \index{wifi\_list@{wifi\_list}!ui.cpp@{ui.cpp}}

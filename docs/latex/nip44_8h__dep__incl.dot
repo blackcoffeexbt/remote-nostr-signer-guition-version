@@ -9,4 +9,6 @@ digraph "lib/nostr/nip44/nip44.h"
   Node2 [label="lib/nostr/nip44/nip44.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$nip44_8cpp.html",tooltip=" "];
   Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
   Node3 [label="lib/nostr/nostr.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$nostr_8cpp.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="src/remote_signer.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$remote__signer_8cpp.html",tooltip=" "];
 }

@@ -1,23 +1,24 @@
-# NWC Point of Sale Device Architecture
+# Nostr Remote Signer Device Architecture
 
 ## Project Overview
 
-This is a **Nostr Wallet Connect (NWC) powered Point of Sale device** built for the ESP32-S3 Guition JC3248W535 touch screen display. The device enables merchants to accept Bitcoin Lightning Network payments using the Nostr protocol NIP-47 for wallet communication.
+This is a **Nostr Remote Signer device** built for the ESP32-S3 Guition JC3248W535 touch screen display. The device implements NIP-46 (Nostr Connect) protocol to provide secure remote signing services for Nostr events while keeping private keys isolated on the hardware device.
 
 ### Key Features
-- Nostr Wallet Connect integration for Lightning payments
-- Touch screen interface
-- WiFi connectivity with AP mode for NWC Pairing Code configuration
-- Bitcoin price fetching from multiple fiat currencies
-- QR code generation for Lightning invoices
-- Real-time payment notifications
+- NIP-46 (Nostr Connect) remote signer implementation
+- Hardware-isolated private key storage
+- Touch screen interface for user confirmation
+- Client authorization management
+- Event signing with user approval
+- WiFi connectivity for Nostr relay communication
+- Real-time signing request notifications
 
 ### Technology Stack
 - **Device**: ESP32-S3 Guition JC3248W535 with 3.5" touch screen display (320x480)
 - **GUI Framework**: LVGL (Light and Versatile Graphics Library)
-- **Display Driver**: ArduinoGFX
-- **Protocols**: Nostr, WebSocket, HTTP/HTTPS, NTP
-- **Cryptography**: Bitcoin secp256k1 with Schnorr sigs, AES encryption
+- **Display Driver**: LovyanGFX
+- **Protocols**: Nostr (NIP-01, NIP-44, NIP-46), WebSocket, NTP
+- **Cryptography**: Secp256k1 with Schnorr signatures, NIP-44 encryption
 
 ---
 
@@ -33,10 +34,10 @@ The application follows a **modular architecture** with clear separation of conc
       │
 ┌─────┴───────────────────────────────────────┐
 │  Module Layer                               │
-├─────────┬─────────┬─────────┬─────────┬─────┴──┐
-│Display  │Settings │WiFiMgr  │   UI    │  NWC   │
-│         │         │         │         │        │
-└─────────┴─────────┴─────────┴─────────┴────────┘
+├─────────┬─────────┬─────────┬─────────┬──────────────┐
+│Display  │Settings │WiFiMgr  │   UI    │RemoteSigner  │
+│         │         │         │         │              │
+└─────────┴─────────┴─────────┴─────────┴──────────────┘
 ```
 
 ---
@@ -138,27 +139,28 @@ The application follows a **modular architecture** with clear separation of conc
 - Handles NWC URL configuration via web interface
 - Provides WiFi network selection and credential entry
 
-#### `src/nwc.cpp` / `src/nwc.h`
-**Nostr Wallet Connect protocol implementation**
-- Implements NWC protocol over WebSocket connections
-- Handles Nostr event encryption/decryption (NIP-04)
-- Manages Lightning invoice creation and payment monitoring
-- Fetches Bitcoin price data from external APIs
-- Provides automatic reconnection and connection health monitoring
+#### `src/remote_signer.cpp` / `src/remote_signer.h`
+**NIP-46 Remote Signer protocol implementation**
+- Implements NIP-46 (Nostr Connect) protocol over WebSocket connections
+- Handles Nostr event encryption/decryption using NIP-44
+- Manages client authorization and event signing requests
+- Provides secure private key storage and management
+- Implements automatic reconnection and connection health monitoring
 
 **Key Functions:**
-- `setupData()`: Parse NWC pairing URL and extract credentials
 - `connectToRelay()`: Establish WebSocket connection to Nostr relay
-- `makeInvoice()`: Create Lightning payment request
-- `sendInvoiceLookupRequest()`: Check payment status
-- `fetchBitcoinPrices()`: Update exchange rates
+- `handleSigningRequestEvent()`: Process incoming signing requests
+- `handleConnect()`: Handle client connection requests
+- `handleSignEvent()`: Process event signing requests with user confirmation
+- `loadConfigFromPreferences()`: Load signer configuration
 - `websocketEvent()`: Handle WebSocket events and Nostr messages
 
 **Protocol Features:**
-- Supports multiple fiat currencies (USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY)
-- Implements WebSocket fragmentation handling
-- Provides connection health monitoring with automatic reconnection
-- Handles encrypted Nostr events (kinds 23194, 23195, 23196, 23197)
+- Full NIP-46 method support (connect, sign_event, get_public_key, etc.)
+- NIP-44 encryption for all client communications
+- Client authorization management with user approval
+- Event signing confirmation via touch interface
+- Hardware-isolated private key storage
 
 ### Configuration and Storage
 
@@ -211,24 +213,30 @@ The application follows a **modular architecture** with clear separation of conc
 
 ### 1. **Application Startup**
 ```
-main.cpp → App::init() → Display::init() → Settings::init() → WiFiManager::init() → UI::init() → NWC::init()
+main.cpp → App::init() → Display::init() → Settings::init() → WiFiManager::init() → UI::init() → RemoteSigner::init()
 ```
 
-### 2. **Payment Processing Flow**
+### 2. **Client Connection Flow**
 ```
-UI (amount entry) → NWC::makeInvoice() → Nostr relay → Lightning wallet → 
-Payment notification → NWC::handleNwcResponseEvent() → UI::showPaymentReceived()
+Client application → NIP-46 connect request → RemoteSigner::handleConnect() → 
+UI authorization prompt → User approval → RemoteSigner::sendResponse() → Client authorized
 ```
 
-### 3. **WiFi Configuration Flow**
+### 3. **Event Signing Flow**
+```
+Authorized client → NIP-46 sign_event request → RemoteSigner::handleSignEvent() → 
+UI signing confirmation → User approval → Event signed → Encrypted response to client
+```
+
+### 4. **WiFi Configuration Flow**
 ```
 UI (WiFi screen) → WiFiManager::startScan() → UI (network list) → 
-WiFiManager::startConnection() → App::notifyWiFiStatusChanged() → NWC::connectToRelay()
+WiFiManager::startConnection() → App::notifyWiFiStatusChanged() → RemoteSigner::connectToRelay()
 ```
 
-### 4. **Settings Management Flow**
+### 5. **Settings Management Flow**
 ```
-UI (settings screen) → Settings::setShopName() → Settings::saveToPreferences() → 
+UI (settings screen) → Settings::saveToPreferences() → 
 App state update → UI refresh
 ```
 
@@ -236,19 +244,18 @@ App state update → UI refresh
 
 ## Communication Protocols
 
-### Nostr Wallet Connect (NWC)
+### NIP-46 (Nostr Connect) Protocol
 - **WebSocket connection** to Nostr relay servers
-- **Encrypted messaging** using NIP-04 encryption
-- **Event types**: 23194 (requests), 23195 (responses), 23196/23197 (notifications)
-- **Lightning integration** for invoice creation and payment monitoring
+- **Encrypted messaging** using NIP-44 encryption
+- **Event types**: Kind 24133 for remote signer requests and responses
+- **Method support**: connect, sign_event, get_public_key, ping, nip04/nip44 encrypt/decrypt
 
-### Lightning Network
-- **BOLT-11 invoices** for payment requests
-- **Real-time payment notifications** via NWC protocol
-- **Multi-currency support** with automatic satoshi conversion
+### Nostr Protocol Integration
+- **Event signing** with secp256k1 Schnorr signatures
+- **Real-time communication** via WebSocket connections to relays
+- **Client authorization** with persistent storage of approved clients
 
 ### External APIs
-- **Mempool.space API** for Bitcoin price data
 - **NTP synchronization** for accurate timestamps
 - **HTTPS requests** for secure API communication
 
@@ -273,15 +280,17 @@ App state update → UI refresh
 ## Security Features
 
 ### Cryptographic Security
-- **secp256k1 key pairs** for Nostr identity
-- **AES encryption** for sensitive communications
+- **secp256k1 key pairs** for Nostr identity and event signing
+- **NIP-44 encryption** for all client communications
+- **Hardware-isolated private keys** never leave the device
 - **PIN protection** for settings access
 - **Secure storage** of credentials in ESP32 Preferences
 
 ### Network Security
 - **HTTPS/WSS connections** for all external communications
-- **Encrypted Nostr messaging** using NIP-04 standard
-- **Access point password protection** for device configuration
+- **Encrypted Nostr messaging** using NIP-44 standard
+- **Client authorization** requiring user approval for each connection
+- **Event signing confirmation** requiring user approval for each request
 
 ---
 

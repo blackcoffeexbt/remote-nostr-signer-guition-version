@@ -33,6 +33,7 @@ var wifi__manager_8h =
     [ "getTaskHandle", "wifi__manager_8h.html#a21642cfac3d9379d2d1057956359f942", null ],
     [ "handleAPConfig", "wifi__manager_8h.html#a83adf4c440290cc3d725fbb7521dc5f1", null ],
     [ "handleAPRoot", "wifi__manager_8h.html#acee34f68f7c76be57917ada674c087c3", null ],
+    [ "handleCurrentConfig", "wifi__manager_8h.html#a42fcac4975c9a54e61aacee344294a87", null ],
     [ "init", "wifi__manager_8h.html#a307a74b2278e5f1c3ac148944034ca75", null ],
     [ "isAPModeActive", "wifi__manager_8h.html#a91219dd6aeea8f4e7f1960b8504a8b6f", null ],
     [ "isConnected", "wifi__manager_8h.html#aa6406a18b4523ef158247b902e770052", null ],

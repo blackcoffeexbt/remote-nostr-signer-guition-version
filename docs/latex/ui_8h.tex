@@ -6,6 +6,11 @@ Include dependency graph for ui.\+h\+:
 % FIG 0
 This graph shows which files directly or indirectly include this file\+:
 % FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_u_i_1_1_signed_event}{UI\+::\+Signed\+Event}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,7 +24,7 @@ namespace \mbox{\hyperlink{namespace_u_i_1_1_fonts}{UI\+::\+Fonts}}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{UI\+::screen\+\_\+state\+\_\+t}} \{ \newline
-\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{UI\+::\+SCREEN\+\_\+\+KEYPAD}}
+\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba0a1c6b9c964dab238998c925fd896006}{UI\+::\+SCREEN\+\_\+\+SIGNER\+\_\+\+STATUS}}
 , \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3bacedff97c3d308d48dda23b4505422956}{UI\+::\+SCREEN\+\_\+\+SETTINGS}}
 , \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3baad174f3034de428254af0b3ae43aa6bd}{UI\+::\+SCREEN\+\_\+\+WIFI}}
 , \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba159efe446c8b73c670063c4ac8f23438}{UI\+::\+SCREEN\+\_\+\+WIFI\+\_\+\+PASSWORD}}
@@ -35,7 +40,7 @@ void \mbox{\hyperlink{namespace_u_i_a2277decc2cba013de2fbb5a64fbc1543}{UI\+::ini
 \item 
 void \mbox{\hyperlink{namespace_u_i_a45e6a820c52945de0b31c1083648b8ca}{UI\+::cleanup}} ()
 \item 
-void \mbox{\hyperlink{namespace_u_i_a2d8ca1ecf0a566260451af9087f396f3}{UI\+::create\+Keypad\+Screen}} ()
+void \mbox{\hyperlink{namespace_u_i_aabd4d4788cdc8d3edb520fe2394fe355}{UI\+::create\+Signer\+Status\+Screen}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a1a65423af3051eca667c6210a4fd4e3b}{UI\+::create\+Settings\+Screen}} ()
 \item 
@@ -107,11 +112,19 @@ void \mbox{\hyperlink{namespace_u_i_a3a951a6d2b5d532d8321705ae237a2db}{UI\+::inv
 \item 
 void \mbox{\hyperlink{namespace_u_i_a8fdc8946d85d7e8cbe4d339e1e268f5d}{UI\+::reboot\+Device\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
 \item 
-void \mbox{\hyperlink{namespace_u_i_a230e829eccc0f61ab056f024c9ed0212}{UI\+::update\+Amount\+Display}} (const String \&amount)
+void \mbox{\hyperlink{namespace_u_i_a1fcb1735f63dd0a530f3c828a5f2ce37}{UI\+::add\+Signed\+Event}} (const String \&event\+Kind, const String \&content, const String \&timestamp)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a0580ac3c721a34070f4ecfdfd156ca43}{UI\+::clear\+Signed\+Events}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a85d758c0282e4c9e9031eaedc95db532}{UI\+::update\+Status\+Display}} (const String \&status)
 \item 
 void \mbox{\hyperlink{namespace_u_i_a9f8700b22f3cf1eb451e8a2b5cc4985a}{UI\+::show\+Loading\+Spinner}} (bool show)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a0171e1f44ebe2745721fe6a80d3e2963}{UI\+::show\+Signing\+Confirmation}} (const String \&event\+Kind, const String \&content)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1d0d2d698d97a9a368600ae08b0af6f5}{UI\+::show\+Pairing\+QRCode}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a3e86a09bb46232f85060b53f5060a2ca}{UI\+::show\+Event\+Signed\+Notification}} (const String \&event\+Kind, const String \&content)
 \item 
 void \mbox{\hyperlink{namespace_u_i_a5b4ed56a4755e396af5d6c827cba06d6}{UI\+::update\+Shop\+Name\+Display}} ()
 \item 

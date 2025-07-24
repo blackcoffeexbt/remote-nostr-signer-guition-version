@@ -6,7 +6,7 @@
 {\ttfamily \#include \char`\"{}display.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}wifi\+\_\+manager.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}ui.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}nwc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}remote\+\_\+signer.\+h\char`\"{}}\newline
 Include dependency graph for app.\+h\+:
 % FIG 0
 This graph shows which files directly or indirectly include this file\+:
@@ -55,13 +55,11 @@ String \mbox{\hyperlink{namespace_app_a80c864880e5ca12c02093585ed0cf447}{App\+::
 \item 
 void \mbox{\hyperlink{namespace_app_afb037eba2d5bcaebddb20eee584dc210}{App\+::notify\+Wi\+Fi\+Status\+Changed}} (bool connected)
 \item 
-void \mbox{\hyperlink{namespace_app_a76f7ef636cfd7f4429853af2f96b44e9}{App\+::notify\+NWCStatus\+Changed}} (bool connected)
+void \mbox{\hyperlink{namespace_app_afadd76c05e486d9157d66c0c8346acf3}{App\+::notify\+Signer\+Status\+Changed}} (bool connected)
 \item 
-void \mbox{\hyperlink{namespace_app_a8cba06ce488296b2939433e782c495d2}{App\+::notify\+Prices\+Updated}} ()
+void \mbox{\hyperlink{namespace_app_a34706d7f2162285403ae24260b7be973}{App\+::notify\+Signing\+Request}} (const String \&event\+Kind, const String \&content)
 \item 
-void \mbox{\hyperlink{namespace_app_aa9affbf3274d56cd4a55e4f2da119f62}{App\+::notify\+Invoice\+Created}} (const String \&invoice)
-\item 
-void \mbox{\hyperlink{namespace_app_a78b4623c59d84d6d49ea4bcef3e2e50d}{App\+::notify\+Payment\+Received}} ()
+void \mbox{\hyperlink{namespace_app_a257efbaaef01b8858ee5cbd6f903aa38}{App\+::notify\+Signing\+Completed}} (bool success)
 \item 
 bool \mbox{\hyperlink{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}{App\+::load\+Configuration}} ()
 \item 
@@ -75,35 +73,7 @@ String \mbox{\hyperlink{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}{App\+::
 \item 
 void \mbox{\hyperlink{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}{App\+::print\+System\+Info}} ()
 \item 
-void \mbox{\hyperlink{namespace_app_acd1e936efc6f95c59a40a1855fec628f}{App\+::enter\+Sleep\+Mode}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_add4f10ef1f893dee045cee7394aa964d}{App\+::exit\+Sleep\+Mode}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_ad479e4eced825606fa2bba2e58d0fe2e}{App\+::enter\+Light\+Sleep\+Mode}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}{App\+::exit\+Light\+Sleep\+Mode}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_a78517f9e5f4f6892c4a1197e113f1cf0}{App\+::init\+Sleep\+Mode}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_a9275aeb02dd780c3f348db22812d0af0}{App\+::cleanup\+Sleep\+Mode}} ()
-\item 
 void \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{App\+::reset\+Activity\+Timer}} ()
-\item 
-void \mbox{\hyperlink{namespace_app_ae7348f8ae44915c79695b95eaaf8e6f4}{App\+::sleep\+Check\+Callback}} (lv\+\_\+timer\+\_\+t $\ast$timer)
-\item 
-void \mbox{\hyperlink{namespace_app_a2ad2cb227fd9a9cb56cd6f0a157e2ba7}{App\+::set\+Sleep\+Enabled}} (bool enabled)
-\item 
-bool \mbox{\hyperlink{namespace_app_aacf00bbb11ff39ad6396bce703fece7a}{App\+::is\+Sleep\+Enabled}} ()
-\item 
-bool \mbox{\hyperlink{namespace_app_ac4ecbc30cf2ce9769c0dd6fab5e5a364}{App\+::is\+In\+Light\+Sleep}} ()
-\item 
-bool \mbox{\hyperlink{namespace_app_a0ba03eec3bb43b1375522bc618857789}{App\+::is\+Backlight\+Off}} ()
-\item 
-unsigned long \mbox{\hyperlink{namespace_app_ac67a97aaf8fc7a4f9cbaa5387f1eba9e}{App\+::get\+Inactive\+Time}} ()
-\item 
-unsigned long \mbox{\hyperlink{namespace_app_a4377e4c9c1c5fe0ca432f3cd209a038e}{App\+::get\+Light\+Sleep\+Timeout}} ()
-\item 
-unsigned long \mbox{\hyperlink{namespace_app_a7acecdd250d4af52cb8857ffa758b274}{App\+::get\+Deep\+Sleep\+Timeout}} ()
 \item 
 void \mbox{\hyperlink{namespace_app_afebab729ad90b87d5c556255298b5f8b}{App\+::handle\+Touch\+Wake}} ()
 \item 
@@ -136,9 +106,5 @@ const unsigned long \mbox{\hyperlink{namespace_app_1_1_config_aed2365acb340abc9a
 \item 
 const unsigned long \mbox{\hyperlink{namespace_app_1_1_config_a00a57a231630d54b3d237936cdb56445}{App\+::\+Config\+::\+STATUS\+\_\+\+REPORT\+\_\+\+INTERVAL}} = 300000
 \item 
-const unsigned long \mbox{\hyperlink{namespace_app_1_1_config_a35820e19d7e583e8ad16eac4c1bfc682}{App\+::\+Config\+::\+SLEEP\+\_\+\+TIMEOUT}} = 30 $\ast$ 1000
-\item 
-const gpio\+\_\+num\+\_\+t \mbox{\hyperlink{namespace_app_1_1_config_a9d3d0263180e83cf381f42eacbe20713}{App\+::\+Config\+::\+WAKE\+\_\+\+PIN}} = GPIO\+\_\+\+NUM\+\_\+10
-\item 
-const unsigned long \mbox{\hyperlink{namespace_app_1_1_config_a77650851f0515bfcc43bf2f9b59553b1}{App\+::\+Config\+::\+SLEEP\+\_\+\+CHECK\+\_\+\+INTERVAL}} = 1000
+const unsigned long \mbox{\hyperlink{namespace_app_1_1_config_aa4a9714186cd1ece72f73ca03cc723da}{App\+::\+Config\+::\+TOUCH\+\_\+\+DEBOUNCE\+\_\+\+TIME}} = 50
 \end{DoxyCompactItemize}
