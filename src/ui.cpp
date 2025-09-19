@@ -218,7 +218,10 @@ namespace UI {
         lv_obj_add_event_cb(qr_btn, [](lv_event_t* e) {
             lv_event_code_t code = lv_event_get_code(e);
             if (code == LV_EVENT_CLICKED) {
-                showPairingQRCode();
+                // Reset activity timer
+                App::resetActivityTimer();
+                // Show PIN verification screen before displaying QR code
+                Settings::showPinVerificationScreenForQR();
             }
         }, LV_EVENT_CLICKED, NULL);
         

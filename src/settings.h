@@ -46,6 +46,7 @@ namespace Settings {
     void showPinManagementScreen();
     void hidePinManagementScreen();
     void showPinVerificationScreen();
+    void showPinVerificationScreenForQR();
     
     // Configuration management
     void resetToDefaults();
@@ -56,6 +57,8 @@ namespace Settings {
     void pinCancelEventHandler(lv_event_t *e);
     void pinVerificationKBEventHandler(lv_event_t *e);
     void pinVerificationCancelEventHandler(lv_event_t *e);
+    void pinVerificationQRKBEventHandler(lv_event_t *e);
+    void pinVerificationQRCancelEventHandler(lv_event_t *e);
     
     // UI element references for keyboard handling
     void setSettingsUIElements(lv_obj_t *pin_btn, lv_obj_t *save_btn);

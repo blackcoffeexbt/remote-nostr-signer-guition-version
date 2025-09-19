@@ -33,6 +33,12 @@ namespace Settings {
     static lv_obj_t *pin_verification_keyboard = NULL;
     static lv_obj_t *pin_verification_status = NULL;
     
+    // QR PIN verification UI elements
+    static lv_obj_t *pin_verification_qr_screen = NULL;
+    static lv_obj_t *pin_verification_qr_textarea = NULL;
+    static lv_obj_t *pin_verification_qr_keyboard = NULL;
+    static lv_obj_t *pin_verification_qr_status = NULL;
+    
     void init() {
         loadFromPreferences();
     }
@@ -597,6 +603,138 @@ namespace Settings {
             if (pin_verification_screen != NULL) {
                 lv_obj_del(pin_verification_screen);
                 pin_verification_screen = NULL;
+            }
+        }
+    }
+    
+    void showPinVerificationScreenForQR() {
+        if (pin_verification_qr_screen != NULL) {
+            lv_obj_del(pin_verification_qr_screen);
+        }
+        
+        pin_verification_qr_screen = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(pin_verification_qr_screen, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(pin_verification_qr_screen, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(pin_verification_qr_screen, LV_OPA_100, LV_PART_MAIN);
+        
+        // Title
+        lv_obj_t * title = lv_label_create(pin_verification_qr_screen);
+        lv_label_set_text(title, "Enter PIN to Show Pairing QR");
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 20);
+        lv_obj_set_style_text_font(title, &lv_font_montserrat_16, LV_PART_MAIN);
+        lv_obj_set_style_text_color(title, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        
+        // PIN input field
+        pin_verification_qr_textarea = lv_textarea_create(pin_verification_qr_screen);
+        lv_textarea_set_password_mode(pin_verification_qr_textarea, true);
+        lv_textarea_set_one_line(pin_verification_qr_textarea, true);
+        lv_obj_set_size(pin_verification_qr_textarea, 200, 50);
+        lv_obj_align(pin_verification_qr_textarea, LV_ALIGN_TOP_MID, 0, 80);
+        lv_obj_add_event_cb(pin_verification_qr_textarea, pinVerificationQRKBEventHandler, LV_EVENT_CLICKED, NULL);
+        lv_obj_add_event_cb(pin_verification_qr_textarea, [](lv_event_t *e) {
+            lv_event_code_t code = lv_event_get_code(e);
+            if (code == LV_EVENT_VALUE_CHANGED) {
+                if (pin_verification_qr_status != NULL) {
+                    lv_obj_add_flag(pin_verification_qr_status, LV_OBJ_FLAG_HIDDEN);
+                }
+            }
+        }, LV_EVENT_VALUE_CHANGED, NULL);
+        
+        // Status label
+        pin_verification_qr_status = lv_label_create(pin_verification_qr_screen);
+        lv_label_set_text(pin_verification_qr_status, "");
+        lv_obj_align(pin_verification_qr_status, LV_ALIGN_TOP_MID, 0, 140);
+        lv_obj_set_style_text_color(pin_verification_qr_status, lv_color_hex(0xFF0000), LV_PART_MAIN);
+        lv_obj_add_flag(pin_verification_qr_status, LV_OBJ_FLAG_HIDDEN);
+        
+        // Show QR button
+        lv_obj_t * show_qr_btn = lv_btn_create(pin_verification_qr_screen);
+        lv_obj_set_size(show_qr_btn, 120, 50);
+        lv_obj_align(show_qr_btn, LV_ALIGN_TOP_MID, -70, 150);
+        lv_obj_add_event_cb(show_qr_btn, [](lv_event_t *e) {
+            lv_event_code_t code = lv_event_get_code(e);
+            if (code == LV_EVENT_CLICKED) {
+                // Reset activity timer on PIN verification
+                App::resetActivityTimer();
+                
+                const char* entered_pin = lv_textarea_get_text(pin_verification_qr_textarea);
+                if (Settings::verifyPin(String(entered_pin))) {
+                    if (pin_verification_qr_screen != NULL) {
+                        lv_obj_del(pin_verification_qr_screen);
+                        pin_verification_qr_screen = NULL;
+                    }
+                    // Show the pairing QR code
+                    UI::showPairingQRCode();
+                } else {
+                    lv_textarea_set_text(pin_verification_qr_textarea, "");
+                    lv_label_set_text(pin_verification_qr_status, "Incorrect PIN");
+                    lv_obj_clear_flag(pin_verification_qr_status, LV_OBJ_FLAG_HIDDEN);
+                }
+            }
+        }, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t * show_qr_label = lv_label_create(show_qr_btn);
+        lv_label_set_text(show_qr_label, "Show QR");
+        lv_obj_center(show_qr_label);
+        
+        // Style for Show QR button (Blue)
+        lv_obj_set_style_bg_color(show_qr_btn, lv_color_hex(0x2196F3), LV_PART_MAIN);
+        lv_obj_set_style_text_color(show_qr_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(show_qr_btn, lv_color_hex(0x1976D2), LV_STATE_PRESSED);
+        
+        // Cancel button
+        lv_obj_t * cancel_btn = lv_btn_create(pin_verification_qr_screen);
+        lv_obj_set_size(cancel_btn, 100, 50);
+        lv_obj_align(cancel_btn, LV_ALIGN_TOP_MID, 70, 150);
+        lv_obj_add_event_cb(cancel_btn, pinVerificationQRCancelEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t * cancel_label = lv_label_create(cancel_btn);
+        lv_label_set_text(cancel_label, "Cancel");
+        lv_obj_center(cancel_label);
+        
+        // Style for Cancel button (Grey)
+        lv_obj_set_style_bg_color(cancel_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
+        lv_obj_set_style_text_color(cancel_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(cancel_btn, lv_color_hex(0x757575), LV_STATE_PRESSED);
+        
+        // Create keyboard
+        pin_verification_qr_keyboard = lv_keyboard_create(lv_scr_act());
+        lv_keyboard_set_mode(pin_verification_qr_keyboard, LV_KEYBOARD_MODE_NUMBER);
+        lv_obj_clear_flag(pin_verification_qr_keyboard, LV_OBJ_FLAG_HIDDEN);
+        lv_keyboard_set_textarea(pin_verification_qr_keyboard, pin_verification_qr_textarea);
+        lv_obj_add_event_cb(pin_verification_qr_keyboard, [](lv_event_t *e) {
+            lv_event_code_t code = lv_event_get_code(e);
+            if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+                lv_obj_add_flag(pin_verification_qr_keyboard, LV_OBJ_FLAG_HIDDEN);
+            }
+        }, LV_EVENT_ALL, NULL);
+    }
+    
+    void pinVerificationQRKBEventHandler(lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_READY) {
+            const char* entered_pin = lv_textarea_get_text(pin_verification_qr_textarea);
+            if (verifyPin(String(entered_pin))) {
+                if (pin_verification_qr_screen != NULL) {
+                    lv_obj_del(pin_verification_qr_screen);
+                    pin_verification_qr_screen = NULL;
+                }
+                // Show the pairing QR code
+                UI::showPairingQRCode();
+            } else {
+                lv_textarea_set_text(pin_verification_qr_textarea, "");
+                lv_label_set_text(pin_verification_qr_status, "Incorrect PIN");
+                lv_obj_clear_flag(pin_verification_qr_status, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }
+    
+    void pinVerificationQRCancelEventHandler(lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            if (pin_verification_qr_screen != NULL) {
+                lv_obj_del(pin_verification_qr_screen);
+                pin_verification_qr_screen = NULL;
             }
         }
     }
