@@ -41,6 +41,8 @@ namespace RemoteSigner {
     static unsigned long last_ws_ping = 0;
     static unsigned long last_ws_message_received = 0;
     static int reconnection_attempts = 0;
+    static unsigned long last_reconnect_attempt = 0;
+    static bool manual_reconnect_needed = false;
     
     // WebSocket fragment management
     static bool ws_fragment_in_progress = false;
@@ -167,6 +169,7 @@ namespace RemoteSigner {
         }
         
         Serial.println("RemoteSigner::connectToRelay() - Connecting to relay: " + relayUrl);
+        Serial.println("Connection attempt #" + String(reconnection_attempts + 1) + " of " + String(Config::MAX_RECONNECT_ATTEMPTS));
         
         connection_in_progress = true;
         last_connection_attempt = millis();
@@ -187,10 +190,10 @@ namespace RemoteSigner {
     
     void disconnect() {
         Serial.println("RemoteSigner::disconnect() - Disconnecting from relay");
+        Serial.println("Connection was active for: " + String((millis() - last_connection_attempt) / 1000) + "s");
         
         webSocket.disconnect();
         connection_in_progress = false;
-        reconnection_attempts = 0;
         
         if (status_callback) {
             status_callback(false, "Disconnected");
@@ -222,6 +225,7 @@ namespace RemoteSigner {
                 Serial.println("RemoteSigner::websocketEvent() - WebSocket Connected to: " + String((char*)payload));
                 connection_in_progress = false;
                 reconnection_attempts = 0;
+                manual_reconnect_needed = false;
                 last_ws_message_received = millis();
                 
                 // Subscribe to NIP-46 events for our public key
@@ -250,10 +254,22 @@ namespace RemoteSigner {
                 
             case WStype_PING:
                 Serial.println("RemoteSigner::websocketEvent() - Received ping");
+                last_ws_message_received = millis();
                 break;
                 
             case WStype_PONG:
                 Serial.println("RemoteSigner::websocketEvent() - Received pong");
+                last_ws_message_received = millis();
+                break;
+                
+            case WStype_ERROR:
+                Serial.println("RemoteSigner::websocketEvent() - WebSocket Error");
+                connection_in_progress = false;
+                manual_reconnect_needed = true;
+                
+                if (status_callback) {
+                    status_callback(false, "Connection error");
+                }
                 break;
                 
             default:
@@ -646,16 +662,56 @@ namespace RemoteSigner {
             last_ws_ping = now;
         }
         
+        // Debug: Log connection health every 30 seconds
+        static unsigned long last_debug_log = 0;
+        if (now - last_debug_log > 30000) {
+            if (isConnected()) {
+                Serial.println("RemoteSigner::processLoop() - Connection healthy. Last message: " + String((now - last_ws_message_received) / 1000) + "s ago");
+            } else {
+                Serial.println("RemoteSigner::processLoop() - Not connected. Manual reconnect needed: " + String(manual_reconnect_needed ? "Yes" : "No"));
+            }
+            last_debug_log = now;
+        }
+        
         // Check connection health
         if (isConnected() && (now - last_ws_message_received > Config::CONNECTION_TIMEOUT)) {
-            Serial.println("RemoteSigner::processLoop() - Connection timeout, disconnecting");
+            Serial.println("RemoteSigner::processLoop() - Connection timeout detected");
+            Serial.println("Last message received: " + String((now - last_ws_message_received) / 1000) + "s ago");
             disconnect();
+            manual_reconnect_needed = true;
+        }
+        
+        // Handle manual reconnection with exponential backoff
+        if (manual_reconnect_needed && !connection_in_progress && !isConnected()) {
+            unsigned long backoff_delay = Config::MIN_RECONNECT_INTERVAL * (1 << min(reconnection_attempts, 5)); // Cap at 32x base interval
+            
+            if (now - last_reconnect_attempt >= backoff_delay) {
+                if (reconnection_attempts < Config::MAX_RECONNECT_ATTEMPTS) {
+                    Serial.println("RemoteSigner::processLoop() - Attempting manual reconnection #" + String(reconnection_attempts + 1));
+                    Serial.println("Backoff delay was: " + String(backoff_delay) + "ms");
+                    
+                    connectToRelay();
+                    last_reconnect_attempt = now;
+                    reconnection_attempts++;
+                } else {
+                    Serial.println("RemoteSigner::processLoop() - Max reconnection attempts reached, giving up");
+                    manual_reconnect_needed = false;
+                    reconnection_attempts = 0;
+                    
+                    if (status_callback) {
+                        status_callback(false, "Connection failed permanently");
+                    }
+                }
+            }
         }
     }
     
     void sendPing() {
         if (isConnected()) {
+            Serial.println("RemoteSigner::sendPing() - Sending ping to relay");
             webSocket.sendPing();
+        } else {
+            Serial.println("RemoteSigner::sendPing() - Cannot send ping: not connected");
         }
     }
     

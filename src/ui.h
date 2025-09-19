@@ -17,6 +17,8 @@ namespace UI {
     // Initialization and cleanup
     void init();
     void cleanup();
+
+    String getReadableEventKind(String eventKind);
     
     // Screen creation functions
     void createSignerStatusScreen();

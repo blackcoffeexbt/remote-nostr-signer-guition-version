@@ -110,6 +110,28 @@ namespace UI {
         // Force an immediate refresh after screen creation
         lv_timer_handler();
     }
+
+    /**
+     * @brief Get a human-readable description of the event kind.
+     * @param eventKind The kind of the event as a string.
+     * @return A human-readable description of the event kind.
+     */
+    String getReadableEventKind(String eventKind) {
+        if(eventKind == "0") return "Metadata";
+        if(eventKind == "1") return "Note";
+        if(eventKind == "2") return "Recommend Relay";
+        if(eventKind == "3") return "Contact List";
+        if(eventKind == "4") return "Encrypted DM";
+        if(eventKind == "5") return "Event Deletion";
+        if(eventKind == "6") return "Repost";
+        if(eventKind == "7") return "Reaction";
+        if(eventKind == "8") return "Badge Award";
+        if(eventKind == "44") return "Encrypted DM";
+        if(eventKind == "9734") return "Zap Request";
+
+        return "Kind " + eventKind;
+
+    }
     
     void createSignerStatusScreen() {
         // Set black background for the main screen
@@ -165,7 +187,7 @@ namespace UI {
         } else {
             // Populate with existing signed events
             for (const auto& event : signed_events) {
-                String item_text = "Kind " + event.eventKind + " - " + event.timestamp;
+                String item_text = event.timestamp + " - " + getReadableEventKind(event.eventKind);
                 lv_obj_t* btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_OK, item_text.c_str());
                 lv_obj_set_style_bg_color(btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
                 lv_obj_set_style_text_color(btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
@@ -1347,29 +1369,26 @@ namespace UI {
         event.eventKind = eventKind;
         event.content = content;
         event.timestamp = timestamp;
-        signed_events.push_back(event);
-        
-        // Limit to last 20 events to prevent memory issues
-        if (signed_events.size() > 20) {
-            signed_events.erase(signed_events.begin());
-        }
-        
+        // push event to the top of the vector
+        signed_events.insert(signed_events.begin(), event);
+                
         // Update the list if it exists and is valid
         if (signed_events_list && lv_obj_is_valid(signed_events_list)) {
             // Clear the list first
             lv_obj_clean(signed_events_list);
+            // reverse iterate through signed_events to show latest at top
+            std::vector<SignedEvent> signed_events_copy = signed_events;
+            std::reverse(signed_events_copy.begin(), signed_events_copy.end());
             
             // Add all events back
             for (const auto& evt : signed_events) {
-                String item_text = "Kind " + evt.eventKind + " - " + evt.timestamp;
+                String item_text = evt.timestamp + " - " + getReadableEventKind(evt.eventKind);
                 lv_obj_t* btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_OK, item_text.c_str());
-                lv_obj_set_style_bg_color(btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
-                lv_obj_set_style_text_color(btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
+                    lv_obj_set_style_bg_color(btn, lv_color_hex(0x000000), LV_PART_MAIN);
+                lv_obj_set_style_bg_opa(btn, LV_OPA_TRANSP, LV_PART_MAIN);
+            lv_obj_set_style_text_color(btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
                 lv_obj_clear_flag(btn, LV_OBJ_FLAG_CLICKABLE);
             }
-            
-            // Scroll to bottom to show latest event
-            lv_obj_scroll_to_y(signed_events_list, LV_COORD_MAX, LV_ANIM_ON);
         }
         
         Serial.println("Added signed event to list: Kind " + eventKind + " at " + timestamp);
@@ -1386,7 +1405,8 @@ namespace UI {
             lv_obj_t* initial_label = lv_obj_get_child(initial_btn, 1);
             lv_obj_set_style_text_color(initial_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
             lv_obj_set_style_text_align(initial_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
-            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+            lv_obj_set_style_bg_opa(initial_btn, LV_OPA_TRANSP, LV_PART_MAIN);
             lv_obj_clear_flag(initial_btn, LV_OBJ_FLAG_CLICKABLE);
         }
     }
