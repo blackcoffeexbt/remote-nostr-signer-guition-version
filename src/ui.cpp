@@ -1361,8 +1361,74 @@ namespace UI {
             return;
         }
         
-        // Use existing QR code display functionality
+        // Create pairing QR screen overlay
+        lv_obj_t* pairing_overlay = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(pairing_overlay, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(pairing_overlay, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(pairing_overlay, LV_OPA_COVER, LV_PART_MAIN);
+        lv_obj_set_style_border_width(pairing_overlay, 0, LV_PART_MAIN);
+        
+        // Title
+        lv_obj_t* title = lv_label_create(pairing_overlay);
+        lv_label_set_text(title, "Pairing QR Code");
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 20);
+        lv_obj_set_style_text_font(title, Fonts::FONT_XLARGE, LV_PART_MAIN);
+        lv_obj_set_style_text_color(title, lv_color_hex(Colors::PRIMARY), 0);
+        
+        // Instruction text
+        lv_obj_t* instruction = lv_label_create(pairing_overlay);
+        lv_label_set_text(instruction, "Scan this QR code with your Nostr client\nto pair with this remote signer");
+        lv_obj_align(instruction, LV_ALIGN_TOP_MID, 0, 60);
+        lv_obj_set_style_text_color(instruction, lv_color_hex(Colors::TEXT), 0);
+        lv_obj_set_style_text_align(instruction, LV_TEXT_ALIGN_CENTER, 0);
+        lv_label_set_long_mode(instruction, LV_LABEL_LONG_WRAP);
+        lv_obj_set_width(instruction, lv_pct(90));
+        
+        // QR Code canvas
+        lv_obj_t* pairing_qr_canvas = lv_canvas_create(pairing_overlay);
+        lv_obj_set_size(pairing_qr_canvas, 280, 280);
+        lv_obj_align(pairing_qr_canvas, LV_ALIGN_CENTER, 0, 20);
+        lv_obj_set_style_bg_color(pairing_qr_canvas, lv_color_white(), LV_PART_MAIN);
+        lv_obj_set_style_border_width(pairing_qr_canvas, 2, LV_PART_MAIN);
+        lv_obj_set_style_border_color(pairing_qr_canvas, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        
+        // Set the QR canvas for display and show the QR code
+        Display::setQRCanvas(pairing_qr_canvas);
         Display::displayQRCode(bunkerUrl);
+        
+        // Back button
+        lv_obj_t* back_btn = lv_btn_create(pairing_overlay);
+        lv_obj_set_size(back_btn, 120, 50);
+        lv_obj_align(back_btn, LV_ALIGN_BOTTOM_MID, 0, -20);
+        lv_obj_add_event_cb(back_btn, [](lv_event_t* e) {
+            lv_event_code_t code = lv_event_get_code(e);
+            if (code == LV_EVENT_CLICKED) {
+                // Reset activity timer
+                App::resetActivityTimer();
+                // Close the pairing overlay and return to home screen
+                lv_obj_t* overlay = lv_obj_get_parent(lv_event_get_target(e));
+                lv_obj_del(overlay);
+                // Restore original QR canvas reference
+                qr_canvas = lv_obj_create(lv_scr_act());
+                lv_obj_set_size(qr_canvas, 300, 300);
+                lv_obj_align(qr_canvas, LV_ALIGN_CENTER, 0, 0);
+                lv_obj_set_style_bg_color(qr_canvas, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+                lv_obj_set_style_border_width(qr_canvas, 2, LV_PART_MAIN);
+                lv_obj_set_style_border_color(qr_canvas, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+                lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
+                Display::setQRCanvas(qr_canvas);
+            }
+        }, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* back_label = lv_label_create(back_btn);
+        lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+        lv_obj_set_style_text_font(back_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_center(back_label);
+        
+        // Style for Back button
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
     }
     
     void addSignedEvent(const String& eventKind, const String& content, const String& timestamp) {
