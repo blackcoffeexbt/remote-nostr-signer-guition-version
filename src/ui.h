@@ -98,7 +98,7 @@ namespace UI {
     
     // Constants for UI styling
     namespace Colors {
-        const uint32_t PRIMARY = 0x2196F3;
+        const uint32_t PRIMARY = 0xdf2ccf;
         const uint32_t SUCCESS = 0x4CAF50;
         const uint32_t WARNING = 0xFF9800;
         const uint32_t ERROR = 0xF44336;

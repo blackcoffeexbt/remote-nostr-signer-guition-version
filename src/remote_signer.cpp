@@ -175,6 +175,9 @@ namespace RemoteSigner {
         connection_in_progress = true;
         last_connection_attempt = millis();
         
+        // Update status display immediately
+        displayConnectionStatus(false);
+        
         // Extract hostname from relay URL (remove wss:// prefix)
         String hostname = relayUrl;
         hostname.replace("wss://", "");
@@ -196,6 +199,9 @@ namespace RemoteSigner {
         webSocket.disconnect();
         connection_in_progress = false;
         
+        // Update status display immediately
+        displayConnectionStatus(false);
+        
         if (status_callback) {
             status_callback(false, "Disconnected");
         }
@@ -207,9 +213,13 @@ namespace RemoteSigner {
                 Serial.println("RemoteSigner::websocketEvent() - WebSocket Disconnected");
                 connection_in_progress = false;
                 
+                // Update status display immediately
+                displayConnectionStatus(false);
+                
                 if (reconnection_attempts < Config::MAX_RECONNECT_ATTEMPTS) {
                     reconnection_attempts++;
                     Serial.println("RemoteSigner::websocketEvent() - Scheduling reconnection attempt " + String(reconnection_attempts));
+                    manual_reconnect_needed = true;
                     
                     if (status_callback) {
                         status_callback(false, "Reconnecting...");
@@ -228,6 +238,9 @@ namespace RemoteSigner {
                 reconnection_attempts = 0;
                 manual_reconnect_needed = false;
                 last_ws_message_received = millis();
+                
+                // Update status display immediately
+                displayConnectionStatus(true);
                 
                 // Subscribe to NIP-46 events for our public key
                 if (publicKeyHex.length() > 0) {
@@ -663,6 +676,13 @@ namespace RemoteSigner {
             last_ws_ping = now;
         }
         
+        // Periodic status updates every 5 seconds
+        static unsigned long last_status_update = 0;
+        if (now - last_status_update > 5000) {
+            displayConnectionStatus(isConnected());
+            last_status_update = now;
+        }
+        
         // Debug: Log connection health every 30 seconds
         static unsigned long last_debug_log = 0;
         if (now - last_debug_log > 30000) {
@@ -698,6 +718,9 @@ namespace RemoteSigner {
                     Serial.println("RemoteSigner::processLoop() - Max reconnection attempts reached, giving up");
                     manual_reconnect_needed = false;
                     reconnection_attempts = 0;
+                    
+                    // Update status display immediately
+                    displayConnectionStatus(false);
                     
                     if (status_callback) {
                         status_callback(false, "Connection failed permanently");
@@ -751,9 +774,28 @@ namespace RemoteSigner {
     
     void displayConnectionStatus(bool connected) {
         if (status_label && lv_obj_is_valid(status_label)) {
-            lv_label_set_text(status_label, connected ? "Connected" : "Disconnected");
-            // set to green if connected, red if disconnected
-            lv_obj_set_style_text_color(status_label, connected ? lv_color_hex(0x00FF00) : lv_color_hex(0x9E9E9E), 0);
+            String statusText;
+            uint32_t statusColor;
+            
+            if (connected) {
+                statusText = "Relay: Connected";
+                statusColor = 0x00FF00; // Green
+            } else if (connection_in_progress) {
+                statusText = "Relay: Connecting...";
+                statusColor = 0xFFA500; // Orange
+            } else if (manual_reconnect_needed && reconnection_attempts > 0) {
+                statusText = "Relay: Reconnecting (" + String(reconnection_attempts) + "/" + String(Config::MAX_RECONNECT_ATTEMPTS) + ")";
+                statusColor = 0xFFA500; // Orange
+            } else if (reconnection_attempts >= Config::MAX_RECONNECT_ATTEMPTS) {
+                statusText = "Relay: Failed";
+                statusColor = 0xFF0000; // Red
+            } else {
+                statusText = "Relay: Disconnected";
+                statusColor = 0x9E9E9E; // Grey
+            }
+            
+            lv_label_set_text(status_label, statusText.c_str());
+            lv_obj_set_style_text_color(status_label, lv_color_hex(statusColor), 0);
         }
     }
     
@@ -783,5 +825,9 @@ namespace RemoteSigner {
     String getPublicKey() { return publicKeyHex; }
     String getSecretKey() { return secretKey; }
     WebSocketsClient& getWebSocketClient() { return webSocket; }
-    void setStatusLabel(lv_obj_t* label) { status_label = label; }
+    void setStatusLabel(lv_obj_t* label) { 
+        status_label = label; 
+        // Update status immediately after setting the label
+        displayConnectionStatus(isConnected());
+    }
 }

@@ -1387,7 +1387,7 @@ namespace UI {
         // QR Code canvas
         lv_obj_t* pairing_qr_canvas = lv_canvas_create(pairing_overlay);
         lv_obj_set_size(pairing_qr_canvas, 280, 280);
-        lv_obj_align(pairing_qr_canvas, LV_ALIGN_CENTER, 0, 20);
+        lv_obj_align(pairing_qr_canvas, LV_ALIGN_CENTER, 0, 30);
         lv_obj_set_style_bg_color(pairing_qr_canvas, lv_color_white(), LV_PART_MAIN);
         lv_obj_set_style_border_width(pairing_qr_canvas, 2, LV_PART_MAIN);
         lv_obj_set_style_border_color(pairing_qr_canvas, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
@@ -1398,8 +1398,8 @@ namespace UI {
         
         // Back button
         lv_obj_t* back_btn = lv_btn_create(pairing_overlay);
-        lv_obj_set_size(back_btn, 120, 50);
-        lv_obj_align(back_btn, LV_ALIGN_BOTTOM_MID, 0, -20);
+        lv_obj_set_size(back_btn, 120, 40);
+        lv_obj_align(back_btn, LV_ALIGN_BOTTOM_MID, 0, 0);
         lv_obj_add_event_cb(back_btn, [](lv_event_t* e) {
             lv_event_code_t code = lv_event_get_code(e);
             if (code == LV_EVENT_CLICKED) {
@@ -1427,7 +1427,11 @@ namespace UI {
         
         // Style for Back button
         lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
-        lv_obj_set_style_text_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_TRANSP, LV_PART_MAIN);
+        // border and text color blue
+        lv_obj_set_style_border_color(back_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
         lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
     }
     
