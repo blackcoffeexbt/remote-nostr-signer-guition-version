@@ -718,6 +718,8 @@ namespace RemoteSigner {
                     reconnection_attempts++;
                 } else {
                     Serial.println("RemoteSigner::processLoop() - Max reconnection attempts reached, giving up");
+                    // reboot the device
+                    ESP.restart();
                     manual_reconnect_needed = false;
                     reconnection_attempts = 0;
                     
