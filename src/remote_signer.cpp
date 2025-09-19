@@ -4,6 +4,7 @@
 #include "app.h"
 #include "display.h"
 #include <Preferences.h>
+#include "lvgl.h"
 
 // Import Nostr library components from lib/ folder
 #include "../lib/nostr/nostr.h"
@@ -746,12 +747,13 @@ namespace RemoteSigner {
     
     void displaySigningRequest(const String& eventKind, const String& content) {
         Serial.println("RemoteSigner::displaySigningRequest() - " + eventKind + ": " + content);
-        // TODO: Update UI to show signing request
     }
     
     void displayConnectionStatus(bool connected) {
         if (status_label && lv_obj_is_valid(status_label)) {
             lv_label_set_text(status_label, connected ? "Connected" : "Disconnected");
+            // set to green if connected, red if disconnected
+            lv_obj_set_style_text_color(status_label, connected ? lv_color_hex(0x00FF00) : lv_color_hex(0x9E9E9E), 0);
         }
     }
     

@@ -159,10 +159,10 @@ namespace UI {
         lv_obj_set_style_text_font(title_label, Fonts::FONT_XLARGE, 0);
         lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 40);
 
-        // Signed events list container (taller to fill more space)
+        // Signed events list container
         lv_obj_t *events_container = lv_obj_create(lv_scr_act());
-        lv_obj_set_size(events_container, 300, 280);  // Made much taller
-        lv_obj_align(events_container, LV_ALIGN_CENTER, 0, 10);  // Moved down slightly
+        lv_obj_set_size(events_container, 300, 300); 
+        lv_obj_align(events_container, LV_ALIGN_CENTER, 0, 0); 
         lv_obj_set_style_bg_color(events_container, lv_color_hex(0x1a1a1a), LV_PART_MAIN);
         lv_obj_set_style_border_width(events_container, 2, LV_PART_MAIN);
         lv_obj_set_style_border_color(events_container, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
@@ -179,10 +179,12 @@ namespace UI {
         // Initial message when no events are signed yet
         if (signed_events.empty()) {
             lv_obj_t* initial_btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_REFRESH, "Ready to sign Nostr events");
+            lv_obj_set_style_text_color(initial_btn, lv_color_hex(0x00FF00), LV_PART_MAIN);
             lv_obj_t* initial_label = lv_obj_get_child(initial_btn, 1); // Get the label child
             lv_obj_set_style_text_color(initial_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
             lv_obj_set_style_text_align(initial_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
-            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x2a2a2a), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+            lv_obj_set_style_bg_opa(initial_btn, LV_OPA_TRANSP, LV_PART_MAIN);
             lv_obj_clear_flag(initial_btn, LV_OBJ_FLAG_CLICKABLE); // Make it non-clickable
         } else {
             // Populate with existing signed events
