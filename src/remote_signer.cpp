@@ -372,6 +372,8 @@ namespace RemoteSigner {
         String responseMsg = secret.length() > 0 ? 
             "{\"id\":\"" + requestId + "\",\"result\":\"" + secret + "\"}" :
             "{\"id\":\"" + requestId + "\",\"result\":\"ack\"}";
+
+        Serial.println("RemoteSigner::handleConnect() - Sending connect response: " + responseMsg);
         
         // Encrypt and send response using NIP-44
         String encryptedResponse = nostr::getEncryptedDm(

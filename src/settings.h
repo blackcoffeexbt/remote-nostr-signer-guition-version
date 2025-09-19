@@ -59,6 +59,7 @@ namespace Settings {
     void pinVerificationCancelEventHandler(lv_event_t *e);
     void pinVerificationQRKBEventHandler(lv_event_t *e);
     void pinVerificationQRCancelEventHandler(lv_event_t *e);
+    void cleanupPinVerificationQRKeyboard();
     
     // UI element references for keyboard handling
     void setSettingsUIElements(lv_obj_t *pin_btn, lv_obj_t *save_btn);

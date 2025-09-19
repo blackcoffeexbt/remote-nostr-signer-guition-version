@@ -1408,6 +1408,10 @@ namespace UI {
             if (code == LV_EVENT_CLICKED) {
                 // Reset activity timer
                 App::resetActivityTimer();
+                
+                // Clean up any remaining PIN verification keyboards
+                Settings::cleanupPinVerificationQRKeyboard();
+                
                 // Close the pairing overlay and return to home screen
                 lv_obj_t* overlay = lv_obj_get_parent(lv_event_get_target(e));
                 lv_obj_del(overlay);

@@ -659,6 +659,12 @@ namespace Settings {
                 
                 const char* entered_pin = lv_textarea_get_text(pin_verification_qr_textarea);
                 if (Settings::verifyPin(String(entered_pin))) {
+                    // Hide keyboard first before deleting the screen
+                    if (pin_verification_qr_keyboard != NULL && lv_obj_is_valid(pin_verification_qr_keyboard)) {
+                        lv_obj_del(pin_verification_qr_keyboard);
+                        pin_verification_qr_keyboard = NULL;
+                    }
+                    
                     if (pin_verification_qr_screen != NULL) {
                         lv_obj_del(pin_verification_qr_screen);
                         pin_verification_qr_screen = NULL;
@@ -715,6 +721,12 @@ namespace Settings {
         if (code == LV_EVENT_READY) {
             const char* entered_pin = lv_textarea_get_text(pin_verification_qr_textarea);
             if (verifyPin(String(entered_pin))) {
+                // Hide keyboard first before deleting the screen
+                if (pin_verification_qr_keyboard != NULL && lv_obj_is_valid(pin_verification_qr_keyboard)) {
+                    lv_obj_del(pin_verification_qr_keyboard);
+                    pin_verification_qr_keyboard = NULL;
+                }
+                
                 if (pin_verification_qr_screen != NULL) {
                     lv_obj_del(pin_verification_qr_screen);
                     pin_verification_qr_screen = NULL;
@@ -732,10 +744,30 @@ namespace Settings {
     void pinVerificationQRCancelEventHandler(lv_event_t *e) {
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED) {
+            // Hide keyboard first before deleting the screen
+            if (pin_verification_qr_keyboard != NULL && lv_obj_is_valid(pin_verification_qr_keyboard)) {
+                lv_obj_del(pin_verification_qr_keyboard);
+                pin_verification_qr_keyboard = NULL;
+            }
+            
             if (pin_verification_qr_screen != NULL) {
                 lv_obj_del(pin_verification_qr_screen);
                 pin_verification_qr_screen = NULL;
             }
+        }
+    }
+    
+    void cleanupPinVerificationQRKeyboard() {
+        // Clean up any remaining PIN verification QR keyboard
+        if (pin_verification_qr_keyboard != NULL && lv_obj_is_valid(pin_verification_qr_keyboard)) {
+            lv_obj_del(pin_verification_qr_keyboard);
+            pin_verification_qr_keyboard = NULL;
+        }
+        
+        // Clean up any remaining PIN verification QR screen
+        if (pin_verification_qr_screen != NULL && lv_obj_is_valid(pin_verification_qr_screen)) {
+            lv_obj_del(pin_verification_qr_screen);
+            pin_verification_qr_screen = NULL;
         }
     }
 }
