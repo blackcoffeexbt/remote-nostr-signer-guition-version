@@ -132,7 +132,7 @@ namespace UI {
 
         // Main title
         lv_obj_t *title_label = lv_label_create(lv_scr_act());
-        lv_label_set_text(title_label, "Nostr Remote Signer");
+        lv_label_set_text(title_label, "Remote Nostr Signer");
         lv_obj_set_style_text_color(title_label, lv_color_hex(Colors::PRIMARY), 0);
         lv_obj_set_style_text_font(title_label, Fonts::FONT_XLARGE, 0);
         lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 40);
