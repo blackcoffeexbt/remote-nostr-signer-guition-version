@@ -25,7 +25,7 @@ namespace WiFiManager {
     static bool ap_mode_active = false;
     static WebServer ap_server(80);
     static DNSServer dns_server;
-    static const char* ap_ssid = "NWC-PoS-Portal";
+    static const char* ap_ssid = "Remote-Signer-Portal";
     static const char* ap_ip = "192.168.4.1";
     
     // Task and queue management
