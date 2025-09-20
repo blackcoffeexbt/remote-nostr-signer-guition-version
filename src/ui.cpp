@@ -128,16 +128,21 @@ namespace UI {
         if(eventKind == "0") return "Metadata";
         if(eventKind == "1") return "Note";
         if(eventKind == "2") return "Recommend Relay";
-        if(eventKind == "3") return "Contact List";
+        if(eventKind == "3") return "Updated Follows";
         if(eventKind == "4") return "Encrypted DM";
         if(eventKind == "5") return "Event Deletion";
         if(eventKind == "6") return "Repost";
         if(eventKind == "7") return "Reaction";
         if(eventKind == "8") return "Badge Award";
+        if(eventKind == "21") return "Video Event";
         if(eventKind == "44") return "Encrypted DM";
         if(eventKind == "9734") return "Zap Request";
         if (eventKind == "9735") return "Zap";
         if (eventKind == "27235") return "HTTP Auth";
+        if (eventKind == "22242") return "Relay Auth";
+        if (eventKind == "30023") return "Long-form Content";
+        if (eventKind == "30024") return "Draft Long-form Content";
+        if(eventKind == "30078") return "Application-specific Data";
         {
             /* code */
         }
