@@ -140,8 +140,8 @@ namespace UI {
         //10012 favorite relays
         if(eventKind == "10012") return "Favorite Relays List";
         if (eventKind == "9735") return "Zap";
-        if (eventKind == "27235") return "HTTP Auth";
-        if (eventKind == "22242") return "Relay Auth";
+        if (eventKind == "27235") return "HTTP Authentication";
+        if (eventKind == "22242") return "Relay Authentication";
         if (eventKind == "30023") return "Long-form Content";
         if (eventKind == "30024") return "Draft Long-form Content";
         if(eventKind == "30078") return "Application-specific Data";
