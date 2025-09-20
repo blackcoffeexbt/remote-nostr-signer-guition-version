@@ -27,6 +27,7 @@ namespace Display {
     void setBacklightBrightness(uint8_t brightness); // 0-255
     void turnOffBacklight();
     void turnOnBacklight();
+    void turnOnBacklightForSigning();
     
     // Backlight timeout management
     void initBacklightTimeout();

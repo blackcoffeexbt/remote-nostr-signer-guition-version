@@ -31,8 +31,10 @@ namespace Display {
     // Backlight timeout management
     static unsigned long last_activity_time = 0;
     static bool backlight_on = true;
-    static const unsigned long BACKLIGHT_TIMEOUT = 60000; // 60 seconds
-    
+    static const unsigned long BACKLIGHT_TIMEOUT = 30000; // 30 seconds
+    // EVENT_SIGNING_BACKLIGHT_TIMEOUT to turn on backlight during signing
+    static const unsigned long EVENT_SIGNING_BACKLIGHT_TIMEOUT = 5000; // 5 seconds
+
     void init() {
         Serial.println("=== Initializing ArduinoGFX display ===");
         
@@ -374,6 +376,17 @@ namespace Display {
         Serial.println("Turning on display backlight");
         digitalWrite(TFT_BL, HIGH);
         backlight_on = true;
+    }
+
+    /**
+     * @brief Turn on backlight for signing event with reduced backlight turn off timeout
+     * 
+     */
+    void turnOnBacklightForSigning() {
+        Serial.println("Turning on backlight for signing event");
+        turnOnBacklight();
+        resetBacklightTimeout();
+        last_activity_time -= (BACKLIGHT_TIMEOUT - EVENT_SIGNING_BACKLIGHT_TIMEOUT);
     }
     
     // Backlight timeout management functions

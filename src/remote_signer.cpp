@@ -337,20 +337,26 @@ namespace RemoteSigner {
         Serial.println("RemoteSigner::handleSigningRequestEvent() - Method: " + method);
         
         if (method == Methods::CONNECT) {
+            Display::turnOnBacklightForSigning();
             handleConnect(eventDoc, requestingPubKey);
         } else if (method == Methods::SIGN_EVENT) {
+            Display::turnOnBacklightForSigning();
             handleSignEvent(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::PING) {
             handlePing(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::GET_PUBLIC_KEY) {
             handleGetPublicKey(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::NIP04_ENCRYPT) {
+            Display::turnOnBacklightForSigning();
             handleNip04Encrypt(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::NIP04_DECRYPT) {
+            Display::turnOnBacklightForSigning();
             handleNip04Decrypt(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::NIP44_ENCRYPT) {
+            Display::turnOnBacklightForSigning();
             handleNip44Encrypt(eventDoc, requestingPubKey.c_str());
         } else if (method == Methods::NIP44_DECRYPT) {
+            Display::turnOnBacklightForSigning();
             handleNip44Decrypt(eventDoc, requestingPubKey.c_str());
         } else {
             Serial.println("RemoteSigner::handleSigningRequestEvent() - Unknown method: " + method);

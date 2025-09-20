@@ -143,7 +143,7 @@ namespace UI {
         if (eventKind == "27235") return "HTTP Authentication";
         if (eventKind == "22242") return "Relay Authentication";
         if (eventKind == "30023") return "Long-form Content";
-        if (eventKind == "30024") return "Draft Long-form Content";
+        if (eventKind == "30024") return "Draft Lon-form Content";
         if(eventKind == "30078") return "Application-specific Data";
         {
             /* code */
