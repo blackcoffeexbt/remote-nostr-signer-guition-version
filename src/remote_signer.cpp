@@ -422,6 +422,9 @@ namespace RemoteSigner {
         // Show signing confirmation on display
         displaySigningRequest("Kind " + String(kind), content.substring(0, 30) + "...");
         
+        // Show signing modal
+        UI::showSigningModal();
+        
         // For now, auto-approve (TODO: Add UI confirmation)
         // Sign the event using nostr library
         String signedEvent = nostr::getNote(
@@ -440,6 +443,9 @@ namespace RemoteSigner {
         // Create response
         String responseMsg = "{\"id\":\"" + requestId + "\",\"result\":\"" + signedEvent + "\"}";
         
+        // Update modal to show broadcasting status
+        UI::updateSigningModalText("Broadcasting");
+        
         // Encrypt and send response
         String encryptedResponse = nostr::getEncryptedDm(
             privateKeyHex.c_str(),
@@ -453,6 +459,9 @@ namespace RemoteSigner {
         
         webSocket.sendTXT(encryptedResponse);
         Serial.println("RemoteSigner::handleSignEvent() - Event signed and response sent");
+        
+        // Hide signing modal after 250ms delay as requested
+        UI::hideSigningModalDelayed(250);
         
         // Show notification on device screen
         UI::showEventSignedNotification(String(kind), content);

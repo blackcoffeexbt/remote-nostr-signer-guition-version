@@ -87,6 +87,12 @@ namespace UI {
     void showPairingQRCode();
     void showEventSignedNotification(const String& eventKind, const String& content);
     
+    // Signing modal functions
+    void showSigningModal();
+    void updateSigningModalText(const String& text);
+    void hideSigningModal();
+    void hideSigningModalDelayed(uint32_t delayMs);
+    
     // Settings integration
     void updateShopNameDisplay();
     void updateCurrencyDisplay();

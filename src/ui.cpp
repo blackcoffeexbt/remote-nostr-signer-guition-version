@@ -47,6 +47,11 @@ namespace UI {
     static lv_obj_t* settings_pin_btn = NULL;
     static lv_obj_t* settings_save_btn = NULL;
     
+    // Signing modal elements
+    static lv_obj_t* signing_modal = NULL;
+    static lv_obj_t* signing_modal_label = NULL;
+    static lv_obj_t* signing_modal_spinner = NULL;
+    
     void init() {
         // UI is initialized through Display::init()
         // This function can be used for additional UI setup
@@ -74,6 +79,9 @@ namespace UI {
         settings_pin_btn = NULL;
         settings_save_btn = NULL;
         signed_events_list = NULL;
+        signing_modal = NULL;
+        signing_modal_label = NULL;
+        signing_modal_spinner = NULL;
     }
     
     void loadScreen(screen_state_t screen) {
@@ -1493,8 +1501,16 @@ namespace UI {
     void showEventSignedNotification(const String& eventKind, const String& content) {
         // Create timestamp
         time_t now;
+        struct tm * timeinfo;
+
         time(&now);
-        struct tm * timeinfo = localtime(&now);
+        timeinfo = localtime(&now);
+        // Set TZ to GMT+1
+        setenv("TZ", "GMT1", 1);
+        tzset();
+
+        localtime_r(&now, timeinfo);
+        
         char timeStr[64];
         strftime(timeStr, sizeof(timeStr), "%H:%M:%S", timeinfo);
         
@@ -1502,5 +1518,73 @@ namespace UI {
         addSignedEvent(eventKind, content, String(timeStr));
         
         Serial.println("Event signed and added to persistent list: Kind " + eventKind);
+    }
+    
+    void showSigningModal() {
+        // Don't create if already exists
+        if (signing_modal != NULL) {
+            return;
+        }
+        
+        // Create modal overlay
+        signing_modal = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(signing_modal, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(signing_modal, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(signing_modal, LV_OPA_80, LV_PART_MAIN);
+        lv_obj_set_style_border_width(signing_modal, 0, LV_PART_MAIN);
+        
+        // Create modal content box
+        lv_obj_t* modal_box = lv_obj_create(signing_modal);
+        lv_obj_set_size(modal_box, 250, 120);
+        lv_obj_center(modal_box);
+        lv_obj_set_style_bg_color(modal_box, lv_color_hex(0x2c2c2c), LV_PART_MAIN);
+        lv_obj_set_style_border_color(modal_box, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_set_style_border_width(modal_box, 2, LV_PART_MAIN);
+        lv_obj_set_style_radius(modal_box, 10, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(modal_box, 20, LV_PART_MAIN);
+        
+        // Create spinner
+        signing_modal_spinner = lv_spinner_create(modal_box, 1000, 60);
+        lv_obj_set_size(signing_modal_spinner, 40, 40);
+        lv_obj_align(signing_modal_spinner, LV_ALIGN_TOP_MID, 0, 0);
+        lv_obj_set_style_arc_color(signing_modal_spinner, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        
+        // Create status label
+        signing_modal_label = lv_label_create(modal_box);
+        lv_label_set_text(signing_modal_label, "Signing event");
+        lv_obj_align(signing_modal_label, LV_ALIGN_BOTTOM_MID, 0, 0);
+        lv_obj_set_style_text_font(signing_modal_label, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_set_style_text_color(signing_modal_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_text_align(signing_modal_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+        
+        Serial.println("UI::showSigningModal() - Signing modal displayed");
+    }
+    
+    void updateSigningModalText(const String& text) {
+        if (signing_modal_label != NULL && lv_obj_is_valid(signing_modal_label)) {
+            lv_label_set_text(signing_modal_label, text.c_str());
+            Serial.println("UI::updateSigningModalText() - Updated to: " + text);
+        }
+    }
+    
+    void hideSigningModal() {
+        if (signing_modal != NULL && lv_obj_is_valid(signing_modal)) {
+            lv_obj_del(signing_modal);
+            signing_modal = NULL;
+            signing_modal_label = NULL;
+            signing_modal_spinner = NULL;
+            Serial.println("UI::hideSigningModal() - Signing modal hidden");
+        }
+    }
+    
+    void hideSigningModalDelayed(uint32_t delayMs) {
+        if (signing_modal != NULL && lv_obj_is_valid(signing_modal)) {
+            // Create a timer to hide the modal after delay
+            lv_timer_create([](lv_timer_t* timer) {
+                hideSigningModal();
+                lv_timer_del(timer);
+            }, delayMs, NULL);
+            Serial.println("UI::hideSigningModalDelayed() - Scheduled modal hide in " + String(delayMs) + "ms");
+        }
     }
 }
