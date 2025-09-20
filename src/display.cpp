@@ -28,6 +28,11 @@ namespace Display {
     // Display objects
     static lv_obj_t* qr_canvas = nullptr;
     
+    // Backlight timeout management
+    static unsigned long last_activity_time = 0;
+    static bool backlight_on = true;
+    static const unsigned long BACKLIGHT_TIMEOUT = 60000; // 60 seconds
+    
     void init() {
         Serial.println("=== Initializing ArduinoGFX display ===");
         
@@ -47,10 +52,10 @@ namespace Display {
             }
             Serial.println("Display initialized successfully");
             
-            // Turn on backlight first
-            Serial.println("Turning on backlight...");
+            // Initialize backlight pin and turn on backlight
             pinMode(TFT_BL, OUTPUT);
-            digitalWrite(TFT_BL, HIGH);
+            turnOnBacklight();
+            initBacklightTimeout();
             
             // Clear display
             Serial.println("Clearing display...");
@@ -196,6 +201,13 @@ namespace Display {
         bool currently_touched = touch.touched();
         
         if (currently_touched) {
+            // Reset backlight timeout and turn backlight on if it was off
+            resetBacklightTimeout();
+            if (!backlight_on) {
+                turnOnBacklight();
+                backlight_on = true;
+            }
+            
             // Handle touch wake from light sleep first
             App::handleTouchWake();
             
@@ -355,10 +367,34 @@ namespace Display {
     void turnOffBacklight() {
         Serial.println("Turning off display backlight");
         digitalWrite(TFT_BL, LOW);
+        backlight_on = false;
     }
     
     void turnOnBacklight() {
         Serial.println("Turning on display backlight");
         digitalWrite(TFT_BL, HIGH);
+        backlight_on = true;
+    }
+    
+    // Backlight timeout management functions
+    void initBacklightTimeout() {
+        last_activity_time = millis();
+        backlight_on = true;
+        Serial.println("Backlight timeout initialized - 60 second timeout");
+    }
+    
+    void resetBacklightTimeout() {
+        last_activity_time = millis();
+    }
+    
+    void checkBacklightTimeout() {
+        if (backlight_on && (millis() - last_activity_time > BACKLIGHT_TIMEOUT)) {
+            Serial.println("Backlight timeout reached - turning off backlight");
+            turnOffBacklight();
+        }
+    }
+    
+    bool isBacklightOn() {
+        return backlight_on;
     }
 }

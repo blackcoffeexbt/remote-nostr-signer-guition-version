@@ -28,6 +28,12 @@ namespace Display {
     void turnOffBacklight();
     void turnOnBacklight();
     
+    // Backlight timeout management
+    void initBacklightTimeout();
+    void resetBacklightTimeout();
+    void checkBacklightTimeout();
+    bool isBacklightOn();
+    
     // Display driver callbacks
     void displayFlush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
     void touchpadRead(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
