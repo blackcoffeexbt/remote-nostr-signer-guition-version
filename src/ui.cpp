@@ -137,6 +137,8 @@ namespace UI {
         if(eventKind == "21") return "Video Event";
         if(eventKind == "44") return "Encrypted DM";
         if(eventKind == "9734") return "Zap Request";
+        //10012 favorite relays
+        if(eventKind == "10012") return "Favorite Relays List";
         if (eventKind == "9735") return "Zap";
         if (eventKind == "27235") return "HTTP Auth";
         if (eventKind == "22242") return "Relay Auth";
