@@ -251,6 +251,12 @@ namespace nostr
         _logToSerialWithTitle("timestamp is: ", String(timestamp));
         // escape any double quotes in content
         content.replace("\"", "\\\"");
+        // replace new lines with \n
+        content.replace("\n", "\\n");
+        // replace carriage returns with \r
+        content.replace("\r", "\\r");
+        // replace tabs with \t
+        content.replace("\t", "\\t");
         String message = "[0,\"" + String(pubKeyHex) + "\"," + String(timestamp) + "," + String(kind) + "," + tags + ",\"" + content + "\"]";
         _logToSerialWithTitle("message is: ", message);
 

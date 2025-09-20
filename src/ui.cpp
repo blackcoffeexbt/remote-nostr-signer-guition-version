@@ -136,6 +136,12 @@ namespace UI {
         if(eventKind == "8") return "Badge Award";
         if(eventKind == "44") return "Encrypted DM";
         if(eventKind == "9734") return "Zap Request";
+        if (eventKind == "9735") return "Zap";
+        if (eventKind == "27235") return "HTTP Auth";
+        {
+            /* code */
+        }
+        
 
         return "Kind " + eventKind;
 
@@ -1499,17 +1505,20 @@ namespace UI {
     }
     
     void showEventSignedNotification(const String& eventKind, const String& content) {
-        // Create timestamp
-        time_t now;
-        struct tm * timeinfo;
-
-        time(&now);
-        timeinfo = localtime(&now);
-        // Set TZ to GMT+1
-        setenv("TZ", "GMT1", 1);
-        tzset();
-
-        localtime_r(&now, timeinfo);
+        // Create timestamp using NTP synchronized time
+        unsigned long epochTime = RemoteSigner::getUnixTimestamp();
+        if (epochTime == 0) {
+            // Fallback to system time if NTP not available
+            time_t now;
+            time(&now);
+            epochTime = now;
+        }
+        
+        // Add GMT+1 offset (3600 seconds)
+        epochTime += 3600;
+        
+        time_t adjustedTime = epochTime;
+        struct tm * timeinfo = gmtime(&adjustedTime);
         
         char timeStr[64];
         strftime(timeStr, sizeof(timeStr), "%H:%M:%S", timeinfo);
