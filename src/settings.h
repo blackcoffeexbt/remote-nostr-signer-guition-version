@@ -8,14 +8,7 @@ namespace Settings {
     // Initialization and cleanup
     void init();
     void cleanup();
-    
-    // Shop settings
-    String getCurrency();
-    void setCurrency(const String& currency);
-    
-    String getShopName();
-    void setShopName(const String& name);
-    
+        
     String getAPPassword();
     void setAPPassword(const String& password);
     

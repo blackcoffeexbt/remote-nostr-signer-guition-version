@@ -10,16 +10,12 @@ namespace Settings {
     static Preferences preferences;
     
     // Settings data
-    static String selected_currency = "sats";
-    static String shop_name = "LNbits Shop";
     static String ap_password = "GoodMorning21";
-    static String nwc_pairing_url = "nostr+walletconnect://dbb2f09400c14e80a2d7926e634221ddf0d5f5144aada66a996bfd2e88ca7cde?relay=wss://relay.nostriot.com&secret=e2b73178e2119612cad6457530bee54ed10067b249ab3dbfbbf5a3c770da3708";
     static String current_pin = "1234";
     
     // UI element references
     static lv_obj_t *settings_pin_btn = NULL;
     static lv_obj_t *settings_save_btn = NULL;
-    static lv_obj_t *shop_name_textarea = NULL;
     static lv_obj_t *ap_password_textarea = NULL;
     
     // PIN management UI elements
@@ -52,51 +48,19 @@ namespace Settings {
     void resetToDefaults() {
         preferences.begin("config", false);
         preferences.clear();
-        selected_currency = "sats";
-        shop_name = "LNbits Shop";
         ap_password = "GoodMorning21";
         current_pin = "1234";
         saveToPreferences();
         preferences.end();
         Serial.println("Settings reset to defaults");
     }
-    
-    // Shop settings getters/setters
-    String getCurrency() {
-        return selected_currency;
-    }
-    
-    void setCurrency(const String& currency) {
-        selected_currency = currency;
-    }
-    
-    String getShopName() {
-        return shop_name;
-    }
-    
-    void setShopName(const String& name) {
-        shop_name = name;
-    }
-    
+        
     String getAPPassword() {
         return ap_password;
     }
     
     void setAPPassword(const String& password) {
         ap_password = password;
-    }
-    
-    // NWC configuration
-    String getNWCUrl() {
-        return nwc_pairing_url;
-    }
-    
-    void setNWCUrl(const String& url) {
-        nwc_pairing_url = url;
-        preferences.begin("nwc-config", false);
-        preferences.putString("nwc_url", url);
-        preferences.end();
-        Serial.println("Saved NWC URL to preferences: " + url);
     }
     
     // PIN management
@@ -163,23 +127,11 @@ namespace Settings {
     void loadFromPreferences() {
         // Load shop settings
         preferences.begin("shop-config", true);
-        selected_currency = preferences.getString("currency", "sats");
-        shop_name = preferences.getString("shop_name", "LNbits Shop");
         ap_password = preferences.getString("ap_password", "GoodMorning21");
         preferences.end();
-        Serial.println("Loaded shop settings - Currency: " + selected_currency + ", Shop: " + shop_name + ", AP Password: " + ap_password);
         
         // Load NWC URL
         preferences.begin("nwc-config", true);
-        String saved_url = preferences.getString("nwc_url", "");
-        preferences.end();
-        
-        if (saved_url.length() > 0) {
-            nwc_pairing_url = saved_url;
-            Serial.println("Loaded NWC URL from preferences: " + nwc_pairing_url);
-        } else {
-            Serial.println("No saved NWC URL found, using default");
-        }
         
         // Load PIN
         preferences.begin("pin-config", true);
@@ -190,24 +142,18 @@ namespace Settings {
     
     void saveToPreferences() {
         preferences.begin("shop-config", false);
-        preferences.putString("currency", selected_currency);
-        preferences.putString("shop_name", shop_name);
         if (ap_password_textarea != NULL) {
             ap_password = String(lv_textarea_get_text(ap_password_textarea));
         }
         preferences.putString("ap_password", ap_password);
         preferences.end();
-        Serial.println("Saved shop settings - Currency: " + selected_currency + ", Shop: " + shop_name + ", AP Password: " + ap_password);
+        Serial.println("Saved settings");
     }
     
     // UI element setters
     void setSettingsUIElements(lv_obj_t *pin_btn, lv_obj_t *save_btn) {
         settings_pin_btn = pin_btn;
         settings_save_btn = save_btn;
-    }
-    
-    void setShopNameTextArea(lv_obj_t *textarea) {
-        shop_name_textarea = textarea;
     }
     
     void setAPPasswordTextArea(lv_obj_t *textarea) {
@@ -219,11 +165,6 @@ namespace Settings {
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED) {
             // Get the current shop name from the text area
-            if (shop_name_textarea != NULL) {
-                const char *text = lv_textarea_get_text(shop_name_textarea);
-                shop_name = String(text);
-                Serial.println("Shop name updated from text area: " + shop_name);
-            }
             
             saveToPreferences();
             UI::showMessage("Settings Saved", "Shop settings have been saved successfully.");
@@ -247,9 +188,6 @@ namespace Settings {
         if (code == LV_EVENT_READY) {
             lv_obj_t *ta = lv_keyboard_get_textarea(kb);
             const char *text = lv_textarea_get_text(ta);
-            shop_name = String(text);
-            
-            Serial.println("Shop name changed to: " + shop_name);
             
             lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
             

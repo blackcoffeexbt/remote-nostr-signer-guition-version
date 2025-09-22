@@ -824,7 +824,7 @@ namespace WiFiManager {
             
             <div class="form-group">
                 <label for="relay_url">Nostr Relay URL:</label>
-                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.damus.io" required>
+                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.nostrconnect.com" required>
                 <small style="color: #666;">WebSocket URL of the Nostr relay to connect to</small>
             </div>
             

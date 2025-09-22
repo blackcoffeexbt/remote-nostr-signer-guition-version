@@ -349,12 +349,12 @@ namespace UI {
             lv_obj_add_event_cb(exit_ap_btn, WiFiManager::exitAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
             lv_obj_t* exit_ap_label = lv_label_create(exit_ap_btn);
-            lv_label_set_text(exit_ap_label, "Exit NWC Pairing Code Settings");
+            lv_label_set_text(exit_ap_label, "Exit AP Mode");
             lv_obj_center(exit_ap_label);
             
             // AP Status info
             lv_obj_t* ap_info = lv_label_create(main_container);
-            String ap_text = "NWC Pairing Code AP Active\nSSID: " + WiFiManager::getAPSSID() + 
+            String ap_text = "AP Active\nSSID: " + WiFiManager::getAPSSID() + 
                            "\nPassword: " + WiFiManager::getAPPassword() + 
                            "\nIP: " + WiFiManager::getAPIP();
             lv_label_set_text(ap_info, ap_text.c_str());
@@ -583,53 +583,6 @@ namespace UI {
         lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
         lv_obj_set_style_text_color(title, lv_color_hex(Colors::TEXT), 0);
         
-        // Currency selection
-        lv_obj_t* currency_label = lv_label_create(main_container);
-        lv_label_set_text(currency_label, "Currency:");
-        lv_obj_align(currency_label, LV_ALIGN_TOP_LEFT, 0, 50);
-        lv_obj_set_style_text_color(currency_label, lv_color_hex(Colors::TEXT), 0);
-        
-        lv_obj_t* currency_dropdown = lv_dropdown_create(main_container);
-        lv_dropdown_set_options(currency_dropdown, "sats\nUSD\nGBP\nEUR\nCHF");
-        
-        // Set current currency selection
-        if (Settings::getCurrency() == "sats") lv_dropdown_set_selected(currency_dropdown, 0);
-        else if (Settings::getCurrency() == "USD") lv_dropdown_set_selected(currency_dropdown, 1);
-        else if (Settings::getCurrency() == "GBP") lv_dropdown_set_selected(currency_dropdown, 2);
-        else if (Settings::getCurrency() == "EUR") lv_dropdown_set_selected(currency_dropdown, 3);
-        else if (Settings::getCurrency() == "CHF") lv_dropdown_set_selected(currency_dropdown, 4);
-        
-        lv_obj_set_size(currency_dropdown, 100, 40);
-        lv_obj_align(currency_dropdown, LV_ALIGN_TOP_LEFT, 120, 40);
-        lv_obj_add_event_cb(currency_dropdown, currencyDropdownEventHandler, LV_EVENT_VALUE_CHANGED, NULL);
-        
-        // Shop name
-        lv_obj_t* shop_name_label = lv_label_create(main_container);
-        lv_label_set_text(shop_name_label, "Shop Name:");
-        lv_obj_align(shop_name_label, LV_ALIGN_TOP_LEFT, 0, 110);
-        lv_obj_set_style_text_color(shop_name_label, lv_color_hex(Colors::TEXT), 0);
-        
-        shop_name_textarea = lv_textarea_create(main_container);
-        lv_obj_set_size(shop_name_textarea, 180, 40);
-        lv_obj_align(shop_name_textarea, LV_ALIGN_TOP_LEFT, 120, 100);
-        lv_textarea_set_text(shop_name_textarea, Settings::getShopName().c_str());
-        lv_textarea_set_one_line(shop_name_textarea, true);
-        lv_obj_add_event_cb(shop_name_textarea, [](lv_event_t *e) {
-            lv_event_code_t code = lv_event_get_code(e);
-            if (code == LV_EVENT_CLICKED) {
-                // Reset activity timer on text area click
-                App::resetActivityTimer();
-                if (shop_name_keyboard != NULL) {
-                    lv_keyboard_set_textarea(shop_name_keyboard, shop_name_textarea);
-                    lv_obj_clear_flag(shop_name_keyboard, LV_OBJ_FLAG_HIDDEN);
-                    
-                    // Hide PIN and Save buttons when keyboard is shown
-                    if (settings_pin_btn != NULL) lv_obj_add_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
-                    if (settings_save_btn != NULL) lv_obj_add_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
-                }
-            }
-        }, LV_EVENT_CLICKED, NULL);
-        
         // AP Password
         lv_obj_t* ap_password_label = lv_label_create(main_container);
         lv_label_set_text(ap_password_label, "AP Password:");
@@ -686,18 +639,12 @@ namespace UI {
         lv_label_set_text(save_label, "Save");
         lv_obj_center(save_label);
         
-        // Create keyboards (hidden initially)
-        shop_name_keyboard = lv_keyboard_create(lv_scr_act());
-        lv_obj_add_flag(shop_name_keyboard, LV_OBJ_FLAG_HIDDEN);
-        lv_obj_add_event_cb(shop_name_keyboard, shopNameKBEventHandler, LV_EVENT_ALL, NULL);
-        
         ap_password_keyboard = lv_keyboard_create(lv_scr_act());
         lv_obj_add_flag(ap_password_keyboard, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_event_cb(ap_password_keyboard, apPasswordKBEventHandler, LV_EVENT_ALL, NULL);
         
         // Set UI element references for Settings module
         Settings::setSettingsUIElements(settings_pin_btn, settings_save_btn);
-        Settings::setShopNameTextArea(shop_name_textarea);
         Settings::setAPPasswordTextArea(ap_password_textarea);
     }
     
@@ -881,79 +828,6 @@ namespace UI {
         // No invoice timers to stop for signer mode
     }
     
-    void updateInvoiceDisplay(const String& invoice, int amount_sats) {
-        Serial.println("=== Starting updateInvoiceDisplay ===");
-        Serial.println("Invoice length: " + String(invoice.length()));
-        Serial.println("Amount: " + String(amount_sats) + " sats");
-        Serial.println("Free heap before QR: " + String(ESP.getFreeHeap()));
-        
-        // Remove spinner if it exists
-        if (invoice_spinner != NULL && lv_obj_is_valid(invoice_spinner)) {
-            lv_obj_del(invoice_spinner);
-            invoice_spinner = NULL;
-        }
-        
-        // Update the amount label with sats and fiat value
-        if (invoice_amount_label != NULL && lv_obj_is_valid(invoice_amount_label)) {
-            // Calculate fiat value from sats (reverse of calculateSatsFromAmount)
-            String currency = Settings::getCurrency();
-            String amount_text = "Please pay\n" + String(amount_sats) + " sats";
-            
-            // Price conversion disabled for signer mode
-            
-            lv_label_set_text(invoice_amount_label, amount_text.c_str());
-            lv_obj_clear_flag(invoice_amount_label, LV_OBJ_FLAG_HIDDEN);
-        }
-        
-        // Update the status label
-        if (invoice_label != NULL && lv_obj_is_valid(invoice_label)) {
-            lv_label_set_text(invoice_label, "Scan QR code to pay");
-            lv_obj_clear_flag(invoice_label, LV_OBJ_FLAG_HIDDEN);
-        }
-        
-        // Display QR code using Display module to avoid duplication
-        Display::displayQRCode(invoice);
-        
-        Serial.println("Free heap after QR: " + String(ESP.getFreeHeap()));
-        Serial.println("=== updateInvoiceDisplay completed ===");
-    }
-    
-    void showPaymentReceived() {
-        Serial.println("=== showPaymentReceived called ===");
-        
-        if (invoice_overlay == NULL || !lv_obj_is_valid(invoice_overlay)) {
-            Serial.println("No invoice overlay to update");
-            return;
-        }
-        
-        // Hide QR code
-        if (qr_canvas != NULL && lv_obj_is_valid(qr_canvas)) {
-            lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
-        }
-        
-        // Create checkmark symbol
-        lv_obj_t* checkmark = lv_label_create(invoice_overlay);
-        lv_label_set_text(checkmark, LV_SYMBOL_OK);
-        lv_obj_set_style_text_color(checkmark, lv_color_hex(Colors::SUCCESS), 0);
-        lv_obj_set_style_text_font(checkmark, &lv_font_montserrat_48, 0);
-        lv_obj_align(checkmark, LV_ALIGN_CENTER, 0, -40);
-        
-        // Update status label
-        if (invoice_label != NULL && lv_obj_is_valid(invoice_label)) {
-            lv_label_set_text(invoice_label, "Payment received!");
-            lv_obj_set_style_text_color(invoice_label, lv_color_hex(Colors::SUCCESS), 0);
-            lv_obj_clear_flag(invoice_label, LV_OBJ_FLAG_HIDDEN);
-        }
-        
-        // Auto-close overlay after 3 seconds
-        lv_timer_create([](lv_timer_t* timer) {
-            closeInvoiceOverlay();
-            lv_timer_del(timer);
-        }, 3000, NULL);
-        
-        Serial.println("=== showPaymentReceived completed ===");
-    }
-    
     void showMessage(String title, String message) {
         // Create message overlay
         lv_obj_t* msg_overlay = lv_obj_create(lv_scr_act());
@@ -1063,13 +937,6 @@ namespace UI {
                 }
             }
             
-            // Update display
-            if (entered_number.isEmpty()) {
-                lv_label_set_text(display_label, ("0 " + Settings::getCurrency()).c_str());
-            } else {
-                String display_text = entered_number + " " + Settings::getCurrency();
-                lv_label_set_text(display_label, display_text.c_str());
-            }
         }
     }
     
@@ -1088,12 +955,6 @@ namespace UI {
         if (code == LV_EVENT_CLICKED) {
             // Reset activity timer on settings save
             App::resetActivityTimer();
-            // Get the current shop name from the text area
-            if (shop_name_textarea != NULL) {
-                const char* text = lv_textarea_get_text(shop_name_textarea);
-                Settings::setShopName(String(text));
-                Serial.println("Shop name updated from text area: " + Settings::getShopName());
-            }
             
             // Get AP password from text area
             if (ap_password_textarea != NULL) {
@@ -1114,69 +975,6 @@ namespace UI {
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED) {
             loadScreen(SCREEN_SETTINGS);
-        }
-    }
-    
-    void currencyDropdownEventHandler(lv_event_t* e) {
-        lv_event_code_t code = lv_event_get_code(e);
-        if (code == LV_EVENT_VALUE_CHANGED) {
-            lv_obj_t* dropdown = lv_event_get_target(e);
-            uint16_t selected = lv_dropdown_get_selected(dropdown);
-            
-            switch (selected) {
-                case 0:
-                    Settings::setCurrency("sats");
-                    break;
-                case 1:
-                    Settings::setCurrency("USD");
-                    break;
-                case 2:
-                    Settings::setCurrency("GBP");
-                    break;
-                case 3:
-                    Settings::setCurrency("EUR");
-                    break;
-                case 4:
-                    Settings::setCurrency("CHF");
-                    break;
-            }
-            
-            Serial.println("Currency changed to: " + Settings::getCurrency());
-        }
-    }
-    
-    void shopNameKBEventHandler(lv_event_t* e) {
-        lv_event_code_t code = lv_event_get_code(e);
-        lv_obj_t* kb = lv_event_get_target(e);
-        
-        if (code == LV_EVENT_READY) {
-            // Reset activity timer on keyboard input
-            App::resetActivityTimer();
-            lv_obj_t* ta = lv_keyboard_get_textarea(kb);
-            const char* text = lv_textarea_get_text(ta);
-            Settings::setShopName(String(text));
-            
-            Serial.println("Shop name changed to: " + Settings::getShopName());
-            
-            lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
-            
-            // Show the PIN and Save buttons when keyboard is hidden
-            if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
-                lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-            if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
-                lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-        } else if (code == LV_EVENT_CANCEL) {
-            lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
-            
-            // Show the PIN and Save buttons when keyboard is hidden
-            if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
-                lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-            if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
-                lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
-            }
         }
     }
     
@@ -1254,14 +1052,6 @@ namespace UI {
         }
     }
     
-    // Utility functions
-    void updateAmountDisplay(const String& amount) {
-        if (display_label != NULL) {
-            String display_text = amount + " " + Settings::getCurrency();
-            lv_label_set_text(display_label, display_text.c_str());
-        }
-    }
-    
     void updateStatusDisplay(const String& status) {
         // Update any relevant status displays
         Serial.println("Status: " + status);
@@ -1296,26 +1086,6 @@ namespace UI {
     bool isOverlayActive() { return invoice_overlay != NULL; }
     bool isInvoiceProcessing() { return invoice_processing; }
     void setInvoiceProcessing(bool processing) { invoice_processing = processing; }
-    
-    void updateShopNameDisplay() {
-        // Update shop name in settings screen if active
-        if (shop_name_textarea != NULL) {
-            lv_textarea_set_text(shop_name_textarea, Settings::getShopName().c_str());
-        }
-    }
-    
-    void updateCurrencyDisplay() {
-        // Update display label with new currency
-        if (display_label != NULL) {
-            const char* current_text = lv_label_get_text(display_label);
-            String amount_part = String(current_text);
-            int space_pos = amount_part.lastIndexOf(' ');
-            if (space_pos != -1) {
-                amount_part = amount_part.substring(0, space_pos);
-            }
-            updateAmountDisplay(amount_part);
-        }
-    }
     
     void updateAPPasswordDisplay() {
         // Update AP password in settings screen if active
