@@ -85,5 +85,6 @@ namespace FirmwareUpdate {
     bool downloadFirmware(const String& url, size_t expectedSize);
     bool flashFirmware();
     void freeMemoryForUpdate();
+    void defragmentHeap();
     
 }

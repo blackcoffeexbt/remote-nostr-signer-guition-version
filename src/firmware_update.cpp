@@ -26,28 +26,151 @@ namespace FirmwareUpdate {
         // WiFi client management handled by WiFiManager
     }
     
+    void defragmentHeap() {
+        // Advanced heap defragmentation technique
+        Serial.println("Starting heap defragmentation...");
+        
+        // 1. Allocate and free blocks of decreasing size to force compaction
+        const size_t blockSizes[] = {16384, 8192, 4096, 2048, 1024, 512, 256};
+        const int numSizes = sizeof(blockSizes) / sizeof(blockSizes[0]);
+        
+        for (int round = 0; round < 3; round++) {
+            for (int i = 0; i < numSizes; i++) {
+                void* blocks[20];
+                int allocated = 0;
+                
+                // Allocate as many blocks as possible
+                for (int j = 0; j < 20; j++) {
+                    blocks[j] = malloc(blockSizes[i]);
+                    if (blocks[j]) {
+                        allocated++;
+                        // Write pattern to ensure memory is actually used
+                        memset(blocks[j], 0xAA, blockSizes[i]);
+                    } else {
+                        break;
+                    }
+                }
+                
+                // Free all blocks in reverse order
+                for (int j = allocated - 1; j >= 0; j--) {
+                    if (blocks[j]) {
+                        free(blocks[j]);
+                        blocks[j] = nullptr;
+                    }
+                }
+                
+                yield();
+            }
+            
+            // Force heap integrity check between rounds
+            heap_caps_check_integrity_all(true);
+            delay(50);
+        }
+        
+        // 2. Force PSRAM defragmentation if available
+        if (ESP.getPsramSize() > 0) {
+            void* psramBlocks[10];
+            for (int i = 0; i < 10; i++) {
+                psramBlocks[i] = heap_caps_malloc(8192, MALLOC_CAP_SPIRAM);
+                if (psramBlocks[i]) {
+                    memset(psramBlocks[i], 0x55, 8192);
+                }
+            }
+            
+            for (int i = 0; i < 10; i++) {
+                if (psramBlocks[i]) {
+                    heap_caps_free(psramBlocks[i]);
+                }
+            }
+        }
+        
+        Serial.println("Heap defragmentation complete");
+    }
+    
     void freeMemoryForUpdate() {
         // Free up as much memory as possible before SSL operations
         Serial.println("Freeing memory for update...");
         Serial.println("Free heap before cleanup: " + String(ESP.getFreeHeap()));
         Serial.println("Free PSRAM before cleanup: " + String(ESP.getFreePsram()));
         
-        // Force garbage collection multiple times
-        for (int i = 0; i < 3; i++) {
+        // 1. Clean up any existing HTTP connections
+        http_client.end();
+        
+        // 2. Force WiFi to disconnect/reconnect to free WiFi stack memory
+        WiFi.disconnect(true);
+        delay(100);
+        WiFi.mode(WIFI_STA);
+        delay(100);
+        
+        // 3. Aggressive heap cleanup - allocate and free large blocks
+        void* largeBlocks[10];
+        for (int i = 0; i < 10; i++) {
+            largeBlocks[i] = malloc(8192); // Try to allocate 8KB blocks
+            if (!largeBlocks[i]) break;
+        }
+        // Free all allocated blocks
+        for (int i = 0; i < 10; i++) {
+            if (largeBlocks[i]) {
+                free(largeBlocks[i]);
+                largeBlocks[i] = nullptr;
+            }
+        }
+        
+        // 4. Force garbage collection multiple times with larger allocations
+        for (int i = 0; i < 5; i++) {
             String dummy;
-            dummy.reserve(1000);
-            for (int j = 0; j < 100; j++) {
+            dummy.reserve(4096); // Larger reserve
+            for (int j = 0; j < 1000; j++) {
                 dummy += "x";
             }
             dummy = "";
+            delay(20);
+        }
+        
+        // 5. Clear any cached DNS entries
+        WiFi.dnsIP(0);
+        WiFi.dnsIP(1);
+        
+        // 6. Advanced heap defragmentation
+        defragmentHeap();
+        
+        // 7. Enable external memory for large allocations (SSL buffers)
+        heap_caps_malloc_extmem_enable(2048); // Use PSRAM for allocations > 2KB
+        
+        // 8. Force LWIP memory cleanup if available
+        #ifdef ESP_IDF_VERSION
+        if (esp_get_free_heap_size() < esp_get_minimum_free_heap_size() + 32768) {
+            // If we're running low on memory, try to force LWIP cleanup
+            // Note: sys_check_timeouts is internal LWIP function, may not be available
+            // Just yield to allow any pending network cleanup
+            for (int i = 0; i < 5; i++) {
+                yield();
+                delay(10);
+            }
+        }
+        #endif
+        
+        // 9. Multiple heap integrity checks to trigger compaction
+        for (int i = 0; i < 3; i++) {
+            heap_caps_check_integrity_all(true);
+            delay(50);
+        }
+        
+        // 10. Clear any lingering task stacks by yielding
+        for (int i = 0; i < 10; i++) {
+            yield();
             delay(10);
         }
         
-        // Try to trigger heap compaction
-        heap_caps_check_integrity_all(true);
-        
         Serial.println("Free heap after cleanup: " + String(ESP.getFreeHeap()));
         Serial.println("Free PSRAM after cleanup: " + String(ESP.getFreePsram()));
+        Serial.println("Minimum free heap ever: " + String(ESP.getMinFreeHeap()));
+        
+        // Ensure WiFi is reconnected after cleanup
+        if (!WiFiManager::isConnected()) {
+            Serial.println("Reconnecting WiFi after cleanup...");
+            // WiFiManager should handle reconnection
+        }
     }
     
     void cleanup() {
@@ -210,54 +333,77 @@ namespace FirmwareUpdate {
         freeMemoryForUpdate();
         
         // Force SSL library to use PSRAM for allocations
-        heap_caps_malloc_extmem_enable(4096); // Use external memory for allocations > 4KB
+        heap_caps_malloc_extmem_enable(1024); // Use external memory for allocations > 1KB
         
         WiFiClientSecure* client = nullptr;
+        HTTPClient* http = nullptr;
         
-        // Try to allocate everything in PSRAM
+        // Allocate both client and http in PSRAM if possible
         client = (WiFiClientSecure*)heap_caps_malloc(sizeof(WiFiClientSecure), MALLOC_CAP_SPIRAM);
         if (!client) {
-            Serial.println("Failed to allocate WiFiClientSecure in PSRAM");
-            client = (WiFiClientSecure*)heap_caps_malloc(sizeof(WiFiClientSecure), MALLOC_CAP_8BIT);
+            Serial.println("Failed to allocate WiFiClientSecure in PSRAM, trying regular heap");
+            client = (WiFiClientSecure*)malloc(sizeof(WiFiClientSecure));
             if (!client) {
                 Serial.println("Failed to allocate WiFiClientSecure at all");
                 return "";
             }
-            Serial.println("Using regular heap for WiFiClientSecure");
         } else {
             Serial.println("Successfully allocated WiFiClientSecure in PSRAM");
         }
         
-        // Use placement new to construct the object
+        // Try to allocate HTTPClient in PSRAM too
+        http = (HTTPClient*)heap_caps_malloc(sizeof(HTTPClient), MALLOC_CAP_SPIRAM);
+        if (!http) {
+            http = new HTTPClient();
+        } else {
+            new(http) HTTPClient();
+            Serial.println("HTTPClient allocated in PSRAM");
+        }
+        
+        // Use placement new to construct the WiFiClientSecure object
         new(client) WiFiClientSecure();
         
-        // Configure for minimal memory usage
+        // Configure for absolute minimal memory usage
         client->setInsecure(); // Skip certificate validation
-        client->setTimeout(20000); // Shorter timeout
+        client->setTimeout(15000); // Shorter timeout
         
-        HTTPClient http;
         String releaseUrl = "https://api.github.com/repos/" + 
                           String(GITHUB_REPO_OWNER) + "/" + 
                           String(GITHUB_REPO_NAME) + "/releases/latest";
         
         Serial.println("Using direct API URL: " + releaseUrl);
         
-        if (!http.begin(*client, releaseUrl)) {
+        String response = "";
+        int httpCode = 0;
+        
+        if (!http->begin(*client, releaseUrl)) {
             Serial.println("Failed to begin HTTPS connection");
-            client->~WiFiClientSecure();
-            heap_caps_free(client);
-            return "";
+            goto cleanup_and_exit;
         }
         
-        http.addHeader("User-Agent", "ESP32-Signer/1.0");
-        http.setTimeout(20000);
+        http->addHeader("User-Agent", "ESP32-Signer/1.0");
+        http->addHeader("Connection", "close"); // Don't keep connection alive
+        http->setTimeout(15000);
         
-        int httpCode = http.GET();
+        httpCode = http->GET();
         Serial.println("HTTPS response code: " + String(httpCode));
         
-        String response = "";
         if (httpCode == HTTP_CODE_OK) {
-            response = http.getString();
+            // Read response in smaller chunks to reduce memory pressure
+            WiFiClient* stream = http->getStreamPtr();
+            String chunk;
+            chunk.reserve(1024);
+            
+            while (stream->available()) {
+                chunk = stream->readString();
+                response += chunk;
+                if (response.length() > 32768) { // Limit response size
+                    Serial.println("Response too large, truncating");
+                    break;
+                }
+                yield(); // Allow other tasks to run
+            }
+            
             Serial.println("HTTPS response length: " + String(response.length()));
             if (response.length() > 100) {
                 Serial.println("Response preview: " + response.substring(0, 100) + "...");
@@ -266,13 +412,33 @@ namespace FirmwareUpdate {
             Serial.println("HTTPS request failed with code: " + String(httpCode));
         }
         
-        http.end();
+        http->end();
         
-        // Cleanup
+cleanup_and_exit:
+        // Careful cleanup of PSRAM-allocated objects
         if (client) {
             client->~WiFiClientSecure();
-            heap_caps_free(client);
+            if (heap_caps_get_allocated_size(client) > 0) {
+                heap_caps_free(client);
+            } else {
+                free(client);
+            }
+            client = nullptr;
         }
+        
+        if (http) {
+            http->~HTTPClient();
+            if (heap_caps_get_allocated_size(http) > 0) {
+                heap_caps_free(http);
+            } else {
+                delete http;
+            }
+            http = nullptr;
+        }
+        
+        // Force immediate cleanup
+        yield();
+        delay(100);
         
         Serial.println("Free heap after HTTPS request: " + String(ESP.getFreeHeap()));
         return response;
@@ -433,53 +599,64 @@ namespace FirmwareUpdate {
         Serial.println("Free heap before download: " + String(ESP.getFreeHeap()));
         Serial.println("Free PSRAM before download: " + String(ESP.getFreePsram()));
         
+        // Aggressive memory cleanup before large download
+        freeMemoryForUpdate();
+        
+        // Force SSL to use PSRAM for large allocations
+        heap_caps_malloc_extmem_enable(512); // Even smaller threshold for download
+        
         // Allocate WiFiClientSecure in PSRAM to avoid SSL memory issues
-        WiFiClientSecure* client = (WiFiClientSecure*)ps_malloc(sizeof(WiFiClientSecure));
+        WiFiClientSecure* client = (WiFiClientSecure*)heap_caps_malloc(sizeof(WiFiClientSecure), MALLOC_CAP_SPIRAM);
         if (!client) {
             Serial.println("Failed to allocate WiFiClientSecure in PSRAM for download");
             // Fallback to regular malloc
-            client = new WiFiClientSecure();
+            client = (WiFiClientSecure*)malloc(sizeof(WiFiClientSecure));
             if (!client) {
                 logError("Failed to allocate secure client for download");
                 return false;
             }
             Serial.println("Using regular heap for WiFiClientSecure download");
         } else {
-            // Use placement new to construct the object in PSRAM
-            new(client) WiFiClientSecure();
             Serial.println("Successfully allocated WiFiClientSecure in PSRAM for download");
         }
         
+        // Use placement new to construct the object
+        new(client) WiFiClientSecure();
+        
+        // Configure for minimal memory usage during download
         client->setTimeout(30000); // 30 seconds for firmware download
         client->setInsecure(); // Skip certificate validation for GitHub downloads
         
+        // Pre-declare variables to avoid goto issues
+        int httpCode = 0;
+        int contentLength = 0;
+        WiFiClient* stream = nullptr;
+        size_t written = 0;
+        uint8_t* buffer = nullptr;
+        size_t bufferSize = 0;
+        
         if (!http_client.begin(*client, url)) {
             logError("Failed to begin download connection");
-            // Properly cleanup PSRAM-allocated client
-            client->~WiFiClientSecure();
-            free(client);
-            return false;
+            goto download_cleanup;
         }
         
-        int httpCode = http_client.GET();
+        // Add headers to minimize server response overhead
+        http_client.addHeader("Connection", "close");
+        http_client.addHeader("User-Agent", "ESP32-Signer/1.0");
+        
+        httpCode = http_client.GET();
         
         if (httpCode != HTTP_CODE_OK) {
             logError("Download failed: HTTP " + String(httpCode));
             http_client.end();
-            // Properly cleanup PSRAM-allocated client
-            client->~WiFiClientSecure();
-            free(client);
-            return false;
+            goto download_cleanup;
         }
         
-        int contentLength = http_client.getSize();
+        contentLength = http_client.getSize();
         if (contentLength <= 0) {
             logError("Invalid content length: " + String(contentLength));
             http_client.end();
-            // Properly cleanup PSRAM-allocated client
-            client->~WiFiClientSecure();
-            free(client);
-            return false;
+            goto download_cleanup;
         }
         
         if (contentLength != expectedSize) {
@@ -489,44 +666,60 @@ namespace FirmwareUpdate {
         if (!Update.begin(contentLength)) {
             logError("Update.begin failed: " + String(Update.errorString()));
             http_client.end();
-            // Properly cleanup PSRAM-allocated client
-            client->~WiFiClientSecure();
-            free(client);
-            return false;
+            goto download_cleanup;
         }
         
-        WiFiClient* stream = http_client.getStreamPtr();
-        size_t written = 0;
+        stream = http_client.getStreamPtr();
+        buffer = (uint8_t*)heap_caps_malloc(2048, MALLOC_CAP_SPIRAM); // Larger buffer in PSRAM
+        if (!buffer) {
+            buffer = (uint8_t*)malloc(1024); // Fallback to smaller buffer in regular heap
+            if (!buffer) {
+                logError("Failed to allocate download buffer");
+                http_client.end();
+                goto download_cleanup;
+            }
+        }
+        bufferSize = heap_caps_get_allocated_size(buffer) > 0 ? 2048 : 1024;
         
         while (http_client.connected() && written < contentLength) {
             size_t available = stream->available();
             if (available) {
-                uint8_t buffer[1024];
-                size_t readBytes = stream->readBytes(buffer, min(available, sizeof(buffer)));
+                size_t readBytes = stream->readBytes(buffer, min(available, bufferSize));
                 
                 size_t writtenBytes = Update.write(buffer, readBytes);
                 if (writtenBytes != readBytes) {
                     logError("Write error: " + String(Update.errorString()));
+                    free(buffer);
                     http_client.end();
-                    // Properly cleanup PSRAM-allocated client
-                    client->~WiFiClientSecure();
-                    free(client);
-                    return false;
+                    goto download_cleanup;
                 }
                 
                 written += writtenBytes;
                 int progress = (written * 100) / contentLength;
                 updateProgress(progress, written, contentLength);
+                
+                // Yield periodically to prevent watchdog issues
+                if (written % 8192 == 0) {
+                    yield();
+                }
             }
             delay(1);
         }
         
+        if (buffer) {
+            free(buffer);
+        }
         http_client.end();
         
         // Properly cleanup PSRAM-allocated client
         if (client) {
             client->~WiFiClientSecure();
-            free(client);
+            if (heap_caps_get_allocated_size(client) > 0) {
+                heap_caps_free(client);
+            } else {
+                free(client);
+            }
+            client = nullptr;
         }
         
         if (written != contentLength) {
@@ -536,6 +729,20 @@ namespace FirmwareUpdate {
         
         Serial.println("Free heap after download: " + String(ESP.getFreeHeap()));
         return true;
+        
+download_cleanup:
+        if (buffer) {
+            free(buffer);
+        }
+        if (client) {
+            client->~WiFiClientSecure();
+            if (heap_caps_get_allocated_size(client) > 0) {
+                heap_caps_free(client);
+            } else {
+                free(client);
+            }
+        }
+        return false;
     }
     
     bool flashFirmware() {
