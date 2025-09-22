@@ -371,7 +371,8 @@ namespace UI {
             lv_obj_add_event_cb(launch_ap_btn, WiFiManager::launchAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
             lv_obj_t* launch_ap_label = lv_label_create(launch_ap_btn);
-            lv_label_set_text(launch_ap_label, "Key and Relay Settings");
+            
+            lv_label_set_text(launch_ap_label, LV_SYMBOL_EDIT " Key and Relay Settings");
             lv_obj_center(launch_ap_label);
         }
         
