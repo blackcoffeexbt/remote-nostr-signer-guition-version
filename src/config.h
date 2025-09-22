@@ -15,6 +15,20 @@
 #include <stdint.h>
 
 /**
+ * @defgroup VersionConfig Firmware Version Configuration
+ * @brief Firmware version information for OTA updates
+ * @{
+ */
+/** @brief Current firmware version (semver format) */
+#define FIRMWARE_VERSION "1.0.2"
+
+/** @brief GitHub repository for firmware updates */
+#define GITHUB_REPO_OWNER "blackcoffeexbt"
+#define GITHUB_REPO_NAME "remote-nostr-signer-guition-version"
+#define GITHUB_API_ENDPOINT "https://api.github.com/repos/" GITHUB_REPO_OWNER "/" GITHUB_REPO_NAME "/releases/latest"
+/** @} */
+
+/**
  * @defgroup DisplayConfig Display Configuration
  * @brief Display and graphics-related configuration constants
  * @{

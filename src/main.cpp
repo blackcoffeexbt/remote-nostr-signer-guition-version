@@ -1,17 +1,10 @@
 /**
  * @file main.cpp
- * @brief NWC Powered Point of Sale Device - Main Entry Point
- * 
- * Modular ESP32 Point of Sale system featuring:
- * - Touch screen interface
- * - WiFi connectivity with AP mode setup
- * - Nostr Wallet Connect integration for Lightning payments
- * - LVGL-based user interface with QR code generation
- * - Deep sleep power management
+ * @brief Remote Nostr Signer
  * 
  * @author BlackCoffee bc@lnbits.com
  * @version 1.0.0
- * @date 07-2025
+ * @date 09-2025
  */
 
 // ArduinoGFX is now included via display.h
@@ -91,7 +84,7 @@ static void wifi_main_status_updater_cb(lv_timer_t *timer);
 void setup(void)
 {
     Serial.begin(115200);
-    Serial.println("=== NWC Point of Sale Device Starting ===");
+    Serial.println("=== Remote Nostr Signer Starting ===");
     Serial.println("Software Version: " + SOFTWARE_VERSION);
     
     // Initialize PSRAM memory space for Nostr operations to prevent heap fragmentation

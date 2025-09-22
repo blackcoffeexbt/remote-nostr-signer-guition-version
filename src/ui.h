@@ -11,7 +11,10 @@ namespace UI {
         SCREEN_WIFI,
         SCREEN_WIFI_PASSWORD,
         SCREEN_SETTINGS_SUB,
-        SCREEN_INFO
+        SCREEN_INFO,
+        SCREEN_UPDATE_CHECK,
+        SCREEN_UPDATE_CONFIRM,
+        SCREEN_UPDATE_PROGRESS
     } screen_state_t;
 
     // Initialization and cleanup
@@ -27,6 +30,9 @@ namespace UI {
     void createWiFiPasswordScreen(const char* ssid);
     void createSettingsSubScreen();
     void createInfoScreen();
+    void createUpdateCheckScreen();
+    void createUpdateConfirmScreen();
+    void createUpdateProgressScreen();
     
     // Screen management
     void loadScreen(screen_state_t screen);
@@ -69,6 +75,9 @@ namespace UI {
     void apPasswordKBEventHandler(lv_event_t* e);
     void invoiceCloseButtonEventHandler(lv_event_t* e);
     void rebootDeviceEventHandler(lv_event_t* e);
+    void checkForUpdatesEventHandler(lv_event_t* e);
+    void confirmUpdateEventHandler(lv_event_t* e);
+    void cancelUpdateEventHandler(lv_event_t* e);
     
     // Signed events management
     struct SignedEvent {
@@ -97,6 +106,8 @@ namespace UI {
     void updateShopNameDisplay();
     void updateCurrencyDisplay();
     void updateAPPasswordDisplay();
+    void updateFirmwareProgress(int progress, size_t current, size_t total);
+    void updateFirmwareStatus(const String& status);
     
     // Screen state queries
     screen_state_t getCurrentScreen();

@@ -45,6 +45,18 @@ namespace App
             Serial.println("Initializing Remote Signer module...");
             RemoteSigner::init();
 
+            Serial.println("Initializing Firmware Update module...");
+            FirmwareUpdate::init();
+            
+            // Set up Firmware Update callbacks
+            FirmwareUpdate::setStatusCallback([](FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error) {
+                App::notifyFirmwareUpdateStatusChanged(status, error);
+            });
+            
+            FirmwareUpdate::setProgressCallback([](int progress, size_t current, size_t total) {
+                UI::updateFirmwareProgress(progress, current, total);
+            });
+
             // Set up Remote Signer status callback
             RemoteSigner::setStatusCallback([](bool connected, const String &status)
                                            { App::notifySignerStatusChanged(connected); });
@@ -75,6 +87,7 @@ namespace App
         Serial.println("=== Application cleanup starting ===");
 
         // Cleanup modules in reverse dependency order
+        FirmwareUpdate::cleanup();
         RemoteSigner::cleanup();
         UI::cleanup();
         WiFiManager::cleanup();
@@ -252,6 +265,52 @@ namespace App
         UI::showMessage(success ? "Event Signed" : "Signing Failed", 
                        success ? "Event signed successfully!" : "Failed to sign event");
         fireEvent("signing_completed", success ? "success" : "failed");
+    }
+    
+    void notifyFirmwareUpdateStatusChanged(FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error)
+    {
+        Serial.println("Firmware update status changed: " + FirmwareUpdate::getStatusMessage());
+        
+        switch (status) {
+            case FirmwareUpdate::UPDATE_AVAILABLE:
+                UI::loadScreen(UI::SCREEN_UPDATE_CONFIRM);
+                break;
+                
+            case FirmwareUpdate::UPDATE_NO_UPDATE:
+                UI::showMessage("No Updates", "You have the latest firmware version.");
+                delay(2000);
+                UI::loadScreen(UI::SCREEN_SETTINGS);
+                break;
+                
+            case FirmwareUpdate::UPDATE_SUCCESS:
+                UI::showMessage("Update Complete", "Firmware updated successfully! Device will restart.");
+                delay(3000);
+                ESP.restart();
+                break;
+                
+            case FirmwareUpdate::UPDATE_ERROR:
+                String errorMsg;
+                switch (error) {
+                    case FirmwareUpdate::ERROR_NETWORK:
+                        errorMsg = "Network connection failed";
+                        break;
+                    case FirmwareUpdate::ERROR_DOWNLOAD_FAILED:
+                        errorMsg = "Download failed";
+                        break;
+                    case FirmwareUpdate::ERROR_FLASH_FAILED:
+                        errorMsg = "Installation failed";
+                        break;
+                    default:
+                        errorMsg = "Update failed: " + FirmwareUpdate::getStatusMessage();
+                        break;
+                }
+                UI::showMessage("Update Failed", errorMsg);
+                delay(3000);
+                UI::loadScreen(UI::SCREEN_SETTINGS);
+                break;
+        }
+        
+        fireEvent("firmware_update", FirmwareUpdate::getStatusMessage().c_str());
     }
 
     bool loadConfiguration()

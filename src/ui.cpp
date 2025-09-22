@@ -8,6 +8,7 @@
 #include "display.h"
 #include "remote_signer.h"
 #include "app.h"
+#include "firmware_update.h"
 
 // Forward declarations for external functions
 extern lv_obj_t* wifi_list;
@@ -112,6 +113,15 @@ namespace UI {
                 break;
             case SCREEN_INFO:
                 createInfoScreen();
+                break;
+            case SCREEN_UPDATE_CHECK:
+                createUpdateCheckScreen();
+                break;
+            case SCREEN_UPDATE_CONFIRM:
+                createUpdateConfirmScreen();
+                break;
+            case SCREEN_UPDATE_PROGRESS:
+                createUpdateProgressScreen();
                 break;
         }
         
@@ -328,10 +338,21 @@ namespace UI {
         lv_label_set_text(info_label, "Device Information");
         lv_obj_center(info_label);
         
+        // Check for Updates button
+        lv_obj_t* update_btn = lv_btn_create(main_container);
+        lv_obj_set_size(update_btn, lv_pct(100), 50);
+        lv_obj_align(update_btn, LV_ALIGN_TOP_MID, 0, 240);
+        lv_obj_set_style_bg_color(update_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN); // Green color for updates
+        lv_obj_add_event_cb(update_btn, checkForUpdatesEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* update_label = lv_label_create(update_btn);
+        lv_label_set_text(update_label, LV_SYMBOL_DOWNLOAD " Check for Updates");
+        lv_obj_center(update_label);
+        
         // Reboot Device button
         lv_obj_t* reboot_btn = lv_btn_create(main_container);
         lv_obj_set_size(reboot_btn, lv_pct(100), 50);
-        lv_obj_align(reboot_btn, LV_ALIGN_TOP_MID, 0, 240);
+        lv_obj_align(reboot_btn, LV_ALIGN_TOP_MID, 0, 300);
         lv_obj_set_style_bg_color(reboot_btn, lv_color_hex(0xFF5722), LV_PART_MAIN); // Orange/Red color for reboot
         lv_obj_add_event_cb(reboot_btn, rebootDeviceEventHandler, LV_EVENT_CLICKED, NULL);
         
@@ -339,12 +360,12 @@ namespace UI {
         lv_label_set_text(reboot_label, LV_SYMBOL_REFRESH " Reboot Device");
         lv_obj_center(reboot_label);
         
-        // AP Mode section - moved down by 60 pixels to accommodate reboot button
+        // AP Mode section - moved down to accommodate update and reboot buttons
         if (WiFiManager::isAPModeActive()) {
             // Exit AP Mode button
             lv_obj_t* exit_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(exit_ap_btn, lv_pct(100), 50);
-            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
+            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 360);
             lv_obj_set_style_bg_color(exit_ap_btn, lv_color_hex(Colors::WARNING), LV_PART_MAIN);
             lv_obj_add_event_cb(exit_ap_btn, WiFiManager::exitAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -358,7 +379,7 @@ namespace UI {
                            "\nPassword: " + WiFiManager::getAPPassword() + 
                            "\nIP: " + WiFiManager::getAPIP();
             lv_label_set_text(ap_info, ap_text.c_str());
-            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 360);
+            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 420);
             lv_obj_set_style_text_color(ap_info, lv_color_hex(Colors::SUCCESS), 0);
             lv_label_set_long_mode(ap_info, LV_LABEL_LONG_WRAP);
             lv_obj_set_width(ap_info, lv_pct(100));
@@ -366,7 +387,7 @@ namespace UI {
             // Launch AP Mode button
             lv_obj_t* launch_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(launch_ap_btn, lv_pct(100), 50);
-            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
+            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 360);
             lv_obj_set_style_bg_color(launch_ap_btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
             lv_obj_add_event_cb(launch_ap_btn, WiFiManager::launchAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -1601,6 +1622,239 @@ namespace UI {
                 lv_timer_del(timer);
             }, delayMs, NULL);
             Serial.println("UI::hideSigningModalDelayed() - Scheduled modal hide in " + String(delayMs) + "ms");
+        }
+    }
+    
+    // Update screen creation functions
+    void createUpdateCheckScreen() {
+        // Create main container
+        lv_obj_t* main_container = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(main_container, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(main_container, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(main_container, 10, LV_PART_MAIN);
+        
+        // Title
+        lv_obj_t* title = lv_label_create(main_container);
+        lv_label_set_text(title, "Checking for Updates");
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 12);
+        lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
+        lv_obj_set_style_text_color(title, lv_color_hex(Colors::TEXT), 0);
+        
+        // Spinner
+        lv_obj_t* spinner = lv_spinner_create(main_container, 1000, 60);
+        lv_obj_set_size(spinner, 80, 80);
+        lv_obj_align(spinner, LV_ALIGN_CENTER, 0, -50);
+        lv_obj_set_style_arc_color(spinner, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        
+        // Status label
+        lv_obj_t* status_label = lv_label_create(main_container);
+        lv_label_set_text(status_label, "Contacting GitHub...");
+        lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 50);
+        lv_obj_set_style_text_color(status_label, lv_color_hex(Colors::TEXT), 0);
+        lv_label_set_long_mode(status_label, LV_LABEL_LONG_WRAP);
+        lv_obj_set_width(status_label, lv_pct(90));
+        
+        // Back button
+        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(back_btn, 40, 40);
+        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+        lv_obj_add_event_cb(back_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS);
+        
+        lv_obj_t* back_label = lv_label_create(back_btn);
+        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
+        lv_obj_center(back_label);
+        
+        // Style back button
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+        
+        // Start checking for updates
+        FirmwareUpdate::checkForUpdates();
+    }
+    
+    void createUpdateConfirmScreen() {
+        FirmwareUpdate::ReleaseInfo release = FirmwareUpdate::getLatestRelease();
+        
+        // Create main container
+        lv_obj_t* main_container = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(main_container, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(main_container, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(main_container, 10, LV_PART_MAIN);
+        
+        // Title
+        lv_obj_t* title = lv_label_create(main_container);
+        lv_label_set_text(title, "Update Available");
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 12);
+        lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
+        lv_obj_set_style_text_color(title, lv_color_hex(Colors::SUCCESS), 0);
+        
+        // Current version
+        lv_obj_t* current_label = lv_label_create(main_container);
+        String current_text = "Current: v" + FirmwareUpdate::getCurrentVersion();
+        lv_label_set_text(current_label, current_text.c_str());
+        lv_obj_align(current_label, LV_ALIGN_TOP_LEFT, 0, 60);
+        lv_obj_set_style_text_color(current_label, lv_color_hex(Colors::TEXT), 0);
+        
+        // New version
+        lv_obj_t* new_label = lv_label_create(main_container);
+        String new_text = "Available: v" + release.version;
+        lv_label_set_text(new_label, new_text.c_str());
+        lv_obj_align(new_label, LV_ALIGN_TOP_LEFT, 0, 80);
+        lv_obj_set_style_text_color(new_label, lv_color_hex(Colors::SUCCESS), 0);
+        
+        // Size info
+        lv_obj_t* size_label = lv_label_create(main_container);
+        String size_text = "Size: " + String(release.fileSize / 1024) + " KB";
+        lv_label_set_text(size_label, size_text.c_str());
+        lv_obj_align(size_label, LV_ALIGN_TOP_LEFT, 0, 100);
+        lv_obj_set_style_text_color(size_label, lv_color_hex(Colors::TEXT), 0);
+        
+        // Changelog (if available)
+        if (!release.changelog.isEmpty()) {
+            lv_obj_t* changelog_title = lv_label_create(main_container);
+            lv_label_set_text(changelog_title, "Changes:");
+            lv_obj_align(changelog_title, LV_ALIGN_TOP_LEFT, 0, 130);
+            lv_obj_set_style_text_color(changelog_title, lv_color_hex(Colors::TEXT), 0);
+            
+            lv_obj_t* changelog_text = lv_label_create(main_container);
+            // Limit changelog length for display
+            String changelog = release.changelog;
+            if (changelog.length() > 200) {
+                changelog = changelog.substring(0, 197) + "...";
+            }
+            lv_label_set_text(changelog_text, changelog.c_str());
+            lv_obj_align(changelog_text, LV_ALIGN_TOP_LEFT, 0, 150);
+            lv_obj_set_style_text_color(changelog_text, lv_color_hex(0xCCCCCC), 0);
+            lv_label_set_long_mode(changelog_text, LV_LABEL_LONG_WRAP);
+            lv_obj_set_width(changelog_text, lv_pct(90));
+        }
+        
+        // Install button
+        lv_obj_t* install_btn = lv_btn_create(main_container);
+        lv_obj_set_size(install_btn, lv_pct(45), 50);
+        lv_obj_align(install_btn, LV_ALIGN_BOTTOM_LEFT, 0, -20);
+        lv_obj_set_style_bg_color(install_btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
+        lv_obj_add_event_cb(install_btn, confirmUpdateEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* install_label = lv_label_create(install_btn);
+        lv_label_set_text(install_label, "Install");
+        lv_obj_center(install_label);
+        
+        // Cancel button
+        lv_obj_t* cancel_btn = lv_btn_create(main_container);
+        lv_obj_set_size(cancel_btn, lv_pct(45), 50);
+        lv_obj_align(cancel_btn, LV_ALIGN_BOTTOM_RIGHT, 0, -20);
+        lv_obj_set_style_bg_color(cancel_btn, lv_color_hex(Colors::ERROR), LV_PART_MAIN);
+        lv_obj_add_event_cb(cancel_btn, cancelUpdateEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* cancel_label = lv_label_create(cancel_btn);
+        lv_label_set_text(cancel_label, "Cancel");
+        lv_obj_center(cancel_label);
+        
+        // Back button
+        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(back_btn, 40, 40);
+        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+        lv_obj_add_event_cb(back_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS);
+        
+        lv_obj_t* back_label = lv_label_create(back_btn);
+        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
+        lv_obj_center(back_label);
+        
+        // Style back button
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    }
+    
+    void createUpdateProgressScreen() {
+        // Create main container
+        lv_obj_t* main_container = lv_obj_create(lv_scr_act());
+        lv_obj_set_size(main_container, lv_pct(100), lv_pct(100));
+        lv_obj_set_style_bg_color(main_container, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(main_container, 10, LV_PART_MAIN);
+        
+        // Title
+        lv_obj_t* title = lv_label_create(main_container);
+        lv_label_set_text(title, "Installing Update");
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 12);
+        lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
+        lv_obj_set_style_text_color(title, lv_color_hex(Colors::WARNING), 0);
+        
+        // Warning
+        lv_obj_t* warning = lv_label_create(main_container);
+        lv_label_set_text(warning, "Do not power off the device!");
+        lv_obj_align(warning, LV_ALIGN_TOP_MID, 0, 50);
+        lv_obj_set_style_text_color(warning, lv_color_hex(Colors::ERROR), 0);
+        lv_obj_set_style_text_font(warning, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        
+        // Progress bar
+        lv_obj_t* progress_bar = lv_bar_create(main_container);
+        lv_obj_set_size(progress_bar, lv_pct(80), 20);
+        lv_obj_align(progress_bar, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_style_bg_color(progress_bar, lv_color_hex(0x333333), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(progress_bar, lv_color_hex(Colors::SUCCESS), LV_PART_INDICATOR);
+        lv_bar_set_value(progress_bar, 0, LV_ANIM_OFF);
+        
+        // Progress label
+        lv_obj_t* progress_label = lv_label_create(main_container);
+        lv_label_set_text(progress_label, "0%");
+        lv_obj_align(progress_label, LV_ALIGN_CENTER, 0, 40);
+        lv_obj_set_style_text_color(progress_label, lv_color_hex(Colors::TEXT), 0);
+        
+        // Status label
+        lv_obj_t* status_label = lv_label_create(main_container);
+        lv_label_set_text(status_label, "Preparing...");
+        lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 80);
+        lv_obj_set_style_text_color(status_label, lv_color_hex(Colors::TEXT), 0);
+        lv_label_set_long_mode(status_label, LV_LABEL_LONG_WRAP);
+        lv_obj_set_width(status_label, lv_pct(90));
+    }
+    
+    // Event handlers for update functionality
+    void checkForUpdatesEventHandler(lv_event_t* e) {
+        if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+            loadScreen(SCREEN_UPDATE_CHECK);
+        }
+    }
+    
+    void confirmUpdateEventHandler(lv_event_t* e) {
+        if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+            loadScreen(SCREEN_UPDATE_PROGRESS);
+            FirmwareUpdate::startUpdate();
+        }
+    }
+    
+    void cancelUpdateEventHandler(lv_event_t* e) {
+        if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+            FirmwareUpdate::cancelUpdate();
+            loadScreen(SCREEN_SETTINGS);
+        }
+    }
+    
+    // Progress update functions
+    void updateFirmwareProgress(int progress, size_t current, size_t total) {
+        // Update progress bar and labels if on progress screen
+        if (getCurrentScreen() == SCREEN_UPDATE_PROGRESS) {
+            // This would require storing references to the progress elements
+            // For now, we'll recreate the screen or use a more complex state management
+        }
+    }
+    
+    void updateFirmwareStatus(const String& status) {
+        // Update status label if on progress screen
+        if (getCurrentScreen() == SCREEN_UPDATE_PROGRESS) {
+            // This would require storing references to the status elements
         }
     }
 }

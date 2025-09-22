@@ -5,7 +5,6 @@
  * 
  * This header provides a unified interface to all application modules
  * and coordinates initialization, cleanup, and inter-module communication
- * for the NWC Point of Sale device.
  */
 
 #include <Arduino.h>
@@ -15,6 +14,7 @@
 #include "wifi_manager.h"
 #include "ui.h"
 #include "remote_signer.h"
+#include "firmware_update.h"
 
 namespace App {
     /**
@@ -55,6 +55,7 @@ namespace App {
     void notifySignerStatusChanged(bool connected);
     void notifySigningRequest(const String& eventKind, const String& content);
     void notifySigningCompleted(bool success);
+    void notifyFirmwareUpdateStatusChanged(FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error);
     
     /**
      * Configuration Management
