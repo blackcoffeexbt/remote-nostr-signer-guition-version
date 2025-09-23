@@ -907,97 +907,15 @@ namespace UI {
             }, 3000, NULL); // 3 second delay to show the message
         }
     }
-    
-    void updateStatusDisplay(const String& status) {
-        // Update any relevant status displays
-        Serial.println("Status: " + status);
-    }
-    
-    void showLoadingSpinner(bool show) {
-        if (invoice_spinner != NULL) {
-            if (show) {
-                lv_obj_clear_flag(invoice_spinner, LV_OBJ_FLAG_HIDDEN);
-            } else {
-                lv_obj_add_flag(invoice_spinner, LV_OBJ_FLAG_HIDDEN);
-            }
-        }
-    }
-    
+        
     // Getters and setters
-    lv_obj_t* getDisplayLabel() { return display_label; }
     lv_obj_t* getWiFiList() { return wifi_list; }
-    lv_obj_t* getQRCanvas() { return qr_canvas; }
     lv_obj_t* getInvoiceLabel() { return invoice_label; }
     lv_obj_t* getInvoiceSpinner() { return invoice_spinner; }
-    lv_obj_t* getMainWiFiStatusLabel() { return main_wifi_status_label; }
     
-    void setDisplayLabel(lv_obj_t* label) { display_label = label; }
-    void setWiFiList(lv_obj_t* list) { wifi_list = list; }
     void setQRCanvas(lv_obj_t* canvas) { qr_canvas = canvas; }
-    void setMainWiFiStatusLabel(lv_obj_t* label) { main_wifi_status_label = label; }
     
     screen_state_t getCurrentScreen() { return current_screen; }
-    bool isOverlayActive() { return invoice_overlay != NULL; }
-    
-    void updateAPPasswordDisplay() {
-        // Update AP password in settings screen if active
-        if (ap_password_textarea != NULL) {
-            lv_textarea_set_text(ap_password_textarea, Settings::getAPPassword().c_str());
-        }
-    }
-    
-    void showSigningConfirmation(const String& eventKind, const String& content) {
-        // Create a simple signing confirmation overlay
-        lv_obj_t* overlay = lv_obj_create(lv_scr_act());
-        lv_obj_set_size(overlay, LV_HOR_RES, LV_VER_RES);
-        lv_obj_set_style_bg_color(overlay, lv_color_hex(0x000000), 0);
-        lv_obj_set_style_bg_opa(overlay, 200, 0);
-        
-        lv_obj_t* container = lv_obj_create(overlay);
-        lv_obj_set_size(container, 280, 200);
-        lv_obj_center(container);
-        lv_obj_set_style_bg_color(container, lv_color_hex(Colors::BACKGROUND), 0);
-        lv_obj_set_style_border_color(container, lv_color_hex(Colors::PRIMARY), 0);
-        lv_obj_set_style_border_width(container, 2, 0);
-        
-        lv_obj_t* title = lv_label_create(container);
-        lv_label_set_text(title, ("Signing " + eventKind).c_str());
-        lv_obj_set_style_text_color(title, lv_color_hex(Colors::PRIMARY), 0);
-        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 10);
-        
-        lv_obj_t* content_label = lv_label_create(container);
-        lv_label_set_text(content_label, content.c_str());
-        lv_obj_set_style_text_color(content_label, lv_color_hex(Colors::TEXT), 0);
-        lv_obj_align(content_label, LV_ALIGN_CENTER, 0, -20);
-        lv_label_set_long_mode(content_label, LV_LABEL_LONG_WRAP);
-        lv_obj_set_width(content_label, 250);
-        
-        lv_obj_t* approve_btn = lv_btn_create(container);
-        lv_obj_set_size(approve_btn, 100, 40);
-        lv_obj_align(approve_btn, LV_ALIGN_BOTTOM_LEFT, 20, -10);
-        lv_obj_set_style_bg_color(approve_btn, lv_color_hex(Colors::SUCCESS), 0);
-        
-        lv_obj_t* approve_label = lv_label_create(approve_btn);
-        lv_label_set_text(approve_label, "Approve");
-        lv_obj_center(approve_label);
-        
-        lv_obj_t* reject_btn = lv_btn_create(container);
-        lv_obj_set_size(reject_btn, 100, 40);
-        lv_obj_align(reject_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -10);
-        lv_obj_set_style_bg_color(reject_btn, lv_color_hex(Colors::ERROR), 0);
-        
-        lv_obj_t* reject_label = lv_label_create(reject_btn);
-        lv_label_set_text(reject_label, "Reject");
-        lv_obj_center(reject_label);
-        
-        // For now, auto-approve after 3 seconds (TODO: Add proper touch handling)
-        // This will be implemented when we need proper confirmation UI
-        lv_timer_t* auto_approve_timer = lv_timer_create([](lv_timer_t* timer) {
-            lv_obj_t* overlay = (lv_obj_t*)timer->user_data;
-            lv_obj_del(overlay);
-            lv_timer_del(timer);
-        }, 3000, overlay);
-    }
     
     void showPairingQRCode() {
         // Get bunker URL from RemoteSigner
@@ -1115,23 +1033,6 @@ namespace UI {
         }
         
         Serial.println("Added signed event to list: Kind " + eventKind + " at " + timestamp);
-    }
-    
-    void clearSignedEvents() {
-        signed_events.clear();
-        
-        if (signed_events_list && lv_obj_is_valid(signed_events_list)) {
-            lv_obj_clean(signed_events_list);
-            
-            // Add initial message
-            lv_obj_t* initial_btn = lv_list_add_btn(signed_events_list, LV_SYMBOL_REFRESH, "Ready to sign Nostr events");
-            lv_obj_t* initial_label = lv_obj_get_child(initial_btn, 1);
-            lv_obj_set_style_text_color(initial_label, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
-            lv_obj_set_style_text_align(initial_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
-            lv_obj_set_style_bg_color(initial_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-            lv_obj_set_style_bg_opa(initial_btn, LV_OPA_TRANSP, LV_PART_MAIN);
-            lv_obj_clear_flag(initial_btn, LV_OBJ_FLAG_CLICKABLE);
-        }
     }
     
     void showEventSignedNotification(const String& eventKind, const String& content) {

@@ -63,11 +63,6 @@ namespace Settings {
         ap_password = password;
     }
     
-    // PIN management
-    String getCurrentPin() {
-        return current_pin;
-    }
-    
     void setCurrentPin(const String& pin) {
         current_pin = pin;
         preferences.begin("pin-config", false);
@@ -79,50 +74,7 @@ namespace Settings {
     bool verifyPin(const String& pin) {
         return pin == current_pin;
     }
-    
-    // WiFi network management
-    void saveWiFiNetwork(const char* ssid, const char* password) {
-        preferences.begin("wifi-creds", false);
         
-        // Get current count
-        int count = preferences.getInt("count", 0);
-        
-        // Create indexed keys
-        String ssid_key = "ssid_" + String(count);
-        String pass_key = "pass_" + String(count);
-        
-        // Save the network
-        preferences.putString(ssid_key.c_str(), ssid);
-        preferences.putString(pass_key.c_str(), password);
-        
-        // Update count
-        preferences.putInt("count", count + 1);
-        
-        preferences.end();
-        Serial.printf("Saved WiFi network %d: %s\n", count, ssid);
-    }
-    
-    void loadAllWiFiNetworks() {
-        preferences.begin("wifi-creds", true);
-        
-        int count = preferences.getInt("count", 0);
-        Serial.printf("Found %d saved WiFi networks\n", count);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String pass_key = "pass_" + String(i);
-            
-            String ssid = preferences.getString(ssid_key.c_str(), "");
-            String password = preferences.getString(pass_key.c_str(), "");
-            
-            if (ssid.length() > 0) {
-                Serial.printf("Network %d: %s\n", i, ssid.c_str());
-            }
-        }
-        
-        preferences.end();
-    }
-    
     // Persistence
     void loadFromPreferences() {
         // Load shop settings

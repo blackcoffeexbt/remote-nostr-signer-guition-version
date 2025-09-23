@@ -36,18 +36,12 @@ namespace UI {
     void showMessage(String title, String message);
     
     // UI element accessors for other modules
-    lv_obj_t* getDisplayLabel();
     lv_obj_t* getWiFiList();
-    lv_obj_t* getQRCanvas();
     lv_obj_t* getInvoiceLabel();
     lv_obj_t* getInvoiceSpinner();
-    lv_obj_t* getMainWiFiStatusLabel();
     
     // UI element setters
-    void setDisplayLabel(lv_obj_t* label);
-    void setWiFiList(lv_obj_t* list);
     void setQRCanvas(lv_obj_t* canvas);
-    void setMainWiFiStatusLabel(lv_obj_t* label);
     
     // Event handlers for external use
     void navigationEventHandler(lv_event_t* e);
@@ -64,12 +58,8 @@ namespace UI {
     };
     
     void addSignedEvent(const String& eventKind, const String& content, const String& timestamp);
-    void clearSignedEvents();
     
     // Utility functions
-    void updateStatusDisplay(const String& status);
-    void showLoadingSpinner(bool show);
-    void showSigningConfirmation(const String& eventKind, const String& content);
     void showPairingQRCode();
     void showEventSignedNotification(const String& eventKind, const String& content);
     
@@ -82,11 +72,9 @@ namespace UI {
     // Settings integration
     void updateShopNameDisplay();
     void updateCurrencyDisplay();
-    void updateAPPasswordDisplay();
     
     // Screen state queries
     screen_state_t getCurrentScreen();
-    bool isOverlayActive();
     
     // Constants for UI styling
     namespace Colors {

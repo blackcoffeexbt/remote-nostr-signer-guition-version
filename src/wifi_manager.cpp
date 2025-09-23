@@ -327,28 +327,6 @@ namespace WiFiManager {
         }, 500, NULL);
     }
     
-    void stopScanning() {
-        Serial.println("Stopping WiFi scanning...");
-        
-        if (wifi_scan_timer != NULL) {
-            lv_timer_del(wifi_scan_timer);
-            wifi_scan_timer = NULL;
-        }
-        
-        if (wifi_command_queue != NULL) {
-            wifi_command_t command;
-            command.type = WIFI_STOP_SCAN;
-            xQueueSend(wifi_command_queue, &command, 0);
-        }
-        
-        if (wifi_scan_result_queue != NULL) {
-            wifi_scan_result_t result;
-            while (xQueueReceive(wifi_scan_result_queue, &result, 0) == pdTRUE) {
-                // Clear the queue
-            }
-        }
-    }
-    
     bool processScanResults() {
         if (wifi_scan_result_queue == NULL) {
             return false;
@@ -399,95 +377,7 @@ namespace WiFiManager {
         }
         return false;
     }
-    
-    void saveCredentials(const char* ssid, const char* password) {
-        preferences.begin("wifi-creds", false);
-        
-        int count = preferences.getInt("count", 0);
-        String ssid_key = "ssid_" + String(count);
-        String pass_key = "pass_" + String(count);
-        
-        preferences.putString(ssid_key.c_str(), ssid);
-        preferences.putString(pass_key.c_str(), password);
-        preferences.putInt("count", count + 1);
-        
-        preferences.end();
-        Serial.printf("Saved WiFi network %d: %s\n", count, ssid);
-    }
-    
-    bool findSavedCredentials(const char* ssid, char* password, size_t password_size) {
-        preferences.begin("wifi-creds", true);
-        
-        int count = preferences.getInt("count", 0);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String saved_ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (saved_ssid == ssid) {
-                String pass_key = "pass_" + String(i);
-                String saved_password = preferences.getString(pass_key.c_str(), "");
-                strncpy(password, saved_password.c_str(), password_size - 1);
-                password[password_size - 1] = '\0';
-                preferences.end();
-                return true;
-            }
-        }
-        
-        preferences.end();
-        return false;
-    }
-    
-    void loadAllNetworks() {
-        preferences.begin("wifi-creds", true);
-        
-        int count = preferences.getInt("count", 0);
-        Serial.printf("Found %d saved WiFi networks\n", count);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (ssid.length() > 0) {
-                Serial.printf("Network %d: %s\n", i, ssid.c_str());
-            }
-        }
-        
-        preferences.end();
-    }
-    
-    void removeNetwork(const char* ssid) {
-        preferences.begin("wifi-creds", false);
-        
-        int count = preferences.getInt("count", 0);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String saved_ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (saved_ssid == ssid) {
-                for (int j = i; j < count - 1; j++) {
-                    String current_ssid_key = "ssid_" + String(j);
-                    String current_pass_key = "pass_" + String(j);
-                    String next_ssid_key = "ssid_" + String(j + 1);
-                    String next_pass_key = "pass_" + String(j + 1);
-                    
-                    String next_ssid = preferences.getString(next_ssid_key.c_str(), "");
-                    String next_password = preferences.getString(next_pass_key.c_str(), "");
-                    
-                    preferences.putString(current_ssid_key.c_str(), next_ssid);
-                    preferences.putString(current_pass_key.c_str(), next_password);
-                }
-                
-                preferences.putInt("count", count - 1);
-                Serial.printf("Removed WiFi network: %s\n", ssid);
-                break;
-            }
-        }
-        
-        preferences.end();
-    }
-    
+      
     void startAPMode() {
         if (ap_mode_active) {
             Serial.println("AP mode already active");
@@ -591,26 +481,8 @@ namespace WiFiManager {
         }
     }
     
-    void saveBunkerUrl(const String& url) {
-        preferences.begin("config", false);
-        preferences.putString("bunker_url", url);
-        preferences.end();
-        Serial.println("Saved Bunker URL to preferences: " + url);
-    }
-    
     String getBunkerUrl() {
         return RemoteSigner::getBunkerUrl();
-    }
-    
-    void setBunkerUrl(const String& url) {
-        // Signer configuration set separately
-        Serial.println("Signer URL configuration: " + url);
-        saveBunkerUrl(url);
-    }
-    
-    void updateStatus() {
-        // Trigger status update
-        mainStatusUpdaterCB(NULL);
     }
     
     void setStatusLabel(lv_obj_t* label) {
@@ -723,28 +595,11 @@ namespace WiFiManager {
         }
     }
     
-    TaskHandle_t getTaskHandle() {
-        return wifi_task_handle;
-    }
-    
-    QueueHandle_t getCommandQueue() {
-        return wifi_command_queue;
-    }
-    
-    QueueHandle_t getScanResultQueue() {
-        return wifi_scan_result_queue;
-    }
-    
     void setCurrentCredentials(const char* ssid, const char* password) {
         strncpy(current_ssid, ssid, sizeof(current_ssid) - 1);
         current_ssid[sizeof(current_ssid) - 1] = '\0';
         strncpy(current_password, password, sizeof(current_password) - 1);
         current_password[sizeof(current_password) - 1] = '\0';
-    }
-    
-    void getCurrentCredentials(char* ssid, char* password) {
-        strcpy(ssid, current_ssid);
-        strcpy(password, current_password);
     }
     
     void setStatusCallback(wifi_status_callback_t callback) {

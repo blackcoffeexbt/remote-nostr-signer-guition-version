@@ -85,7 +85,6 @@ static int invoice_counter = 0;
 static Preferences preferences;
 
 // Forward declarations for functions that still need to be implemented or migrated
-static void wifi_status_checker_cb(lv_timer_t *timer);
 static void wifi_main_status_updater_cb(lv_timer_t *timer);
 
 void setup(void)
@@ -150,11 +149,5 @@ static void wifi_main_status_updater_cb(lv_timer_t *timer) {
     
     // AP mode processing now handled by WiFiManager module
     
-    delay(1);
-}
-
-// Minimal status checker for backward compatibility (will be removed)
-static void wifi_status_checker_cb(lv_timer_t *timer) {
-    // Implementation moved to WiFi module
     delay(1);
 }

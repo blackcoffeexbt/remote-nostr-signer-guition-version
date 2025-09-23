@@ -766,25 +766,12 @@ namespace RemoteSigner {
         return webSocket.isConnected();
     }
     
-    void updateTime() {
-        timeClient.update();
-        unixTimestamp = timeClient.getEpochTime();
-    }
-    
     unsigned long getUnixTimestamp() {
         return unixTimestamp;
     }
     
-    NTPClient& getTimeClient() {
-        return timeClient;
-    }
-    
     void setStatusCallback(signer_status_callback_t callback) {
         status_callback = callback;
-    }
-    
-    void setSigningConfirmationCallback(signing_confirmation_callback_t callback) {
-        signing_callback = callback;
     }
     
     void displaySigningRequest(const String& eventKind, const String& content) {
@@ -842,8 +829,6 @@ namespace RemoteSigner {
         }
     }
     String getPublicKey() { return publicKeyHex; }
-    String getSecretKey() { return secretKey; }
-    WebSocketsClient& getWebSocketClient() { return webSocket; }
     void setStatusLabel(lv_obj_t* label) { 
         status_label = label; 
         // Update status immediately after setting the label

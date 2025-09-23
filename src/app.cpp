@@ -134,11 +134,6 @@ namespace App
         delay(1);
     }
 
-    app_state_t getState()
-    {
-        return current_state;
-    }
-
     void setState(app_state_t state)
     {
         if (current_state != state)
@@ -164,31 +159,6 @@ namespace App
         default:
             return "Unknown";
         }
-    }
-
-    void handleError(const String &module, const String &error)
-    {
-        last_error = module + ": " + error;
-        Serial.println("ERROR - " + last_error);
-
-        // Show error message to user
-        UI::showMessage("Error", last_error);
-
-        fireEvent("error", last_error);
-    }
-
-    void clearError()
-    {
-        last_error = "";
-        if (current_state == APP_STATE_ERROR)
-        {
-            setState(APP_STATE_READY);
-        }
-    }
-
-    String getLastError()
-    {
-        return last_error;
     }
 
     void notifyWiFiStatusChanged(bool connected)
@@ -239,41 +209,6 @@ namespace App
         fireEvent("signer_status", connected ? "connected" : "disconnected");
     }
 
-    void notifySigningRequest(const String& eventKind, const String& content)
-    {
-        Serial.println("Signing request received: " + eventKind);
-        UI::showSigningConfirmation(eventKind, content);
-        fireEvent("signing_request", eventKind);
-    }
-
-    void notifySigningCompleted(bool success)
-    {
-        Serial.println("Signing completed: " + String(success ? "Success" : "Failed"));
-        UI::showMessage(success ? "Event Signed" : "Signing Failed", 
-                       success ? "Event signed successfully!" : "Failed to sign event");
-        fireEvent("signing_completed", success ? "success" : "failed");
-    }
-
-    bool loadConfiguration()
-    {
-        Serial.println("Loading application configuration...");
-
-        // Configuration is loaded by individual modules
-        // This function could coordinate any cross-module configuration
-
-        return true;
-    }
-
-    bool saveConfiguration()
-    {
-        Serial.println("Saving application configuration...");
-
-        // Configuration is saved by individual modules
-        // This function could coordinate any cross-module configuration
-
-        return true;
-    }
-
     void resetToDefaults()
     {
         Serial.println("Resetting to default configuration...");
@@ -286,24 +221,6 @@ namespace App
     String getVersion()
     {
         return Config::VERSION;
-    }
-
-    String getBuildInfo()
-    {
-        return Config::BUILD_DATE;
-    }
-
-    void printSystemInfo()
-    {
-        Serial.println("=== System Information ===");
-        Serial.println("Version: " + getVersion());
-        Serial.println("Build Date: " + getBuildInfo());
-        Serial.println("Free Heap: " + String(ESP.getFreeHeap()));
-        Serial.println("Chip Model: " + String(ESP.getChipModel()));
-        Serial.println("Chip Revision: " + String(ESP.getChipRevision()));
-        Serial.println("CPU Frequency: " + String(ESP.getCpuFreqMHz()) + " MHz");
-        Serial.println("Flash Size: " + String(ESP.getFlashChipSize()));
-        Serial.println("==========================");
     }
 
     void resetActivityTimer()
@@ -361,85 +278,6 @@ namespace App
         Serial.println("Current Screen: " + String(UI::getCurrentScreen()));
         Serial.println("Free Heap: " + String(ESP.getFreeHeap()));
         Serial.println("============================");
-    }
-
-    void checkForUpdates()
-    {
-        Serial.println("Checking for updates...");
-        // Implementation would check for firmware updates
-        fireEvent("update_check", "started");
-    }
-
-    bool isUpdateAvailable()
-    {
-        // Implementation would check if update is available
-        return false;
-    }
-
-    void performUpdate()
-    {
-        Serial.println("Performing update...");
-        setState(APP_STATE_UPDATING);
-        // Implementation would perform firmware update
-        fireEvent("update", "started");
-    }
-
-    void runDiagnostics()
-    {
-        Serial.println("=== Running Diagnostics ===");
-
-        printSystemInfo();
-        reportModuleStatus();
-
-        // Test display
-        UI::showMessage("Diagnostics", "Display test - press any key");
-
-        // Test WiFi scan
-        if (WiFiManager::isConnected())
-        {
-            Serial.println("WiFi diagnostic: PASS");
-        }
-        else
-        {
-            Serial.println("WiFi diagnostic: FAIL - Not connected");
-        }
-
-        // Test Remote Signer connection
-        if (RemoteSigner::isConnected())
-        {
-            Serial.println("Remote Signer diagnostic: PASS");
-        }
-        else
-        {
-            Serial.println("Remote Signer diagnostic: FAIL - Not connected");
-        }
-
-        Serial.println("=== Diagnostics Complete ===");
-        fireEvent("diagnostics", "completed");
-    }
-
-    void generateStatusReport()
-    {
-        String report = "Status Report\\n";
-        report += "=============\\n";
-        report += "Version: " + getVersion() + "\\n";
-        report += "State: " + getStateString() + "\\n";
-        report += "WiFi: " + String(WiFiManager::isConnected() ? "OK" : "FAIL") + "\\n";
-        report += "Signer: " + String(RemoteSigner::isConnected() ? "OK" : "FAIL") + "\\n";
-        report += "Heap: " + String(ESP.getFreeHeap()) + "\\n";
-
-        if (last_error.length() > 0)
-        {
-            report += "Last Error: " + last_error + "\\n";
-        }
-
-        Serial.println(report);
-        fireEvent("status_report", report);
-    }
-
-    void setEventCallback(app_event_callback_t callback)
-    {
-        event_callback = callback;
     }
 
     void fireEvent(const String &event, const String &data)

@@ -17,13 +17,8 @@ namespace Settings {
     void setBunkerUrl(const String& url);
     
     // PIN management
-    String getCurrentPin();
     void setCurrentPin(const String& pin);
     bool verifyPin(const String& pin);
-    
-    // WiFi network management
-    void saveWiFiNetwork(const char* ssid, const char* password);
-    void loadAllWiFiNetworks();
     
     // Persistence
     void loadFromPreferences();
