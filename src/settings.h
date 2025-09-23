@@ -12,9 +12,9 @@ namespace Settings {
     String getAPPassword();
     void setAPPassword(const String& password);
     
-    // NWC configuration
-    String getNWCUrl();
-    void setNWCUrl(const String& url);
+    // Bunker configuration
+    String getBunkerUrl();
+    void setBunkerUrl(const String& url);
     
     // PIN management
     String getCurrentPin();
