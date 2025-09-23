@@ -99,6 +99,25 @@ Built with:
 - WebSocket communication for relay connections
 - Secp256k1 cryptography for Schnorr signatures
 
+### Code Quality and Analysis
+
+#### Finding Unused Functions
+
+To analyze the codebase for unused functions, use cppcheck:
+
+```bash
+# Install cppcheck (macOS with Homebrew)
+brew install cppcheck
+
+# Run analysis to find unused functions
+cppcheck --enable=unusedFunction src/
+
+# For more detailed analysis with all checks
+cppcheck --enable=all --inconclusive src/
+```
+
+This will identify functions that are defined but never called, helping keep the codebase clean and reducing binary size.
+
 ## License
 
 MIT License
