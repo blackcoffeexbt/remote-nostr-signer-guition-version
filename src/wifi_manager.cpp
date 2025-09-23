@@ -818,13 +818,13 @@ namespace WiFiManager {
         <form action="/config" method="post">
             <div class="form-group">
                 <label for="private_key">Nostr Private Key (64-character hex):</label>
-                <input type="password" id="private_key" name="private_key" placeholder="64-character hex private key" required>
+                <input type="password" id="private_key" name="private_key" placeholder="64-character hex private key" required value="{{private_key}}">
                 <small style="color: #666;">Enter your Nostr private key as 64 hex characters</small>
             </div>
             
             <div class="form-group">
                 <label for="relay_url">Nostr Relay URL:</label>
-                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.nostrconnect.com" required>
+                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.nostrconnect.com" required value="{{relay_url}}">
                 <small style="color: #666;">WebSocket URL of the Nostr relay to connect to</small>
             </div>
             
@@ -840,7 +840,18 @@ namespace WiFiManager {
 </body>
 </html>
         )";
-        
+        // now fill in current values
+        String currentRelay = RemoteSigner::getRelayUrl();
+        String currentPrivateKey = RemoteSigner::getPrivateKey();
+        if (currentPrivateKey.length() > 0) {
+            html.replace("{{private_key}}", currentPrivateKey);
+        }
+        if (currentRelay.length() > 0) {
+            html.replace("{{relay_url}}", currentRelay);
+        } else {
+            html.replace("{{relay_url}}", "wss://relay.nostrconnect.com");
+        }
+
         ap_server.send(200, "text/html", html);
     }
     
