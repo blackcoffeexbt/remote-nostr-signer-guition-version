@@ -755,10 +755,6 @@ namespace WiFiManager {
         status_callback = callback;
     }
     
-    NTPClient& getNTPClient() {
-        return timeClient;
-    }
-    
     void createStatusTimer() {
         lv_timer_create(mainStatusUpdaterCB, 1000, NULL);
     }

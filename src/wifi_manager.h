@@ -108,9 +108,6 @@ namespace WiFiManager {
     typedef void (*wifi_status_callback_t)(bool connected, const char* status);
     void setStatusCallback(wifi_status_callback_t callback);
     
-    // NTP client access
-    NTPClient& getNTPClient();
-    
     // Timer management
     void createStatusTimer();
     void deleteStatusTimer();
