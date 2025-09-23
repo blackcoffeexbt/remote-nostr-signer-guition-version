@@ -180,37 +180,6 @@ namespace Settings {
         }
     }
     
-    // Keyboard event handlers
-    void shopNameKBEventHandler(lv_event_t *e) {
-        lv_event_code_t code = lv_event_get_code(e);
-        lv_obj_t *kb = lv_event_get_target(e);
-        
-        if (code == LV_EVENT_READY) {
-            lv_obj_t *ta = lv_keyboard_get_textarea(kb);
-            const char *text = lv_textarea_get_text(ta);
-            
-            lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
-            
-            // Show the PIN and Save buttons when keyboard is hidden
-            if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
-                lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-            if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
-                lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-        } else if (code == LV_EVENT_CANCEL) {
-            lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
-            
-            // Show the PIN and Save buttons when keyboard is hidden
-            if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
-                lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-            if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
-                lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
-            }
-        }
-    }
-    
     void apPasswordKBEventHandler(lv_event_t *e) {
         lv_event_code_t code = lv_event_get_code(e);
         lv_obj_t *kb = lv_event_get_target(e);

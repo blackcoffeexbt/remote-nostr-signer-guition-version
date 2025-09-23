@@ -32,7 +32,6 @@ namespace Settings {
     // UI Event handlers
     void settingsSaveEventHandler(lv_event_t *e);
     void settingsBackEventHandler(lv_event_t *e);
-    void shopNameKBEventHandler(lv_event_t *e);
     void apPasswordKBEventHandler(lv_event_t *e);
     
     // PIN management UI

@@ -31,15 +31,7 @@ namespace UI {
     // Screen management
     void loadScreen(screen_state_t screen);
     void cleanupGlobalPointers();
-    
-    // Invoice overlay management
-    void createInvoiceOverlay();
-    void closeInvoiceOverlay();
-    void updateInvoiceDisplay(const String& invoice, int amount_sats);
-    void showPaymentReceived();
-    bool isInvoiceProcessing();
-    void setInvoiceProcessing(bool processing);
-    
+   
     // Message display
     void showMessage(String title, String message);
     
@@ -55,19 +47,13 @@ namespace UI {
     void setDisplayLabel(lv_obj_t* label);
     void setWiFiList(lv_obj_t* list);
     void setQRCanvas(lv_obj_t* canvas);
-    void setInvoiceLabel(lv_obj_t* label);
-    void setInvoiceSpinner(lv_obj_t* spinner);
     void setMainWiFiStatusLabel(lv_obj_t* label);
     
     // Event handlers for external use
-    void keypadEventHandler(lv_event_t* e);
     void navigationEventHandler(lv_event_t* e);
     void settingsSaveEventHandler(lv_event_t* e);
     void settingsBackEventHandler(lv_event_t* e);
-    void currencyDropdownEventHandler(lv_event_t* e);
-    void shopNameKBEventHandler(lv_event_t* e);
     void apPasswordKBEventHandler(lv_event_t* e);
-    void invoiceCloseButtonEventHandler(lv_event_t* e);
     void rebootDeviceEventHandler(lv_event_t* e);
     
     // Signed events management

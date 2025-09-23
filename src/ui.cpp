@@ -754,80 +754,6 @@ namespace UI {
         lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
     }
     
-    void createInvoiceOverlay() {
-        if (invoice_overlay != NULL) {
-            return; // Already exists
-        }
-        
-        invoice_overlay = lv_obj_create(lv_scr_act());
-        lv_obj_set_size(invoice_overlay, lv_pct(100), lv_pct(100));
-        lv_obj_set_style_bg_color(invoice_overlay, lv_color_white(), LV_PART_MAIN);
-        lv_obj_set_style_bg_opa(invoice_overlay, LV_OPA_COVER, LV_PART_MAIN);
-        lv_obj_set_style_border_width(invoice_overlay, 0, LV_PART_MAIN);
-        
-        // Amount display above QR code
-        invoice_amount_label = lv_label_create(invoice_overlay);
-        lv_label_set_text(invoice_amount_label, "Generating invoice...");
-        lv_obj_align(invoice_amount_label, LV_ALIGN_CENTER, 0, -180);
-        lv_obj_set_style_text_color(invoice_amount_label, lv_color_black(), 0);
-        lv_obj_set_style_text_font(invoice_amount_label, Fonts::FONT_XLARGE, LV_PART_MAIN);
-        lv_obj_set_style_text_align(invoice_amount_label, LV_TEXT_ALIGN_CENTER, 0);
-        
-        // QR Code canvas
-        qr_canvas = lv_canvas_create(invoice_overlay);
-        lv_obj_set_size(qr_canvas, 280, 280);
-        lv_obj_align(qr_canvas, LV_ALIGN_CENTER, 0, 10);
-        lv_obj_set_style_bg_color(qr_canvas, lv_color_white(), LV_PART_MAIN);
-        
-        // Invoice status label (below QR code)
-        invoice_label = lv_label_create(invoice_overlay);
-        lv_label_set_text(invoice_label, "Scan QR code to pay");
-        lv_obj_align(invoice_label, LV_ALIGN_CENTER, 0, 150);
-        lv_obj_set_style_text_color(invoice_label, lv_color_black(), 0);
-        lv_obj_set_style_text_align(invoice_label, LV_TEXT_ALIGN_CENTER, 0);
-        lv_label_set_long_mode(invoice_label, LV_LABEL_LONG_WRAP);
-        lv_obj_set_width(invoice_label, 260);
-        
-        // Spinner
-        invoice_spinner = lv_spinner_create(invoice_overlay, 1000, 60);
-        lv_obj_set_size(invoice_spinner, 40, 40);
-        lv_obj_align(invoice_spinner, LV_ALIGN_CENTER, 0, 0);
-        
-        // Close button
-        lv_obj_t* close_btn = lv_btn_create(invoice_overlay);
-        lv_obj_set_size(close_btn, 100, 40);
-        lv_obj_align(close_btn, LV_ALIGN_BOTTOM_MID, 0, 0);
-        lv_obj_set_style_bg_color(close_btn, lv_color_white(), LV_PART_MAIN);
-        lv_obj_set_style_border_color(close_btn, lv_color_black(), LV_PART_MAIN);
-        lv_obj_set_style_border_width(close_btn, 2, LV_PART_MAIN);
-        lv_obj_add_event_cb(close_btn, invoiceCloseButtonEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t* close_label = lv_label_create(close_btn);
-        lv_label_set_text(close_label, "Close");
-        lv_obj_set_style_text_color(close_label, lv_color_black(), 0);
-        lv_obj_center(close_label);
-        
-        invoice_processing = true;
-        
-        // Set references for Display module
-        Display::setQRCanvas(qr_canvas);
-    }
-    
-    void closeInvoiceOverlay() {
-        if (invoice_overlay != NULL) {
-            lv_obj_del(invoice_overlay);
-            invoice_overlay = NULL;
-            qr_canvas = NULL;
-            invoice_label = NULL;
-            invoice_spinner = NULL;
-            invoice_amount_label = NULL;
-        }
-        invoice_processing = false;
-        
-        // Stop NWC timers when overlay is closed
-        // No invoice timers to stop for signer mode
-    }
-    
     void showMessage(String title, String message) {
         // Create message overlay
         lv_obj_t* msg_overlay = lv_obj_create(lv_scr_act());
@@ -877,67 +803,6 @@ namespace UI {
         lv_obj_center(ok_label);
         
         Serial.println(title + ": " + message);
-    }
-    
-    // Event handlers
-    void keypadEventHandler(lv_event_t* e) {
-        lv_event_code_t code = lv_event_get_code(e);
-        lv_obj_t *btn = lv_event_get_target(e);
-        
-        if (code == LV_EVENT_CLICKED) {
-            // Reset activity timer on any button press
-            App::resetActivityTimer();
-            
-            /*Get the first child of the button which is the label and get its text*/
-            lv_obj_t *label = lv_obj_get_child(btn, 0);
-            const char *button_text = lv_label_get_text(label);
-            
-            if (display_label == NULL) return;
-            
-            static String entered_number = "";
-            
-            if (strcmp(button_text, LV_SYMBOL_BACKSPACE) == 0) {
-                // Backspace button
-                if (entered_number.length() > 0) {
-                    entered_number.remove(entered_number.length() - 1);
-                }
-                Serial.println("Button pressed: Backspace");
-            }
-            else if (strcmp(button_text, "Clear") == 0) {
-                // Clear button
-                entered_number = "";
-                Serial.println("Button pressed: Clear");
-            }
-            else if (strcmp(button_text, "Go") == 0) {
-                // Go button
-                Serial.print("Button pressed: Go - Number entered: ");
-                Serial.println(entered_number);
-                createInvoiceOverlay();
-                // Request invoice creation through NWC module
-                if (entered_number.length() > 0) {
-                    float amount = entered_number.toFloat();
-                    // No invoice creation for signer mode
-                    Serial.println("Signer mode - no invoice creation");
-                }
-            }
-            else if (strcmp(button_text, ".") == 0) {
-                // Decimal button
-                if (entered_number.indexOf('.') == -1) { // Only add decimal if not already present
-                    entered_number += ".";
-                }
-                Serial.println("Button pressed: Decimal");
-            }
-            else {
-                // Number button (0-9)
-                int dot_index = entered_number.indexOf('.');
-                if (dot_index == -1 || (entered_number.length() - dot_index - 1) < 2) {
-                    entered_number += button_text;
-                    Serial.print("Button pressed: ");
-                    Serial.println(button_text);
-                }
-            }
-            
-        }
     }
     
     void navigationEventHandler(lv_event_t* e) {
@@ -1013,15 +878,6 @@ namespace UI {
         }
     }
     
-    void invoiceCloseButtonEventHandler(lv_event_t* e) {
-        lv_event_code_t code = lv_event_get_code(e);
-        if (code == LV_EVENT_CLICKED) {
-            // Reset activity timer on invoice close
-            App::resetActivityTimer();
-            closeInvoiceOverlay();
-        }
-    }
-    
     void rebootDeviceEventHandler(lv_event_t* e) {
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED) {
@@ -1078,14 +934,10 @@ namespace UI {
     void setDisplayLabel(lv_obj_t* label) { display_label = label; }
     void setWiFiList(lv_obj_t* list) { wifi_list = list; }
     void setQRCanvas(lv_obj_t* canvas) { qr_canvas = canvas; }
-    void setInvoiceLabel(lv_obj_t* label) { invoice_label = label; }
-    void setInvoiceSpinner(lv_obj_t* spinner) { invoice_spinner = spinner; }
     void setMainWiFiStatusLabel(lv_obj_t* label) { main_wifi_status_label = label; }
     
     screen_state_t getCurrentScreen() { return current_screen; }
     bool isOverlayActive() { return invoice_overlay != NULL; }
-    bool isInvoiceProcessing() { return invoice_processing; }
-    void setInvoiceProcessing(bool processing) { invoice_processing = processing; }
     
     void updateAPPasswordDisplay() {
         // Update AP password in settings screen if active
