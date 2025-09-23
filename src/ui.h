@@ -37,43 +37,23 @@ namespace UI {
     // Screen management
     void loadScreen(screen_state_t screen);
     void cleanupGlobalPointers();
-    
-    // Invoice overlay management
-    void createInvoiceOverlay();
-    void closeInvoiceOverlay();
-    void updateInvoiceDisplay(const String& invoice, int amount_sats);
-    void showPaymentReceived();
-    bool isInvoiceProcessing();
-    void setInvoiceProcessing(bool processing);
-    
+   
     // Message display
     void showMessage(String title, String message);
     
     // UI element accessors for other modules
-    lv_obj_t* getDisplayLabel();
     lv_obj_t* getWiFiList();
-    lv_obj_t* getQRCanvas();
     lv_obj_t* getInvoiceLabel();
     lv_obj_t* getInvoiceSpinner();
-    lv_obj_t* getMainWiFiStatusLabel();
     
     // UI element setters
-    void setDisplayLabel(lv_obj_t* label);
-    void setWiFiList(lv_obj_t* list);
     void setQRCanvas(lv_obj_t* canvas);
-    void setInvoiceLabel(lv_obj_t* label);
-    void setInvoiceSpinner(lv_obj_t* spinner);
-    void setMainWiFiStatusLabel(lv_obj_t* label);
     
     // Event handlers for external use
-    void keypadEventHandler(lv_event_t* e);
     void navigationEventHandler(lv_event_t* e);
     void settingsSaveEventHandler(lv_event_t* e);
     void settingsBackEventHandler(lv_event_t* e);
-    void currencyDropdownEventHandler(lv_event_t* e);
-    void shopNameKBEventHandler(lv_event_t* e);
     void apPasswordKBEventHandler(lv_event_t* e);
-    void invoiceCloseButtonEventHandler(lv_event_t* e);
     void rebootDeviceEventHandler(lv_event_t* e);
     void checkForUpdatesEventHandler(lv_event_t* e);
     void confirmUpdateEventHandler(lv_event_t* e);
@@ -87,12 +67,8 @@ namespace UI {
     };
     
     void addSignedEvent(const String& eventKind, const String& content, const String& timestamp);
-    void clearSignedEvents();
     
     // Utility functions
-    void updateStatusDisplay(const String& status);
-    void showLoadingSpinner(bool show);
-    void showSigningConfirmation(const String& eventKind, const String& content);
     void showPairingQRCode();
     void showEventSignedNotification(const String& eventKind, const String& content);
     
@@ -105,13 +81,9 @@ namespace UI {
     // Settings integration
     void updateShopNameDisplay();
     void updateCurrencyDisplay();
-    void updateAPPasswordDisplay();
-    void updateFirmwareProgress(int progress, size_t current, size_t total);
-    void updateFirmwareStatus(const String& status);
     
     // Screen state queries
     screen_state_t getCurrentScreen();
-    bool isOverlayActive();
     
     // Constants for UI styling
     namespace Colors {

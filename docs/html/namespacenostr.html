@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NWC Point of Sale: nostr Namespace Reference</title>
+<title>Nostr Remote Signer: nostr Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">NWC Point of Sale<span id="projectnumber">&#160;v1.0.0</span>
+   <div id="projectname">Nostr Remote Signer<span id="projectnumber">&#160;v1.0.0</span>
    </div>
-   <div id="projectbrief">Nostr Wallet Connect Point of Sale device for ESP32 with Lightning Network payments</div>
+   <div id="projectbrief">A NIP46 remote signer for Nostr running on the Guition 3.5inch touch display board.</div>
   </td>
  </tr>
  </tbody>
@@ -470,29 +470,29 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00337">337</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  338</span>    {</div>
-<div class="line"><span class="lineno">  339</span>        <span class="comment">// message has to be padded at the end so it is a multiple of 16</span></div>
-<div class="line"><span class="lineno">  340</span>        <span class="keywordtype">int</span> padding_diff = msg.length() % 16 == 0 ? 16 : 16 - (msg.length() % 16);</div>
-<div class="line"><span class="lineno">  341</span> </div>
-<div class="line"><span class="lineno">  342</span>        <span class="keywordtype">int</span> byteSize = msg.length() + padding_diff;</div>
-<div class="line"><span class="lineno">  343</span>        <span class="keywordtype">byte</span> *messageBin = (<span class="keywordtype">byte</span> *)malloc(byteSize);</div>
-<div class="line"><span class="lineno">  344</span> </div>
-<div class="line"><span class="lineno">  345</span>        <span class="keywordflow">if</span> (messageBin == <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  346</span>        {</div>
-<div class="line"><span class="lineno">  347</span>            Serial.println(<span class="stringliteral">&quot;Failed to allocate PSRAM&quot;</span>);</div>
-<div class="line"><span class="lineno">  348</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  349</span>        }</div>
-<div class="line"><span class="lineno">  350</span> </div>
-<div class="line"><span class="lineno">  351</span>        stringToByteArray(msg.c_str(), padding_diff, messageBin);</div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00345">345</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  346</span>    {</div>
+<div class="line"><span class="lineno">  347</span>        <span class="comment">// message has to be padded at the end so it is a multiple of 16</span></div>
+<div class="line"><span class="lineno">  348</span>        <span class="keywordtype">int</span> padding_diff = msg.length() % 16 == 0 ? 16 : 16 - (msg.length() % 16);</div>
+<div class="line"><span class="lineno">  349</span> </div>
+<div class="line"><span class="lineno">  350</span>        <span class="keywordtype">int</span> byteSize = msg.length() + padding_diff;</div>
+<div class="line"><span class="lineno">  351</span>        <span class="keywordtype">byte</span> *messageBin = (<span class="keywordtype">byte</span> *)malloc(byteSize);</div>
 <div class="line"><span class="lineno">  352</span> </div>
-<div class="line"><span class="lineno">  353</span>        <a class="code hl_struct" href="struct_a_e_s__ctx.html">AES_ctx</a> ctx;</div>
-<div class="line"><span class="lineno">  354</span>        <a class="code hl_function" href="aes_8cpp.html#a99d17d22ed909bd155007cdece29263a">AES_init_ctx_iv</a>(&amp;ctx, key, iv);</div>
-<div class="line"><span class="lineno">  355</span> </div>
-<div class="line"><span class="lineno">  356</span>        <a class="code hl_function" href="aes_8cpp.html#a296bd30323044b07d69e0e3b5f676281">AES_CBC_encrypt_buffer</a>(&amp;ctx, messageBin, byteSize);</div>
-<div class="line"><span class="lineno">  357</span> </div>
-<div class="line"><span class="lineno">  358</span>        <span class="keywordflow">return</span> toHex(messageBin, byteSize);</div>
-<div class="line"><span class="lineno">  359</span>    }</div>
+<div class="line"><span class="lineno">  353</span>        <span class="keywordflow">if</span> (messageBin == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  354</span>        {</div>
+<div class="line"><span class="lineno">  355</span>            Serial.println(<span class="stringliteral">&quot;Failed to allocate PSRAM&quot;</span>);</div>
+<div class="line"><span class="lineno">  356</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  357</span>        }</div>
+<div class="line"><span class="lineno">  358</span> </div>
+<div class="line"><span class="lineno">  359</span>        stringToByteArray(msg.c_str(), padding_diff, messageBin);</div>
+<div class="line"><span class="lineno">  360</span> </div>
+<div class="line"><span class="lineno">  361</span>        <a class="code hl_struct" href="struct_a_e_s__ctx.html">AES_ctx</a> ctx;</div>
+<div class="line"><span class="lineno">  362</span>        <a class="code hl_function" href="aes_8cpp.html#a99d17d22ed909bd155007cdece29263a">AES_init_ctx_iv</a>(&amp;ctx, key, iv);</div>
+<div class="line"><span class="lineno">  363</span> </div>
+<div class="line"><span class="lineno">  364</span>        <a class="code hl_function" href="aes_8cpp.html#a296bd30323044b07d69e0e3b5f676281">AES_CBC_encrypt_buffer</a>(&amp;ctx, messageBin, byteSize);</div>
+<div class="line"><span class="lineno">  365</span> </div>
+<div class="line"><span class="lineno">  366</span>        <span class="keywordflow">return</span> toHex(messageBin, byteSize);</div>
+<div class="line"><span class="lineno">  367</span>    }</div>
 <div class="ttc" id="aaes_8cpp_html_a296bd30323044b07d69e0e3b5f676281"><div class="ttname"><a href="aes_8cpp.html#a296bd30323044b07d69e0e3b5f676281">AES_CBC_encrypt_buffer</a></div><div class="ttdeci">void AES_CBC_encrypt_buffer(struct AES_ctx *ctx, uint8_t *buf, size_t length)</div><div class="ttdef"><b>Definition:</b> <a href="aes_8cpp_source.html#l00501">aes.cpp:501</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -540,62 +540,62 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00369">369</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  370</span>    {</div>
-<div class="line"><span class="lineno">  371</span>        <a class="code hl_function" href="namespacenostr.html#ae7add69f32ac7f6af83399c69374cc50">_startTimer</a>(<span class="stringliteral">&quot;getCipherText&quot;</span>);</div>
-<div class="line"><span class="lineno">  372</span>        <span class="comment">// Get shared point</span></div>
-<div class="line"><span class="lineno">  373</span>        <span class="comment">// Create the private key object</span></div>
-<div class="line"><span class="lineno">  374</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
-<div class="line"><span class="lineno">  375</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
-<div class="line"><span class="lineno">  376</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
-<div class="line"><span class="lineno">  377</span>        PrivateKey privateKey(privateKeyBytes);</div>
-<div class="line"><span class="lineno">  378</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: create privateKey object&quot;</span>);</div>
-<div class="line"><span class="lineno">  379</span> </div>
-<div class="line"><span class="lineno">  380</span>        <span class="keywordtype">byte</span> publicKeyBin[64];</div>
-<div class="line"><span class="lineno">  381</span>        fromHex(<span class="stringliteral">&quot;02&quot;</span> + String(recipientPubKeyHex), publicKeyBin, 64);</div>
-<div class="line"><span class="lineno">  382</span>        PublicKey otherDhPublicKey(publicKeyBin);</div>
-<div class="line"><span class="lineno">  383</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;otherDhPublicKey.toString() is&quot;</span>, otherDhPublicKey.toString());</div>
-<div class="line"><span class="lineno">  384</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: create otherDhPublicKey object&quot;</span>);</div>
-<div class="line"><span class="lineno">  385</span> </div>
-<div class="line"><span class="lineno">  386</span>        <span class="keywordtype">byte</span> sharedPointX[32];</div>
-<div class="line"><span class="lineno">  387</span>        privateKey.ecdh(otherDhPublicKey, sharedPointX, <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  388</span>        String sharedPointXHex = toHex(sharedPointX, <span class="keyword">sizeof</span>(sharedPointX));</div>
-<div class="line"><span class="lineno">  389</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;sharedPointXHex is&quot;</span>, sharedPointXHex);</div>
-<div class="line"><span class="lineno">  390</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get sharedPointX&quot;</span>);</div>
-<div class="line"><span class="lineno">  391</span> </div>
-<div class="line"><span class="lineno">  392</span>        <span class="comment">// Create the initialization vector</span></div>
-<div class="line"><span class="lineno">  393</span>        uint8_t iv[16];</div>
-<div class="line"><span class="lineno">  394</span>        esp_random() % 256;</div>
-<div class="line"><span class="lineno">  395</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <span class="keyword">sizeof</span>(iv); i++)</div>
-<div class="line"><span class="lineno">  396</span>        {</div>
-<div class="line"><span class="lineno">  397</span>            iv[i] = esp_random() % 256;</div>
-<div class="line"><span class="lineno">  398</span>        }</div>
-<div class="line"><span class="lineno">  399</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: create iv&quot;</span>);</div>
-<div class="line"><span class="lineno">  400</span> </div>
-<div class="line"><span class="lineno">  401</span>        String ivHex = toHex(iv, 16);</div>
-<div class="line"><span class="lineno">  402</span>        String ivBase64 = hexToBase64(ivHex);</div>
-<div class="line"><span class="lineno">  403</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: get ivBase64&quot;</span>);</div>
-<div class="line"><span class="lineno">  404</span> </div>
-<div class="line"><span class="lineno">  405</span>        String encryptedMessageHex = encryptData(sharedPointX, iv, content);</div>
-<div class="line"><span class="lineno">  406</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: get encryptedMessageHex&quot;</span>);</div>
-<div class="line"><span class="lineno">  407</span> </div>
-<div class="line"><span class="lineno">  408</span>        <span class="comment">// divide the length of the hex string 2 to get the size of the byte array, since each byte consists of 2 hexadecimal characters.</span></div>
-<div class="line"><span class="lineno">  409</span>        <span class="keywordtype">int</span> encryptedMessageSize = encryptedMessageHex.length() / 2;</div>
-<div class="line"><span class="lineno">  410</span>        <span class="comment">// Allocate memory for the encrypted message array</span></div>
-<div class="line"><span class="lineno">  411</span>        uint8_t *encryptedMessage = (uint8_t *)malloc(encryptedMessageSize);</div>
-<div class="line"><span class="lineno">  412</span>        <span class="keywordflow">if</span> (encryptedMessage == <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  413</span>        {</div>
-<div class="line"><span class="lineno">  414</span>            Serial.println(<span class="stringliteral">&quot;Failed to allocate PSRAM for encryptedMessage&quot;</span>);</div>
-<div class="line"><span class="lineno">  415</span>        }</div>
-<div class="line"><span class="lineno">  416</span>        fromHex(encryptedMessageHex, encryptedMessage, encryptedMessageSize);</div>
-<div class="line"><span class="lineno">  417</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get encryptedMessage fromHex&quot;</span>);</div>
-<div class="line"><span class="lineno">  418</span> </div>
-<div class="line"><span class="lineno">  419</span>        String encryptedMessageBase64 = hexToBase64(encryptedMessageHex);</div>
-<div class="line"><span class="lineno">  420</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get encryptedMessageBase64&quot;</span>);</div>
-<div class="line"><span class="lineno">  421</span> </div>
-<div class="line"><span class="lineno">  422</span>        encryptedMessageBase64 += <span class="stringliteral">&quot;?iv=&quot;</span> + ivBase64;</div>
-<div class="line"><span class="lineno">  423</span>        <span class="keywordflow">return</span> encryptedMessageBase64;</div>
-<div class="line"><span class="lineno">  424</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00377">377</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  378</span>    {</div>
+<div class="line"><span class="lineno">  379</span>        <a class="code hl_function" href="namespacenostr.html#ae7add69f32ac7f6af83399c69374cc50">_startTimer</a>(<span class="stringliteral">&quot;getCipherText&quot;</span>);</div>
+<div class="line"><span class="lineno">  380</span>        <span class="comment">// Get shared point</span></div>
+<div class="line"><span class="lineno">  381</span>        <span class="comment">// Create the private key object</span></div>
+<div class="line"><span class="lineno">  382</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
+<div class="line"><span class="lineno">  383</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
+<div class="line"><span class="lineno">  384</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
+<div class="line"><span class="lineno">  385</span>        PrivateKey privateKey(privateKeyBytes);</div>
+<div class="line"><span class="lineno">  386</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: create privateKey object&quot;</span>);</div>
+<div class="line"><span class="lineno">  387</span> </div>
+<div class="line"><span class="lineno">  388</span>        <span class="keywordtype">byte</span> publicKeyBin[64];</div>
+<div class="line"><span class="lineno">  389</span>        fromHex(<span class="stringliteral">&quot;02&quot;</span> + String(recipientPubKeyHex), publicKeyBin, 64);</div>
+<div class="line"><span class="lineno">  390</span>        PublicKey otherDhPublicKey(publicKeyBin);</div>
+<div class="line"><span class="lineno">  391</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;otherDhPublicKey.toString() is&quot;</span>, otherDhPublicKey.toString());</div>
+<div class="line"><span class="lineno">  392</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: create otherDhPublicKey object&quot;</span>);</div>
+<div class="line"><span class="lineno">  393</span> </div>
+<div class="line"><span class="lineno">  394</span>        <span class="keywordtype">byte</span> sharedPointX[32];</div>
+<div class="line"><span class="lineno">  395</span>        privateKey.ecdh(otherDhPublicKey, sharedPointX, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  396</span>        String sharedPointXHex = toHex(sharedPointX, <span class="keyword">sizeof</span>(sharedPointX));</div>
+<div class="line"><span class="lineno">  397</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;sharedPointXHex is&quot;</span>, sharedPointXHex);</div>
+<div class="line"><span class="lineno">  398</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get sharedPointX&quot;</span>);</div>
+<div class="line"><span class="lineno">  399</span> </div>
+<div class="line"><span class="lineno">  400</span>        <span class="comment">// Create the initialization vector</span></div>
+<div class="line"><span class="lineno">  401</span>        uint8_t iv[16];</div>
+<div class="line"><span class="lineno">  402</span>        esp_random() % 256;</div>
+<div class="line"><span class="lineno">  403</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <span class="keyword">sizeof</span>(iv); i++)</div>
+<div class="line"><span class="lineno">  404</span>        {</div>
+<div class="line"><span class="lineno">  405</span>            iv[i] = esp_random() % 256;</div>
+<div class="line"><span class="lineno">  406</span>        }</div>
+<div class="line"><span class="lineno">  407</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: create iv&quot;</span>);</div>
+<div class="line"><span class="lineno">  408</span> </div>
+<div class="line"><span class="lineno">  409</span>        String ivHex = toHex(iv, 16);</div>
+<div class="line"><span class="lineno">  410</span>        String ivBase64 = hexToBase64(ivHex);</div>
+<div class="line"><span class="lineno">  411</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: get ivBase64&quot;</span>);</div>
+<div class="line"><span class="lineno">  412</span> </div>
+<div class="line"><span class="lineno">  413</span>        String encryptedMessageHex = encryptData(sharedPointX, iv, content);</div>
+<div class="line"><span class="lineno">  414</span>        _stopTimer(<span class="stringliteral">&quot;getCipherText: get encryptedMessageHex&quot;</span>);</div>
+<div class="line"><span class="lineno">  415</span> </div>
+<div class="line"><span class="lineno">  416</span>        <span class="comment">// divide the length of the hex string 2 to get the size of the byte array, since each byte consists of 2 hexadecimal characters.</span></div>
+<div class="line"><span class="lineno">  417</span>        <span class="keywordtype">int</span> encryptedMessageSize = encryptedMessageHex.length() / 2;</div>
+<div class="line"><span class="lineno">  418</span>        <span class="comment">// Allocate memory for the encrypted message array</span></div>
+<div class="line"><span class="lineno">  419</span>        uint8_t *encryptedMessage = (uint8_t *)malloc(encryptedMessageSize);</div>
+<div class="line"><span class="lineno">  420</span>        <span class="keywordflow">if</span> (encryptedMessage == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  421</span>        {</div>
+<div class="line"><span class="lineno">  422</span>            Serial.println(<span class="stringliteral">&quot;Failed to allocate PSRAM for encryptedMessage&quot;</span>);</div>
+<div class="line"><span class="lineno">  423</span>        }</div>
+<div class="line"><span class="lineno">  424</span>        fromHex(encryptedMessageHex, encryptedMessage, encryptedMessageSize);</div>
+<div class="line"><span class="lineno">  425</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get encryptedMessage fromHex&quot;</span>);</div>
+<div class="line"><span class="lineno">  426</span> </div>
+<div class="line"><span class="lineno">  427</span>        String encryptedMessageBase64 = hexToBase64(encryptedMessageHex);</div>
+<div class="line"><span class="lineno">  428</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;getCipherText: get encryptedMessageBase64&quot;</span>);</div>
+<div class="line"><span class="lineno">  429</span> </div>
+<div class="line"><span class="lineno">  430</span>        encryptedMessageBase64 += <span class="stringliteral">&quot;?iv=&quot;</span> + ivBase64;</div>
+<div class="line"><span class="lineno">  431</span>        <span class="keywordflow">return</span> encryptedMessageBase64;</div>
+<div class="line"><span class="lineno">  432</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -699,51 +699,51 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00470">470</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  471</span>    {</div>
-<div class="line"><span class="lineno">  472</span>        String encryptedMessageBase64 = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  473</span>        <span class="keywordflow">if</span> (type == <span class="stringliteral">&quot;nip44&quot;</span>) {</div>
-<div class="line"><span class="lineno">  474</span>            <a class="code hl_function" href="namespacenostr.html#ae7add69f32ac7f6af83399c69374cc50">_startTimer</a>(<span class="stringliteral">&quot;getEncrypted NIP44 Dm&quot;</span>);</div>
-<div class="line"><span class="lineno">  475</span>            encryptedMessageBase64 = <a class="code hl_function" href="nip44_8cpp.html#a9fca4f5d3adc798444724f0ef23cb0c6">executeEncryptMessageNip44</a>(content, privateKeyHex, recipientPubKeyHex);</div>
-<div class="line"><span class="lineno">  476</span>            Serial.println(<span class="stringliteral">&quot;NIP44 encrypted message: &quot;</span> + encryptedMessageBase64);</div>
-<div class="line"><span class="lineno">  477</span>            <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;executeEncryptMessageNip44&quot;</span>);</div>
-<div class="line"><span class="lineno">  478</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  479</span>            _startTimer(<span class="stringliteral">&quot;getEncrypted NIP44 Dm&quot;</span>);</div>
-<div class="line"><span class="lineno">  480</span>            encryptedMessageBase64 = getCipherText(privateKeyHex, recipientPubKeyHex, content);</div>
-<div class="line"><span class="lineno">  481</span>            _stopTimer(<span class="stringliteral">&quot;getCipherText&quot;</span>);</div>
-<div class="line"><span class="lineno">  482</span>        }</div>
-<div class="line"><span class="lineno">  483</span> </div>
-<div class="line"><span class="lineno">  484</span>        String message = <a class="code hl_function" href="namespacenostr.html#a754ce1cc38ea76f4a89fb5c26c264156">nostr::getSerialisedEncryptedDmArray</a>(pubKeyHex, recipientPubKeyHex, kind, timestamp, encryptedMessageBase64);</div>
-<div class="line"><span class="lineno">  485</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get serialised encrypted dm array&quot;</span>);</div>
-<div class="line"><span class="lineno">  486</span> </div>
-<div class="line"><span class="lineno">  487</span>        <span class="keywordtype">byte</span> hash[64] = {0}; <span class="comment">// hash</span></div>
-<div class="line"><span class="lineno">  488</span>        <span class="keywordtype">int</span> hashLen = 0;</div>
-<div class="line"><span class="lineno">  489</span> </div>
-<div class="line"><span class="lineno">  490</span>        <span class="comment">// Get the sha256 hash of the message</span></div>
-<div class="line"><span class="lineno">  491</span>        hashLen = sha256(message, hash);</div>
-<div class="line"><span class="lineno">  492</span>        String msgHash = toHex(hash, hashLen);</div>
-<div class="line"><span class="lineno">  493</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;SHA-256:&quot;</span>, msgHash);</div>
-<div class="line"><span class="lineno">  494</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get sha256 hash of message&quot;</span>);</div>
-<div class="line"><span class="lineno">  495</span> </div>
-<div class="line"><span class="lineno">  496</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
-<div class="line"><span class="lineno">  497</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
-<div class="line"><span class="lineno">  498</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
-<div class="line"><span class="lineno">  499</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get privateKeyBytes from hex&quot;</span>);</div>
-<div class="line"><span class="lineno">  500</span>        PrivateKey privateKey(privateKeyBytes);</div>
-<div class="line"><span class="lineno">  501</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;create privateKey object&quot;</span>);</div>
-<div class="line"><span class="lineno">  502</span>        <span class="comment">// Generate the schnorr sig of the messageHash</span></div>
-<div class="line"><span class="lineno">  503</span>        SchnorrSignature signature = privateKey.schnorr_sign(hash);</div>
-<div class="line"><span class="lineno">  504</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;generate schnorr sig&quot;</span>);</div>
-<div class="line"><span class="lineno">  505</span>        String signatureHex = String(signature);</div>
-<div class="line"><span class="lineno">  506</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;Schnorr sig is: &quot;</span>, signatureHex);</div>
-<div class="line"><span class="lineno">  507</span> </div>
-<div class="line"><span class="lineno">  508</span>        String serialisedEventData = <a class="code hl_function" href="namespacenostr.html#a6153fcc43ae15291045b9c2a2bd89291">nostr::getSerialisedEncryptedDmObject</a>(pubKeyHex, recipientPubKeyHex, kind, msgHash, timestamp, encryptedMessageBase64, signatureHex);</div>
-<div class="line"><span class="lineno">  509</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get serialised encrypted dm object&quot;</span>);</div>
-<div class="line"><span class="lineno">  510</span>        <span class="comment">// _logToSerialWithTitle(&quot;serialisedEventData is&quot;, serialisedEventData);</span></div>
-<div class="line"><span class="lineno">  511</span>        <span class="keywordflow">return</span> serialisedEventData;</div>
-<div class="line"><span class="lineno">  512</span>    }</div>
-<div class="ttc" id="anamespacenostr_html_a6153fcc43ae15291045b9c2a2bd89291"><div class="ttname"><a href="namespacenostr.html#a6153fcc43ae15291045b9c2a2bd89291">nostr::getSerialisedEncryptedDmObject</a></div><div class="ttdeci">String getSerialisedEncryptedDmObject(const char *pubKeyHex, const char *recipientPubKeyHex, uint16_t kind, String &amp;msgHash, int timestamp, String &amp;encryptedMessageWithIv, String &amp;schnorrSig)</div><div class="ttdoc">Get the Serialised Encrypted Dm Object.</div><div class="ttdef"><b>Definition:</b> <a href="nostr_8cpp_source.html#l00438">nostr.cpp:438</a></div></div>
-<div class="ttc" id="anamespacenostr_html_a754ce1cc38ea76f4a89fb5c26c264156"><div class="ttname"><a href="namespacenostr.html#a754ce1cc38ea76f4a89fb5c26c264156">nostr::getSerialisedEncryptedDmArray</a></div><div class="ttdeci">String getSerialisedEncryptedDmArray(char const *pubKeyHex, char const *recipientPubKeyHex, uint16_t kind, int timestamp, String &amp;encryptedMessageWithIv)</div><div class="ttdef"><b>Definition:</b> <a href="nostr_8cpp_source.html#l00448">nostr.cpp:448</a></div></div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00478">478</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  479</span>    {</div>
+<div class="line"><span class="lineno">  480</span>        String encryptedMessageBase64 = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  481</span>        <span class="keywordflow">if</span> (type == <span class="stringliteral">&quot;nip44&quot;</span>) {</div>
+<div class="line"><span class="lineno">  482</span>            <a class="code hl_function" href="namespacenostr.html#ae7add69f32ac7f6af83399c69374cc50">_startTimer</a>(<span class="stringliteral">&quot;getEncrypted NIP44 Dm&quot;</span>);</div>
+<div class="line"><span class="lineno">  483</span>            encryptedMessageBase64 = <a class="code hl_function" href="nip44_8cpp.html#a9fca4f5d3adc798444724f0ef23cb0c6">executeEncryptMessageNip44</a>(content, privateKeyHex, recipientPubKeyHex);</div>
+<div class="line"><span class="lineno">  484</span>            Serial.println(<span class="stringliteral">&quot;NIP44 encrypted message: &quot;</span> + encryptedMessageBase64);</div>
+<div class="line"><span class="lineno">  485</span>            <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;executeEncryptMessageNip44&quot;</span>);</div>
+<div class="line"><span class="lineno">  486</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  487</span>            _startTimer(<span class="stringliteral">&quot;getEncrypted NIP44 Dm&quot;</span>);</div>
+<div class="line"><span class="lineno">  488</span>            encryptedMessageBase64 = getCipherText(privateKeyHex, recipientPubKeyHex, content);</div>
+<div class="line"><span class="lineno">  489</span>            _stopTimer(<span class="stringliteral">&quot;getCipherText&quot;</span>);</div>
+<div class="line"><span class="lineno">  490</span>        }</div>
+<div class="line"><span class="lineno">  491</span> </div>
+<div class="line"><span class="lineno">  492</span>        String message = <a class="code hl_function" href="namespacenostr.html#a754ce1cc38ea76f4a89fb5c26c264156">nostr::getSerialisedEncryptedDmArray</a>(pubKeyHex, recipientPubKeyHex, kind, timestamp, encryptedMessageBase64);</div>
+<div class="line"><span class="lineno">  493</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get serialised encrypted dm array&quot;</span>);</div>
+<div class="line"><span class="lineno">  494</span> </div>
+<div class="line"><span class="lineno">  495</span>        <span class="keywordtype">byte</span> hash[64] = {0}; <span class="comment">// hash</span></div>
+<div class="line"><span class="lineno">  496</span>        <span class="keywordtype">int</span> hashLen = 0;</div>
+<div class="line"><span class="lineno">  497</span> </div>
+<div class="line"><span class="lineno">  498</span>        <span class="comment">// Get the sha256 hash of the message</span></div>
+<div class="line"><span class="lineno">  499</span>        hashLen = sha256(message, hash);</div>
+<div class="line"><span class="lineno">  500</span>        String msgHash = toHex(hash, hashLen);</div>
+<div class="line"><span class="lineno">  501</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;SHA-256:&quot;</span>, msgHash);</div>
+<div class="line"><span class="lineno">  502</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get sha256 hash of message&quot;</span>);</div>
+<div class="line"><span class="lineno">  503</span> </div>
+<div class="line"><span class="lineno">  504</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
+<div class="line"><span class="lineno">  505</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
+<div class="line"><span class="lineno">  506</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
+<div class="line"><span class="lineno">  507</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get privateKeyBytes from hex&quot;</span>);</div>
+<div class="line"><span class="lineno">  508</span>        PrivateKey privateKey(privateKeyBytes);</div>
+<div class="line"><span class="lineno">  509</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;create privateKey object&quot;</span>);</div>
+<div class="line"><span class="lineno">  510</span>        <span class="comment">// Generate the schnorr sig of the messageHash</span></div>
+<div class="line"><span class="lineno">  511</span>        SchnorrSignature signature = privateKey.schnorr_sign(hash);</div>
+<div class="line"><span class="lineno">  512</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;generate schnorr sig&quot;</span>);</div>
+<div class="line"><span class="lineno">  513</span>        String signatureHex = String(signature);</div>
+<div class="line"><span class="lineno">  514</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;Schnorr sig is: &quot;</span>, signatureHex);</div>
+<div class="line"><span class="lineno">  515</span> </div>
+<div class="line"><span class="lineno">  516</span>        String serialisedEventData = <a class="code hl_function" href="namespacenostr.html#a6153fcc43ae15291045b9c2a2bd89291">nostr::getSerialisedEncryptedDmObject</a>(pubKeyHex, recipientPubKeyHex, kind, msgHash, timestamp, encryptedMessageBase64, signatureHex);</div>
+<div class="line"><span class="lineno">  517</span>        <a class="code hl_function" href="namespacenostr.html#a9b4c329f738edf5cebd6f9eacb0facbe">_stopTimer</a>(<span class="stringliteral">&quot;get serialised encrypted dm object&quot;</span>);</div>
+<div class="line"><span class="lineno">  518</span>        <span class="comment">// _logToSerialWithTitle(&quot;serialisedEventData is&quot;, serialisedEventData);</span></div>
+<div class="line"><span class="lineno">  519</span>        <span class="keywordflow">return</span> serialisedEventData;</div>
+<div class="line"><span class="lineno">  520</span>    }</div>
+<div class="ttc" id="anamespacenostr_html_a6153fcc43ae15291045b9c2a2bd89291"><div class="ttname"><a href="namespacenostr.html#a6153fcc43ae15291045b9c2a2bd89291">nostr::getSerialisedEncryptedDmObject</a></div><div class="ttdeci">String getSerialisedEncryptedDmObject(const char *pubKeyHex, const char *recipientPubKeyHex, uint16_t kind, String &amp;msgHash, int timestamp, String &amp;encryptedMessageWithIv, String &amp;schnorrSig)</div><div class="ttdoc">Get the Serialised Encrypted Dm Object.</div><div class="ttdef"><b>Definition:</b> <a href="nostr_8cpp_source.html#l00446">nostr.cpp:446</a></div></div>
+<div class="ttc" id="anamespacenostr_html_a754ce1cc38ea76f4a89fb5c26c264156"><div class="ttname"><a href="namespacenostr.html#a754ce1cc38ea76f4a89fb5c26c264156">nostr::getSerialisedEncryptedDmArray</a></div><div class="ttdeci">String getSerialisedEncryptedDmArray(char const *pubKeyHex, char const *recipientPubKeyHex, uint16_t kind, int timestamp, String &amp;encryptedMessageWithIv)</div><div class="ttdef"><b>Definition:</b> <a href="nostr_8cpp_source.html#l00456">nostr.cpp:456</a></div></div>
 <div class="ttc" id="anip44_8cpp_html_a9fca4f5d3adc798444724f0ef23cb0c6"><div class="ttname"><a href="nip44_8cpp.html#a9fca4f5d3adc798444724f0ef23cb0c6">executeEncryptMessageNip44</a></div><div class="ttdeci">String executeEncryptMessageNip44(String data, String privateKeyHex, String thirdPartyPublicKeyHex)</div><div class="ttdef"><b>Definition:</b> <a href="nip44_8cpp_source.html#l00467">nip44.cpp:467</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -818,58 +818,66 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  249</span>        <span class="comment">// convert</span></div>
 <div class="line"><span class="lineno">  250</span>        <span class="comment">// log timestamp</span></div>
 <div class="line"><span class="lineno">  251</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;timestamp is: &quot;</span>, String(timestamp));</div>
-<div class="line"><span class="lineno">  252</span>        String message = <span class="stringliteral">&quot;[0,\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,&quot;</span> + String(kind) + <span class="stringliteral">&quot;,&quot;</span> + tags + <span class="stringliteral">&quot;,\&quot;&quot;</span> + content + <span class="stringliteral">&quot;\&quot;]&quot;</span>;</div>
-<div class="line"><span class="lineno">  253</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;message is: &quot;</span>, message);</div>
-<div class="line"><span class="lineno">  254</span> </div>
-<div class="line"><span class="lineno">  255</span>        <span class="comment">// sha256 of message converted to hex, assign to msghash</span></div>
-<div class="line"><span class="lineno">  256</span>        <span class="keywordtype">byte</span> hash[64] = {0}; <span class="comment">// hash</span></div>
-<div class="line"><span class="lineno">  257</span>        <span class="keywordtype">int</span> hashLen = 0;</div>
-<div class="line"><span class="lineno">  258</span> </div>
-<div class="line"><span class="lineno">  259</span>        <span class="comment">// Get the sha256 hash of the message</span></div>
-<div class="line"><span class="lineno">  260</span>        hashLen = sha256(message, hash);</div>
-<div class="line"><span class="lineno">  261</span>        _stopTimer(<span class="stringliteral">&quot;get sha256 hash of message&quot;</span>);</div>
-<div class="line"><span class="lineno">  262</span>        String msgHash = toHex(hash, hashLen);</div>
-<div class="line"><span class="lineno">  263</span>        _stopTimer(<span class="stringliteral">&quot;get msgHash as hex&quot;</span>);</div>
-<div class="line"><span class="lineno">  264</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;SHA-256: &quot;</span>, msgHash);</div>
-<div class="line"><span class="lineno">  265</span> </div>
-<div class="line"><span class="lineno">  266</span>        <span class="comment">// Create the private key object</span></div>
-<div class="line"><span class="lineno">  267</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
-<div class="line"><span class="lineno">  268</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
-<div class="line"><span class="lineno">  269</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
-<div class="line"><span class="lineno">  270</span>        _stopTimer(<span class="stringliteral">&quot;convert privateKeyHex to byte array&quot;</span>);</div>
-<div class="line"><span class="lineno">  271</span>        PrivateKey privateKey(privateKeyBytes);</div>
-<div class="line"><span class="lineno">  272</span>        _stopTimer(<span class="stringliteral">&quot;create privateKey object&quot;</span>);</div>
+<div class="line"><span class="lineno">  252</span>        <span class="comment">// escape any double quotes in content</span></div>
+<div class="line"><span class="lineno">  253</span>        content.replace(<span class="stringliteral">&quot;\&quot;&quot;</span>, <span class="stringliteral">&quot;\\\&quot;&quot;</span>);</div>
+<div class="line"><span class="lineno">  254</span>        <span class="comment">// replace new lines with \n</span></div>
+<div class="line"><span class="lineno">  255</span>        content.replace(<span class="stringliteral">&quot;\n&quot;</span>, <span class="stringliteral">&quot;\\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  256</span>        <span class="comment">// replace carriage returns with \r</span></div>
+<div class="line"><span class="lineno">  257</span>        content.replace(<span class="stringliteral">&quot;\r&quot;</span>, <span class="stringliteral">&quot;\\r&quot;</span>);</div>
+<div class="line"><span class="lineno">  258</span>        <span class="comment">// replace tabs with \t</span></div>
+<div class="line"><span class="lineno">  259</span>        content.replace(<span class="stringliteral">&quot;\t&quot;</span>, <span class="stringliteral">&quot;\\t&quot;</span>);</div>
+<div class="line"><span class="lineno">  260</span>        String message = <span class="stringliteral">&quot;[0,\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,&quot;</span> + String(kind) + <span class="stringliteral">&quot;,&quot;</span> + tags + <span class="stringliteral">&quot;,\&quot;&quot;</span> + content + <span class="stringliteral">&quot;\&quot;]&quot;</span>;</div>
+<div class="line"><span class="lineno">  261</span>        <a class="code hl_function" href="namespacenostr.html#a5006a25d7135fb5bc420095e4773df9c">_logToSerialWithTitle</a>(<span class="stringliteral">&quot;message is: &quot;</span>, message);</div>
+<div class="line"><span class="lineno">  262</span> </div>
+<div class="line"><span class="lineno">  263</span>        <span class="comment">// sha256 of message converted to hex, assign to msghash</span></div>
+<div class="line"><span class="lineno">  264</span>        <span class="keywordtype">byte</span> hash[64] = {0}; <span class="comment">// hash</span></div>
+<div class="line"><span class="lineno">  265</span>        <span class="keywordtype">int</span> hashLen = 0;</div>
+<div class="line"><span class="lineno">  266</span> </div>
+<div class="line"><span class="lineno">  267</span>        <span class="comment">// Get the sha256 hash of the message</span></div>
+<div class="line"><span class="lineno">  268</span>        hashLen = sha256(message, hash);</div>
+<div class="line"><span class="lineno">  269</span>        _stopTimer(<span class="stringliteral">&quot;get sha256 hash of message&quot;</span>);</div>
+<div class="line"><span class="lineno">  270</span>        String msgHash = toHex(hash, hashLen);</div>
+<div class="line"><span class="lineno">  271</span>        _stopTimer(<span class="stringliteral">&quot;get msgHash as hex&quot;</span>);</div>
+<div class="line"><span class="lineno">  272</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;SHA-256: &quot;</span>, msgHash);</div>
 <div class="line"><span class="lineno">  273</span> </div>
-<div class="line"><span class="lineno">  274</span>        <span class="comment">// Generate the schnorr sig of the messageHash</span></div>
-<div class="line"><span class="lineno">  275</span>        <span class="keywordtype">byte</span> messageBytes[byteSize];</div>
-<div class="line"><span class="lineno">  276</span>        fromHex(msgHash, messageBytes, byteSize);</div>
-<div class="line"><span class="lineno">  277</span>        _stopTimer(<span class="stringliteral">&quot;convert msgHash to byte array&quot;</span>);</div>
-<div class="line"><span class="lineno">  278</span>        SchnorrSignature signature = privateKey.schnorr_sign(messageBytes);</div>
-<div class="line"><span class="lineno">  279</span>        _stopTimer(<span class="stringliteral">&quot;generate schnorr sig&quot;</span>);</div>
-<div class="line"><span class="lineno">  280</span>        String signatureHex = String(signature);</div>
-<div class="line"><span class="lineno">  281</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;Schnorr sig is: &quot;</span>, signatureHex);</div>
-<div class="line"><span class="lineno">  282</span> </div>
-<div class="line"><span class="lineno">  283</span>        <span class="comment">// Device the public key and verify the schnorr sig is valid</span></div>
-<div class="line"><span class="lineno">  284</span>        PublicKey pub = privateKey.publicKey();</div>
-<div class="line"><span class="lineno">  285</span>        _stopTimer(<span class="stringliteral">&quot;get public key&quot;</span>);</div>
-<div class="line"><span class="lineno">  286</span> </div>
-<div class="line"><span class="lineno">  287</span>        <span class="comment">// if (pub.schnorr_verify(signature, messageBytes))</span></div>
-<div class="line"><span class="lineno">  288</span>        <span class="comment">// {</span></div>
-<div class="line"><span class="lineno">  289</span>        <span class="comment">//     _logToSerialWithTitle(&quot;All good, signature is valid&quot;, &quot;&quot;);</span></div>
-<div class="line"><span class="lineno">  290</span>        <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">  291</span>        <span class="comment">// else</span></div>
-<div class="line"><span class="lineno">  292</span>        <span class="comment">// {</span></div>
-<div class="line"><span class="lineno">  293</span>        <span class="comment">//     _logToSerialWithTitle(&quot;Something went wrong, signature is invalid&quot;, &quot;&quot;);</span></div>
-<div class="line"><span class="lineno">  294</span>        <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">  295</span>        _stopTimer(<span class="stringliteral">&quot;verify schnorr sig&quot;</span>);</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>        String serialisedDataString = <span class="stringliteral">&quot;{\&quot;id\&quot;:\&quot;&quot;</span> + msgHash + <span class="stringliteral">&quot;\&quot;,\&quot;pubkey\&quot;:\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,\&quot;created_at\&quot;:&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,\&quot;kind\&quot;:&quot;</span> + String(kind) + <span class="stringliteral">&quot;,\&quot;tags\&quot;:&quot;</span> + tags + <span class="stringliteral">&quot;,\&quot;content\&quot;:\&quot;&quot;</span> + content + <span class="stringliteral">&quot;\&quot;,\&quot;sig\&quot;:\&quot;&quot;</span> + signatureHex + <span class="stringliteral">&quot;\&quot;}&quot;</span>;</div>
-<div class="line"><span class="lineno">  298</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;serialisedEventDataString is: &quot;</span>, String(serialisedDataString));</div>
-<div class="line"><span class="lineno">  299</span> </div>
-<div class="line"><span class="lineno">  300</span>        <span class="comment">// Print the JSON to the serial monitor</span></div>
-<div class="line"><span class="lineno">  301</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;Event JSON&quot;</span>, serialisedDataString);</div>
-<div class="line"><span class="lineno">  302</span>        <span class="keywordflow">return</span> serialisedDataString;</div>
-<div class="line"><span class="lineno">  303</span>    }</div>
+<div class="line"><span class="lineno">  274</span>        <span class="comment">// Create the private key object</span></div>
+<div class="line"><span class="lineno">  275</span>        <span class="keywordtype">int</span> byteSize = 32;</div>
+<div class="line"><span class="lineno">  276</span>        <span class="keywordtype">byte</span> privateKeyBytes[byteSize];</div>
+<div class="line"><span class="lineno">  277</span>        fromHex(privateKeyHex, privateKeyBytes, byteSize);</div>
+<div class="line"><span class="lineno">  278</span>        _stopTimer(<span class="stringliteral">&quot;convert privateKeyHex to byte array&quot;</span>);</div>
+<div class="line"><span class="lineno">  279</span>        PrivateKey privateKey(privateKeyBytes);</div>
+<div class="line"><span class="lineno">  280</span>        _stopTimer(<span class="stringliteral">&quot;create privateKey object&quot;</span>);</div>
+<div class="line"><span class="lineno">  281</span> </div>
+<div class="line"><span class="lineno">  282</span>        <span class="comment">// Generate the schnorr sig of the messageHash</span></div>
+<div class="line"><span class="lineno">  283</span>        <span class="keywordtype">byte</span> messageBytes[byteSize];</div>
+<div class="line"><span class="lineno">  284</span>        fromHex(msgHash, messageBytes, byteSize);</div>
+<div class="line"><span class="lineno">  285</span>        _stopTimer(<span class="stringliteral">&quot;convert msgHash to byte array&quot;</span>);</div>
+<div class="line"><span class="lineno">  286</span>        SchnorrSignature signature = privateKey.schnorr_sign(messageBytes);</div>
+<div class="line"><span class="lineno">  287</span>        _stopTimer(<span class="stringliteral">&quot;generate schnorr sig&quot;</span>);</div>
+<div class="line"><span class="lineno">  288</span>        String signatureHex = String(signature);</div>
+<div class="line"><span class="lineno">  289</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;Schnorr sig is: &quot;</span>, signatureHex);</div>
+<div class="line"><span class="lineno">  290</span> </div>
+<div class="line"><span class="lineno">  291</span>        <span class="comment">// Device the public key and verify the schnorr sig is valid</span></div>
+<div class="line"><span class="lineno">  292</span>        PublicKey pub = privateKey.publicKey();</div>
+<div class="line"><span class="lineno">  293</span>        _stopTimer(<span class="stringliteral">&quot;get public key&quot;</span>);</div>
+<div class="line"><span class="lineno">  294</span> </div>
+<div class="line"><span class="lineno">  295</span>        <span class="comment">// if (pub.schnorr_verify(signature, messageBytes))</span></div>
+<div class="line"><span class="lineno">  296</span>        <span class="comment">// {</span></div>
+<div class="line"><span class="lineno">  297</span>        <span class="comment">//     _logToSerialWithTitle(&quot;All good, signature is valid&quot;, &quot;&quot;);</span></div>
+<div class="line"><span class="lineno">  298</span>        <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  299</span>        <span class="comment">// else</span></div>
+<div class="line"><span class="lineno">  300</span>        <span class="comment">// {</span></div>
+<div class="line"><span class="lineno">  301</span>        <span class="comment">//     _logToSerialWithTitle(&quot;Something went wrong, signature is invalid&quot;, &quot;&quot;);</span></div>
+<div class="line"><span class="lineno">  302</span>        <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  303</span>        _stopTimer(<span class="stringliteral">&quot;verify schnorr sig&quot;</span>);</div>
+<div class="line"><span class="lineno">  304</span> </div>
+<div class="line"><span class="lineno">  305</span>        String serialisedDataString = <span class="stringliteral">&quot;{\&quot;id\&quot;:\&quot;&quot;</span> + msgHash + <span class="stringliteral">&quot;\&quot;,\&quot;pubkey\&quot;:\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,\&quot;created_at\&quot;:&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,\&quot;kind\&quot;:&quot;</span> + String(kind) + <span class="stringliteral">&quot;,\&quot;tags\&quot;:&quot;</span> + tags + <span class="stringliteral">&quot;,\&quot;content\&quot;:\&quot;&quot;</span> + content + <span class="stringliteral">&quot;\&quot;,\&quot;sig\&quot;:\&quot;&quot;</span> + signatureHex + <span class="stringliteral">&quot;\&quot;}&quot;</span>;</div>
+<div class="line"><span class="lineno">  306</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;serialisedEventDataString is: &quot;</span>, String(serialisedDataString));</div>
+<div class="line"><span class="lineno">  307</span> </div>
+<div class="line"><span class="lineno">  308</span>        <span class="comment">// Print the JSON to the serial monitor</span></div>
+<div class="line"><span class="lineno">  309</span>        _logToSerialWithTitle(<span class="stringliteral">&quot;Event JSON&quot;</span>, serialisedDataString);</div>
+<div class="line"><span class="lineno">  310</span>        <span class="keywordflow">return</span> serialisedDataString;</div>
+<div class="line"><span class="lineno">  311</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -982,15 +990,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00448">448</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  449</span>    {</div>
-<div class="line"><span class="lineno">  450</span>        String serialisedTagsArray = <span class="stringliteral">&quot;[[\&quot;p\&quot;,\&quot;&quot;</span> + String(recipientPubKeyHex) + <span class="stringliteral">&quot;\&quot;]]&quot;</span>;</div>
-<div class="line"><span class="lineno">  451</span>        String message = <span class="stringliteral">&quot;[0,\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,&quot;</span> + String(kind) + <span class="stringliteral">&quot;,&quot;</span> + serialisedTagsArray + <span class="stringliteral">&quot;,\&quot;&quot;</span> + encryptedMessageWithIv + <span class="stringliteral">&quot;\&quot;]&quot;</span>;</div>
-<div class="line"><span class="lineno">  452</span> </div>
-<div class="line"><span class="lineno">  453</span>        <span class="comment">// _logToSerialWithTitle(&quot;message is: &quot;, message);</span></div>
-<div class="line"><span class="lineno">  454</span> </div>
-<div class="line"><span class="lineno">  455</span>        <span class="keywordflow">return</span> message;</div>
-<div class="line"><span class="lineno">  456</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00456">456</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  457</span>    {</div>
+<div class="line"><span class="lineno">  458</span>        String serialisedTagsArray = <span class="stringliteral">&quot;[[\&quot;p\&quot;,\&quot;&quot;</span> + String(recipientPubKeyHex) + <span class="stringliteral">&quot;\&quot;]]&quot;</span>;</div>
+<div class="line"><span class="lineno">  459</span>        String message = <span class="stringliteral">&quot;[0,\&quot;&quot;</span> + String(pubKeyHex) + <span class="stringliteral">&quot;\&quot;,&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,&quot;</span> + String(kind) + <span class="stringliteral">&quot;,&quot;</span> + serialisedTagsArray + <span class="stringliteral">&quot;,\&quot;&quot;</span> + encryptedMessageWithIv + <span class="stringliteral">&quot;\&quot;]&quot;</span>;</div>
+<div class="line"><span class="lineno">  460</span> </div>
+<div class="line"><span class="lineno">  461</span>        <span class="comment">// _logToSerialWithTitle(&quot;message is: &quot;, message);</span></div>
+<div class="line"><span class="lineno">  462</span> </div>
+<div class="line"><span class="lineno">  463</span>        <span class="keywordflow">return</span> message;</div>
+<div class="line"><span class="lineno">  464</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1065,15 +1073,15 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00438">438</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  439</span>    {</div>
-<div class="line"><span class="lineno">  440</span>        <span class="comment">// parse a JSON array</span></div>
-<div class="line"><span class="lineno">  441</span>        String serialisedTagsArray = <span class="stringliteral">&quot;[[\&quot;p\&quot;,\&quot;&quot;</span> + String(recipientPubKeyHex) + <span class="stringliteral">&quot;\&quot;]]&quot;</span>;</div>
-<div class="line"><span class="lineno">  442</span>        <span class="comment">// _logToSerialWithTitle(&quot;serialisedTagsArray is: &quot;, serialisedTagsArray);</span></div>
-<div class="line"><span class="lineno">  443</span> </div>
-<div class="line"><span class="lineno">  444</span>        <span class="comment">// create the serialised fullEvent string using sprintf instead of the Arduino JSON library</span></div>
-<div class="line"><span class="lineno">  445</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;[\&quot;EVENT\&quot;,{\&quot;id\&quot;:\&quot;&quot;</span> + msgHash + <span class="stringliteral">&quot;\&quot;,\&quot;pubkey\&quot;:\&quot;&quot;</span> + pubKeyHex + <span class="stringliteral">&quot;\&quot;,\&quot;created_at\&quot;:&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,\&quot;kind\&quot;:&quot;</span> + String(kind) + <span class="stringliteral">&quot;,\&quot;tags\&quot;:&quot;</span> + serialisedTagsArray + <span class="stringliteral">&quot;,\&quot;content\&quot;:\&quot;&quot;</span> + encryptedMessageWithIv + <span class="stringliteral">&quot;\&quot;,\&quot;sig\&quot;:\&quot;&quot;</span> + schnorrSig + <span class="stringliteral">&quot;\&quot;}]&quot;</span>;</div>
-<div class="line"><span class="lineno">  446</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00446">446</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  447</span>    {</div>
+<div class="line"><span class="lineno">  448</span>        <span class="comment">// parse a JSON array</span></div>
+<div class="line"><span class="lineno">  449</span>        String serialisedTagsArray = <span class="stringliteral">&quot;[[\&quot;p\&quot;,\&quot;&quot;</span> + String(recipientPubKeyHex) + <span class="stringliteral">&quot;\&quot;]]&quot;</span>;</div>
+<div class="line"><span class="lineno">  450</span>        <span class="comment">// _logToSerialWithTitle(&quot;serialisedTagsArray is: &quot;, serialisedTagsArray);</span></div>
+<div class="line"><span class="lineno">  451</span> </div>
+<div class="line"><span class="lineno">  452</span>        <span class="comment">// create the serialised fullEvent string using sprintf instead of the Arduino JSON library</span></div>
+<div class="line"><span class="lineno">  453</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;[\&quot;EVENT\&quot;,{\&quot;id\&quot;:\&quot;&quot;</span> + msgHash + <span class="stringliteral">&quot;\&quot;,\&quot;pubkey\&quot;:\&quot;&quot;</span> + pubKeyHex + <span class="stringliteral">&quot;\&quot;,\&quot;created_at\&quot;:&quot;</span> + String(timestamp) + <span class="stringliteral">&quot;,\&quot;kind\&quot;:&quot;</span> + String(kind) + <span class="stringliteral">&quot;,\&quot;tags\&quot;:&quot;</span> + serialisedTagsArray + <span class="stringliteral">&quot;,\&quot;content\&quot;:\&quot;&quot;</span> + encryptedMessageWithIv + <span class="stringliteral">&quot;\&quot;,\&quot;sig\&quot;:\&quot;&quot;</span> + schnorrSig + <span class="stringliteral">&quot;\&quot;}]&quot;</span>;</div>
+<div class="line"><span class="lineno">  454</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1331,22 +1339,22 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00312">312</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  313</span>    {</div>
-<div class="line"><span class="lineno">  314</span>        <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><span class="lineno">  315</span>        <span class="comment">// remove end-of-string char</span></div>
-<div class="line"><span class="lineno">  316</span>        <span class="keywordflow">while</span> (input[i] != <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  317</span>        {</div>
-<div class="line"><span class="lineno">  318</span>            output[i] = input[i];</div>
-<div class="line"><span class="lineno">  319</span>            i++;</div>
-<div class="line"><span class="lineno">  320</span>        }</div>
-<div class="line"><span class="lineno">  321</span> </div>
-<div class="line"><span class="lineno">  322</span>        <span class="comment">// pad between 1 and 16 bytes</span></div>
-<div class="line"><span class="lineno">  323</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; padding_diff; j++)</div>
-<div class="line"><span class="lineno">  324</span>        {</div>
-<div class="line"><span class="lineno">  325</span>            output[i + j] = padding_diff;</div>
-<div class="line"><span class="lineno">  326</span>        }</div>
-<div class="line"><span class="lineno">  327</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="nostr_8cpp_source.html#l00320">320</a> of file <a class="el" href="nostr_8cpp_source.html">nostr.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  321</span>    {</div>
+<div class="line"><span class="lineno">  322</span>        <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><span class="lineno">  323</span>        <span class="comment">// remove end-of-string char</span></div>
+<div class="line"><span class="lineno">  324</span>        <span class="keywordflow">while</span> (input[i] != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  325</span>        {</div>
+<div class="line"><span class="lineno">  326</span>            output[i] = input[i];</div>
+<div class="line"><span class="lineno">  327</span>            i++;</div>
+<div class="line"><span class="lineno">  328</span>        }</div>
+<div class="line"><span class="lineno">  329</span> </div>
+<div class="line"><span class="lineno">  330</span>        <span class="comment">// pad between 1 and 16 bytes</span></div>
+<div class="line"><span class="lineno">  331</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; padding_diff; j++)</div>
+<div class="line"><span class="lineno">  332</span>        {</div>
+<div class="line"><span class="lineno">  333</span>            output[i + j] = padding_diff;</div>
+<div class="line"><span class="lineno">  334</span>        }</div>
+<div class="line"><span class="lineno">  335</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>

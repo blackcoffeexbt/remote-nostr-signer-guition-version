@@ -54,14 +54,7 @@ namespace WiFiManager {
     
     // Network scanning
     void startScan();
-    void stopScanning();
     bool processScanResults();
-    
-    // Credential management
-    void saveCredentials(const char* ssid, const char* password);
-    bool findSavedCredentials(const char* ssid, char* password, size_t password_size);
-    void loadAllNetworks();
-    void removeNetwork(const char* ssid);
     
     // Access Point mode
     void startAPMode();
@@ -71,14 +64,11 @@ namespace WiFiManager {
     String getAPPassword();
     String getAPIP();
     
-    // NWC URL management
-    void loadNWCUrl();
-    void saveNWCUrl(const String& url);
-    String getNWCUrl();
-    void setNWCUrl(const String& url);
+    // Bunker URL management
+    void loadBunkerUrl();
+    String getBunkerUrl();
     
     // Status monitoring
-    void updateStatus();
     void setStatusLabel(lv_obj_t* label);
     void setMainStatusLabel(lv_obj_t* label);
     
@@ -92,24 +82,14 @@ namespace WiFiManager {
     
     // Task management
     void createTask();
-    void deleteTask();
-    TaskHandle_t getTaskHandle();
-    
-    // Queue management
-    QueueHandle_t getCommandQueue();
-    QueueHandle_t getScanResultQueue();
+    void deleteTask();    
     
     // Utility functions
     void setCurrentCredentials(const char* ssid, const char* password);
-    void getCurrentCredentials(char* ssid, char* password);
-    std::vector<String>& getSSIDList();
     
     // Status callbacks for integration
     typedef void (*wifi_status_callback_t)(bool connected, const char* status);
     void setStatusCallback(wifi_status_callback_t callback);
-    
-    // NTP client access
-    NTPClient& getNTPClient();
     
     // Timer management
     void createStatusTimer();

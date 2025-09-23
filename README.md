@@ -35,7 +35,7 @@ This is a hardware-based Nostr remote signer built for the Guition JC3248W535 3.
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd nwc-pos
+cd <repository-directory>
 
 # Build the project
 pio run
@@ -98,6 +98,25 @@ Built with:
 - Custom Nostr protocol implementation (NIP-01, NIP-44, NIP-46)
 - WebSocket communication for relay connections
 - Secp256k1 cryptography for Schnorr signatures
+
+### Code Quality and Analysis
+
+#### Finding Unused Functions
+
+To analyze the codebase for unused functions, use cppcheck:
+
+```bash
+# Install cppcheck (macOS with Homebrew)
+brew install cppcheck
+
+# Run analysis to find unused functions
+cppcheck --enable=unusedFunction src/
+
+# For more detailed analysis with all checks
+cppcheck --enable=all --inconclusive src/
+```
+
+This will identify functions that are defined but never called, helping keep the codebase clean and reducing binary size.
 
 ## License
 

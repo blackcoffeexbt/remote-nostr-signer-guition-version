@@ -44,7 +44,10 @@ var namespace_u_i =
     [ "getInvoiceSpinner", "namespace_u_i.html#a68428dcbd48587cb1e1e8af2e5b5ba26", null ],
     [ "getMainWiFiStatusLabel", "namespace_u_i.html#a29f0a77919ea9a241d5151c2c4d457dc", null ],
     [ "getQRCanvas", "namespace_u_i.html#a4818b91137e99345d92ec869bd01c0b0", null ],
+    [ "getReadableEventKind", "namespace_u_i.html#a736d0774b808f024edcb25b2387f8eb5", null ],
     [ "getWiFiList", "namespace_u_i.html#a216aede75a73d0d490526e326aaa6c02", null ],
+    [ "hideSigningModal", "namespace_u_i.html#a7683bdbaf83ab992e9e088b7781d34c6", null ],
+    [ "hideSigningModalDelayed", "namespace_u_i.html#ac722bafc1b8838e0012507dcd83d239c", null ],
     [ "init", "namespace_u_i.html#a2277decc2cba013de2fbb5a64fbc1543", null ],
     [ "invoiceCloseButtonEventHandler", "namespace_u_i.html#a3a951a6d2b5d532d8321705ae237a2db", null ],
     [ "isInvoiceProcessing", "namespace_u_i.html#a256c4320af439732def9402342903462", null ],
@@ -69,10 +72,11 @@ var namespace_u_i =
     [ "showPairingQRCode", "namespace_u_i.html#a1d0d2d698d97a9a368600ae08b0af6f5", null ],
     [ "showPaymentReceived", "namespace_u_i.html#a85a9c95d4c743ddadfb3d0e8a4833482", null ],
     [ "showSigningConfirmation", "namespace_u_i.html#a0171e1f44ebe2745721fe6a80d3e2963", null ],
-    [ "updateAmountDisplay", "namespace_u_i.html#a230e829eccc0f61ab056f024c9ed0212", null ],
+    [ "showSigningModal", "namespace_u_i.html#a301464f5f5573171a492c3c337855edf", null ],
     [ "updateAPPasswordDisplay", "namespace_u_i.html#a4e3bb2b3151c48de6d865b4eab54f5e3", null ],
     [ "updateCurrencyDisplay", "namespace_u_i.html#ae20486f26830f5a8d6312a32e1a5dfec", null ],
     [ "updateInvoiceDisplay", "namespace_u_i.html#a69ebc6c2a7039e77b2a0c8e3b4d2235d", null ],
     [ "updateShopNameDisplay", "namespace_u_i.html#a5b4ed56a4755e396af5d6c827cba06d6", null ],
+    [ "updateSigningModalText", "namespace_u_i.html#a84b77f17721ed8d4ba54a0a8769e04a1", null ],
     [ "updateStatusDisplay", "namespace_u_i.html#a85d758c0282e4c9e9031eaedc95db532", null ]
 ];

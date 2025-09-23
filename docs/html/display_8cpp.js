@@ -1,5 +1,6 @@
 var display_8cpp =
 [
+    [ "checkBacklightTimeout", "display_8cpp.html#a4d65628d3c5e7294cfd734a86fe1122b", null ],
     [ "cleanup", "display_8cpp.html#a74136dce435d7a569c5fb00d5f7afbe6", null ],
     [ "displayFlush", "display_8cpp.html#a78f08fa1900213ef37200b256396765c", null ],
     [ "displayInvoiceTextFallback", "display_8cpp.html#ace6d523c48cf82aef610774be829b85b", null ],
@@ -10,6 +11,9 @@ var display_8cpp =
     [ "getLastTouch", "display_8cpp.html#a0c478a57b622918a8499d369db409f85", null ],
     [ "getQRCanvas", "display_8cpp.html#acb0d0237a8d03c78c35bad1248d26eeb", null ],
     [ "init", "display_8cpp.html#aacbf91b9f8c57fc2cb892c45fd44e655", null ],
+    [ "initBacklightTimeout", "display_8cpp.html#aece4179acb03a4966d7064ef6946b091", null ],
+    [ "isBacklightOn", "display_8cpp.html#a28603b6415f9f3c21a4e9fed5ed180e3", null ],
+    [ "resetBacklightTimeout", "display_8cpp.html#a694dddf11915e58ecf50e9d9f0e9307f", null ],
     [ "setBacklightBrightness", "display_8cpp.html#a77664f233d6b5e98be33985eed783600", null ],
     [ "setQRCanvas", "display_8cpp.html#a265f5a3b090df04fb0b928b84a2d7e17", null ],
     [ "setRotation", "display_8cpp.html#a5edb1eb6aad9305091ed3479edc983d6", null ],
@@ -17,6 +21,7 @@ var display_8cpp =
     [ "touchpadRead", "display_8cpp.html#a3d51aeecf9902984e423412bbe757155", null ],
     [ "turnOffBacklight", "display_8cpp.html#aa8aef5688a630d912c6d9bd1c764c542", null ],
     [ "turnOnBacklight", "display_8cpp.html#a75d875ec473cbdd00bee7951951d81c0", null ],
+    [ "turnOnBacklightForSigning", "display_8cpp.html#a4882df71e0a4d79fcf601ee407c01c39", null ],
     [ "bus", "display_8cpp.html#a73886cb9320187c094593787bd00d01c", null ],
     [ "g", "display_8cpp.html#a07404a97983810db305db509cbf74a9a", null ],
     [ "gfx", "display_8cpp.html#a6c60868b4fdb5a872686070ea0607be3", null ],

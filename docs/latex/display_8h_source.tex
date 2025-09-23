@@ -31,25 +31,32 @@
 \DoxyCodeLine{\Hypertarget{display_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a77664f233d6b5e98be33985eed783600}{setBacklightBrightness}}(uint8\_t\ brightness);\ \textcolor{comment}{//\ 0-\/255}}
 \DoxyCodeLine{\Hypertarget{display_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{turnOffBacklight}}();}
 \DoxyCodeLine{\Hypertarget{display_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{turnOnBacklight}}();}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00030}00030\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ Display\ driver\ callbacks}}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{displayFlush}}(lv\_disp\_drv\_t\ *disp,\ \textcolor{keyword}{const}\ lv\_area\_t\ *area,\ lv\_color\_t\ *color\_p);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{touchpadRead}}(lv\_indev\_drv\_t\ *indev\_driver,\ lv\_indev\_data\_t\ *data);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00034}00034\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ QR\ Code\ display\ functions}}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{displayQRCode}}(\textcolor{keyword}{const}\ String\&\ invoice);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(\textcolor{keyword}{const}\ String\&\ invoice);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00038}00038\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ LVGL\ setup}}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{setupLVGL}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{turnOnBacklightForSigning}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00031}00031\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ Backlight\ timeout\ management}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_aece4179acb03a4966d7064ef6946b091}{initBacklightTimeout}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a694dddf11915e58ecf50e9d9f0e9307f}{resetBacklightTimeout}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a4d65628d3c5e7294cfd734a86fe1122b}{checkBacklightTimeout}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_display_a28603b6415f9f3c21a4e9fed5ed180e3}{isBacklightOn}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00037}00037\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ Display\ driver\ callbacks}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{displayFlush}}(lv\_disp\_drv\_t\ *disp,\ \textcolor{keyword}{const}\ lv\_area\_t\ *area,\ lv\_color\_t\ *color\_p);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{touchpadRead}}(lv\_indev\_drv\_t\ *indev\_driver,\ lv\_indev\_data\_t\ *data);}
 \DoxyCodeLine{\Hypertarget{display_8h_source_l00041}00041\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Display\ object\ getters\ (for\ UI\ module\ to\ access)}}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00043}00043\ \ \ \ \ Arduino\_GFX\&\ \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{getGFX}}();}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00044}00044\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{getQRCanvas}}();}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{setQRCanvas}}(lv\_obj\_t*\ canvas);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00046}00046\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Touch\ coordinates}}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{getLastTouch}}(int32\_t\&\ x,\ int32\_t\&\ y);}
-\DoxyCodeLine{\Hypertarget{display_8h_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ QR\ Code\ display\ functions}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{displayQRCode}}(\textcolor{keyword}{const}\ String\&\ invoice);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(\textcolor{keyword}{const}\ String\&\ invoice);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00045}00045\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ LVGL\ setup}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{setupLVGL}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ Display\ object\ getters\ (for\ UI\ module\ to\ access)}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00050}00050\ \ \ \ \ Arduino\_GFX\&\ \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{getGFX}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00051}00051\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{getQRCanvas}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{setQRCanvas}}(lv\_obj\_t*\ canvas);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00053}00053\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ Touch\ coordinates}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{getLastTouch}}(int32\_t\&\ x,\ int32\_t\&\ y);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00056}00056\ \}}
 
 \end{DoxyCode}

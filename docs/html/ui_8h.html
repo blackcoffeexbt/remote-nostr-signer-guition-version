@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NWC Point of Sale: src/ui.h File Reference</title>
+<title>Nostr Remote Signer: src/ui.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">NWC Point of Sale<span id="projectnumber">&#160;v1.0.0</span>
+   <div id="projectname">Nostr Remote Signer<span id="projectnumber">&#160;v1.0.0</span>
    </div>
-   <div id="projectbrief">Nostr Wallet Connect Point of Sale device for ESP32 with Lightning Network payments</div>
+   <div id="projectbrief">A NIP46 remote signer for Nostr running on the Guition 3.5inch touch display board.</div>
   </td>
  </tr>
  </tbody>
@@ -168,6 +168,9 @@ Functions</h2></td></tr>
 <tr class="separator:a2277decc2cba013de2fbb5a64fbc1543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45e6a820c52945de0b31c1083648b8ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a45e6a820c52945de0b31c1083648b8ca">UI::cleanup</a> ()</td></tr>
 <tr class="separator:a45e6a820c52945de0b31c1083648b8ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736d0774b808f024edcb25b2387f8eb5"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a736d0774b808f024edcb25b2387f8eb5">UI::getReadableEventKind</a> (String eventKind)</td></tr>
+<tr class="memdesc:a736d0774b808f024edcb25b2387f8eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a human-readable description of the event kind.  <br /></td></tr>
+<tr class="separator:a736d0774b808f024edcb25b2387f8eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd4d4788cdc8d3edb520fe2394fe355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#aabd4d4788cdc8d3edb520fe2394fe355">UI::createSignerStatusScreen</a> ()</td></tr>
 <tr class="separator:aabd4d4788cdc8d3edb520fe2394fe355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a65423af3051eca667c6210a4fd4e3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a1a65423af3051eca667c6210a4fd4e3b">UI::createSettingsScreen</a> ()</td></tr>
@@ -254,6 +257,14 @@ Functions</h2></td></tr>
 <tr class="separator:a1d0d2d698d97a9a368600ae08b0af6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e86a09bb46232f85060b53f5060a2ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a3e86a09bb46232f85060b53f5060a2ca">UI::showEventSignedNotification</a> (const String &amp;eventKind, const String &amp;content)</td></tr>
 <tr class="separator:a3e86a09bb46232f85060b53f5060a2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301464f5f5573171a492c3c337855edf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a301464f5f5573171a492c3c337855edf">UI::showSigningModal</a> ()</td></tr>
+<tr class="separator:a301464f5f5573171a492c3c337855edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b77f17721ed8d4ba54a0a8769e04a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a84b77f17721ed8d4ba54a0a8769e04a1">UI::updateSigningModalText</a> (const String &amp;text)</td></tr>
+<tr class="separator:a84b77f17721ed8d4ba54a0a8769e04a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7683bdbaf83ab992e9e088b7781d34c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a7683bdbaf83ab992e9e088b7781d34c6">UI::hideSigningModal</a> ()</td></tr>
+<tr class="separator:a7683bdbaf83ab992e9e088b7781d34c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac722bafc1b8838e0012507dcd83d239c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#ac722bafc1b8838e0012507dcd83d239c">UI::hideSigningModalDelayed</a> (uint32_t delayMs)</td></tr>
+<tr class="separator:ac722bafc1b8838e0012507dcd83d239c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b4ed56a4755e396af5d6c827cba06d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#a5b4ed56a4755e396af5d6c827cba06d6">UI::updateShopNameDisplay</a> ()</td></tr>
 <tr class="separator:a5b4ed56a4755e396af5d6c827cba06d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20486f26830f5a8d6312a32e1a5dfec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i.html#ae20486f26830f5a8d6312a32e1a5dfec">UI::updateCurrencyDisplay</a> ()</td></tr>
@@ -267,7 +278,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a159637a2d15bba6a0d54c87809f2ccbd"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i_1_1_colors.html#a159637a2d15bba6a0d54c87809f2ccbd">UI::Colors::PRIMARY</a> = 0x2196F3</td></tr>
+<tr class="memitem:a159637a2d15bba6a0d54c87809f2ccbd"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i_1_1_colors.html#a159637a2d15bba6a0d54c87809f2ccbd">UI::Colors::PRIMARY</a> = 0xdf2ccf</td></tr>
 <tr class="separator:a159637a2d15bba6a0d54c87809f2ccbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cd5f020d6dffae2d37bae6e1df3c0d2"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_u_i_1_1_colors.html#a2cd5f020d6dffae2d37bae6e1df3c0d2">UI::Colors::SUCCESS</a> = 0x4CAF50</td></tr>
 <tr class="separator:a2cd5f020d6dffae2d37bae6e1df3c0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>

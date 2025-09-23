@@ -1,6 +1,13 @@
 /**
  * @file main.cpp
- * @brief Remote Nostr Signer
+ * @brief Main application entry point for Remote Nostr Signer
+ * 
+ * Modular ESP32 Point of Sale system featuring:
+ * - Touch screen interface
+ * - WiFi connectivity with AP mode setup
+ * - Nostr Wallet Connect integration for Lightning payments
+ * - LVGL-based user interface with QR code generation
+ * - Deep sleep power management
  * 
  * @author BlackCoffee bc@lnbits.com
  * @version 1.0.0
@@ -78,7 +85,6 @@ static int invoice_counter = 0;
 static Preferences preferences;
 
 // Forward declarations for functions that still need to be implemented or migrated
-static void wifi_status_checker_cb(lv_timer_t *timer);
 static void wifi_main_status_updater_cb(lv_timer_t *timer);
 
 void setup(void)
@@ -143,11 +149,5 @@ static void wifi_main_status_updater_cb(lv_timer_t *timer) {
     
     // AP mode processing now handled by WiFiManager module
     
-    delay(1);
-}
-
-// Minimal status checker for backward compatibility (will be removed)
-static void wifi_status_checker_cb(lv_timer_t *timer) {
-    // Implementation moved to WiFi module
     delay(1);
 }

@@ -27,6 +27,8 @@ void \mbox{\hyperlink{namespace_u_i_a7b5471425bfe6a966057aa4e72537a56}{UI\+::cle
 \item 
 void \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI\+::load\+Screen}} (\mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\+\_\+state\+\_\+t}} screen)
 \item 
+String \mbox{\hyperlink{namespace_u_i_a736d0774b808f024edcb25b2387f8eb5}{UI\+::get\+Readable\+Event\+Kind}} (String event\+Kind)
+\begin{DoxyCompactList}\small\item\em Get a human-\/readable description of the event kind. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespace_u_i_aabd4d4788cdc8d3edb520fe2394fe355}{UI\+::create\+Signer\+Status\+Screen}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a1a65423af3051eca667c6210a4fd4e3b}{UI\+::create\+Settings\+Screen}} ()
@@ -43,10 +45,6 @@ void \mbox{\hyperlink{namespace_u_i_a8e08086366be0567c206956439cf07d3}{UI\+::cre
 \item 
 void \mbox{\hyperlink{namespace_u_i_a7bbab39abe50d5133bb309f45ee37609}{UI\+::close\+Invoice\+Overlay}} ()
 \item 
-void \mbox{\hyperlink{namespace_u_i_a69ebc6c2a7039e77b2a0c8e3b4d2235d}{UI\+::update\+Invoice\+Display}} (const String \&invoice, int amount\+\_\+sats)
-\item 
-void \mbox{\hyperlink{namespace_u_i_a85a9c95d4c743ddadfb3d0e8a4833482}{UI\+::show\+Payment\+Received}} ()
-\item 
 void \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI\+::show\+Message}} (String title, String message)
 \item 
 void \mbox{\hyperlink{namespace_u_i_ad401ada10ac0476ee072b7ed911b8146}{UI\+::keypad\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
@@ -57,17 +55,11 @@ void \mbox{\hyperlink{namespace_u_i_ac299369e02ef88cc5b8ab49d575189c5}{UI\+::set
 \item 
 void \mbox{\hyperlink{namespace_u_i_a16bfecd6138d00f450bc5c8e1bde1bef}{UI\+::settings\+Back\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
 \item 
-void \mbox{\hyperlink{namespace_u_i_ac310b5f5952d7f5091868999fdbb3bfb}{UI\+::currency\+Dropdown\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
-\item 
-void \mbox{\hyperlink{namespace_u_i_a81fa6a4db9aafd1fb789d2ee7cde2c5c}{UI\+::shop\+Name\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
-\item 
 void \mbox{\hyperlink{namespace_u_i_a88f110e483de181123f3620e44775cba}{UI\+::ap\+Password\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
 \item 
 void \mbox{\hyperlink{namespace_u_i_a3a951a6d2b5d532d8321705ae237a2db}{UI\+::invoice\+Close\+Button\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
 \item 
 void \mbox{\hyperlink{namespace_u_i_a8fdc8946d85d7e8cbe4d339e1e268f5d}{UI\+::reboot\+Device\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
-\item 
-void \mbox{\hyperlink{namespace_u_i_a230e829eccc0f61ab056f024c9ed0212}{UI\+::update\+Amount\+Display}} (const String \&amount)
 \item 
 void \mbox{\hyperlink{namespace_u_i_a85d758c0282e4c9e9031eaedc95db532}{UI\+::update\+Status\+Display}} (const String \&status)
 \item 
@@ -105,10 +97,6 @@ bool \mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI\+::is\
 \item 
 void \mbox{\hyperlink{namespace_u_i_a1d571a531143f16935470cfaab3d22c0}{UI\+::set\+Invoice\+Processing}} (bool processing)
 \item 
-void \mbox{\hyperlink{namespace_u_i_a5b4ed56a4755e396af5d6c827cba06d6}{UI\+::update\+Shop\+Name\+Display}} ()
-\item 
-void \mbox{\hyperlink{namespace_u_i_ae20486f26830f5a8d6312a32e1a5dfec}{UI\+::update\+Currency\+Display}} ()
-\item 
 void \mbox{\hyperlink{namespace_u_i_a4e3bb2b3151c48de6d865b4eab54f5e3}{UI\+::update\+APPassword\+Display}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a0171e1f44ebe2745721fe6a80d3e2963}{UI\+::show\+Signing\+Confirmation}} (const String \&event\+Kind, const String \&content)
@@ -120,6 +108,14 @@ void \mbox{\hyperlink{namespace_u_i_a1fcb1735f63dd0a530f3c828a5f2ce37}{UI\+::add
 void \mbox{\hyperlink{namespace_u_i_a0580ac3c721a34070f4ecfdfd156ca43}{UI\+::clear\+Signed\+Events}} ()
 \item 
 void \mbox{\hyperlink{namespace_u_i_a3e86a09bb46232f85060b53f5060a2ca}{UI\+::show\+Event\+Signed\+Notification}} (const String \&event\+Kind, const String \&content)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a301464f5f5573171a492c3c337855edf}{UI\+::show\+Signing\+Modal}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a84b77f17721ed8d4ba54a0a8769e04a1}{UI\+::update\+Signing\+Modal\+Text}} (const String \&text)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a7683bdbaf83ab992e9e088b7781d34c6}{UI\+::hide\+Signing\+Modal}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_ac722bafc1b8838e0012507dcd83d239c}{UI\+::hide\+Signing\+Modal\+Delayed}} (uint32\+\_\+t delay\+Ms)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}

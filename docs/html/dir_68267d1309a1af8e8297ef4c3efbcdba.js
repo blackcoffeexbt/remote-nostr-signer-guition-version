@@ -17,6 +17,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "settings.h", "settings_8h.html", "settings_8h" ],
     [ "ui.cpp", "ui_8cpp.html", "ui_8cpp" ],
     [ "ui.h", "ui_8h.html", "ui_8h" ],
-    [ "wifi_manager.cpp", "wifi__manager_8cpp.html", null ],
+    [ "wifi_manager.cpp", "wifi__manager_8cpp.html", "wifi__manager_8cpp" ],
     [ "wifi_manager.h", "wifi__manager_8h.html", "wifi__manager_8h" ]
 ];

@@ -182,8 +182,6 @@ namespace WiFiManager {
                 String status_text = String(LV_SYMBOL_WIFI) + " " + WiFi.SSID();
                 lv_label_set_text(main_wifi_status_label, status_text.c_str());
                 lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x00FF00), 0);
-                
-                // NWC and Bitcoin price fetching will be handled by external modules
             } else {
                 unsigned long current_time = millis();
                 if (wifi_connection_attempted && (current_time - wifi_connect_start_time > WIFI_CONNECT_TIMEOUT)) {
@@ -193,8 +191,6 @@ namespace WiFiManager {
                     lv_label_set_text(main_wifi_status_label, LV_SYMBOL_WIFI " Not Connected");
                     lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x9E9E9E), 0);
                 }
-                
-                // NWC disconnection will be handled by external modules
             }
         }
         
@@ -218,8 +214,8 @@ namespace WiFiManager {
         createTask();
         createStatusTimer();
         
-        // Load NWC URL
-        loadNWCUrl();
+        // Load Bunker URL
+        loadBunkerUrl();
         
         // Try to connect to saved WiFi if not in AP mode
         if (!ap_mode_active) {
@@ -331,28 +327,6 @@ namespace WiFiManager {
         }, 500, NULL);
     }
     
-    void stopScanning() {
-        Serial.println("Stopping WiFi scanning...");
-        
-        if (wifi_scan_timer != NULL) {
-            lv_timer_del(wifi_scan_timer);
-            wifi_scan_timer = NULL;
-        }
-        
-        if (wifi_command_queue != NULL) {
-            wifi_command_t command;
-            command.type = WIFI_STOP_SCAN;
-            xQueueSend(wifi_command_queue, &command, 0);
-        }
-        
-        if (wifi_scan_result_queue != NULL) {
-            wifi_scan_result_t result;
-            while (xQueueReceive(wifi_scan_result_queue, &result, 0) == pdTRUE) {
-                // Clear the queue
-            }
-        }
-    }
-    
     bool processScanResults() {
         if (wifi_scan_result_queue == NULL) {
             return false;
@@ -403,95 +377,7 @@ namespace WiFiManager {
         }
         return false;
     }
-    
-    void saveCredentials(const char* ssid, const char* password) {
-        preferences.begin("wifi-creds", false);
-        
-        int count = preferences.getInt("count", 0);
-        String ssid_key = "ssid_" + String(count);
-        String pass_key = "pass_" + String(count);
-        
-        preferences.putString(ssid_key.c_str(), ssid);
-        preferences.putString(pass_key.c_str(), password);
-        preferences.putInt("count", count + 1);
-        
-        preferences.end();
-        Serial.printf("Saved WiFi network %d: %s\n", count, ssid);
-    }
-    
-    bool findSavedCredentials(const char* ssid, char* password, size_t password_size) {
-        preferences.begin("wifi-creds", true);
-        
-        int count = preferences.getInt("count", 0);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String saved_ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (saved_ssid == ssid) {
-                String pass_key = "pass_" + String(i);
-                String saved_password = preferences.getString(pass_key.c_str(), "");
-                strncpy(password, saved_password.c_str(), password_size - 1);
-                password[password_size - 1] = '\0';
-                preferences.end();
-                return true;
-            }
-        }
-        
-        preferences.end();
-        return false;
-    }
-    
-    void loadAllNetworks() {
-        preferences.begin("wifi-creds", true);
-        
-        int count = preferences.getInt("count", 0);
-        Serial.printf("Found %d saved WiFi networks\n", count);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (ssid.length() > 0) {
-                Serial.printf("Network %d: %s\n", i, ssid.c_str());
-            }
-        }
-        
-        preferences.end();
-    }
-    
-    void removeNetwork(const char* ssid) {
-        preferences.begin("wifi-creds", false);
-        
-        int count = preferences.getInt("count", 0);
-        
-        for (int i = 0; i < count; i++) {
-            String ssid_key = "ssid_" + String(i);
-            String saved_ssid = preferences.getString(ssid_key.c_str(), "");
-            
-            if (saved_ssid == ssid) {
-                for (int j = i; j < count - 1; j++) {
-                    String current_ssid_key = "ssid_" + String(j);
-                    String current_pass_key = "pass_" + String(j);
-                    String next_ssid_key = "ssid_" + String(j + 1);
-                    String next_pass_key = "pass_" + String(j + 1);
-                    
-                    String next_ssid = preferences.getString(next_ssid_key.c_str(), "");
-                    String next_password = preferences.getString(next_pass_key.c_str(), "");
-                    
-                    preferences.putString(current_ssid_key.c_str(), next_ssid);
-                    preferences.putString(current_pass_key.c_str(), next_password);
-                }
-                
-                preferences.putInt("count", count - 1);
-                Serial.printf("Removed WiFi network: %s\n", ssid);
-                break;
-            }
-        }
-        
-        preferences.end();
-    }
-    
+      
     void startAPMode() {
         if (ap_mode_active) {
             Serial.println("AP mode already active");
@@ -501,9 +387,6 @@ namespace WiFiManager {
         Serial.println("Starting Access Point mode...");
         
         if (RemoteSigner::isInitialized()) {
-            // webSocket.disconnect();
-            // webSocket.setReconnectInterval(0);
-            // NWC disconnection handled by NWC module
             Serial.println("Disconnected from relay and disabled reconnection");
         }
         
@@ -540,7 +423,7 @@ namespace WiFiManager {
         Serial.println("Access Point started successfully");
         updateSettingsScreenForAPMode();
         
-        UI::showMessage("NWC Pairing Code", "Connect to the WiFi hotspot below to set your NWC pairing code.\nSSID: " + String(ap_ssid) + "\nPassword: " + Settings::getAPPassword() + "\nIP: " + String(ap_ip));
+        UI::showMessage("Bunker Pairing Code", "Connect to the WiFi hotspot below to set your Nostr key and prefered relay.\nSSID: " + String(ap_ssid) + "\nPassword: " + Settings::getAPPassword() + "\nIP: " + String(ap_ip));
     }
     
     void stopAPMode() {
@@ -584,40 +467,22 @@ namespace WiFiManager {
         return String(ap_ip);
     }
     
-    void loadNWCUrl() {
-        preferences.begin("nwc-config", true);
-        String saved_url = preferences.getString("nwc_url", "");
+    void loadBunkerUrl() {
+        preferences.begin("config", true);
+        String saved_url = preferences.getString("bunker_url", "");
         preferences.end();
         
         if (saved_url.length() > 0) {
             // Signer configuration loaded separately
             Serial.println("Signer config will be loaded from preferences");
-            Serial.println("Loaded NWC URL from preferences: " + saved_url);
+            Serial.println("Loaded Bunker URL from preferences: " + saved_url);
         } else {
-            Serial.println("No saved NWC URL found, using default");
+            Serial.println("No saved Bunker URL found, using default");
         }
     }
     
-    void saveNWCUrl(const String& url) {
-        preferences.begin("nwc-config", false);
-        preferences.putString("nwc_url", url);
-        preferences.end();
-        Serial.println("Saved NWC URL to preferences: " + url);
-    }
-    
-    String getNWCUrl() {
+    String getBunkerUrl() {
         return RemoteSigner::getBunkerUrl();
-    }
-    
-    void setNWCUrl(const String& url) {
-        // Signer configuration set separately
-        Serial.println("Signer URL configuration: " + url);
-        saveNWCUrl(url);
-    }
-    
-    void updateStatus() {
-        // Trigger status update
-        mainStatusUpdaterCB(NULL);
     }
     
     void setStatusLabel(lv_obj_t* label) {
@@ -730,18 +595,6 @@ namespace WiFiManager {
         }
     }
     
-    TaskHandle_t getTaskHandle() {
-        return wifi_task_handle;
-    }
-    
-    QueueHandle_t getCommandQueue() {
-        return wifi_command_queue;
-    }
-    
-    QueueHandle_t getScanResultQueue() {
-        return wifi_scan_result_queue;
-    }
-    
     void setCurrentCredentials(const char* ssid, const char* password) {
         strncpy(current_ssid, ssid, sizeof(current_ssid) - 1);
         current_ssid[sizeof(current_ssid) - 1] = '\0';
@@ -749,21 +602,8 @@ namespace WiFiManager {
         current_password[sizeof(current_password) - 1] = '\0';
     }
     
-    void getCurrentCredentials(char* ssid, char* password) {
-        strcpy(ssid, current_ssid);
-        strcpy(password, current_password);
-    }
-    
-    std::vector<String>& getSSIDList() {
-        return wifi_ssids;
-    }
-    
     void setStatusCallback(wifi_status_callback_t callback) {
         status_callback = callback;
-    }
-    
-    NTPClient& getNTPClient() {
-        return timeClient;
     }
     
     void createStatusTimer() {
@@ -818,13 +658,13 @@ namespace WiFiManager {
         <form action="/config" method="post">
             <div class="form-group">
                 <label for="private_key">Nostr Private Key (64-character hex):</label>
-                <input type="password" id="private_key" name="private_key" placeholder="64-character hex private key" required>
+                <input type="password" id="private_key" name="private_key" placeholder="64-character hex private key" required value="{{private_key}}">
                 <small style="color: #666;">Enter your Nostr private key as 64 hex characters</small>
             </div>
             
             <div class="form-group">
                 <label for="relay_url">Nostr Relay URL:</label>
-                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.damus.io" required>
+                <input type="text" id="relay_url" name="relay_url" placeholder="wss://relay.nostrconnect.com" required value="{{relay_url}}">
                 <small style="color: #666;">WebSocket URL of the Nostr relay to connect to</small>
             </div>
             
@@ -840,7 +680,18 @@ namespace WiFiManager {
 </body>
 </html>
         )";
-        
+        // now fill in current values
+        String currentRelay = RemoteSigner::getRelayUrl();
+        String currentPrivateKey = RemoteSigner::getPrivateKey();
+        if (currentPrivateKey.length() > 0) {
+            html.replace("{{private_key}}", currentPrivateKey);
+        }
+        if (currentRelay.length() > 0) {
+            html.replace("{{relay_url}}", currentRelay);
+        } else {
+            html.replace("{{relay_url}}", "wss://relay.nostrconnect.com");
+        }
+
         ap_server.send(200, "text/html", html);
     }
     

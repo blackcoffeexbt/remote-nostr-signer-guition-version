@@ -8,29 +8,17 @@ namespace Settings {
     // Initialization and cleanup
     void init();
     void cleanup();
-    
-    // Shop settings
-    String getCurrency();
-    void setCurrency(const String& currency);
-    
-    String getShopName();
-    void setShopName(const String& name);
-    
+        
     String getAPPassword();
     void setAPPassword(const String& password);
     
-    // NWC configuration
-    String getNWCUrl();
-    void setNWCUrl(const String& url);
+    // Bunker configuration
+    String getBunkerUrl();
+    void setBunkerUrl(const String& url);
     
     // PIN management
-    String getCurrentPin();
     void setCurrentPin(const String& pin);
     bool verifyPin(const String& pin);
-    
-    // WiFi network management
-    void saveWiFiNetwork(const char* ssid, const char* password);
-    void loadAllWiFiNetworks();
     
     // Persistence
     void loadFromPreferences();
@@ -39,7 +27,6 @@ namespace Settings {
     // UI Event handlers
     void settingsSaveEventHandler(lv_event_t *e);
     void settingsBackEventHandler(lv_event_t *e);
-    void shopNameKBEventHandler(lv_event_t *e);
     void apPasswordKBEventHandler(lv_event_t *e);
     
     // PIN management UI

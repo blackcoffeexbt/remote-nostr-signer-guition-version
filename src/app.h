@@ -5,6 +5,7 @@
  * 
  * This header provides a unified interface to all application modules
  * and coordinates initialization, cleanup, and inter-module communication
+ * for the Remote Nostr Signer project.
  */
 
 #include <Arduino.h>
@@ -37,39 +38,24 @@ namespace App {
     /**
      * State Management
      */
-    app_state_t getState();
     void setState(app_state_t state);
     String getStateString();
-    
-    /**
-     * Error Handling
-     */
-    void handleError(const String& module, const String& error);
-    void clearError();
-    String getLastError();
     
     /**
      * Inter-Module Communication
      */
     void notifyWiFiStatusChanged(bool connected);
     void notifySignerStatusChanged(bool connected);
-    void notifySigningRequest(const String& eventKind, const String& content);
-    void notifySigningCompleted(bool success);
-    void notifyFirmwareUpdateStatusChanged(FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error);
     
     /**
      * Configuration Management
      */
-    bool loadConfiguration();
-    bool saveConfiguration();
     void resetToDefaults();
     
     /**
      * System Information
      */
     String getVersion();
-    String getBuildInfo();
-    void printSystemInfo();
     
     /**
      * Power Management (Sleep modes removed for continuous monitoring)
@@ -84,23 +70,9 @@ namespace App {
     void reportModuleStatus();
     
     /**
-     * Update Management
-     */
-    void checkForUpdates();
-    bool isUpdateAvailable();
-    void performUpdate();
-    
-    /**
-     * Diagnostic Functions
-     */
-    void runDiagnostics();
-    void generateStatusReport();
-    
-    /**
      * Event System
      */
     typedef void (*app_event_callback_t)(const String& event, const String& data);
-    void setEventCallback(app_event_callback_t callback);
     void fireEvent(const String& event, const String& data);
     
     /**

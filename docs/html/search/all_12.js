@@ -30,5 +30,6 @@ var searchData=
   ['touchpadread_27',['touchpadRead',['../namespace_display.html#a3d51aeecf9902984e423412bbe757155',1,'Display']]],
   ['turnoffbacklight_28',['turnOffBacklight',['../namespace_display.html#aa8aef5688a630d912c6d9bd1c764c542',1,'Display']]],
   ['turnonbacklight_29',['turnOnBacklight',['../namespace_display.html#a75d875ec473cbdd00bee7951951d81c0',1,'Display']]],
-  ['type_30',['type',['../structwifi__command__t.html#a164a5d3e636017c0e95a61ad626716b2',1,'wifi_command_t::type()'],['../struct_wi_fi_manager_1_1wifi__command__t.html#a560e032549977d2b5cffd9289f046154',1,'WiFiManager::wifi_command_t::type()']]]
+  ['turnonbacklightforsigning_30',['turnOnBacklightForSigning',['../namespace_display.html#a4882df71e0a4d79fcf601ee407c01c39',1,'Display']]],
+  ['type_31',['type',['../structwifi__command__t.html#a164a5d3e636017c0e95a61ad626716b2',1,'wifi_command_t::type()'],['../struct_wi_fi_manager_1_1wifi__command__t.html#a560e032549977d2b5cffd9289f046154',1,'WiFiManager::wifi_command_t::type()']]]
 ];

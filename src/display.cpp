@@ -342,28 +342,8 @@ namespace Display {
     }
     
     // Getters and accessors
-    Arduino_GFX& getGFX() {
-        return *gfx;
-    }
-    
-    lv_obj_t* getQRCanvas() {
-        return qr_canvas;
-    }
-    
     void setQRCanvas(lv_obj_t* canvas) {
         qr_canvas = canvas;
-    }
-    
-    void getLastTouch(int32_t& x, int32_t& y) {
-        x = last_x;
-        y = last_y;
-    }
-    
-    // Power management functions
-    void setBacklightBrightness(uint8_t brightness) {
-        // ArduinoGFX doesn't have built-in brightness control
-        // Use PWM on backlight pin for brightness control
-        analogWrite(TFT_BL, brightness);
     }
     
     void turnOffBacklight() {
@@ -407,7 +387,4 @@ namespace Display {
         }
     }
     
-    bool isBacklightOn() {
-        return backlight_on;
-    }
 }

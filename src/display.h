@@ -24,7 +24,6 @@ namespace Display {
     void setRotation(int rotation);
     
     // Power management
-    void setBacklightBrightness(uint8_t brightness); // 0-255
     void turnOffBacklight();
     void turnOnBacklight();
     void turnOnBacklightForSigning();
@@ -33,7 +32,6 @@ namespace Display {
     void initBacklightTimeout();
     void resetBacklightTimeout();
     void checkBacklightTimeout();
-    bool isBacklightOn();
     
     // Display driver callbacks
     void displayFlush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
@@ -47,10 +45,5 @@ namespace Display {
     void setupLVGL();
     
     // Display object getters (for UI module to access)
-    Arduino_GFX& getGFX();
-    lv_obj_t* getQRCanvas();
     void setQRCanvas(lv_obj_t* canvas);
-    
-    // Touch coordinates
-    void getLastTouch(int32_t& x, int32_t& y);
 }

@@ -24,7 +24,7 @@ namespace RemoteSigner {
     String getRelayUrl();
     void setRelayUrl(const String& url);
     String getPrivateKey();
-    void setPrivateKey(const String& nsec);
+    void setPrivateKey(const String& privKeyHex);
     String getPublicKey();
     String getBunkerUrl();
     
@@ -52,7 +52,6 @@ namespace RemoteSigner {
     
     // Secret key management
     void refreshSecretKey();
-    String getSecretKey();
     
     // Connection monitoring
     void processLoop();
@@ -60,9 +59,7 @@ namespace RemoteSigner {
     void updateConnectionStatus();
     
     // Time synchronization
-    void updateTime();
     unsigned long getUnixTimestamp();
-    NTPClient& getTimeClient();
     
     // Fragment handling
     bool isFragmentInProgress();
@@ -77,13 +74,8 @@ namespace RemoteSigner {
     void displaySigningRequest(const String& eventKind, const String& content);
     void displayConnectionStatus(bool connected);
     
-    // Access to internal components
-    WebSocketsClient& getWebSocketClient();
-    
     // Event signing UI callbacks
     typedef void (*signing_confirmation_callback_t)(bool approved);
-    void setSigningConfirmationCallback(signing_confirmation_callback_t callback);
-    void showSigningConfirmation(const String& eventDetails);
     
     // Constants
     namespace Config {

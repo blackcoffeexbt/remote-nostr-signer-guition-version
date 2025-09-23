@@ -152,15 +152,15 @@ Definition at line \mbox{\hyperlink{app_8h_source_l00023}{23}} of file \mbox{\hy
 
 Update Management 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00363}{363}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00366}{366}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00364\ \ \ \ \ \{}
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Checking\ for\ updates..."{}});}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ for\ firmware\ updates}}
-\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update\_check"{}},\ \textcolor{stringliteral}{"{}started"{}});}
-\DoxyCodeLine{00368\ \ \ \ \ \}}
+\DoxyCodeLine{00367\ \ \ \ \ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Checking\ for\ updates..."{}});}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ for\ firmware\ updates}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update\_check"{}},\ \textcolor{stringliteral}{"{}started"{}});}
+\DoxyCodeLine{00371\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a8c902b97afa2062bbd08efa469419324}\label{namespace_app_a8c902b97afa2062bbd08efa469419324}} 
@@ -171,36 +171,36 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00363}{363}} of file \mbox{
 
 Module Health Monitoring 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00316}{316}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00319}{319}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00317\ \ \ \ \ \{}
-\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ health\_ok\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00319\ }
-\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ WiFi\ module\ health}}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ \&\&\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{WiFiManager::getStatus}}()\ !=\ WL\_IDLE\_STATUS)}
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ module\ health\ check\ failed"{}});}
-\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00326\ }
-\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ Remote\ Signer\ module\ health}}
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}{RemoteSigner::isInitialized}}()\ \&\&\ !\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ module\ health\ check\ warning\ -\/\ not\ connected"{}});}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ a\ warning,\ not\ a\ failure}}
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00333\ }
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ UI\ module\ health}}
-\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()\ <\ 0)}
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}UI\ module\ health\ check\ failed"{}});}
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00340\ }
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ health\_ok;}
-\DoxyCodeLine{00342\ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ health\_ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ WiFi\ module\ health}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ \&\&\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{WiFiManager::getStatus}}()\ !=\ WL\_IDLE\_STATUS)}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ module\ health\ check\ failed"{}});}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ Remote\ Signer\ module\ health}}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}{RemoteSigner::isInitialized}}()\ \&\&\ !\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ module\ health\ check\ warning\ -\/\ not\ connected"{}});}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ a\ warning,\ not\ a\ failure}}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ UI\ module\ health}}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()\ <\ 0)}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}UI\ module\ health\ check\ failed"{}});}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ health\_ok;}
+\DoxyCodeLine{00345\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_aa172d6e06d067c1653591cb381a666e9}\label{namespace_app_aa172d6e06d067c1653591cb381a666e9}} 
@@ -240,17 +240,17 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00073}{73}} of file \mbox{\
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00177}{177}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00180}{180}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00178\ \ \ \ \ \{}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ last\_error\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ ==\ APP\_STATE\_ERROR)}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_READY);}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ last\_error\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ ==\ APP\_STATE\_ERROR)}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_READY);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}\label{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}} 
@@ -261,16 +261,16 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00177}{177}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00442}{442}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00445}{445}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00443\ \ \ \ \ \{}
-\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event\_callback)}
-\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ event\_callback(event,\ data);}
-\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00448\ \ \ \ \ \}}
+\DoxyCodeLine{00446\ \ \ \ \ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event\_callback)}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ event\_callback(event,\ data);}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00451\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_aee9b615b8302567165e2e5ad826d6201}\label{namespace_app_aee9b615b8302567165e2e5ad826d6201}} 
@@ -281,27 +281,27 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00442}{442}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00418}{418}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00421}{421}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00419\ \ \ \ \ \{}
-\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ String\ report\ =\ \textcolor{stringliteral}{"{}Status\ Report\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}=============\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}State:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Signer:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Heap:\ "{}}\ +\ String(ESP.getFreeHeap())\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00427\ }
-\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_error.length()\ >\ 0)}
-\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Last\ Error:\ "{}}\ +\ last\_error\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
-\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00432\ }
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ Serial.println(report);}
-\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}status\_report"{}},\ report);}
-\DoxyCodeLine{00435\ \ \ \ \ \}}
+\DoxyCodeLine{00422\ \ \ \ \ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ String\ report\ =\ \textcolor{stringliteral}{"{}Status\ Report\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}=============\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}State:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Signer:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Heap:\ "{}}\ +\ String(ESP.getFreeHeap())\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_error.length()\ >\ 0)}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Last\ Error:\ "{}}\ +\ last\_error\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ Serial.println(report);}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}status\_report"{}},\ report);}
+\DoxyCodeLine{00438\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}\label{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}} 
@@ -312,13 +312,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00418}{418}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00288}{288}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00291}{291}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00289\ \ \ \ \ \{}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::BUILD\_DATE;}
-\DoxyCodeLine{00291\ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \ \ \ \ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::BUILD\_DATE;}
+\DoxyCodeLine{00294\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a80c864880e5ca12c02093585ed0cf447}\label{namespace_app_a80c864880e5ca12c02093585ed0cf447}} 
@@ -329,13 +329,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00288}{288}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00186}{186}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00189}{189}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00187\ \ \ \ \ \{}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ last\_error;}
-\DoxyCodeLine{00189\ \ \ \ \ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ last\_error;}
+\DoxyCodeLine{00192\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a25186002dcf6373ba059741d47fc1514}\label{namespace_app_a25186002dcf6373ba059741d47fc1514}} 
@@ -346,13 +346,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00186}{186}} of file \mbox{
 
 State Management 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00134}{134}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00137}{137}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00135\ \ \ \ \ \{}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\_state;}
-\DoxyCodeLine{00137\ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\_state;}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a22c8042a43eb38e54720382fedf1c31b}\label{namespace_app_a22c8042a43eb38e54720382fedf1c31b}} 
@@ -363,25 +363,25 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00134}{134}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00149}{149}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00152}{152}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00150\ \ \ \ \ \{}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (current\_state)}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}{APP\_STATE\_INITIALIZING}}:}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Initializing"{}};}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}{APP\_STATE\_READY}}:}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Ready"{}};}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}{APP\_STATE\_ERROR}}:}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error"{}};}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}{APP\_STATE\_UPDATING}}:}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Updating"{}};}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Unknown"{}};}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (current\_state)}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}{APP\_STATE\_INITIALIZING}}:}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Initializing"{}};}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}{APP\_STATE\_READY}}:}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Ready"{}};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}{APP\_STATE\_ERROR}}:}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error"{}};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}{APP\_STATE\_UPDATING}}:}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Updating"{}};}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Unknown"{}};}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}\label{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}} 
@@ -392,13 +392,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00149}{149}} of file \mbox{
 
 System Information 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00283}{283}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00286}{286}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00284\ \ \ \ \ \{}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::VERSION;}
-\DoxyCodeLine{00286\ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::VERSION;}
+\DoxyCodeLine{00289\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a7d55551c0ecee64d4385182df40da631}\label{namespace_app_a7d55551c0ecee64d4385182df40da631}} 
@@ -409,19 +409,19 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00283}{283}} of file \mbox{
 
 Error Handling 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00166}{166}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00169}{169}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00167\ \ \ \ \ \{}
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ last\_error\ =\ module\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ error;}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR\ -\/\ "{}}\ +\ last\_error);}
-\DoxyCodeLine{00170\ }
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ error\ message\ to\ user}}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Error"{}},\ last\_error);}
+\DoxyCodeLine{00170\ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ last\_error\ =\ module\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ error;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR\ -\/\ "{}}\ +\ last\_error);}
 \DoxyCodeLine{00173\ }
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}error"{}},\ last\_error);}
-\DoxyCodeLine{00175\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ error\ message\ to\ user}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Error"{}},\ last\_error);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}error"{}},\ last\_error);}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_afebab729ad90b87d5c556255298b5f8b}\label{namespace_app_afebab729ad90b87d5c556255298b5f8b}} 
@@ -432,13 +432,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00166}{166}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00311}{311}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00314}{314}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00312\ \ \ \ \ \{}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{resetActivityTimer}}();}
-\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{resetActivityTimer}}();}
+\DoxyCodeLine{00317\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}\label{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}} 
@@ -516,14 +516,14 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00018}{18}} of file \mbox{\
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00370}{370}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00373}{373}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00371\ \ \ \ \ \{}
-\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ if\ update\ is\ available}}
-\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00374\ \ \ \ \ \}}
+\DoxyCodeLine{00374\ \ \ \ \ \{}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ if\ update\ is\ available}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00377\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}\label{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}} 
@@ -534,18 +534,18 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00370}{370}} of file \mbox{
 
 Configuration Management 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00254}{254}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00257}{257}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00255\ \ \ \ \ \{}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Loading\ application\ configuration..."{}});}
-\DoxyCodeLine{00257\ }
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ loaded\ by\ individual\ modules}}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00258\ \ \ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Loading\ application\ configuration..."{}});}
 \DoxyCodeLine{00260\ }
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00262\ \ \ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ loaded\ by\ individual\ modules}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00265\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_afadd76c05e486d9157d66c0c8346acf3}\label{namespace_app_afadd76c05e486d9157d66c0c8346acf3}} 
@@ -556,24 +556,24 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00254}{254}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00223}{223}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00226}{226}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00224\ \ \ \ \ \{}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_signer\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00226\ }
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_signer\_status\ ==\ connected)}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ last\_signer\_status\ =\ connected;}
-\DoxyCodeLine{00233\ }
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{RemoteSigner::displayConnectionStatus}}(connected);}
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}signer\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
-\DoxyCodeLine{00237\ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_signer\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_signer\_status\ ==\ connected)}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ last\_signer\_status\ =\ connected;}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{RemoteSigner::displayConnectionStatus}}(connected);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}signer\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
+\DoxyCodeLine{00240\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a257efbaaef01b8858ee5cbd6f903aa38}\label{namespace_app_a257efbaaef01b8858ee5cbd6f903aa38}} 
@@ -584,16 +584,16 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00223}{223}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00246}{246}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00249}{249}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00247\ \ \ \ \ \{}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Signing\ completed:\ "{}}\ +\ String(success\ ?\ \textcolor{stringliteral}{"{}Success"{}}\ :\ \textcolor{stringliteral}{"{}Failed"{}}));}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(success\ ?\ \textcolor{stringliteral}{"{}Event\ Signed"{}}\ :\ \textcolor{stringliteral}{"{}Signing\ Failed"{}},\ }
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ success\ ?\ \textcolor{stringliteral}{"{}Event\ signed\ successfully!"{}}\ :\ \textcolor{stringliteral}{"{}Failed\ to\ sign\ event"{}});}
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}signing\_completed"{}},\ success\ ?\ \textcolor{stringliteral}{"{}success"{}}\ :\ \textcolor{stringliteral}{"{}failed"{}});}
-\DoxyCodeLine{00252\ \ \ \ \ \}}
+\DoxyCodeLine{00250\ \ \ \ \ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Signing\ completed:\ "{}}\ +\ String(success\ ?\ \textcolor{stringliteral}{"{}Success"{}}\ :\ \textcolor{stringliteral}{"{}Failed"{}}));}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(success\ ?\ \textcolor{stringliteral}{"{}Event\ Signed"{}}\ :\ \textcolor{stringliteral}{"{}Signing\ Failed"{}},\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ success\ ?\ \textcolor{stringliteral}{"{}Event\ signed\ successfully!"{}}\ :\ \textcolor{stringliteral}{"{}Failed\ to\ sign\ event"{}});}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}signing\_completed"{}},\ success\ ?\ \textcolor{stringliteral}{"{}success"{}}\ :\ \textcolor{stringliteral}{"{}failed"{}});}
+\DoxyCodeLine{00255\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a34706d7f2162285403ae24260b7be973}\label{namespace_app_a34706d7f2162285403ae24260b7be973}} 
@@ -604,15 +604,15 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00246}{246}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00239}{239}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00242}{242}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00240\ \ \ \ \ \{}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Signing\ request\ received:\ "{}}\ +\ eventKind);}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a0171e1f44ebe2745721fe6a80d3e2963}{UI::showSigningConfirmation}}(eventKind,\ content);}
-\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}signing\_request"{}},\ eventKind);}
-\DoxyCodeLine{00244\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Signing\ request\ received:\ "{}}\ +\ eventKind);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a0171e1f44ebe2745721fe6a80d3e2963}{UI::showSigningConfirmation}}(eventKind,\ content);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}signing\_request"{}},\ eventKind);}
+\DoxyCodeLine{00247\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_afb037eba2d5bcaebddb20eee584dc210}\label{namespace_app_afb037eba2d5bcaebddb20eee584dc210}} 
@@ -623,40 +623,40 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00239}{239}} of file \mbox{
 
 Inter-\/\+Module Communication 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00191}{191}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00194}{194}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00192\ \ \ \ \ \{}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_wifi\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_wifi\_status\ ==\ connected)}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ last\_wifi\_status\ =\ connected;}
-\DoxyCodeLine{00201\ }
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
-\DoxyCodeLine{00203\ }
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connected)}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ connected\ -\/\ attempt\ Remote\ Signer\ connection}}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ connected,\ attempting\ relay\ connection..."{}});}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{RemoteSigner::connectToRelay}}();}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ disconnected\ -\/\ notify\ Remote\ Signer\ module}}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ disconnected,\ disconnecting\ from\ relay..."{}});}
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{RemoteSigner::disconnect}}();}
-\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00219\ }
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}wifi\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
-\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_wifi\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_wifi\_status\ ==\ connected)}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ last\_wifi\_status\ =\ connected;}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connected)}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ connected\ -\/\ attempt\ Remote\ Signer\ connection}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ connected,\ attempting\ relay\ connection..."{}});}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{RemoteSigner::connectToRelay}}();}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ disconnected\ -\/\ notify\ Remote\ Signer\ module}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ disconnected,\ disconnecting\ from\ relay..."{}});}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{RemoteSigner::disconnect}}();}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}wifi\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
+\DoxyCodeLine{00224\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a1fe12b467c84861a1b948df26eb74ca7}\label{namespace_app_a1fe12b467c84861a1b948df26eb74ca7}} 
@@ -667,16 +667,16 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00191}{191}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00376}{376}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00379}{379}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00377\ \ \ \ \ \{}
-\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Performing\ update..."{}});}
-\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_UPDATING);}
-\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ perform\ firmware\ update}}
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update"{}},\ \textcolor{stringliteral}{"{}started"{}});}
-\DoxyCodeLine{00382\ \ \ \ \ \}}
+\DoxyCodeLine{00380\ \ \ \ \ \{}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Performing\ update..."{}});}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_UPDATING);}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ perform\ firmware\ update}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update"{}},\ \textcolor{stringliteral}{"{}started"{}});}
+\DoxyCodeLine{00385\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}\label{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}} 
@@ -687,21 +687,21 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00376}{376}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00293}{293}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00296}{296}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00294\ \ \ \ \ \{}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ System\ Information\ ==="{}});}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}());}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Build\ Date:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}{getBuildInfo}}());}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Model:\ "{}}\ +\ String(ESP.getChipModel()));}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Revision:\ "{}}\ +\ String(ESP.getChipRevision()));}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}CPU\ Frequency:\ "{}}\ +\ String(ESP.getCpuFreqMHz())\ +\ \textcolor{stringliteral}{"{}\ MHz"{}});}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Flash\ Size:\ "{}}\ +\ String(ESP.getFlashChipSize()));}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}=========================="{}});}
-\DoxyCodeLine{00304\ \ \ \ \ \}}
+\DoxyCodeLine{00297\ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ System\ Information\ ==="{}});}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}());}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Build\ Date:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}{getBuildInfo}}());}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Model:\ "{}}\ +\ String(ESP.getChipModel()));}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Revision:\ "{}}\ +\ String(ESP.getChipRevision()));}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}CPU\ Frequency:\ "{}}\ +\ String(ESP.getCpuFreqMHz())\ +\ \textcolor{stringliteral}{"{}\ MHz"{}});}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Flash\ Size:\ "{}}\ +\ String(ESP.getFlashChipSize()));}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}=========================="{}});}
+\DoxyCodeLine{00307\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}\label{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}} 
@@ -712,27 +712,27 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00293}{293}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00344}{344}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00347}{347}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00345\ \ \ \ \ \{}
-\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Module\ Status\ Report\ ==="{}});}
-\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
-\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ SSID:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{WiFiManager::getSSID}}());}
-\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ IP:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{WiFiManager::getLocalIP}}());}
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ Relay:\ "{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{RemoteSigner::getRelayUrl}}());}
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Current\ Screen:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()));}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}============================"{}});}
-\DoxyCodeLine{00361\ \ \ \ \ \}}
+\DoxyCodeLine{00348\ \ \ \ \ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Module\ Status\ Report\ ==="{}});}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ SSID:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{WiFiManager::getSSID}}());}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ IP:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{WiFiManager::getLocalIP}}());}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ Relay:\ "{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{RemoteSigner::getRelayUrl}}());}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Current\ Screen:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()));}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}============================"{}});}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_adfe353584321cab94c6491c32470d046}\label{namespace_app_adfe353584321cab94c6491c32470d046}} 
@@ -743,13 +743,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00344}{344}} of file \mbox{
 
 Power Management (Sleep modes removed for continuous monitoring) 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00306}{306}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00309}{309}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00307\ \ \ \ \ \{}
-\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ last\_activity\_time\ =\ millis();}
-\DoxyCodeLine{00309\ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ last\_activity\_time\ =\ millis();}
+\DoxyCodeLine{00312\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_aad3d214ab3bb9320fbfada4d1a34b202}\label{namespace_app_aad3d214ab3bb9320fbfada4d1a34b202}} 
@@ -760,17 +760,17 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00306}{306}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00274}{274}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00277}{277}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00275\ \ \ \ \ \{}
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Resetting\ to\ default\ configuration..."{}});}
-\DoxyCodeLine{00277\ }
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_aa26da663d96a908585fb90c6444f975b}{Settings::resetToDefaults}}();}
-\DoxyCodeLine{00279\ }
-\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}reset\_defaults"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
-\DoxyCodeLine{00281\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Resetting\ to\ default\ configuration..."{}});}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_aa26da663d96a908585fb90c6444f975b}{Settings::resetToDefaults}}();}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}reset\_defaults"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
+\DoxyCodeLine{00284\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}\label{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}} 
@@ -808,25 +808,28 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00090}{90}} of file \mbox{\
 \DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ RemoteSigner::processLoop()\ threw\ exception"{}});}
 \DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ health\ checks}}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_health\_check\ >=\ Config::HEALTH\_CHECK\_INTERVAL)}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8c902b97afa2062bbd08efa469419324}{checkModuleHealth}}();}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ last\_health\_check\ =\ current\_time;}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ status\ reports}}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_status\_report\ >=\ Config::STATUS\_REPORT\_INTERVAL)}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ last\_status\_report\ =\ current\_time;}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ additional\ processing\ needed\ for\ continuous\ monitoring}}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Small\ delay\ to\ prevent\ watchdog\ triggers}}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ delay(1);}
-\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ backlight\ timeout}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4d65628d3c5e7294cfd734a86fe1122b}{Display::checkBacklightTimeout}}();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ health\ checks}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_health\_check\ >=\ Config::HEALTH\_CHECK\_INTERVAL)}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8c902b97afa2062bbd08efa469419324}{checkModuleHealth}}();}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ last\_health\_check\ =\ current\_time;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ status\ reports}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_status\_report\ >=\ Config::STATUS\_REPORT\_INTERVAL)}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ last\_status\_report\ =\ current\_time;}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ additional\ processing\ needed\ for\ continuous\ monitoring}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Small\ delay\ to\ prevent\ watchdog\ triggers}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ delay(1);}
+\DoxyCodeLine{00135\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a70e0965d86f6b58c39348c8802e27591}\label{namespace_app_a70e0965d86f6b58c39348c8802e27591}} 
@@ -837,42 +840,42 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00090}{90}} of file \mbox{\
 
 Diagnostic Functions 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00384}{384}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00387}{387}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00385\ \ \ \ \ \{}
-\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Running\ Diagnostics\ ==="{}});}
-\DoxyCodeLine{00387\ }
-\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}{printSystemInfo}}();}
-\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
+\DoxyCodeLine{00388\ \ \ \ \ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Running\ Diagnostics\ ==="{}});}
 \DoxyCodeLine{00390\ }
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ display}}
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Diagnostics"{}},\ \textcolor{stringliteral}{"{}Display\ test\ -\/\ press\ any\ key"{}});}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}{printSystemInfo}}();}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
 \DoxyCodeLine{00393\ }
-\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ WiFi\ scan}}
-\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ PASS"{}});}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
-\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00403\ }
-\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ Remote\ Signer\ connection}}
-\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
-\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ diagnostic:\ PASS"{}});}
-\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
-\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00413\ }
-\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Diagnostics\ Complete\ ==="{}});}
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}diagnostics"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
-\DoxyCodeLine{00416\ \ \ \ \ \}}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ display}}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Diagnostics"{}},\ \textcolor{stringliteral}{"{}Display\ test\ -\/\ press\ any\ key"{}});}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ WiFi\ scan}}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ PASS"{}});}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ Remote\ Signer\ connection}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{RemoteSigner::isConnected}}())}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ diagnostic:\ PASS"{}});}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Diagnostics\ Complete\ ==="{}});}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}diagnostics"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
+\DoxyCodeLine{00419\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a8d662eaf81462543f2a05532ab9f9e36}\label{namespace_app_a8d662eaf81462543f2a05532ab9f9e36}} 
@@ -883,18 +886,18 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00384}{384}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00264}{264}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00267}{267}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00265\ \ \ \ \ \{}
-\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Saving\ application\ configuration..."{}});}
-\DoxyCodeLine{00267\ }
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ saved\ by\ individual\ modules}}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00268\ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Saving\ application\ configuration..."{}});}
 \DoxyCodeLine{00270\ }
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00272\ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ saved\ by\ individual\ modules}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00275\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_a82c928935fb5b3bea9a951dd77a8f1f6}\label{namespace_app_a82c928935fb5b3bea9a951dd77a8f1f6}} 
@@ -905,13 +908,13 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00264}{264}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00437}{437}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00440}{440}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00438\ \ \ \ \ \{}
-\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ event\_callback\ =\ callback;}
-\DoxyCodeLine{00440\ \ \ \ \ \}}
+\DoxyCodeLine{00441\ \ \ \ \ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ event\_callback\ =\ callback;}
+\DoxyCodeLine{00443\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}\label{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}} 
@@ -922,17 +925,17 @@ Definition at line \mbox{\hyperlink{app_8cpp_source_l00437}{437}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{app_8cpp_source_l00139}{139}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00142}{142}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00140\ \ \ \ \ \{}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ !=\ state)}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ current\_state\ =\ state;}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}App\ state\ changed\ to:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}state\_changed"{}},\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ !=\ state)}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ current\_state\ =\ state;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}App\ state\ changed\ to:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}state\_changed"{}},\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
 
 \end{DoxyCode}
