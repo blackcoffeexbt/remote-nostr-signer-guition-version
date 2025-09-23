@@ -81,6 +81,10 @@ namespace UI {
     // Settings integration
     void updateShopNameDisplay();
     void updateCurrencyDisplay();
+
+    // Firmware update progress functions
+    void updateFirmwareProgress(int progress, size_t current, size_t total);
+    void updateFirmwareStatus(const String& status);
     
     // Screen state queries
     screen_state_t getCurrentScreen();
