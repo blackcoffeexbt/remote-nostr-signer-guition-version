@@ -33,6 +33,7 @@ namespace App {
      */
     void init();                    // Initialize all modules
     void cleanup();                 // Cleanup all modules
+    void notifyFirmwareUpdateStatusChanged(FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error);
     void run();                     // Main application loop
     
     /**

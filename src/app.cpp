@@ -100,6 +100,52 @@ namespace App
         fireEvent("app_cleanup", "completed");
     }
 
+    void notifyFirmwareUpdateStatusChanged(FirmwareUpdate::update_status_t status, FirmwareUpdate::update_error_t error)
+    {
+        Serial.println("Firmware update status changed: " + FirmwareUpdate::getStatusMessage());
+        
+        switch (status) {
+            case FirmwareUpdate::UPDATE_AVAILABLE:
+                UI::loadScreen(UI::SCREEN_UPDATE_CONFIRM);
+                break;
+                
+            case FirmwareUpdate::UPDATE_NO_UPDATE:
+                UI::showMessage("No Updates", "You have the latest firmware version.");
+                delay(2000);
+                UI::loadScreen(UI::SCREEN_SETTINGS);
+                break;
+                
+            case FirmwareUpdate::UPDATE_SUCCESS:
+                UI::showMessage("Update Complete", "Firmware updated successfully! Device will restart.");
+                delay(3000);
+                ESP.restart();
+                break;
+                
+            case FirmwareUpdate::UPDATE_ERROR:
+                String errorMsg;
+                switch (error) {
+                    case FirmwareUpdate::ERROR_NETWORK:
+                        errorMsg = "Network connection failed";
+                        break;
+                    case FirmwareUpdate::ERROR_DOWNLOAD_FAILED:
+                        errorMsg = "Download failed";
+                        break;
+                    case FirmwareUpdate::ERROR_FLASH_FAILED:
+                        errorMsg = "Installation failed";
+                        break;
+                    default:
+                        errorMsg = "Update failed: " + FirmwareUpdate::getStatusMessage();
+                        break;
+                }
+                UI::showMessage("Update Failed", errorMsg);
+                delay(3000);
+                UI::loadScreen(UI::SCREEN_SETTINGS);
+                break;
+        }
+        
+        fireEvent("firmware_update", FirmwareUpdate::getStatusMessage().c_str());
+    }
+
     void run()
     {
         static bool first_run = true;
