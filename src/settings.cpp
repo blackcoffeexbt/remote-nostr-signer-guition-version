@@ -130,7 +130,7 @@ namespace Settings {
         ap_password = preferences.getString("ap_password", "GoodMorning21");
         preferences.end();
         
-        // Load NWC URL
+        // Load preferences
         preferences.begin("config", true);
         
         // Load PIN

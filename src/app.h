@@ -5,7 +5,7 @@
  * 
  * This header provides a unified interface to all application modules
  * and coordinates initialization, cleanup, and inter-module communication
- * for the NWC Point of Sale device.
+ * for the Remote Nostr Signer project.
  */
 
 #include <Arduino.h>

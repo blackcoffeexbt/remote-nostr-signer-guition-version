@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @brief NWC Powered Point of Sale Device - Main Entry Point
+ * @brief Main application entry point for Remote Nostr Signer
  * 
  * Modular ESP32 Point of Sale system featuring:
  * - Touch screen interface
@@ -91,7 +91,7 @@ static void wifi_main_status_updater_cb(lv_timer_t *timer);
 void setup(void)
 {
     Serial.begin(115200);
-    Serial.println("=== NWC Point of Sale Device Starting ===");
+    Serial.println("=== Remote Nostr Signer Starting ===");
     Serial.println("Software Version: " + SOFTWARE_VERSION);
     
     // Initialize PSRAM memory space for Nostr operations to prevent heap fragmentation
