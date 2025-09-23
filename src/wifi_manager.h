@@ -102,7 +102,6 @@ namespace WiFiManager {
     // Utility functions
     void setCurrentCredentials(const char* ssid, const char* password);
     void getCurrentCredentials(char* ssid, char* password);
-    std::vector<String>& getSSIDList();
     
     // Status callbacks for integration
     typedef void (*wifi_status_callback_t)(bool connected, const char* status);

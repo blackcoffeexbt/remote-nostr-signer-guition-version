@@ -747,10 +747,6 @@ namespace WiFiManager {
         strcpy(password, current_password);
     }
     
-    std::vector<String>& getSSIDList() {
-        return wifi_ssids;
-    }
-    
     void setStatusCallback(wifi_status_callback_t callback) {
         status_callback = callback;
     }
