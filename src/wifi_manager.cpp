@@ -582,7 +582,7 @@ namespace WiFiManager {
     }
     
     void loadBunkerUrl() {
-        preferences.begin("nwc-config", true);
+        preferences.begin("config", true);
         String saved_url = preferences.getString("nwc_url", "");
         preferences.end();
         
@@ -596,7 +596,7 @@ namespace WiFiManager {
     }
     
     void saveBunkerUrl(const String& url) {
-        preferences.begin("nwc-config", false);
+        preferences.begin("config", false);
         preferences.putString("nwc_url", url);
         preferences.end();
         Serial.println("Saved Bunker URL to preferences: " + url);

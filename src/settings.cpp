@@ -131,7 +131,7 @@ namespace Settings {
         preferences.end();
         
         // Load NWC URL
-        preferences.begin("nwc-config", true);
+        preferences.begin("config", true);
         
         // Load PIN
         preferences.begin("pin-config", true);
