@@ -35,7 +35,7 @@ This is a hardware-based Nostr remote signer built for the Guition JC3248W535 3.
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd nwc-pos
+cd <repository-directory>
 
 # Build the project
 pio run
