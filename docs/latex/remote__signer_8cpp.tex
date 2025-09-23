@@ -1,0 +1,127 @@
+\hypertarget{remote__signer_8cpp}{}\doxysection{src/remote\+\_\+signer.cpp File Reference}
+\label{remote__signer_8cpp}\index{src/remote\_signer.cpp@{src/remote\_signer.cpp}}
+{\ttfamily \#include \char`\"{}remote\+\_\+signer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}settings.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ui.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}display.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Preferences.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}lvgl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/nostr/nostr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/nostr/nip44/nip44.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/nostr/nip19.\+h\char`\"{}}\newline
+Include dependency graph for remote\+\_\+signer.\+cpp\+:
+% FIG 0
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_remote_signer}{Remote\+Signer}}
+\item 
+namespace \mbox{\hyperlink{namespace_remote_signer_1_1_methods}{Remote\+Signer\+::\+Methods}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac40d7ac89589301db2857d5f90b03cc9}{Remote\+Signer\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_af6c3719ca2b21193fa31b813b821361e}{Remote\+Signer\+::cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}{Remote\+Signer\+::load\+Config\+From\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aaa0b057014dc123b0c28892e7f16003a}{Remote\+Signer\+::save\+Config\+To\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}{Remote\+Signer\+::refresh\+Secret\+Key}} ()
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{Remote\+Signer\+::get\+Bunker\+Url}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{Remote\+Signer\+::connect\+To\+Relay}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{Remote\+Signer\+::disconnect}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac1e46c8aceaf55c3b831c4d3b9547992}{Remote\+Signer\+::websocket\+Event}} (WStype\+\_\+t type, uint8\+\_\+t $\ast$payload, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}{Remote\+Signer\+::handle\+Websocket\+Message}} (void $\ast$arg, uint8\+\_\+t $\ast$data, size\+\_\+t len)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}{Remote\+Signer\+::handle\+Signing\+Request\+Event}} (uint8\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}{Remote\+Signer\+::handle\+Connect}} (Dynamic\+Json\+Document \&doc, const String \&requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}{Remote\+Signer\+::handle\+Sign\+Event}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}{Remote\+Signer\+::handle\+Ping}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}{Remote\+Signer\+::handle\+Get\+Public\+Key}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}{Remote\+Signer\+::handle\+Nip04\+Encrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}{Remote\+Signer\+::handle\+Nip04\+Decrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}{Remote\+Signer\+::handle\+Nip44\+Encrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}{Remote\+Signer\+::handle\+Nip44\+Decrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{Remote\+Signer\+::is\+Client\+Authorized}} (const char $\ast$client\+Pub\+Key)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}{Remote\+Signer\+::check\+Client\+Is\+Authorized}} (const char $\ast$client\+Pub\+Key, const char $\ast$secret)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}{Remote\+Signer\+::prompt\+User\+For\+Authorization}} (const String \&requesting\+Npub)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}{Remote\+Signer\+::add\+Authorized\+Client}} (const char $\ast$client\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ae5f7ceb9142bbed66ee40e8159e9ce6c}{Remote\+Signer\+::process\+Loop}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a389e573d2a6cf08f1cc623995fe0d126}{Remote\+Signer\+::send\+Ping}} ()
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}{Remote\+Signer\+::is\+Initialized}} ()
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{Remote\+Signer\+::is\+Connected}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a095ade22697151a633cb71017d76c954}{Remote\+Signer\+::update\+Time}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_remote_signer_a3f8262db983da9c80bc62fc9145da90b}{Remote\+Signer\+::get\+Unix\+Timestamp}} ()
+\item 
+NTPClient \& \mbox{\hyperlink{namespace_remote_signer_ab477605a551a9848f3bf6aca25027288}{Remote\+Signer\+::get\+Time\+Client}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ad280d465fcc68690f7cd2ecd05e0cc42}{Remote\+Signer\+::set\+Status\+Callback}} (signer\+\_\+status\+\_\+callback\+\_\+t callback)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac8b79d546a92d1130cdfd35a192e2fa1}{Remote\+Signer\+::set\+Signing\+Confirmation\+Callback}} (signing\+\_\+confirmation\+\_\+callback\+\_\+t callback)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}{Remote\+Signer\+::display\+Signing\+Request}} (const String \&event\+Kind, const String \&content)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{Remote\+Signer\+::display\+Connection\+Status}} (bool connected)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{Remote\+Signer\+::get\+Relay\+Url}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}{Remote\+Signer\+::set\+Relay\+Url}} (const String \&url)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{Remote\+Signer\+::get\+Private\+Key}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}{Remote\+Signer\+::set\+Private\+Key}} (const String \&priv\+Key\+Hex)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab63e557eaa270158c31089485af13853}{Remote\+Signer\+::get\+Public\+Key}} ()
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_af3b6baaa02bfc245172094d369d9a29e}{Remote\+Signer\+::get\+Secret\+Key}} ()
+\item 
+Web\+Sockets\+Client \& \mbox{\hyperlink{namespace_remote_signer_abefa31362f0296822ae35e4e891e6f5d}{Remote\+Signer\+::get\+Web\+Socket\+Client}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a401f8ea87e71ba13a57a1696402e9955}{Remote\+Signer\+::set\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a8f4ae7196fa393c20cd7d643f8edb862}{Remote\+Signer\+::\+Methods\+::\+CONNECT}} = \char`\"{}connect\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a77e2fa7ffd73e069b8f7fbc220ef1c41}{Remote\+Signer\+::\+Methods\+::\+SIGN\+\_\+\+EVENT}} = \char`\"{}sign\+\_\+event\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_ade025d4a3b418dd8920137c913d77c57}{Remote\+Signer\+::\+Methods\+::\+PING}} = \char`\"{}ping\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a3a1b354e8968c23949b4ff71084a66b4}{Remote\+Signer\+::\+Methods\+::\+GET\+\_\+\+PUBLIC\+\_\+\+KEY}} = \char`\"{}get\+\_\+public\+\_\+key\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a5aafd6d7cc6cd325d8692629d6a06e7c}{Remote\+Signer\+::\+Methods\+::\+NIP04\+\_\+\+ENCRYPT}} = \char`\"{}nip04\+\_\+encrypt\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a469047f9e6e5ed287a5fe1bb71dcd59b}{Remote\+Signer\+::\+Methods\+::\+NIP04\+\_\+\+DECRYPT}} = \char`\"{}nip04\+\_\+decrypt\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_ac3a91e355bb90c3e1c478cd76ffa9dbd}{Remote\+Signer\+::\+Methods\+::\+NIP44\+\_\+\+ENCRYPT}} = \char`\"{}nip44\+\_\+encrypt\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_afbe5e03828b79d7b1bf4c617c1156d5d}{Remote\+Signer\+::\+Methods\+::\+NIP44\+\_\+\+DECRYPT}} = \char`\"{}nip44\+\_\+decrypt\char`\"{}
+\end{DoxyCompactItemize}

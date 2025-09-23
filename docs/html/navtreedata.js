@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "NWC Point of Sale", "index.html", [
+  [ "Nostr Remote Signer", "index.html", [
     [ "Nostr Remote Signer Device", "index.html", "index" ],
     [ "Nostr Remote Signer Device Architecture", "md__a_r_c_h_i_t_e_c_t_u_r_e.html", [
       [ "Project Overview", "md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md14", [
@@ -119,11 +119,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_x_s15231_b__touch_8cpp.html",
-"globals_vars.html",
-"md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md46",
-"namespace_wi_fi_manager.html",
-"remote__signer_8cpp.html#a274b55d4777ae202a4cf5f08aeafde0a",
-"ui_8cpp.html#a801e2a6c76b5ebd8c0897b374bb01cb0"
+"globals_m.html",
+"md__a_r_c_h_i_t_e_c_t_u_r_e.html#autotoc_md34",
+"namespace_u_i.html#ae20486f26830f5a8d6312a32e1a5dfec",
+"nostr_8h_source.html",
+"ui_8cpp.html#a256c4320af439732def9402342903462"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

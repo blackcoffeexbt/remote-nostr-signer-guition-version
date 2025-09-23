@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NWC Point of Sale: src/display.h File Reference</title>
+<title>Nostr Remote Signer: src/display.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">NWC Point of Sale<span id="projectnumber">&#160;v1.0.0</span>
+   <div id="projectname">Nostr Remote Signer<span id="projectnumber">&#160;v1.0.0</span>
    </div>
-   <div id="projectbrief">Nostr Wallet Connect Point of Sale device for ESP32 with Lightning Network payments</div>
+   <div id="projectbrief">A NIP46 remote signer for Nostr running on the Guition 3.5inch touch display board.</div>
   </td>
  </tr>
  </tbody>
@@ -167,6 +167,17 @@ Functions</h2></td></tr>
 <tr class="separator:aa8aef5688a630d912c6d9bd1c764c542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d875ec473cbdd00bee7951951d81c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a75d875ec473cbdd00bee7951951d81c0">Display::turnOnBacklight</a> ()</td></tr>
 <tr class="separator:a75d875ec473cbdd00bee7951951d81c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4882df71e0a4d79fcf601ee407c01c39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a4882df71e0a4d79fcf601ee407c01c39">Display::turnOnBacklightForSigning</a> ()</td></tr>
+<tr class="memdesc:a4882df71e0a4d79fcf601ee407c01c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on backlight for signing event with reduced backlight turn off timeout.  <br /></td></tr>
+<tr class="separator:a4882df71e0a4d79fcf601ee407c01c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece4179acb03a4966d7064ef6946b091"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#aece4179acb03a4966d7064ef6946b091">Display::initBacklightTimeout</a> ()</td></tr>
+<tr class="separator:aece4179acb03a4966d7064ef6946b091"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a694dddf11915e58ecf50e9d9f0e9307f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a694dddf11915e58ecf50e9d9f0e9307f">Display::resetBacklightTimeout</a> ()</td></tr>
+<tr class="separator:a694dddf11915e58ecf50e9d9f0e9307f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d65628d3c5e7294cfd734a86fe1122b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a4d65628d3c5e7294cfd734a86fe1122b">Display::checkBacklightTimeout</a> ()</td></tr>
+<tr class="separator:a4d65628d3c5e7294cfd734a86fe1122b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28603b6415f9f3c21a4e9fed5ed180e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a28603b6415f9f3c21a4e9fed5ed180e3">Display::isBacklightOn</a> ()</td></tr>
+<tr class="separator:a28603b6415f9f3c21a4e9fed5ed180e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78f08fa1900213ef37200b256396765c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a78f08fa1900213ef37200b256396765c">Display::displayFlush</a> (lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)</td></tr>
 <tr class="separator:a78f08fa1900213ef37200b256396765c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d51aeecf9902984e423412bbe757155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_display.html#a3d51aeecf9902984e423412bbe757155">Display::touchpadRead</a> (lv_indev_drv_t *indev_driver, lv_indev_data_t *data)</td></tr>

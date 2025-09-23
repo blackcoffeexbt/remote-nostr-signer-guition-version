@@ -295,16 +295,16 @@ namespace UI {
         lv_obj_align(main_wifi_status_label, LV_ALIGN_TOP_RIGHT, 0, 13);
         lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x9E9E9E), 0);
         
-        // // Device Settings button
-        // lv_obj_t* shop_btn = lv_btn_create(main_container);
-        // lv_obj_set_size(shop_btn, lv_pct(100), 50);
-        // lv_obj_align(shop_btn, LV_ALIGN_TOP_MID, 0, 60);
-        // lv_obj_set_style_bg_color(shop_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
-        // lv_obj_add_event_cb(shop_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS_SUB);
+        // Device Settings button
+        lv_obj_t* device_settings_btn = lv_btn_create(main_container);
+        lv_obj_set_size(device_settings_btn, lv_pct(100), 50);
+        lv_obj_align(device_settings_btn, LV_ALIGN_TOP_MID, 0, 60);
+        lv_obj_set_style_bg_color(device_settings_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
+        lv_obj_add_event_cb(device_settings_btn, navigationEventHandler, LV_EVENT_CLICKED, (void*)SCREEN_SETTINGS_SUB);
         
-        // lv_obj_t* shop_label = lv_label_create(shop_btn);
-        // lv_label_set_text(shop_label, "Device Settings");
-        // lv_obj_center(shop_label);
+        lv_obj_t* device_settings_label = lv_label_create(device_settings_btn);
+        lv_label_set_text(device_settings_label, "Device Settings");
+        lv_obj_center(device_settings_label);
         
         // WiFi settings button
         lv_obj_t* wifi_btn = lv_btn_create(main_container);

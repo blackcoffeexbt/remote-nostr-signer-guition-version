@@ -1,0 +1,1504 @@
+\hypertarget{namespace_remote_signer}{}\doxysection{Remote\+Signer Namespace Reference}
+\label{namespace_remote_signer}\index{RemoteSigner@{RemoteSigner}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_remote_signer_1_1_config}{Config}}
+\item 
+namespace \mbox{\hyperlink{namespace_remote_signer_1_1_methods}{Methods}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{signer\+\_\+status\+\_\+callback\+\_\+t}}) (bool connected, const String \&status)
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{signing\+\_\+confirmation\+\_\+callback\+\_\+t}}) (bool approved)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac40d7ac89589301db2857d5f90b03cc9}{init}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_af6c3719ca2b21193fa31b813b821361e}{cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}{load\+Config\+From\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aaa0b057014dc123b0c28892e7f16003a}{save\+Config\+To\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}{refresh\+Secret\+Key}} ()
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{get\+Bunker\+Url}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{connect\+To\+Relay}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{disconnect}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac1e46c8aceaf55c3b831c4d3b9547992}{websocket\+Event}} (WStype\+\_\+t type, uint8\+\_\+t $\ast$payload, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}{handle\+Websocket\+Message}} (void $\ast$arg, uint8\+\_\+t $\ast$data, size\+\_\+t len)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}{handle\+Signing\+Request\+Event}} (uint8\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}{handle\+Connect}} (Dynamic\+Json\+Document \&doc, const String \&requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}{handle\+Sign\+Event}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}{handle\+Ping}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}{handle\+Get\+Public\+Key}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}{handle\+Nip04\+Encrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}{handle\+Nip04\+Decrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}{handle\+Nip44\+Encrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}{handle\+Nip44\+Decrypt}} (Dynamic\+Json\+Document \&doc, const char $\ast$requesting\+Pub\+Key)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{is\+Client\+Authorized}} (const char $\ast$client\+Pub\+Key)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}{check\+Client\+Is\+Authorized}} (const char $\ast$client\+Pub\+Key, const char $\ast$secret)
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}{prompt\+User\+For\+Authorization}} (const String \&requesting\+Npub)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}{add\+Authorized\+Client}} (const char $\ast$client\+Pub\+Key)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ae5f7ceb9142bbed66ee40e8159e9ce6c}{process\+Loop}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a389e573d2a6cf08f1cc623995fe0d126}{send\+Ping}} ()
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}{is\+Initialized}} ()
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{is\+Connected}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a095ade22697151a633cb71017d76c954}{update\+Time}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_remote_signer_a3f8262db983da9c80bc62fc9145da90b}{get\+Unix\+Timestamp}} ()
+\item 
+NTPClient \& \mbox{\hyperlink{namespace_remote_signer_ab477605a551a9848f3bf6aca25027288}{get\+Time\+Client}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ad280d465fcc68690f7cd2ecd05e0cc42}{set\+Status\+Callback}} (\mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{signer\+\_\+status\+\_\+callback\+\_\+t}} callback)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ac8b79d546a92d1130cdfd35a192e2fa1}{set\+Signing\+Confirmation\+Callback}} (\mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{signing\+\_\+confirmation\+\_\+callback\+\_\+t}} callback)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}{display\+Signing\+Request}} (const String \&event\+Kind, const String \&content)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{display\+Connection\+Status}} (bool connected)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{get\+Relay\+Url}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}{set\+Relay\+Url}} (const String \&url)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{get\+Private\+Key}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}{set\+Private\+Key}} (const String \&priv\+Key\+Hex)
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_ab63e557eaa270158c31089485af13853}{get\+Public\+Key}} ()
+\item 
+String \mbox{\hyperlink{namespace_remote_signer_af3b6baaa02bfc245172094d369d9a29e}{get\+Secret\+Key}} ()
+\item 
+Web\+Sockets\+Client \& \mbox{\hyperlink{namespace_remote_signer_abefa31362f0296822ae35e4e891e6f5d}{get\+Web\+Socket\+Client}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a401f8ea87e71ba13a57a1696402e9955}{set\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_afefdfa0549d3aa2d4c19286036651475}{reset\+Websocket\+Fragment\+State}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aac5d8264940a7c169e87e34742e149b0}{update\+Connection\+Status}} ()
+\item 
+bool \mbox{\hyperlink{namespace_remote_signer_ab978644bceacd4d526d8a9173d174f41}{is\+Fragment\+In\+Progress}} ()
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_a253d2d02fcdf70ced4fb1436fc6aae6f}{handle\+Fragment}} (uint8\+\_\+t $\ast$payload, size\+\_\+t length, bool is\+Binary, bool is\+Last)
+\item 
+void \mbox{\hyperlink{namespace_remote_signer_aed2b0e07f2216c3807cb2ca7c34febe8}{show\+Signing\+Confirmation}} (const String \&event\+Details)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}\label{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}} 
+\index{RemoteSigner@{RemoteSigner}!signer\_status\_callback\_t@{signer\_status\_callback\_t}}
+\index{signer\_status\_callback\_t@{signer\_status\_callback\_t}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{signer\_status\_callback\_t}{signer\_status\_callback\_t}}
+{\footnotesize\ttfamily typedef void($\ast$ Remote\+Signer\+::signer\+\_\+status\+\_\+callback\+\_\+t) (bool connected, const String \&status)}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8h_source_l00072}{72}} of file \mbox{\hyperlink{remote__signer_8h_source}{remote\+\_\+signer.\+h}}.
+
+\mbox{\Hypertarget{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}\label{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}} 
+\index{RemoteSigner@{RemoteSigner}!signing\_confirmation\_callback\_t@{signing\_confirmation\_callback\_t}}
+\index{signing\_confirmation\_callback\_t@{signing\_confirmation\_callback\_t}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{signing\_confirmation\_callback\_t}{signing\_confirmation\_callback\_t}}
+{\footnotesize\ttfamily typedef void($\ast$ Remote\+Signer\+::signing\+\_\+confirmation\+\_\+callback\+\_\+t) (bool approved)}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8h_source_l00084}{84}} of file \mbox{\hyperlink{remote__signer_8h_source}{remote\+\_\+signer.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}\label{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}} 
+\index{RemoteSigner@{RemoteSigner}!addAuthorizedClient@{addAuthorizedClient}}
+\index{addAuthorizedClient@{addAuthorizedClient}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{addAuthorizedClient()}{addAuthorizedClient()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::add\+Authorized\+Client (\begin{DoxyParamCaption}\item[{const char $\ast$}]{client\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00666}{666}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (authorizedClients.indexOf(clientPubKey)\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (authorizedClients.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ authorizedClients\ +=\ \textcolor{stringliteral}{"{}|"{}};}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ authorizedClients\ +=\ clientPubKey;}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ saveConfigToPreferences();}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::addAuthorizedClient()\ -\/\ Client\ authorized:\ "{}}\ +\ String(clientPubKey));}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00675\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}\label{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}} 
+\index{RemoteSigner@{RemoteSigner}!checkClientIsAuthorized@{checkClientIsAuthorized}}
+\index{checkClientIsAuthorized@{checkClientIsAuthorized}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{checkClientIsAuthorized()}{checkClientIsAuthorized()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::check\+Client\+Is\+Authorized (\begin{DoxyParamCaption}\item[{const char $\ast$}]{client\+Pub\+Key,  }\item[{const char $\ast$}]{secret }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00637}{637}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ client\ is\ already\ authorized}}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(clientPubKey))\ \{}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ secret\ matches\ current\ secret\ key}}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ String\ secretTrimmed\ =\ String(secret);}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ secretTrimmed.trim();}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (secretTrimmed\ ==\ secretKey)\ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::checkClientIsAuthorized()\ -\/\ Secret\ key\ matches,\ authorizing\ client"{}});}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ addAuthorizedClient(clientPubKey);}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prompt\ user\ for\ authorization}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}{promptUserForAuthorization}}(clientPubKey);}
+\DoxyCodeLine{00655\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_af6c3719ca2b21193fa31b813b821361e}\label{namespace_remote_signer_af6c3719ca2b21193fa31b813b821361e}} 
+\index{RemoteSigner@{RemoteSigner}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00090}{90}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::cleanup()\ -\/\ Cleaning\ up\ Remote\ Signer\ module"{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{disconnect}}();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ signer\_initialized\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::cleanup()\ -\/\ Remote\ Signer\ module\ cleaned\ up"{}});}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}\label{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}} 
+\index{RemoteSigner@{RemoteSigner}!connectToRelay@{connectToRelay}}
+\index{connectToRelay@{connectToRelay}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{connectToRelay()}{connectToRelay()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::connect\+To\+Relay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00161}{161}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!signer\_initialized\ ||\ relayUrl.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::connectToRelay()\ -\/\ Cannot\ connect:\ not\ initialized\ or\ no\ relay\ URL"{}});}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connection\_in\_progress)\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::connectToRelay()\ -\/\ Connection\ already\ in\ progress"{}});}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::connectToRelay()\ -\/\ Connecting\ to\ relay:\ "{}}\ +\ relayUrl);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connection\ attempt\ \#"{}}\ +\ String(reconnection\_attempts\ +\ 1)\ +\ \textcolor{stringliteral}{"{}\ of\ "{}}\ +\ String(Config::MAX\_RECONNECT\_ATTEMPTS));}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ last\_connection\_attempt\ =\ millis();}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ display\ immediately}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ hostname\ from\ relay\ URL\ (remove\ wss://\ prefix)}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ String\ hostname\ =\ relayUrl;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ hostname.replace(\textcolor{stringliteral}{"{}wss://"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ hostname.replace(\textcolor{stringliteral}{"{}ws://"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ webSocket.beginSSL(hostname.c\_str(),\ 443,\ \textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ webSocket.onEvent(websocketEvent);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ webSocket.setReconnectInterval(Config::MIN\_RECONNECT\_INTERVAL);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Connecting\ to\ relay..."{}});}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}\label{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}} 
+\index{RemoteSigner@{RemoteSigner}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00195}{195}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::disconnect()\ -\/\ Disconnecting\ from\ relay"{}});}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connection\ was\ active\ for:\ "{}}\ +\ String((millis()\ -\/\ last\_connection\_attempt)\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}s"{}});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ webSocket.disconnect();}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ display\ immediately}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Disconnected"{}});}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}\label{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}} 
+\index{RemoteSigner@{RemoteSigner}!displayConnectionStatus@{displayConnectionStatus}}
+\index{displayConnectionStatus@{displayConnectionStatus}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{displayConnectionStatus()}{displayConnectionStatus()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::display\+Connection\+Status (\begin{DoxyParamCaption}\item[{bool}]{connected }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00794}{794}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_label\ \&\&\ lv\_obj\_is\_valid(status\_label))\ \{}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ String\ statusText;}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ statusColor;}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connected)\ \{}
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusText\ =\ \textcolor{stringliteral}{"{}Relay:\ Connected"{}};}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusColor\ =\ 0x00FF00;\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (connection\_in\_progress)\ \{}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusText\ =\ \textcolor{stringliteral}{"{}Relay:\ Connecting..."{}};}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusColor\ =\ 0xFFA500;\ \textcolor{comment}{//\ Orange}}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (manual\_reconnect\_needed\ \&\&\ reconnection\_attempts\ >\ 0)\ \{}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusText\ =\ \textcolor{stringliteral}{"{}Relay:\ Reconnecting\ ("{}}\ +\ String(reconnection\_attempts)\ +\ \textcolor{stringliteral}{"{}/"{}}\ +\ String(Config::MAX\_RECONNECT\_ATTEMPTS)\ +\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusColor\ =\ 0xFFA500;\ \textcolor{comment}{//\ Orange}}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (reconnection\_attempts\ >=\ Config::MAX\_RECONNECT\_ATTEMPTS)\ \{}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusText\ =\ \textcolor{stringliteral}{"{}Relay:\ Failed"{}};}
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusColor\ =\ 0xFF0000;\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusText\ =\ \textcolor{stringliteral}{"{}Relay:\ Disconnected"{}};}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statusColor\ =\ 0x9E9E9E;\ \textcolor{comment}{//\ Grey}}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_label\_set\_text(status\_label,\ statusText.c\_str());}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_set\_style\_text\_color(status\_label,\ lv\_color\_hex(statusColor),\ 0);}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00819\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}\label{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}} 
+\index{RemoteSigner@{RemoteSigner}!displaySigningRequest@{displaySigningRequest}}
+\index{displaySigningRequest@{displaySigningRequest}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{displaySigningRequest()}{displaySigningRequest()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::display\+Signing\+Request (\begin{DoxyParamCaption}\item[{const String \&}]{event\+Kind,  }\item[{const String \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00790}{790}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::displaySigningRequest()\ -\/\ "{}}\ +\ eventKind\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ content);}
+\DoxyCodeLine{00792\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}\label{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}} 
+\index{RemoteSigner@{RemoteSigner}!getBunkerUrl@{getBunkerUrl}}
+\index{getBunkerUrl@{getBunkerUrl}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getBunkerUrl()}{getBunkerUrl()}}
+{\footnotesize\ttfamily String Remote\+Signer\+::get\+Bunker\+Url (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00153}{153}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (publicKeyHex.length()\ ==\ 0\ ||\ relayUrl.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}bunker://"{}}\ +\ publicKeyHex\ +\ \textcolor{stringliteral}{"{}?relay="{}}\ +\ relayUrl\ +\ \textcolor{stringliteral}{"{}\&secret="{}}\ +\ secretKey;}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}\label{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}} 
+\index{RemoteSigner@{RemoteSigner}!getPrivateKey@{getPrivateKey}}
+\index{getPrivateKey@{getPrivateKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getPrivateKey()}{getPrivateKey()}}
+{\footnotesize\ttfamily String Remote\+Signer\+::get\+Private\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00824}{824}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00824\ \{\ \textcolor{keywordflow}{return}\ privateKeyHex;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab63e557eaa270158c31089485af13853}\label{namespace_remote_signer_ab63e557eaa270158c31089485af13853}} 
+\index{RemoteSigner@{RemoteSigner}!getPublicKey@{getPublicKey}}
+\index{getPublicKey@{getPublicKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getPublicKey()}{getPublicKey()}}
+{\footnotesize\ttfamily String Remote\+Signer\+::get\+Public\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00844}{844}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00844\ \{\ \textcolor{keywordflow}{return}\ publicKeyHex;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}\label{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}} 
+\index{RemoteSigner@{RemoteSigner}!getRelayUrl@{getRelayUrl}}
+\index{getRelayUrl@{getRelayUrl}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getRelayUrl()}{getRelayUrl()}}
+{\footnotesize\ttfamily String Remote\+Signer\+::get\+Relay\+Url (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00822}{822}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00822\ \{\ \textcolor{keywordflow}{return}\ relayUrl;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_af3b6baaa02bfc245172094d369d9a29e}\label{namespace_remote_signer_af3b6baaa02bfc245172094d369d9a29e}} 
+\index{RemoteSigner@{RemoteSigner}!getSecretKey@{getSecretKey}}
+\index{getSecretKey@{getSecretKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getSecretKey()}{getSecretKey()}}
+{\footnotesize\ttfamily String Remote\+Signer\+::get\+Secret\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00845}{845}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00845\ \{\ \textcolor{keywordflow}{return}\ secretKey;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab477605a551a9848f3bf6aca25027288}\label{namespace_remote_signer_ab477605a551a9848f3bf6aca25027288}} 
+\index{RemoteSigner@{RemoteSigner}!getTimeClient@{getTimeClient}}
+\index{getTimeClient@{getTimeClient}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getTimeClient()}{getTimeClient()}}
+{\footnotesize\ttfamily NTPClient \& Remote\+Signer\+::get\+Time\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00778}{778}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ timeClient;}
+\DoxyCodeLine{00780\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a3f8262db983da9c80bc62fc9145da90b}\label{namespace_remote_signer_a3f8262db983da9c80bc62fc9145da90b}} 
+\index{RemoteSigner@{RemoteSigner}!getUnixTimestamp@{getUnixTimestamp}}
+\index{getUnixTimestamp@{getUnixTimestamp}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getUnixTimestamp()}{getUnixTimestamp()}}
+{\footnotesize\ttfamily unsigned long Remote\+Signer\+::get\+Unix\+Timestamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00774}{774}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ unixTimestamp;}
+\DoxyCodeLine{00776\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_abefa31362f0296822ae35e4e891e6f5d}\label{namespace_remote_signer_abefa31362f0296822ae35e4e891e6f5d}} 
+\index{RemoteSigner@{RemoteSigner}!getWebSocketClient@{getWebSocketClient}}
+\index{getWebSocketClient@{getWebSocketClient}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{getWebSocketClient()}{getWebSocketClient()}}
+{\footnotesize\ttfamily Web\+Sockets\+Client \& Remote\+Signer\+::get\+Web\+Socket\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00846}{846}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00846\ \{\ \textcolor{keywordflow}{return}\ webSocket;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}\label{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}} 
+\index{RemoteSigner@{RemoteSigner}!handleConnect@{handleConnect}}
+\index{handleConnect@{handleConnect}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleConnect()}{handleConnect()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Connect (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const String \&}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00366}{366}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ String\ secret\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][1];}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleConnect()\ -\/\ Connect\ request\ from:\ "{}}\ +\ requestingPubKey);}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}{checkClientIsAuthorized}}(requestingPubKey.c\_str(),\ secret.c\_str()))\ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleConnect()\ -\/\ Client\ not\ authorized"{}});}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ acknowledgment}}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ secret.length()\ >\ 0\ ?\ }
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ secret\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}}\ :}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}ack\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleConnect()\ -\/\ Sending\ connect\ response:\ "{}}\ +\ responseMsg);}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encrypt\ and\ send\ response\ using\ NIP-\/44}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),\ }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),\ }
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey.c\_str(),\ }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,\ }
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,\ }
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,\ }
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleConnect()\ -\/\ Response\ sent"{}});}
+\DoxyCodeLine{00397\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a253d2d02fcdf70ced4fb1436fc6aae6f}\label{namespace_remote_signer_a253d2d02fcdf70ced4fb1436fc6aae6f}} 
+\index{RemoteSigner@{RemoteSigner}!handleFragment@{handleFragment}}
+\index{handleFragment@{handleFragment}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleFragment()}{handleFragment()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Fragment (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{payload,  }\item[{size\+\_\+t}]{length,  }\item[{bool}]{is\+Binary,  }\item[{bool}]{is\+Last }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}\label{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}} 
+\index{RemoteSigner@{RemoteSigner}!handleGetPublicKey@{handleGetPublicKey}}
+\index{handleGetPublicKey@{handleGetPublicKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleGetPublicKey()}{handleGetPublicKey()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Get\+Public\+Key (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00504}{504}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ publicKeyHex\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleGetPublicKey()\ -\/\ Public\ key\ sent\ to:\ "{}}\ +\ String(requestingPubKey));}
+\DoxyCodeLine{00525\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}\label{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}} 
+\index{RemoteSigner@{RemoteSigner}!handleNip04Decrypt@{handleNip04Decrypt}}
+\index{handleNip04Decrypt@{handleNip04Decrypt}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleNip04Decrypt()}{handleNip04Decrypt()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Nip04\+Decrypt (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00553}{553}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ String\ thirdPartyPubKey\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][0];}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ String\ cipherText\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][1];}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ String\ decryptedMessage\ =\ \mbox{\hyperlink{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}{nostr::decryptNip04Ciphertext}}(cipherText,\ privateKeyHex,\ thirdPartyPubKey);}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ decryptedMessage\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip04"{}}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleNip04Decrypt()\ -\/\ NIP-\/04\ decryption\ completed"{}});}
+\DoxyCodeLine{00577\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}\label{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}} 
+\index{RemoteSigner@{RemoteSigner}!handleNip04Encrypt@{handleNip04Encrypt}}
+\index{handleNip04Encrypt@{handleNip04Encrypt}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleNip04Encrypt()}{handleNip04Encrypt()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Nip04\+Encrypt (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00527}{527}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ String\ thirdPartyPubKey\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][0];}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ String\ plaintext\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][1];}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ String\ encryptedMessage\ =\ \mbox{\hyperlink{namespacenostr_a2fa2b10644805a1cd2b329875134fdbd}{nostr::getCipherText}}(privateKeyHex.c\_str(),\ thirdPartyPubKey.c\_str(),\ plaintext);}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ encryptedMessage\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip04"{}}}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleNip04Encrypt()\ -\/\ NIP-\/04\ encryption\ completed"{}});}
+\DoxyCodeLine{00551\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}\label{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}} 
+\index{RemoteSigner@{RemoteSigner}!handleNip44Decrypt@{handleNip44Decrypt}}
+\index{handleNip44Decrypt@{handleNip44Decrypt}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleNip44Decrypt()}{handleNip44Decrypt()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Nip44\+Decrypt (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00606}{606}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ String\ thirdPartyPubKey\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][0];}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ String\ cipherText\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][1];}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ NIP-\/44\ decryption\ functions}}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ String\ decryptedMessage\ =\ \mbox{\hyperlink{nip44_8cpp_a131b96ad7e7f560b2fd7194ade183695}{executeDecryptMessageNip44}}(cipherText,\ privateKeyHex,\ thirdPartyPubKey);}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ decryptedMessage\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleNip44Decrypt()\ -\/\ NIP-\/44\ decryption\ completed"{}});}
+\DoxyCodeLine{00631\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}\label{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}} 
+\index{RemoteSigner@{RemoteSigner}!handleNip44Encrypt@{handleNip44Encrypt}}
+\index{handleNip44Encrypt@{handleNip44Encrypt}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleNip44Encrypt()}{handleNip44Encrypt()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Nip44\+Encrypt (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00579}{579}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ String\ thirdPartyPubKey\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][0];}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ String\ plaintext\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][1];}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ NIP-\/44\ encryption\ functions}}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ String\ encryptedMessage\ =\ \mbox{\hyperlink{nip44_8cpp_a9fca4f5d3adc798444724f0ef23cb0c6}{executeEncryptMessageNip44}}(plaintext,\ privateKeyHex,\ thirdPartyPubKey);}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ encryptedMessage\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleNip44Encrypt()\ -\/\ NIP-\/44\ encryption\ completed"{}});}
+\DoxyCodeLine{00604\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}\label{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}} 
+\index{RemoteSigner@{RemoteSigner}!handlePing@{handlePing}}
+\index{handlePing@{handlePing}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handlePing()}{handlePing()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Ping (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00481}{481}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}pong\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handlePing()\ -\/\ Pong\ sent\ to:\ "{}}\ +\ String(requestingPubKey));}
+\DoxyCodeLine{00502\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}\label{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}} 
+\index{RemoteSigner@{RemoteSigner}!handleSignEvent@{handleSignEvent}}
+\index{handleSignEvent@{handleSignEvent}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleSignEvent()}{handleSignEvent()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Sign\+Event (\begin{DoxyParamCaption}\item[{Dynamic\+Json\+Document \&}]{doc,  }\item[{const char $\ast$}]{requesting\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00399}{399}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ String\ requestId\ =\ doc[\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Sign\ event\ request\ from:\ "{}}\ +\ String(requestingPubKey));}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(requestingPubKey))\ \{}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Client\ not\ authorized"{}});}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ event\ parameters\ -\/\ first\ parameter\ contains\ the\ event\ to\ sign}}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ String\ eventParams\ =\ doc[\textcolor{stringliteral}{"{}params"{}}][0].as<String>();}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ event\ data\ from\ the\ first\ parameter}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ DeserializationError\ parseError\ =\ deserializeJson(eventParamsDoc,\ eventParams);}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parseError)\ \{}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Failed\ to\ parse\ event\ params:\ "{}}\ +\ String(parseError.c\_str()));}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ event\ details}}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ uint16\_t\ kind\ =\ eventParamsDoc[\textcolor{stringliteral}{"{}kind"{}}];}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ String\ content\ =\ eventParamsDoc[\textcolor{stringliteral}{"{}content"{}}].as<String>();}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ String\ tags\ =\ eventParamsDoc[\textcolor{stringliteral}{"{}tags"{}}].as<String>();}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ timestamp\ =\ eventParamsDoc[\textcolor{stringliteral}{"{}created\_at"{}}];}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Event\ kind:\ "{}}\ +\ String(kind));}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Content:\ "{}}\ +\ content.substring(0,\ 50)\ +\ \textcolor{stringliteral}{"{}..."{}});}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ signing\ confirmation\ on\ display}}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}{displaySigningRequest}}(\textcolor{stringliteral}{"{}Kind\ "{}}\ +\ String(kind),\ content.substring(0,\ 30)\ +\ \textcolor{stringliteral}{"{}..."{}});}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ signing\ modal}}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a301464f5f5573171a492c3c337855edf}{UI::showSigningModal}}();}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ auto-\/approve\ (TODO:\ Add\ UI\ confirmation)}}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sign\ the\ event\ using\ nostr\ library}}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ String\ signedEvent\ =\ \mbox{\hyperlink{namespacenostr_a99a4781da61520d3c58841370c2c3a10}{nostr::getNote}}(}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ timestamp,}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ content,}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ kind,}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ tags}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Escape\ quotes\ in\ the\ signed\ event\ for\ JSON\ response}}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ signedEvent.replace(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}},\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)\(\backslash\)\(\backslash\)"{}});}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ signedEvent.replace(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}},\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ response}}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ String\ responseMsg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ requestId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}result\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ signedEvent\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ modal\ to\ show\ broadcasting\ status}}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a84b77f17721ed8d4ba54a0a8769e04a1}{UI::updateSigningModalText}}(\textcolor{stringliteral}{"{}Broadcasting"{}});}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encrypt\ and\ send\ response}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ String\ encryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ privateKeyHex.c\_str(),}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex.c\_str(),}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ requestingPubKey,}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ 24133,}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ unixTimestamp,}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ responseMsg,}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nip44"{}}}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedResponse);}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSignEvent()\ -\/\ Event\ signed\ and\ response\ sent"{}});}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hide\ signing\ modal\ after\ 250ms\ delay\ as\ requested}}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_ac722bafc1b8838e0012507dcd83d239c}{UI::hideSigningModalDelayed}}(250);}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ notification\ on\ device\ screen}}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a3e86a09bb46232f85060b53f5060a2ca}{UI::showEventSignedNotification}}(String(kind),\ content);}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ UI\ of\ successful\ signing}}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (signing\_callback)\ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ signing\_callback(\textcolor{keyword}{true});}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00479\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}\label{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}} 
+\index{RemoteSigner@{RemoteSigner}!handleSigningRequestEvent@{handleSigningRequestEvent}}
+\index{handleSigningRequestEvent@{handleSigningRequestEvent}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleSigningRequestEvent()}{handleSigningRequestEvent()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Signing\+Request\+Event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00304}{304}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ String\ dataStr\ =\ String((\textcolor{keywordtype}{char}*)data);}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Processing\ signing\ request"{}});}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ sender\ public\ key\ from\ the\ event\ using\ nostr\ library}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ String\ requestingPubKey\ =\ \mbox{\hyperlink{namespacenostr_abdbc8350c239ae90de2c10744a2fad6c}{nostr::getSenderPubKeyHex}}(dataStr);}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Requesting\ pubkey:\ "{}}\ +\ requestingPubKey);}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Determine\ encryption\ type\ (NIP-\/04\ vs\ NIP-\/44)\ and\ decrypt}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ String\ decryptedMessage\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dataStr.indexOf(\textcolor{stringliteral}{"{}?iv="{}})\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Using\ NIP-\/04\ decryption"{}});}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ decryptedMessage\ =\ \mbox{\hyperlink{namespacenostr_a99b54ccdb024947dfabe8ea69c57214e}{nostr::nip04Decrypt}}(privateKeyHex.c\_str(),\ dataStr);}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Using\ NIP-\/44\ decryption"{}});}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ decryptedMessage\ =\ \mbox{\hyperlink{namespacenostr_a4a0c52a59a4083625f1704bf02966af8}{nostr::nip44Decrypt}}(privateKeyHex.c\_str(),\ dataStr);}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (decryptedMessage.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Failed\ to\ decrypt\ message"{}});}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Decrypted\ message:\ "{}}\ +\ decryptedMessage);}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ decrypted\ JSON}}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(eventDoc,\ decryptedMessage);}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ JSON\ parsing\ failed:\ "{}}\ +\ String(error.c\_str()));}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ String\ method\ =\ eventDoc[\textcolor{stringliteral}{"{}method"{}}];}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Method:\ "{}}\ +\ method);}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::CONNECT)\ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}{handleConnect}}(eventDoc,\ requestingPubKey);}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::SIGN\_EVENT)\ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}{handleSignEvent}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::PING)\ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}{handlePing}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::GET\_PUBLIC\_KEY)\ \{}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}{handleGetPublicKey}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::NIP04\_ENCRYPT)\ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}{handleNip04Encrypt}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::NIP04\_DECRYPT)\ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}{handleNip04Decrypt}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::NIP44\_ENCRYPT)\ \{}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}{handleNip44Encrypt}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (method\ ==\ Methods::NIP44\_DECRYPT)\ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a4882df71e0a4d79fcf601ee407c01c39}{Display::turnOnBacklightForSigning}}();}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}{handleNip44Decrypt}}(eventDoc,\ requestingPubKey.c\_str());}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleSigningRequestEvent()\ -\/\ Unknown\ method:\ "{}}\ +\ method);}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}\label{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}} 
+\index{RemoteSigner@{RemoteSigner}!handleWebsocketMessage@{handleWebsocketMessage}}
+\index{handleWebsocketMessage@{handleWebsocketMessage}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{handleWebsocketMessage()}{handleWebsocketMessage()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::handle\+Websocket\+Message (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg,  }\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00294}{294}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ String\ message\ =\ String((\textcolor{keywordtype}{char}*)data);}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ this\ is\ a\ NIP-\/46\ signing\ request\ (EVENT\ with\ kind\ 24133)}}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (message.indexOf(\textcolor{stringliteral}{"{}EVENT"{}})\ !=\ -\/1\ \&\&\ message.indexOf(\textcolor{stringliteral}{"{}24133"{}})\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::handleWebsocketMessage()\ -\/\ Received\ signing\ request"{}});}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}{handleSigningRequestEvent}}(data);}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ac40d7ac89589301db2857d5f90b03cc9}\label{namespace_remote_signer_ac40d7ac89589301db2857d5f90b03cc9}} 
+\index{RemoteSigner@{RemoteSigner}!init@{init}}
+\index{init@{init}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00070}{70}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::init()\ -\/\ Initializing\ Remote\ Signer\ module"{}});}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ memory\ for\ JSON\ documents}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ eventDoc\ =\ DynamicJsonDocument(JSON\_DOC\_SIZE);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ eventParamsDoc\ =\ DynamicJsonDocument(JSON\_DOC\_SIZE);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Load\ configuration}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}{loadConfigFromPreferences}}();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ initial\ secret\ key}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}{refreshSecretKey}}();}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ time\ client}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ timeClient.begin();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ signer\_initialized\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::init()\ -\/\ Remote\ Signer\ module\ initialized"{}});}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}\label{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}} 
+\index{RemoteSigner@{RemoteSigner}!isClientAuthorized@{isClientAuthorized}}
+\index{isClientAuthorized@{isClientAuthorized}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{isClientAuthorized()}{isClientAuthorized()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::is\+Client\+Authorized (\begin{DoxyParamCaption}\item[{const char $\ast$}]{client\+Pub\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00633}{633}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ authorizedClients.indexOf(clientPubKey)\ !=\ -\/1;}
+\DoxyCodeLine{00635\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}\label{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}} 
+\index{RemoteSigner@{RemoteSigner}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00765}{765}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ webSocket.isConnected();}
+\DoxyCodeLine{00767\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ab978644bceacd4d526d8a9173d174f41}\label{namespace_remote_signer_ab978644bceacd4d526d8a9173d174f41}} 
+\index{RemoteSigner@{RemoteSigner}!isFragmentInProgress@{isFragmentInProgress}}
+\index{isFragmentInProgress@{isFragmentInProgress}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{isFragmentInProgress()}{isFragmentInProgress()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::is\+Fragment\+In\+Progress (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}\label{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}} 
+\index{RemoteSigner@{RemoteSigner}!isInitialized@{isInitialized}}
+\index{isInitialized@{isInitialized}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{isInitialized()}{isInitialized()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::is\+Initialized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00761}{761}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ signer\_initialized;}
+\DoxyCodeLine{00763\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}\label{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}} 
+\index{RemoteSigner@{RemoteSigner}!loadConfigFromPreferences@{loadConfigFromPreferences}}
+\index{loadConfigFromPreferences@{loadConfigFromPreferences}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{loadConfigFromPreferences()}{loadConfigFromPreferences()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::load\+Config\+From\+Preferences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00099}{99}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ Preferences\ prefs;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ prefs.begin(\textcolor{stringliteral}{"{}signer"{}},\ \textcolor{keyword}{true});\ \textcolor{comment}{//\ Read-\/only}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ relayUrl\ =\ prefs.getString(\textcolor{stringliteral}{"{}relay\_url"{}},\ \textcolor{stringliteral}{"{}wss://relay.nostriot.com"{}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ privateKeyHex\ =\ prefs.getString(\textcolor{stringliteral}{"{}private\_key"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ derive\ public\ key\ from\ private\ key}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privateKeyHex.length()\ ==\ 64)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PrivateKey\ privKey(privateKeyBytes);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privKey.publicKey();}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ pub.toString();}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remove\ leading\ 2\ bytes\ from\ public\ key}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ publicKeyHex.substring(2);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner:\ ERROR\ -\/\ Failed\ to\ derive\ public\ key"{}});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ authorizedClients\ =\ prefs.getString(\textcolor{stringliteral}{"{}auth\_clients"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ prefs.end();}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::loadConfigFromPreferences()\ -\/\ Configuration\ loaded"{}});}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Relay\ URL:\ "{}}\ +\ relayUrl);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Has\ private\ key:\ "{}}\ +\ String(privateKeyHex.length()\ >\ 0\ ?\ \textcolor{stringliteral}{"{}Yes"{}}\ :\ \textcolor{stringliteral}{"{}No"{}}));}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ae5f7ceb9142bbed66ee40e8159e9ce6c}\label{namespace_remote_signer_ae5f7ceb9142bbed66ee40e8159e9ce6c}} 
+\index{RemoteSigner@{RemoteSigner}!processLoop@{processLoop}}
+\index{processLoop@{processLoop}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{processLoop()}{processLoop()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::process\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00677}{677}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!signer\_initialized)\ \{}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ time}}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ timeClient.update();}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ unixTimestamp\ =\ timeClient.getEpochTime();}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ WebSocket\ events}}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ webSocket.loop();}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ periodic\ ping}}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ now\ =\ millis();}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (now\ -\/\ last\_ws\_ping\ >\ Config::WS\_PING\_INTERVAL)\ \{}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ sendPing();}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_ping\ =\ now;}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ status\ updates\ every\ 5\ seconds}}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ last\_status\_update\ =\ 0;}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (now\ -\/\ last\_status\_update\ >\ 5000)\ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}());}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \ \ \ \ last\_status\_update\ =\ now;}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Debug:\ Log\ connection\ health\ every\ 30\ seconds}}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ last\_debug\_log\ =\ 0;}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (now\ -\/\ last\_debug\_log\ >\ 30000)\ \{}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}())\ \{}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::processLoop()\ -\/\ Connection\ healthy.\ Last\ message:\ "{}}\ +\ String((now\ -\/\ last\_ws\_message\_received)\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}s\ ago"{}});}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::processLoop()\ -\/\ Not\ connected.\ Manual\ reconnect\ needed:\ "{}}\ +\ String(manual\_reconnect\_needed\ ?\ \textcolor{stringliteral}{"{}Yes"{}}\ :\ \textcolor{stringliteral}{"{}No"{}}));}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ last\_debug\_log\ =\ now;}
+\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ connection\ health}}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}()\ \&\&\ (now\ -\/\ last\_ws\_message\_received\ >\ Config::CONNECTION\_TIMEOUT))\ \{}
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::processLoop()\ -\/\ Connection\ timeout\ detected"{}});}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Last\ message\ received:\ "{}}\ +\ String((now\ -\/\ last\_ws\_message\_received)\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}s\ ago"{}});}
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{disconnect}}();}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \ \ \ \ manual\_reconnect\_needed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ manual\ reconnection\ with\ exponential\ backoff}}
+\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (manual\_reconnect\_needed\ \&\&\ !connection\_in\_progress\ \&\&\ !\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}())\ \{}
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ backoff\_delay\ =\ Config::MIN\_RECONNECT\_INTERVAL\ *\ (1\ <<\ min(reconnection\_attempts,\ 5));\ \textcolor{comment}{//\ Cap\ at\ 32x\ base\ interval}}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (now\ -\/\ last\_reconnect\_attempt\ >=\ backoff\_delay)\ \{}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reconnection\_attempts\ <\ Config::MAX\_RECONNECT\_ATTEMPTS)\ \{}
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::processLoop()\ -\/\ Attempting\ manual\ reconnection\ \#"{}}\ +\ String(reconnection\_attempts\ +\ 1));}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Backoff\ delay\ was:\ "{}}\ +\ String(backoff\_delay)\ +\ \textcolor{stringliteral}{"{}ms"{}});}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{connectToRelay}}();}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_reconnect\_attempt\ =\ now;}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts++;}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::processLoop()\ -\/\ Max\ reconnection\ attempts\ reached,\ giving\ up"{}});}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ reboot\ the\ device}}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP.restart();}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manual\_reconnect\_needed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts\ =\ 0;}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ display\ immediately}}
+\DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Connection\ failed\ permanently"{}});}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00750\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}\label{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}} 
+\index{RemoteSigner@{RemoteSigner}!promptUserForAuthorization@{promptUserForAuthorization}}
+\index{promptUserForAuthorization@{promptUserForAuthorization}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{promptUserForAuthorization()}{promptUserForAuthorization()}}
+{\footnotesize\ttfamily bool Remote\+Signer\+::prompt\+User\+For\+Authorization (\begin{DoxyParamCaption}\item[{const String \&}]{requesting\+Npub }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00657}{657}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::promptUserForAuthorization()\ -\/\ Prompting\ user\ for:\ "{}}\ +\ requestingNpub);}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Implement\ UI\ prompt\ for\ user\ authorization}}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ automatically\ authorize\ (should\ be\ replaced\ with\ actual\ UI)}}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}{addAuthorizedClient}}(requestingNpub.c\_str());}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00664\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}\label{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}} 
+\index{RemoteSigner@{RemoteSigner}!refreshSecretKey@{refreshSecretKey}}
+\index{refreshSecretKey@{refreshSecretKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{refreshSecretKey()}{refreshSecretKey()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::refresh\+Secret\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00144}{144}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ a\ random\ 64\ character\ hex\ string}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ secretKey\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 64;\ i++)\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ secretKey\ +=\ \textcolor{stringliteral}{"{}0123456789abcdef"{}}[esp\_random()\ \%\ 16];}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::refreshSecretKey()\ -\/\ New\ secret\ key\ generated"{}});}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_afefdfa0549d3aa2d4c19286036651475}\label{namespace_remote_signer_afefdfa0549d3aa2d4c19286036651475}} 
+\index{RemoteSigner@{RemoteSigner}!resetWebsocketFragmentState@{resetWebsocketFragmentState}}
+\index{resetWebsocketFragmentState@{resetWebsocketFragmentState}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{resetWebsocketFragmentState()}{resetWebsocketFragmentState()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::reset\+Websocket\+Fragment\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_remote_signer_aaa0b057014dc123b0c28892e7f16003a}\label{namespace_remote_signer_aaa0b057014dc123b0c28892e7f16003a}} 
+\index{RemoteSigner@{RemoteSigner}!saveConfigToPreferences@{saveConfigToPreferences}}
+\index{saveConfigToPreferences@{saveConfigToPreferences}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{saveConfigToPreferences()}{saveConfigToPreferences()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::save\+Config\+To\+Preferences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00130}{130}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ Preferences\ prefs;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ prefs.begin(\textcolor{stringliteral}{"{}signer"{}},\ \textcolor{keyword}{false});\ \textcolor{comment}{//\ Read-\/write}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}relay\_url"{}},\ relayUrl);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}private\_key"{}},\ privateKeyHex);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}public\_key"{}},\ publicKeyHex);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}auth\_clients"{}},\ authorizedClients);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ prefs.end();}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::saveConfigToPreferences()\ -\/\ Configuration\ saved"{}});}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a389e573d2a6cf08f1cc623995fe0d126}\label{namespace_remote_signer_a389e573d2a6cf08f1cc623995fe0d126}} 
+\index{RemoteSigner@{RemoteSigner}!sendPing@{sendPing}}
+\index{sendPing@{sendPing}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{sendPing()}{sendPing()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::send\+Ping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00752}{752}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}())\ \{}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::sendPing()\ -\/\ Sending\ ping\ to\ relay"{}});}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.sendPing();}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::sendPing()\ -\/\ Cannot\ send\ ping:\ not\ connected"{}});}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00759\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}\label{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}} 
+\index{RemoteSigner@{RemoteSigner}!setPrivateKey@{setPrivateKey}}
+\index{setPrivateKey@{setPrivateKey}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{setPrivateKey()}{setPrivateKey()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::set\+Private\+Key (\begin{DoxyParamCaption}\item[{const String \&}]{priv\+Key\+Hex }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00825}{825}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ privateKeyHex\ =\ privKeyHex;\ }
+\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Derive\ public\ key\ automatically}}
+\DoxyCodeLine{00828\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privKeyHex.length()\ ==\ 64)\ \{}
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fromHex(privKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PrivateKey\ privKey(privateKeyBytes);}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privKey.publicKey();}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ pub.toString();}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remove\ leading\ 2\ bytes\ from\ public\ key}}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ publicKeyHex.substring(2);}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner:\ Derived\ public\ key:\ "{}}\ +\ publicKeyHex);}
+\DoxyCodeLine{00839\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner:\ ERROR\ -\/\ Failed\ to\ derive\ public\ key"{}});}
+\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00843\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}\label{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}} 
+\index{RemoteSigner@{RemoteSigner}!setRelayUrl@{setRelayUrl}}
+\index{setRelayUrl@{setRelayUrl}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{setRelayUrl()}{setRelayUrl()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::set\+Relay\+Url (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00823}{823}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00823\ \{\ relayUrl\ =\ url;\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ac8b79d546a92d1130cdfd35a192e2fa1}\label{namespace_remote_signer_ac8b79d546a92d1130cdfd35a192e2fa1}} 
+\index{RemoteSigner@{RemoteSigner}!setSigningConfirmationCallback@{setSigningConfirmationCallback}}
+\index{setSigningConfirmationCallback@{setSigningConfirmationCallback}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{setSigningConfirmationCallback()}{setSigningConfirmationCallback()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::set\+Signing\+Confirmation\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{signing\+\_\+confirmation\+\_\+callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00786}{786}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ signing\_callback\ =\ callback;}
+\DoxyCodeLine{00788\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ad280d465fcc68690f7cd2ecd05e0cc42}\label{namespace_remote_signer_ad280d465fcc68690f7cd2ecd05e0cc42}} 
+\index{RemoteSigner@{RemoteSigner}!setStatusCallback@{setStatusCallback}}
+\index{setStatusCallback@{setStatusCallback}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{setStatusCallback()}{setStatusCallback()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::set\+Status\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{signer\+\_\+status\+\_\+callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00782}{782}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ status\_callback\ =\ callback;}
+\DoxyCodeLine{00784\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_a401f8ea87e71ba13a57a1696402e9955}\label{namespace_remote_signer_a401f8ea87e71ba13a57a1696402e9955}} 
+\index{RemoteSigner@{RemoteSigner}!setStatusLabel@{setStatusLabel}}
+\index{setStatusLabel@{setStatusLabel}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{setStatusLabel()}{setStatusLabel()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::set\+Status\+Label (\begin{DoxyParamCaption}\item[{lv\+\_\+obj\+\_\+t $\ast$}]{label }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00847}{847}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ status\_label\ =\ label;\ }
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ immediately\ after\ setting\ the\ label}}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}());}
+\DoxyCodeLine{00851\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_aed2b0e07f2216c3807cb2ca7c34febe8}\label{namespace_remote_signer_aed2b0e07f2216c3807cb2ca7c34febe8}} 
+\index{RemoteSigner@{RemoteSigner}!showSigningConfirmation@{showSigningConfirmation}}
+\index{showSigningConfirmation@{showSigningConfirmation}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{showSigningConfirmation()}{showSigningConfirmation()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::show\+Signing\+Confirmation (\begin{DoxyParamCaption}\item[{const String \&}]{event\+Details }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_remote_signer_aac5d8264940a7c169e87e34742e149b0}\label{namespace_remote_signer_aac5d8264940a7c169e87e34742e149b0}} 
+\index{RemoteSigner@{RemoteSigner}!updateConnectionStatus@{updateConnectionStatus}}
+\index{updateConnectionStatus@{updateConnectionStatus}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{updateConnectionStatus()}{updateConnectionStatus()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::update\+Connection\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_remote_signer_a095ade22697151a633cb71017d76c954}\label{namespace_remote_signer_a095ade22697151a633cb71017d76c954}} 
+\index{RemoteSigner@{RemoteSigner}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::update\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00769}{769}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ timeClient.update();}
+\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ unixTimestamp\ =\ timeClient.getEpochTime();}
+\DoxyCodeLine{00772\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_remote_signer_ac1e46c8aceaf55c3b831c4d3b9547992}\label{namespace_remote_signer_ac1e46c8aceaf55c3b831c4d3b9547992}} 
+\index{RemoteSigner@{RemoteSigner}!websocketEvent@{websocketEvent}}
+\index{websocketEvent@{websocketEvent}!RemoteSigner@{RemoteSigner}}
+\doxysubsubsection{\texorpdfstring{websocketEvent()}{websocketEvent()}}
+{\footnotesize\ttfamily void Remote\+Signer\+::websocket\+Event (\begin{DoxyParamCaption}\item[{WStype\+\_\+t}]{type,  }\item[{uint8\+\_\+t $\ast$}]{payload,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{remote__signer_8cpp_source_l00210}{210}} of file \mbox{\hyperlink{remote__signer_8cpp_source}{remote\+\_\+signer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (type)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_DISCONNECTED:}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ WebSocket\ Disconnected"{}});}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ display\ immediately}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reconnection\_attempts\ <\ Config::MAX\_RECONNECT\_ATTEMPTS)\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts++;}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Scheduling\ reconnection\ attempt\ "{}}\ +\ String(reconnection\_attempts));}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manual\_reconnect\_needed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Reconnecting..."{}});}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Max\ reconnection\ attempts\ reached"{}});}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Connection\ failed"{}});}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_CONNECTED:}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ WebSocket\ Connected\ to:\ "{}}\ +\ String((\textcolor{keywordtype}{char}*)payload));}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts\ =\ 0;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manual\_reconnect\_needed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ status\ display\ immediately}}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Subscribe\ to\ NIP-\/46\ events\ for\ our\ public\ key}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (publicKeyHex.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ subscription\ =\ \textcolor{stringliteral}{"{}[\(\backslash\)"{}REQ\(\backslash\)"{},\ \(\backslash\)"{}signer\(\backslash\)"{},\ \{\(\backslash\)"{}kinds\(\backslash\)"{}:[24133],\ \(\backslash\)"{}\#p\(\backslash\)"{}:[\(\backslash\)"{}"{}}\ +\ publicKeyHex\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}],\ \(\backslash\)"{}limit\(\backslash\)"{}:0\}]"{}};}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.sendTXT(subscription);}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Sent\ subscription:\ "{}}\ +\ subscription);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{true},\ \textcolor{stringliteral}{"{}Connected"{}});}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_TEXT:}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Received\ text\ message"{}});}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}{handleWebsocketMessage}}(\textcolor{keyword}{nullptr},\ payload,\ length);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_BIN:}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Received\ binary\ message"{}});}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}{handleWebsocketMessage}}(\textcolor{keyword}{nullptr},\ payload,\ length);}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_PING:}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Received\ ping"{}});}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_PONG:}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ Received\ pong"{}});}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_ERROR:}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RemoteSigner::websocketEvent()\ -\/\ WebSocket\ Error"{}});}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manual\_reconnect\_needed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Connection\ error"{}});}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \ \ \ \ \}}
+
+\end{DoxyCode}

@@ -13,10 +13,12 @@ var searchData=
   ['pinsaveeventhandler_10',['pinSaveEventHandler',['../namespace_settings.html#ab49e6329f290a6e7ccf48a4803bf4926',1,'Settings']]],
   ['pinverificationcanceleventhandler_11',['pinVerificationCancelEventHandler',['../namespace_settings.html#acfc431be8212b2356532043211127d86',1,'Settings']]],
   ['pinverificationkbeventhandler_12',['pinVerificationKBEventHandler',['../namespace_settings.html#a4b29986b7a9d3c24a455126f4516aecb',1,'Settings']]],
-  ['pinverifykbeventhandler_13',['pinVerifyKBEventHandler',['../namespace_settings.html#a9bdbe65c3c274b9cda185d818cd13d59',1,'Settings']]],
-  ['primary_14',['PRIMARY',['../namespace_u_i_1_1_colors.html#a159637a2d15bba6a0d54c87809f2ccbd',1,'UI::Colors']]],
-  ['printsysteminfo_15',['printSystemInfo',['../namespace_app.html#a8eff98ed4b5bce3fbe05f44c6be52c73',1,'App']]],
-  ['processloop_16',['processLoop',['../namespace_remote_signer.html#ae5f7ceb9142bbed66ee40e8159e9ce6c',1,'RemoteSigner::processLoop()'],['../namespace_wi_fi_manager.html#a4600374afc464e50c6516ed52df26b81',1,'WiFiManager::processLoop()']]],
-  ['processscanresults_17',['processScanResults',['../namespace_wi_fi_manager.html#acce9115c77844a236e1e722ca26b2d30',1,'WiFiManager']]],
-  ['promptuserforauthorization_18',['promptUserForAuthorization',['../namespace_remote_signer.html#aad1b84ca520f09b30870f064180254e2',1,'RemoteSigner']]]
+  ['pinverificationqrcanceleventhandler_13',['pinVerificationQRCancelEventHandler',['../namespace_settings.html#a7342e198e17dd5770e74177d2a9ff50a',1,'Settings']]],
+  ['pinverificationqrkbeventhandler_14',['pinVerificationQRKBEventHandler',['../namespace_settings.html#ab794216f73eb993b3d075c5a45f6b884',1,'Settings']]],
+  ['pinverifykbeventhandler_15',['pinVerifyKBEventHandler',['../namespace_settings.html#a9bdbe65c3c274b9cda185d818cd13d59',1,'Settings']]],
+  ['primary_16',['PRIMARY',['../namespace_u_i_1_1_colors.html#a159637a2d15bba6a0d54c87809f2ccbd',1,'UI::Colors']]],
+  ['printsysteminfo_17',['printSystemInfo',['../namespace_app.html#a8eff98ed4b5bce3fbe05f44c6be52c73',1,'App']]],
+  ['processloop_18',['processLoop',['../namespace_remote_signer.html#ae5f7ceb9142bbed66ee40e8159e9ce6c',1,'RemoteSigner::processLoop()'],['../namespace_wi_fi_manager.html#a4600374afc464e50c6516ed52df26b81',1,'WiFiManager::processLoop()']]],
+  ['processscanresults_19',['processScanResults',['../namespace_wi_fi_manager.html#acce9115c77844a236e1e722ca26b2d30',1,'WiFiManager']]],
+  ['promptuserforauthorization_20',['promptUserForAuthorization',['../namespace_remote_signer.html#aad1b84ca520f09b30870f064180254e2',1,'RemoteSigner']]]
 ];

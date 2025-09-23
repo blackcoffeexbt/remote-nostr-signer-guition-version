@@ -48,6 +48,7 @@ var namespace_wi_fi_manager =
     [ "saveCredentials", "namespace_wi_fi_manager.html#ab0afc95b9cccc0c9eaa4052a1d8e970f", null ],
     [ "saveNWCUrl", "namespace_wi_fi_manager.html#a0ad5d13aa01b899a242fafbeb5c59846", null ],
     [ "scanEventHandler", "namespace_wi_fi_manager.html#a32c3f7851dec88fa0a0af25eac30a9ce", null ],
+    [ "send", "namespace_wi_fi_manager.html#a0cfcbd298e69e1e3158fc5ffb0ea7ed1", null ],
     [ "setCurrentCredentials", "namespace_wi_fi_manager.html#a5980532d43bbd1a132c31c6ebee6de4f", null ],
     [ "setMainStatusLabel", "namespace_wi_fi_manager.html#a1401ba93320696ad67259cd4ed1986e1", null ],
     [ "setNWCUrl", "namespace_wi_fi_manager.html#a097703a26a14ee99c6a7d13721e469ff", null ],

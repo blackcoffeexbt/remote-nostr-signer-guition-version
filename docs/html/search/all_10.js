@@ -13,12 +13,13 @@ var searchData=
   ['removenetwork_10',['removeNetwork',['../namespace_wi_fi_manager.html#acda899003fb96827cf623a31729fa276',1,'WiFiManager']]],
   ['reportmodulestatus_11',['reportModuleStatus',['../namespace_app.html#a683e7e9d5f87752ba306ae8d4b3043c8',1,'App']]],
   ['resetactivitytimer_12',['resetActivityTimer',['../namespace_app.html#adfe353584321cab94c6491c32470d046',1,'App']]],
-  ['resettodefaults_13',['resetToDefaults',['../namespace_app.html#aad3d214ab3bb9320fbfada4d1a34b202',1,'App::resetToDefaults()'],['../namespace_settings.html#aa26da663d96a908585fb90c6444f975b',1,'Settings::resetToDefaults()']]],
-  ['resetwebsocketfragmentstate_14',['resetWebsocketFragmentState',['../namespace_remote_signer.html#afefdfa0549d3aa2d4c19286036651475',1,'RemoteSigner']]],
-  ['rotation_15',['rotation',['../class_a_x_s15231_b___touch.html#a76ff9fc8f6376fdb8fa91cadd56c0249',1,'AXS15231B_Touch']]],
-  ['rotl32_16',['ROTL32',['../chacha20_8cpp.html#a453d6c05303385256d9893904b125483',1,'chacha20.cpp']]],
-  ['roundkey_17',['RoundKey',['../struct_a_e_s__ctx.html#aa475fe62fd5774891c7a42596f6d9c2e',1,'AES_ctx']]],
-  ['rssi_18',['rssi',['../structwifi__scan__result__t.html#a85746d6eb647214ce989fb46b917d655',1,'wifi_scan_result_t::rssi()'],['../struct_wi_fi_manager_1_1wifi__scan__result__t.html#abce42aae7eb4a2de141c820b7ad473eb',1,'WiFiManager::wifi_scan_result_t::rssi()']]],
-  ['run_19',['run',['../namespace_app.html#ae09dc71078b64c56c673b1ad1d25b5d1',1,'App']]],
-  ['rundiagnostics_20',['runDiagnostics',['../namespace_app.html#a70e0965d86f6b58c39348c8802e27591',1,'App']]]
+  ['resetbacklighttimeout_13',['resetBacklightTimeout',['../namespace_display.html#a694dddf11915e58ecf50e9d9f0e9307f',1,'Display']]],
+  ['resettodefaults_14',['resetToDefaults',['../namespace_app.html#aad3d214ab3bb9320fbfada4d1a34b202',1,'App::resetToDefaults()'],['../namespace_settings.html#aa26da663d96a908585fb90c6444f975b',1,'Settings::resetToDefaults()']]],
+  ['resetwebsocketfragmentstate_15',['resetWebsocketFragmentState',['../namespace_remote_signer.html#afefdfa0549d3aa2d4c19286036651475',1,'RemoteSigner']]],
+  ['rotation_16',['rotation',['../class_a_x_s15231_b___touch.html#a76ff9fc8f6376fdb8fa91cadd56c0249',1,'AXS15231B_Touch']]],
+  ['rotl32_17',['ROTL32',['../chacha20_8cpp.html#a453d6c05303385256d9893904b125483',1,'chacha20.cpp']]],
+  ['roundkey_18',['RoundKey',['../struct_a_e_s__ctx.html#aa475fe62fd5774891c7a42596f6d9c2e',1,'AES_ctx']]],
+  ['rssi_19',['rssi',['../structwifi__scan__result__t.html#a85746d6eb647214ce989fb46b917d655',1,'wifi_scan_result_t::rssi()'],['../struct_wi_fi_manager_1_1wifi__scan__result__t.html#abce42aae7eb4a2de141c820b7ad473eb',1,'WiFiManager::wifi_scan_result_t::rssi()']]],
+  ['run_20',['run',['../namespace_app.html#ae09dc71078b64c56c673b1ad1d25b5d1',1,'App']]],
+  ['rundiagnostics_21',['runDiagnostics',['../namespace_app.html#a70e0965d86f6b58c39348c8802e27591',1,'App']]]
 ];

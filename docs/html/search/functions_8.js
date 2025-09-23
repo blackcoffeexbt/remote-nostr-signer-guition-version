@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['handleapconfig_0',['handleAPConfig',['../namespace_wi_fi_manager.html#a83adf4c440290cc3d725fbb7521dc5f1',1,'WiFiManager']]],
+  ['handleapconfig_0',['handleAPConfig',['../wifi__manager_8cpp.html#a658cfcf42b587e39e02a496f6cd3dd6c',1,'handleAPConfig():&#160;wifi_manager.cpp'],['../namespace_wi_fi_manager.html#a83adf4c440290cc3d725fbb7521dc5f1',1,'WiFiManager::handleAPConfig()']]],
   ['handleaproot_1',['handleAPRoot',['../namespace_wi_fi_manager.html#acee34f68f7c76be57917ada674c087c3',1,'WiFiManager']]],
   ['handleconnect_2',['handleConnect',['../namespace_remote_signer.html#aa27ad3dbacf880e871a9bd52a68d8180',1,'RemoteSigner']]],
-  ['handlecurrentconfig_3',['handleCurrentConfig',['../namespace_wi_fi_manager.html#a42fcac4975c9a54e61aacee344294a87',1,'WiFiManager']]],
+  ['handlecurrentconfig_3',['handleCurrentConfig',['../wifi__manager_8cpp.html#ab4c0897915e8cd54874cbf82beb2b9a8',1,'handleCurrentConfig():&#160;wifi_manager.cpp'],['../namespace_wi_fi_manager.html#a42fcac4975c9a54e61aacee344294a87',1,'WiFiManager::handleCurrentConfig()']]],
   ['handleerror_4',['handleError',['../namespace_app.html#a7d55551c0ecee64d4385182df40da631',1,'App']]],
   ['handlefragment_5',['handleFragment',['../namespace_remote_signer.html#a253d2d02fcdf70ced4fb1436fc6aae6f',1,'RemoteSigner']]],
   ['handlegetpublickey_6',['handleGetPublicKey',['../namespace_remote_signer.html#acfe5a25464df923b3b57bdf87920a8ab',1,'RemoteSigner']]],
@@ -18,7 +18,9 @@ var searchData=
   ['handlewebsocketmessage_15',['handleWebsocketMessage',['../namespace_remote_signer.html#aa5c45e02eade3e0450bfa375d46bb51c',1,'RemoteSigner']]],
   ['hexstringtobytearray_16',['hexStringToByteArray',['../namespacenip19.html#a375620e2a6b82042af6aed871330718c',1,'nip19']]],
   ['hidepinmanagementscreen_17',['hidePinManagementScreen',['../namespace_settings.html#aa8047ed6a81a008c34171402a2bbae7b',1,'Settings']]],
-  ['hkdf_5fsha256_18',['hkdf_sha256',['../nip44_8cpp.html#adabe0c22a9ec0eb1995a13c9d18cbfbd',1,'hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm, size_t ikm_len, const uint8_t *info, size_t info_len, uint8_t *okm, size_t okm_len):&#160;nip44.cpp'],['../nip44_8h.html#adabe0c22a9ec0eb1995a13c9d18cbfbd',1,'hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm, size_t ikm_len, const uint8_t *info, size_t info_len, uint8_t *okm, size_t okm_len):&#160;nip44.cpp']]],
-  ['hmac_5faad_19',['hmac_aad',['../nip44_8cpp.html#aae1b96189dd9a1799371b399dcd5b5df',1,'hmac_aad(const uint8_t *key, size_t key_len, const uint8_t *message, size_t msg_len, const uint8_t *aad, size_t aad_len, uint8_t *output):&#160;nip44.cpp'],['../nip44_8h.html#aae1b96189dd9a1799371b399dcd5b5df',1,'hmac_aad(const uint8_t *key, size_t key_len, const uint8_t *message, size_t msg_len, const uint8_t *aad, size_t aad_len, uint8_t *output):&#160;nip44.cpp']]],
-  ['hmac_5fsha256_20',['hmac_sha256',['../nip44_8cpp.html#a8658c09e51abaf63e23f7beabc2c04b5',1,'hmac_sha256(const uint8_t *key, size_t key_len, const uint8_t *msg, size_t msg_len, uint8_t *hmac):&#160;nip44.cpp'],['../nip44_8h.html#a8658c09e51abaf63e23f7beabc2c04b5',1,'hmac_sha256(const uint8_t *key, size_t key_len, const uint8_t *msg, size_t msg_len, uint8_t *hmac):&#160;nip44.cpp']]]
+  ['hidesigningmodal_18',['hideSigningModal',['../namespace_u_i.html#a7683bdbaf83ab992e9e088b7781d34c6',1,'UI']]],
+  ['hidesigningmodaldelayed_19',['hideSigningModalDelayed',['../namespace_u_i.html#ac722bafc1b8838e0012507dcd83d239c',1,'UI']]],
+  ['hkdf_5fsha256_20',['hkdf_sha256',['../nip44_8cpp.html#adabe0c22a9ec0eb1995a13c9d18cbfbd',1,'hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm, size_t ikm_len, const uint8_t *info, size_t info_len, uint8_t *okm, size_t okm_len):&#160;nip44.cpp'],['../nip44_8h.html#adabe0c22a9ec0eb1995a13c9d18cbfbd',1,'hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm, size_t ikm_len, const uint8_t *info, size_t info_len, uint8_t *okm, size_t okm_len):&#160;nip44.cpp']]],
+  ['hmac_5faad_21',['hmac_aad',['../nip44_8cpp.html#aae1b96189dd9a1799371b399dcd5b5df',1,'hmac_aad(const uint8_t *key, size_t key_len, const uint8_t *message, size_t msg_len, const uint8_t *aad, size_t aad_len, uint8_t *output):&#160;nip44.cpp'],['../nip44_8h.html#aae1b96189dd9a1799371b399dcd5b5df',1,'hmac_aad(const uint8_t *key, size_t key_len, const uint8_t *message, size_t msg_len, const uint8_t *aad, size_t aad_len, uint8_t *output):&#160;nip44.cpp']]],
+  ['hmac_5fsha256_22',['hmac_sha256',['../nip44_8cpp.html#a8658c09e51abaf63e23f7beabc2c04b5',1,'hmac_sha256(const uint8_t *key, size_t key_len, const uint8_t *msg, size_t msg_len, uint8_t *hmac):&#160;nip44.cpp'],['../nip44_8h.html#a8658c09e51abaf63e23f7beabc2c04b5',1,'hmac_sha256(const uint8_t *key, size_t key_len, const uint8_t *msg, size_t msg_len, uint8_t *hmac):&#160;nip44.cpp']]]
 ];

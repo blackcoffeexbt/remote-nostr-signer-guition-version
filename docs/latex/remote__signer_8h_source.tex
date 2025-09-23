@@ -1,0 +1,115 @@
+\hypertarget{remote__signer_8h_source}{}\doxysection{remote\+\_\+signer.\+h}
+\label{remote__signer_8h_source}\index{src/remote\_signer.h@{src/remote\_signer.h}}
+\mbox{\hyperlink{remote__signer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <WebSocketsClient.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <WiFiUdp.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <NTPClient.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_remote_signer}{RemoteSigner}}\ \{}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00011}00011\ \ \ \ \ \textcolor{comment}{//\ Initialization\ and\ cleanup}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00012}00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ac40d7ac89589301db2857d5f90b03cc9}{init}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_af6c3719ca2b21193fa31b813b821361e}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00014}00014\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//\ Connection\ management}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a89cf6478bda8fb1f788b1726820e4fb0}{connectToRelay}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_abfefa7f33dfeeef61621c8c51b7ae519}{disconnect}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_abc7900c57e0ff2fa1de1650fb3288beb}{isInitialized}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_a89a85576de23375e61f01b1f3c0f1e96}{isConnected}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00021}00021\ \ \ \ \ \textcolor{comment}{//\ Configuration\ management}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a52e4afea3acfe2372ad0ebe168019a16}{loadConfigFromPreferences}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_aaa0b057014dc123b0c28892e7f16003a}{saveConfigToPreferences}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00024}00024\ \ \ \ \ String\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{getRelayUrl}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00025}00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}{setRelayUrl}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00026}00026\ \ \ \ \ String\ \mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{getPrivateKey}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}{setPrivateKey}}(\textcolor{keyword}{const}\ String\&\ nsec);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00028}00028\ \ \ \ \ String\ \mbox{\hyperlink{namespace_remote_signer_ab63e557eaa270158c31089485af13853}{getPublicKey}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00029}00029\ \ \ \ \ String\ \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{getBunkerUrl}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ WebSocket\ event\ handling}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ac1e46c8aceaf55c3b831c4d3b9547992}{websocketEvent}}(WStype\_t\ type,\ uint8\_t*\ payload,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_aa5c45e02eade3e0450bfa375d46bb51c}{handleWebsocketMessage}}(\textcolor{keywordtype}{void}*\ arg,\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00034}\mbox{\hyperlink{namespace_remote_signer_afefdfa0549d3aa2d4c19286036651475}{00034}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_afefdfa0549d3aa2d4c19286036651475}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00035}00035\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ NIP-\/46\ protocol\ handlers}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a44169fc142c042f2f0ebd5e5d14a065e}{handleSigningRequestEvent}}(uint8\_t*\ data);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_aa27ad3dbacf880e871a9bd52a68d8180}{handleConnect}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ String\&\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a66734de8ba5d59ebb06a477a4a706b3b}{handleSignEvent}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a529bbdcf11822ddad496569d2c84db51}{handlePing}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_acfe5a25464df923b3b57bdf87920a8ab}{handleGetPublicKey}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a1ad939f1e7a7607e17b22a8a2ed887c2}{handleNip04Encrypt}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a5ed0cc1e4bb6cd189d9f92ad36290b59}{handleNip04Decrypt}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a2365cf87b5b1a64d8f4f28746db66507}{handleNip44Encrypt}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a5402b70b1a652df6b62cfe85b5961224}{handleNip44Decrypt}}(DynamicJsonDocument\&\ doc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ requestingPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Client\ authorization\ management}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_aa460cd17d9c7cabcbda06abeeeb0df6d}{isClientAuthorized}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ clientPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_aad1b84ca520f09b30870f064180254e2}{promptUserForAuthorization}}(\textcolor{keyword}{const}\ String\&\ requestingNpub);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a629bf5147f41fb40fb39d588899ede56}{addAuthorizedClient}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ clientPubKey);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_ab4c4c5d314dbae0262de7c4c0ced303f}{checkClientIsAuthorized}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ clientPubKey,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ secret);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00052}00052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ Secret\ key\ management}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a274b55d4777ae202a4cf5f08aeafde0a}{refreshSecretKey}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00055}00055\ \ \ \ \ String\ \mbox{\hyperlink{namespace_remote_signer_af3b6baaa02bfc245172094d369d9a29e}{getSecretKey}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00056}00056\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Connection\ monitoring}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ae5f7ceb9142bbed66ee40e8159e9ce6c}{processLoop}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a389e573d2a6cf08f1cc623995fe0d126}{sendPing}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00060}\mbox{\hyperlink{namespace_remote_signer_aac5d8264940a7c169e87e34742e149b0}{00060}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_aac5d8264940a7c169e87e34742e149b0}{updateConnectionStatus}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00061}00061\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Time\ synchronization}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a095ade22697151a633cb71017d76c954}{updateTime}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_remote_signer_a3f8262db983da9c80bc62fc9145da90b}{getUnixTimestamp}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00065}00065\ \ \ \ \ NTPClient\&\ \mbox{\hyperlink{namespace_remote_signer_ab477605a551a9848f3bf6aca25027288}{getTimeClient}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00066}00066\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ Fragment\ handling}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00068}\mbox{\hyperlink{namespace_remote_signer_ab978644bceacd4d526d8a9173d174f41}{00068}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_remote_signer_ab978644bceacd4d526d8a9173d174f41}{isFragmentInProgress}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00069}\mbox{\hyperlink{namespace_remote_signer_a253d2d02fcdf70ced4fb1436fc6aae6f}{00069}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a253d2d02fcdf70ced4fb1436fc6aae6f}{handleFragment}}(uint8\_t*\ payload,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{bool}\ isBinary,\ \textcolor{keywordtype}{bool}\ isLast);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ Status\ callbacks}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00072}\mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{00072}}\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{signer\_status\_callback\_t}})(\textcolor{keywordtype}{bool}\ connected,\ \textcolor{keyword}{const}\ String\&\ status);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00073}00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ad280d465fcc68690f7cd2ecd05e0cc42}{setStatusCallback}}(\mbox{\hyperlink{namespace_remote_signer_a69b2c9af962e26bf22df85b7df7ae000}{signer\_status\_callback\_t}}\ callback);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00074}00074\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00075}00075\ \ \ \ \ \textcolor{comment}{//\ UI\ integration}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a401f8ea87e71ba13a57a1696402e9955}{setStatusLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a5d133eb78c240a5e3bac211bcb280476}{displaySigningRequest}}(\textcolor{keyword}{const}\ String\&\ eventKind,\ \textcolor{keyword}{const}\ String\&\ content);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00078}00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_a6d3c2e1ce7820db29163a432b7330fac}{displayConnectionStatus}}(\textcolor{keywordtype}{bool}\ connected);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00079}00079\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ Access\ to\ internal\ components}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00081}00081\ \ \ \ \ WebSocketsClient\&\ \mbox{\hyperlink{namespace_remote_signer_abefa31362f0296822ae35e4e891e6f5d}{getWebSocketClient}}();}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00082}00082\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00083}00083\ \ \ \ \ \textcolor{comment}{//\ Event\ signing\ UI\ callbacks}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00084}\mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{00084}}\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{signing\_confirmation\_callback\_t}})(\textcolor{keywordtype}{bool}\ approved);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_ac8b79d546a92d1130cdfd35a192e2fa1}{setSigningConfirmationCallback}}(\mbox{\hyperlink{namespace_remote_signer_aae9f23149604005e51dd67925cef8f51}{signing\_confirmation\_callback\_t}}\ callback);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00086}\mbox{\hyperlink{namespace_remote_signer_aed2b0e07f2216c3807cb2ca7c34febe8}{00086}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_remote_signer_aed2b0e07f2216c3807cb2ca7c34febe8}{showSigningConfirmation}}(\textcolor{keyword}{const}\ String\&\ eventDetails);}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00087}00087\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ Constants}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00089}\mbox{\hyperlink{namespace_remote_signer_1_1_config}{00089}}\ \ \ \ \ \textcolor{keyword}{namespace\ }Config\ \{}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00090}\mbox{\hyperlink{namespace_remote_signer_1_1_config_ade7088b64682eaef3a0d43840a3eb6b2}{00090}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_ade7088b64682eaef3a0d43840a3eb6b2}{WS\_PING\_INTERVAL}}\ =\ 5000;\ \textcolor{comment}{//\ 10\ seconds}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00091}\mbox{\hyperlink{namespace_remote_signer_1_1_config_a97ed2e5374a6f54297634f8e289e29d6}{00091}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_a97ed2e5374a6f54297634f8e289e29d6}{WS\_FRAGMENT\_TIMEOUT}}\ =\ 30000;\ \textcolor{comment}{//\ 30\ seconds}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00092}\mbox{\hyperlink{namespace_remote_signer_1_1_config_af57983c40ea5ac929731f81a576cb349}{00092}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_af57983c40ea5ac929731f81a576cb349}{WS\_MAX\_FRAGMENT\_SIZE}}\ =\ 1024\ *\ 1024;\ \textcolor{comment}{//\ 1MB}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00093}\mbox{\hyperlink{namespace_remote_signer_1_1_config_a46c15d63fc0d7ff5623bbd8a46985dff}{00093}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_a46c15d63fc0d7ff5623bbd8a46985dff}{CONNECTION\_TIMEOUT}}\ =\ 30000;\ \textcolor{comment}{//\ 30\ seconds}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00094}\mbox{\hyperlink{namespace_remote_signer_1_1_config_aa655a02b71fe02eaa19ea373d2f0c9fb}{00094}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_aa655a02b71fe02eaa19ea373d2f0c9fb}{MAX\_RECONNECT\_ATTEMPTS}}\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00095}\mbox{\hyperlink{namespace_remote_signer_1_1_config_a38e5c7a7520bd562a42647a305f9e75f}{00095}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_remote_signer_1_1_config_a38e5c7a7520bd562a42647a305f9e75f}{MIN\_RECONNECT\_INTERVAL}}\ =\ 5000;\ \textcolor{comment}{//\ 5\ seconds}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00097}00097\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00098}00098\ \ \ \ \ \textcolor{comment}{//\ NIP-\/46\ Methods}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{namespace\ }Methods\ \{}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a8f4ae7196fa393c20cd7d643f8edb862}{CONNECT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a77e2fa7ffd73e069b8f7fbc220ef1c41}{SIGN\_EVENT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_ade025d4a3b418dd8920137c913d77c57}{PING}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a3a1b354e8968c23949b4ff71084a66b4}{GET\_PUBLIC\_KEY}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a5aafd6d7cc6cd325d8692629d6a06e7c}{NIP04\_ENCRYPT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_a469047f9e6e5ed287a5fe1bb71dcd59b}{NIP04\_DECRYPT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_ac3a91e355bb90c3e1c478cd76ffa9dbd}{NIP44\_ENCRYPT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespace_remote_signer_1_1_methods_afbe5e03828b79d7b1bf4c617c1156d5d}{NIP44\_DECRYPT}};}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00108}00108\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{remote__signer_8h_source_l00109}00109\ \}}
+
+\end{DoxyCode}

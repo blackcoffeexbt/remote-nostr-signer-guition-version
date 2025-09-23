@@ -13,7 +13,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Import\ Nostr\ library\ components\ for\ key\ derivation}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}../lib/nostr/nostr.h"{}}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00011}00011\ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_wi_fi_manager}{WiFiManager}}\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00012}\mbox{\hyperlink{namespace_wi_fi_manager}{00012}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_wi_fi_manager}{WiFiManager}}\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//\ Global\ WiFi\ state}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{static}\ WiFiUDP\ ntpUDP;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{static}\ NTPClient\ timeClient(ntpUDP,\ \textcolor{stringliteral}{"{}pool.ntp.org"{}},\ 0,\ 60000);}
@@ -29,7 +29,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ ap\_mode\_active\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{static}\ WebServer\ ap\_server(80);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{static}\ DNSServer\ dns\_server;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ap\_ssid\ =\ \textcolor{stringliteral}{"{}NWC-\/PoS-\/Portal"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ap\_ssid\ =\ \textcolor{stringliteral}{"{}Remote-\/Signer-\/Portal"{}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ap\_ip\ =\ \textcolor{stringliteral}{"{}192.168.4.1"{}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00030}00030\ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ Task\ and\ queue\ management}}
@@ -56,12 +56,12 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ wifiTask(\textcolor{keywordtype}{void}\ *parameter)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ task\ started"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}\ command;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}\ command;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xQueueReceive(wifi\_command\_queue,\ \&command,\ portMAX\_DELAY))\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}WiFi\ task\ received\ command:\ "{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}})\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}})\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{WIFI\_SCAN}}:\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Starting\ WiFi\ scan..."{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
@@ -79,7 +79,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(n);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ networks"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ scan\ errors\ (negative\ return\ values)}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 0)\ \{}
@@ -97,15 +97,15 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 0)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Scan\ failed\ after\ retry,\ returning\ empty\ results"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}}\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}}\ =\ (n\ >\ 9)\ ?\ 9\ :\ n;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}}\ =\ (n\ >\ 9)\ ?\ 9\ :\ n;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}};\ i++)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(result.\mbox{\hyperlink{structwifi__scan__result__t_a06e662e9f5f62de94a6ad6c747230257}{ssids}}[i],\ WiFi.SSID(i).c\_str(),\ 32);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structwifi__scan__result__t_a06e662e9f5f62de94a6ad6c747230257}{ssids}}[i][32]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structwifi__scan__result__t_a85746d6eb647214ce989fb46b917d655}{rssi}}[i]\ =\ WiFi.RSSI(i);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structwifi__scan__result__t_ac6800b064bb84379ca81d1fbf33808d0}{encrypted}}[i]\ =\ (WiFi.encryptionType(i)\ !=\ WIFI\_AUTH\_OPEN);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a1063b1d47871ac448588dfb9cc752808}{ssids}}[i],\ WiFi.SSID(i).c\_str(),\ 32);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a1063b1d47871ac448588dfb9cc752808}{ssids}}[i][32]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_abce42aae7eb4a2de141c820b7ad473eb}{rssi}}[i]\ =\ WiFi.RSSI(i);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a035ddbb0ae9e1e3cfa791f9b558a7fcd}{encrypted}}[i]\ =\ (WiFi.encryptionType(i)\ !=\ WIFI\_AUTH\_OPEN);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
@@ -123,7 +123,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{WIFI\_CONNECT}}:}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connecting\ to\ WiFi..."{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WiFi.begin(command.\mbox{\hyperlink{structwifi__command__t_a6e5df3f7611ffa829ab4063ed4f8be3e}{ssid}},\ command.\mbox{\hyperlink{structwifi__command__t_a71ed610e3de30aeb8a1b14dd5e80fd46}{password}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WiFi.begin(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{ssid}},\ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{password}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{WIFI\_DISCONNECT}}:}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Disconnecting\ from\ WiFi..."{}});}
@@ -140,7 +140,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00136}00136\ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ Status\ checker\ callback}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ wifiStatusCheckerCB(lv\_timer\_t\ *timer)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ status\_label\ =\ (lv\_obj\_t*)\mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{timer}}-\/>user\_data;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ status\_label\ =\ (lv\_obj\_t*)timer-\/>user\_data;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ attempts\ =\ (\textcolor{keywordtype}{int})lv\_obj\_get\_user\_data(status\_label);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ attempts++;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00142}00142\ }
@@ -210,14 +210,14 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00206}00206\ \ \ \ \ \ \ \ \ delay(1);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00207}00207\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00208}00208\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{init}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00209}\mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{00209}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{init}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ WiFi.mode(WIFI\_STA);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ timeClient.begin();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ timeClient.setTimeOffset(0);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ queues}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ wifi\_command\_queue\ =\ xQueueCreate(10,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}));}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ wifi\_scan\_result\_queue\ =\ xQueueCreate(5,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structwifi__scan__result__t}{wifi\_scan\_result\_t}}));}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ wifi\_command\_queue\ =\ xQueueCreate(10,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}));}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ wifi\_scan\_result\_queue\ =\ xQueueCreate(5,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\_scan\_result\_t}}));}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{createTask}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{createStatusTimer}}();}
@@ -241,7 +241,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00237}00237\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00238}00238\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00239}00239\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00240}00240\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{cleanup}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00240}\mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{00240}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{cleanup}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{deleteTask}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{deleteStatusTimer}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00243}00243\ \ \ \ \ \ \ \ \ }
@@ -256,26 +256,26 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00253}00253\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00254}00254\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00255}00255\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{processLoop}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00255}\mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{00255}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{processLoop}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{isAPModeActive}}())\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ dns\_server.processNextRequest();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.handleClient();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00260}00260\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00261}00261\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00262}00262\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{startConnection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00262}\mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{00262}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{startConnection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ strncpy(current\_ssid,\ ssid,\ \textcolor{keyword}{sizeof}(current\_ssid)\ -\/\ 1);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ current\_ssid[\textcolor{keyword}{sizeof}(current\_ssid)\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ strncpy(current\_password,\ password,\ \textcolor{keyword}{sizeof}(current\_password)\ -\/\ 1);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ current\_password[\textcolor{keyword}{sizeof}(current\_password)\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_command\_queue\ !=\ NULL)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}\ command;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{WIFI\_CONNECT}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(command.\mbox{\hyperlink{structwifi__command__t_a6e5df3f7611ffa829ab4063ed4f8be3e}{ssid}},\ ssid,\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structwifi__command__t_a6e5df3f7611ffa829ab4063ed4f8be3e}{ssid}})\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a6e5df3f7611ffa829ab4063ed4f8be3e}{ssid}}[\textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structwifi__command__t_a6e5df3f7611ffa829ab4063ed4f8be3e}{ssid}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(command.\mbox{\hyperlink{structwifi__command__t_a71ed610e3de30aeb8a1b14dd5e80fd46}{password}},\ password,\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structwifi__command__t_a71ed610e3de30aeb8a1b14dd5e80fd46}{password}})\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a71ed610e3de30aeb8a1b14dd5e80fd46}{password}}[\textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structwifi__command__t_a71ed610e3de30aeb8a1b14dd5e80fd46}{password}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}\ command;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{WIFI\_CONNECT}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{ssid}},\ ssid,\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{ssid}})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{ssid}}[\textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{ssid}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{password}},\ password,\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{password}})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{password}}[\textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{password}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ xQueueSend(wifi\_command\_queue,\ \&command,\ 0);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ }
@@ -283,31 +283,31 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ wifi\_connection\_attempted\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00280}00280\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00281}00281\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00282}00282\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{disconnect}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00282}\mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{00282}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{disconnect}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_command\_queue\ !=\ NULL)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}\ command;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{WIFI\_DISCONNECT}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}\ command;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{WIFI\_DISCONNECT}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ xQueueSend(wifi\_command\_queue,\ \&command,\ 0);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00288}00288\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00289}00289\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00290}00290\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{isConnected}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00290}\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{00290}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{isConnected}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ WiFi.status()\ ==\ WL\_CONNECTED;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00292}00292\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00293}00293\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00294}00294\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{getSSID}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00294}\mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{00294}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{getSSID}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ WiFi.SSID();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00296}00296\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00297}00297\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00298}00298\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{getLocalIP}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00298}\mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{00298}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{getLocalIP}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ WiFi.localIP().toString();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00300}00300\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00301}00301\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00302}00302\ \ \ \ \ wl\_status\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{getStatus}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00302}\mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{00302}}\ \ \ \ \ wl\_status\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{getStatus}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ WiFi.status();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00304}00304\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00305}00305\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00306}00306\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{startScan}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00306}\mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{00306}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{startScan}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Scanning\ for\ WiFi\ networks..."{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI::getWiFiList}}())\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_clean(\mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI::getWiFiList}}());}
@@ -318,8 +318,8 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_command\_queue\ !=\ NULL)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}\ command;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{WIFI\_SCAN}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}\ command;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{WIFI\_SCAN}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xQueueSend(wifi\_command\_queue,\ \&command,\ 0)\ ==\ pdTRUE)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Scan\ command\ sent\ to\ WiFi\ task\ successfully"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
@@ -335,7 +335,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \},\ 500,\ NULL);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00332}00332\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00333}00333\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00334}00334\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{stopScanning}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00334}\mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{00334}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{stopScanning}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Stopping\ WiFi\ scanning..."{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_scan\_timer\ !=\ NULL)\ \{}
@@ -344,45 +344,45 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00340}00340\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00341}00341\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_command\_queue\ !=\ NULL)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}\ command;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{structwifi__command__t_a164a5d3e636017c0e95a61ad626716b2}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}{WIFI\_STOP\_SCAN}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}}\ command;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ command.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}}\ =\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}{WIFI\_STOP\_SCAN}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ xQueueSend(wifi\_command\_queue,\ \&command,\ 0);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00346}00346\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_scan\_result\_queue\ !=\ NULL)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (xQueueReceive(wifi\_scan\_result\_queue,\ \&result,\ 0)\ ==\ pdTRUE)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ queue}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00354}00354\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00355}00355\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00356}00356\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{processScanResults}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00356}\mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{00356}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{processScanResults}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_scan\_result\_queue\ ==\ NULL)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00359}00359\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00360}00360\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\_scan\_result\_t}}\ result;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00362}00362\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xQueueReceive(wifi\_scan\_result\_queue,\ \&result,\ 0))\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Found\ "{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ networks."{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI::getWiFiList}}())\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_clean(\mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI::getWiFiList}}());}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}}\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}}\ ==\ 0)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_list\_add\_text(\mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI::getWiFiList}}(),\ \textcolor{stringliteral}{"{}No\ networks\ found"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wifi\_ssids.clear();}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wifi\_ssids.reserve(result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wifi\_ssids.reserve(result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ result.\mbox{\hyperlink{structwifi__scan__result__t_aaed9359a0cf7895f4a50e4768abafcd7}{network\_count}};\ i++)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ ssid\ =\ String(result.\mbox{\hyperlink{structwifi__scan__result__t_a06e662e9f5f62de94a6ad6c747230257}{ssids}}[i]);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ ssid\ =\ String(result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a1063b1d47871ac448588dfb9cc752808}{ssids}}[i]);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wifi\_ssids.push\_back(ssid);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ rssi\ =\ String(result.\mbox{\hyperlink{structwifi__scan__result__t_a85746d6eb647214ce989fb46b917d655}{rssi}}[i]);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ security\ =\ result.\mbox{\hyperlink{structwifi__scan__result__t_ac6800b064bb84379ca81d1fbf33808d0}{encrypted}}[i]\ ?\ \textcolor{stringliteral}{"{}Lck"{}}\ :\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ rssi\ =\ String(result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_abce42aae7eb4a2de141c820b7ad473eb}{rssi}}[i]);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ security\ =\ result.\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a035ddbb0ae9e1e3cfa791f9b558a7fcd}{encrypted}}[i]\ ?\ \textcolor{stringliteral}{"{}Lck"{}}\ :\ \textcolor{stringliteral}{"{}\ "{}};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ item\_text\ =\ ssid\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ rssi\ +\ \textcolor{stringliteral}{"{}\ dBm)\ "{}}\ +\ security;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Adding\ network:\ "{}});}
@@ -408,7 +408,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00404}00404\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00405}00405\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00406}00406\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00407}00407\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{saveCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00407}\mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{00407}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{saveCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00408}00408\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}wifi-\/creds"{}},\ \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00409}00409\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00410}00410\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ preferences.getInt(\textcolor{stringliteral}{"{}count"{}},\ 0);}
@@ -423,7 +423,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00419}00419\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Saved\ WiFi\ network\ \%d:\ \%s\(\backslash\)n"{}},\ count,\ ssid);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00420}00420\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00421}00421\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00422}00422\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{findSavedCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password,\ \textcolor{keywordtype}{size\_t}\ password\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00422}\mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{00422}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{findSavedCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password,\ \textcolor{keywordtype}{size\_t}\ password\_size)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00423}00423\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}wifi-\/creds"{}},\ \textcolor{keyword}{true});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00424}00424\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00425}00425\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ preferences.getInt(\textcolor{stringliteral}{"{}count"{}},\ 0);}
@@ -446,7 +446,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00443}00443\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00444}00444\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00445}00445\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{loadAllNetworks}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00445}\mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{00445}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{loadAllNetworks}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00446}00446\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}wifi-\/creds"{}},\ \textcolor{keyword}{true});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00447}00447\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ preferences.getInt(\textcolor{stringliteral}{"{}count"{}},\ 0);}
@@ -464,7 +464,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00460}00460\ \ \ \ \ \ \ \ \ preferences.end();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00461}00461\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00462}00462\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00463}00463\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{removeNetwork}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00463}\mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{00463}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{removeNetwork}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00464}00464\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}wifi-\/creds"{}},\ \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00465}00465\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ preferences.getInt(\textcolor{stringliteral}{"{}count"{}},\ 0);}
@@ -496,7 +496,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00492}00492\ \ \ \ \ \ \ \ \ preferences.end();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00493}00493\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00494}00494\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00495}00495\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{startAPMode}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00495}\mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{00495}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{startAPMode}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00496}00496\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ap\_mode\_active)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}AP\ mode\ already\ active"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
@@ -547,7 +547,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00543}00543\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}NWC\ Pairing\ Code"{}},\ \textcolor{stringliteral}{"{}Connect\ to\ the\ WiFi\ hotspot\ below\ to\ set\ your\ NWC\ pairing\ code.\(\backslash\)nSSID:\ "{}}\ +\ String(ap\_ssid)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nPassword:\ "{}}\ +\ \mbox{\hyperlink{namespace_settings_aa325e87dec40f15b995e5b3712ea2677}{Settings::getAPPassword}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nIP:\ "{}}\ +\ String(ap\_ip));}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00544}00544\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00545}00545\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00546}00546\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{stopAPMode}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00546}\mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{00546}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{stopAPMode}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00547}00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ap\_mode\_active)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00549}00549\ \ \ \ \ \ \ \ \ \}}
@@ -572,23 +572,23 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00568}00568\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00569}00569\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00570}00570\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00571}00571\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{isAPModeActive}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00571}\mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{00571}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{isAPModeActive}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00572}00572\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ap\_mode\_active;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00573}00573\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00574}00574\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00575}00575\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{getAPSSID}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00575}\mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{00575}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{getAPSSID}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00576}00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String(ap\_ssid);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00577}00577\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00578}00578\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00579}00579\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{getAPPassword}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00579}\mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{00579}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{getAPPassword}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00580}00580\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespace_settings_aa325e87dec40f15b995e5b3712ea2677}{Settings::getAPPassword}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00581}00581\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00582}00582\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00583}00583\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{getAPIP}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00583}\mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{00583}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{getAPIP}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00584}00584\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String(ap\_ip);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00585}00585\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00586}00586\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00587}00587\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{loadNWCUrl}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00587}\mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{00587}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{loadNWCUrl}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00588}00588\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}nwc-\/config"{}},\ \textcolor{keyword}{true});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00589}00589\ \ \ \ \ \ \ \ \ String\ saved\_url\ =\ preferences.getString(\textcolor{stringliteral}{"{}nwc\_url"{}},\ \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00590}00590\ \ \ \ \ \ \ \ \ preferences.end();}
@@ -602,38 +602,38 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00598}00598\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00599}00599\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00600}00600\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00601}00601\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{saveNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00601}\mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{00601}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{saveNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00602}00602\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}nwc-\/config"{}},\ \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00603}00603\ \ \ \ \ \ \ \ \ preferences.putString(\textcolor{stringliteral}{"{}nwc\_url"{}},\ url);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00604}00604\ \ \ \ \ \ \ \ \ preferences.end();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00605}00605\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Saved\ NWC\ URL\ to\ preferences:\ "{}}\ +\ url);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00606}00606\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00607}00607\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00608}00608\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{getNWCUrl}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00608}\mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{00608}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{getNWCUrl}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00609}00609\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{RemoteSigner::getBunkerUrl}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00610}00610\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00611}00611\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00612}00612\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{setNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00612}\mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{00612}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{setNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00613}00613\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Signer\ configuration\ set\ separately}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00614}00614\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Signer\ URL\ configuration:\ "{}}\ +\ url);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00615}00615\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{saveNWCUrl}}(url);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00616}00616\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00617}00617\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00618}00618\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{updateStatus}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00618}\mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{00618}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{updateStatus}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00619}00619\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Trigger\ status\ update}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00620}00620\ \ \ \ \ \ \ \ \ mainStatusUpdaterCB(NULL);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00621}00621\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00622}00622\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00623}00623\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{setStatusLabel}}(lv\_obj\_t*\ label)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00623}\mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{00623}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{setStatusLabel}}(lv\_obj\_t*\ label)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00624}00624\ \ \ \ \ \ \ \ \ wifi\_status\_label\ =\ label;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00625}00625\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00626}00626\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00627}00627\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{setMainStatusLabel}}(lv\_obj\_t*\ label)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00627}\mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{00627}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{setMainStatusLabel}}(lv\_obj\_t*\ label)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00628}00628\ \ \ \ \ \ \ \ \ main\_wifi\_status\_label\ =\ label;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00629}00629\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00630}00630\ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00631}00631\ \ \ \ \ \textcolor{comment}{//\ Event\ handlers}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00632}00632\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{scanEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00632}\mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{00632}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{scanEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00633}00633\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e\ !=\ NULL)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_event\_code\_t\ code\ =\ lv\_event\_get\_code(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (code\ !=\ LV\_EVENT\_CLICKED)\ \textcolor{keywordflow}{return};}
@@ -641,7 +641,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00637}00637\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{startScan}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00638}00638\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00639}00639\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00640}00640\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{connectEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00640}\mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{00640}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{connectEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00641}00641\ \ \ \ \ \ \ \ \ lv\_event\_code\_t\ code\ =\ lv\_event\_get\_code(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00642}00642\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (code\ ==\ LV\_EVENT\_CLICKED)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ activity\ timer\ on\ WiFi\ network\ selection}}
@@ -660,7 +660,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00656}00656\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00657}00657\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00658}00658\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00659}00659\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{passwordKBEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00659}\mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{00659}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{passwordKBEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00660}00660\ \ \ \ \ \ \ \ \ lv\_event\_code\_t\ code\ =\ lv\_event\_get\_code(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00661}00661\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ kb\ =\ lv\_event\_get\_target(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00662}00662\ \ \ \ \ \ \ \ \ }
@@ -695,18 +695,18 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00691}00691\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00692}00692\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00693}00693\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00694}00694\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{passwordBackEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00694}\mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{00694}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{passwordBackEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00695}00695\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI::loadScreen}}((\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{UI::screen\_state\_t}})2);\ \textcolor{comment}{//\ SCREEN\_WIFI}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00696}00696\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00697}00697\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00698}00698\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{launchAPModeEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00698}\mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{00698}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{launchAPModeEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00699}00699\ \ \ \ \ \ \ \ \ lv\_event\_code\_t\ code\ =\ lv\_event\_get\_code(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00700}00700\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (code\ ==\ LV\_EVENT\_CLICKED)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00701}00701\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_a8d4326f2e60bf0939250a4a0291cec5f}{Settings::showPinVerificationScreen}}();}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00702}00702\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00703}00703\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00704}00704\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00705}00705\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{exitAPModeEventHandler}}(lv\_event\_t*\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00705}\mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{00705}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{exitAPModeEventHandler}}(lv\_event\_t*\ e)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00706}00706\ \ \ \ \ \ \ \ \ lv\_event\_code\_t\ code\ =\ lv\_event\_get\_code(e);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00707}00707\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (code\ ==\ LV\_EVENT\_CLICKED)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Exiting\ Access\ Point\ mode"{}});}
@@ -715,7 +715,7 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00711}00711\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00712}00712\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00713}00713\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00714}00714\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{createTask}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00714}\mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{00714}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{createTask}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00715}00715\ \ \ \ \ \ \ \ \ xTaskCreatePinnedToCore(}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ wifiTask,}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}WiFiTask"{}},}
@@ -727,58 +727,58 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00723}00723\ \ \ \ \ \ \ \ \ );}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00724}00724\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00725}00725\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00726}00726\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{deleteTask}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00726}\mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{00726}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{deleteTask}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00727}00727\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wifi\_task\_handle\ !=\ NULL)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ vTaskDelete(wifi\_task\_handle);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \ \ wifi\_task\_handle\ =\ NULL;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00730}00730\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00731}00731\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00732}00732\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00733}00733\ \ \ \ \ TaskHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{getTaskHandle}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00733}\mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{00733}}\ \ \ \ \ TaskHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{getTaskHandle}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00734}00734\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wifi\_task\_handle;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00735}00735\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00736}00736\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00737}00737\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{getCommandQueue}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00737}\mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{00737}}\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{getCommandQueue}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00738}00738\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wifi\_command\_queue;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00739}00739\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00740}00740\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00741}00741\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{getScanResultQueue}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00741}\mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{00741}}\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{getScanResultQueue}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00742}00742\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wifi\_scan\_result\_queue;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00743}00743\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00744}00744\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00745}00745\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{setCurrentCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00745}\mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{00745}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{setCurrentCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00746}00746\ \ \ \ \ \ \ \ \ strncpy(current\_ssid,\ ssid,\ \textcolor{keyword}{sizeof}(current\_ssid)\ -\/\ 1);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00747}00747\ \ \ \ \ \ \ \ \ current\_ssid[\textcolor{keyword}{sizeof}(current\_ssid)\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00748}00748\ \ \ \ \ \ \ \ \ strncpy(current\_password,\ password,\ \textcolor{keyword}{sizeof}(current\_password)\ -\/\ 1);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00749}00749\ \ \ \ \ \ \ \ \ current\_password[\textcolor{keyword}{sizeof}(current\_password)\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00750}00750\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00751}00751\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00752}00752\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{getCurrentCredentials}}(\textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00752}\mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{00752}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{getCurrentCredentials}}(\textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00753}00753\ \ \ \ \ \ \ \ \ strcpy(ssid,\ current\_ssid);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00754}00754\ \ \ \ \ \ \ \ \ strcpy(password,\ current\_password);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00755}00755\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00756}00756\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00757}00757\ \ \ \ \ std::vector<String>\&\ \mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{getSSIDList}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00757}\mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{00757}}\ \ \ \ \ std::vector<String>\&\ \mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{getSSIDList}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00758}00758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wifi\_ssids;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00759}00759\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00760}00760\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00761}00761\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{setStatusCallback}}(\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\_status\_callback\_t}}\ callback)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00761}\mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{00761}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{setStatusCallback}}(\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\_status\_callback\_t}}\ callback)\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00762}00762\ \ \ \ \ \ \ \ \ status\_callback\ =\ callback;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00763}00763\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00764}00764\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00765}00765\ \ \ \ \ NTPClient\&\ \mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{getNTPClient}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00765}\mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{00765}}\ \ \ \ \ NTPClient\&\ \mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{getNTPClient}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00766}00766\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ timeClient;}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00767}00767\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00768}00768\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00769}00769\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{createStatusTimer}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00769}\mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{00769}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{createStatusTimer}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00770}00770\ \ \ \ \ \ \ \ \ lv\_timer\_create(mainStatusUpdaterCB,\ 1000,\ NULL);}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00771}00771\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00772}00772\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00773}00773\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{deleteStatusTimer}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00773}\mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{00773}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{deleteStatusTimer}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00774}00774\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Timers\ are\ automatically\ cleaned\ up\ when\ objects\ are\ deleted}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00775}00775\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00776}00776\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00777}00777\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{handleAPRoot}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00777}\mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{00777}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{handleAPRoot}}()\ \{}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00778}00778\ \ \ \ \ \ \ \ \ String\ html\ =\ R\textcolor{stringliteral}{"{}(}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00779}00779\ \textcolor{stringliteral}{<!DOCTYPE\ html>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00780}00780\ \textcolor{stringliteral}{<html>}}
@@ -822,13 +822,13 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00818}00818\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <form\ action="{}/config"{}\ method="{}post"{}>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00819}00819\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}form-\/group"{}>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00820}00820\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <label\ for="{}private\_key"{}>Nostr\ Private\ Key\ (64-\/character\ hex):</label>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00821}00821\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <input\ type="{}password"{}\ id="{}private\_key"{}\ name="{}private\_key"{}\ placeholder="{}64-\/character\ hex\ private\ key"{}\ required>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00821}00821\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <input\ type="{}password"{}\ id="{}private\_key"{}\ name="{}private\_key"{}\ placeholder="{}64-\/character\ hex\ private\ key"{}\ required\ value="{}\{\{private\_key\}\}"{}>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00822}00822\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <small\ style="{}color:\ \#666;"{}>Enter\ your\ Nostr\ private\ key\ as\ 64\ hex\ characters</small>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00823}00823\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00824}00824\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00825}00825\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}form-\/group"{}>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00826}00826\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <label\ for="{}relay\_url"{}>Nostr\ Relay\ URL:</label>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00827}00827\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <input\ type="{}text"{}\ id="{}relay\_url"{}\ name="{}relay\_url"{}\ placeholder="{}wss://relay.damus.io"{}\ required>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00827}00827\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <input\ type="{}text"{}\ id="{}relay\_url"{}\ name="{}relay\_url"{}\ placeholder="{}wss://relay.nostrconnect.com"{}\ required\ value="{}\{\{relay\_url\}\}"{}>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00828}00828\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <small\ style="{}color:\ \#666;"{}>WebSocket\ URL\ of\ the\ Nostr\ relay\ to\ connect\ to</small>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00829}00829\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00830}00830\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
@@ -844,128 +844,139 @@
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00840}00840\ \textcolor{stringliteral}{</body>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00841}00841\ \textcolor{stringliteral}{</html>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00842}00842\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ )"{};}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00843}00843\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00844}00844\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ap\_server.send(200,\ }\textcolor{stringliteral}{"{}text/html"{}},\ html);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00845}00845\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00846}00846\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00847}00847\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}{handleAPConfig}}()\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00848}00848\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ap\_server.hasArg(\textcolor{stringliteral}{"{}private\_key"{}})\ ||\ !ap\_server.hasArg(\textcolor{stringliteral}{"{}relay\_url"{}}))\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00849}00849\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Missing\ required\ parameters"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00850}00850\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00851}00851\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00852}00852\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00853}00853\ \ \ \ \ \ \ \ \ String\ privateKey\ =\ ap\_server.arg(\textcolor{stringliteral}{"{}private\_key"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00854}00854\ \ \ \ \ \ \ \ \ String\ relayUrl\ =\ ap\_server.arg(\textcolor{stringliteral}{"{}relay\_url"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00855}00855\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00856}00856\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Configuring\ Remote\ Signer..."{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00857}00857\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Private\ Key\ length:\ "{}}\ +\ String(privateKey.length()));}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00858}00858\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Relay\ URL:\ "{}}\ +\ relayUrl);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00859}00859\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00860}00860\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ private\ key\ format}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00861}00861\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privateKey.length()\ !=\ 64\ \&\&\ !privateKey.startsWith(\textcolor{stringliteral}{"{}nsec1"{}}))\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00862}00862\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Invalid\ private\ key\ format"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00863}00863\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00864}00864\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00865}00865\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00866}00866\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ nsec\ to\ hex\ if\ needed}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00867}00867\ \ \ \ \ \ \ \ \ String\ privateKeyHex\ =\ privateKey;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00868}00868\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privateKey.startsWith(\textcolor{stringliteral}{"{}nsec1"{}}))\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Add\ nsec\ to\ hex\ conversion\ if\ needed}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WARNING:\ nsec\ format\ not\ yet\ supported,\ use\ hex\ format"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00871}00871\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Please\ use\ hex\ format\ for\ private\ key"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00873}00873\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00874}00874\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00875}00875\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Derive\ public\ key\ using\ nostr\ library}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00876}00876\ \ \ \ \ \ \ \ \ String\ publicKeyHex\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00877}00877\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00878}00878\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00879}00879\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00880}00880\ \ \ \ \ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00881}00881\ \ \ \ \ \ \ \ \ \ \ \ \ PrivateKey\ privKey(privateKeyBytes);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00882}00882\ \ \ \ \ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privKey.publicKey();}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ pub.toString();}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00884}00884\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remove\ leading\ 2\ bytes\ from\ public\ key}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00885}00885\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ publicKeyHex.substring(2);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00886}00886\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Derived\ public\ key:\ "{}}\ +\ publicKeyHex);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00887}00887\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ derive\ public\ key"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Invalid\ private\ key\ -\/\ could\ not\ derive\ public\ key"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00890}00890\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00891}00891\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00892}00892\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00893}00893\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ configuration\ to\ RemoteSigner}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00894}00894\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}{RemoteSigner::setRelayUrl}}(relayUrl);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00895}00895\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}{RemoteSigner::setPrivateKey}}(privateKeyHex);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00896}00896\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00897}00897\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ to\ preferences}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00898}00898\ \ \ \ \ \ \ \ \ Preferences\ prefs;}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00899}00899\ \ \ \ \ \ \ \ \ prefs.begin(\textcolor{stringliteral}{"{}signer"{}},\ \textcolor{keyword}{false});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00900}00900\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}private\_key"{}},\ privateKeyHex);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00901}00901\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}public\_key"{}},\ publicKeyHex);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00902}00902\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}relay\_url"{}},\ relayUrl);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00903}00903\ \ \ \ \ \ \ \ \ prefs.end();}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00904}00904\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00905}00905\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ configuration\ saved\ successfully"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00906}00906\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00907}00907\ \ \ \ \ \ \ \ \ String\ html\ =\ R\textcolor{stringliteral}{"{}(}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00908}00908\ \textcolor{stringliteral}{<!DOCTYPE\ html>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00909}00909\ \textcolor{stringliteral}{<html>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00910}00910\ \textcolor{stringliteral}{<head>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00911}00911\ \textcolor{stringliteral}{\ \ \ \ <title>Configuration\ Saved</title>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00912}00912\ \textcolor{stringliteral}{\ \ \ \ <meta\ name="{}viewport"{}\ content="{}width=device-\/width,\ initial-\/scale=1"{}>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00913}00913\ \textcolor{stringliteral}{\ \ \ \ <style>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00914}00914\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ body\ \{\ font-\/family:\ Arial,\ sans-\/serif;\ margin:\ 20px;\ text-\/align:\ center;\ background-\/color:\ \#f5f5f5;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00915}00915\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .container\ \{\ max-\/width:\ 500px;\ margin:\ 0\ auto;\ background:\ white;\ padding:\ 30px;\ border-\/radius:\ 8px;\ box-\/shadow:\ 0\ 2px\ 10px\ rgba(0,0,0,0.1);\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00916}00916\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .success\ \{\ color:\ \#4CAF50;\ font-\/size:\ 24px;\ margin:\ 20px\ 0;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00917}00917\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .info\ \{\ background-\/color:\ \#e7f3ff;\ padding:\ 15px;\ border-\/radius:\ 4px;\ margin:\ 20px\ 0;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00918}00918\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .back-\/btn\ \{\ background-\/color:\ \#2196F3;\ color:\ white;\ padding:\ 12px\ 24px;\ text-\/decoration:\ none;\ border-\/radius:\ 4px;\ display:\ inline-\/block;\ margin-\/top:\ 20px;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00919}00919\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/item\ \{\ margin:\ 10px\ 0;\ text-\/align:\ left;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00920}00920\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/label\ \{\ font-\/weight:\ bold;\ color:\ \#333;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00921}00921\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/value\ \{\ font-\/family:\ monospace;\ font-\/size:\ 12px;\ word-\/break:\ break-\/all;\ color:\ \#666;\ \}}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00922}00922\ \textcolor{stringliteral}{\ \ \ \ </style>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00923}00923\ \textcolor{stringliteral}{</head>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00924}00924\ \textcolor{stringliteral}{<body>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00925}00925\ \textcolor{stringliteral}{\ \ \ \ <div\ class="{}container"{}>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00926}00926\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <div\ class="{}success"{}>✓\ Configuration\ saved\ successfully!</div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00927}00927\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00928}00928\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <div\ class="{}info"{}>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00929}00929\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/item"{}>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00930}00930\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/label"{}>Public\ Key:</div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00931}00931\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/value"{}>)"{}\ +\ publicKeyHex\ +\ R}\textcolor{stringliteral}{"{}(</div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00932}00932\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00933}00933\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/item"{}>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00934}00934\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/label"{}>Relay:</div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00935}00935\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/value"{}>)"{}\ +\ relayUrl\ +\ R}\textcolor{stringliteral}{"{}(</div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00936}00936\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00937}00937\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00843}00843\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ now\ fill\ in\ current\ values}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00844}00844\ \ \ \ \ \ \ \ \ String\ currentRelay\ =\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{RemoteSigner::getRelayUrl}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00845}00845\ \ \ \ \ \ \ \ \ String\ currentPrivateKey\ =\ \mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{RemoteSigner::getPrivateKey}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00846}00846\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentPrivateKey.length()\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00847}00847\ \ \ \ \ \ \ \ \ \ \ \ \ html.replace(\textcolor{stringliteral}{"{}\{\{private\_key\}\}"{}},\ currentPrivateKey);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00848}00848\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00849}00849\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentRelay.length()\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00850}00850\ \ \ \ \ \ \ \ \ \ \ \ \ html.replace(\textcolor{stringliteral}{"{}\{\{relay\_url\}\}"{}},\ currentRelay);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00851}00851\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ html.replace(\textcolor{stringliteral}{"{}\{\{relay\_url\}\}"{}},\ \textcolor{stringliteral}{"{}wss://relay.nostrconnect.com"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00853}00853\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00854}00854\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00855}\mbox{\hyperlink{namespace_wi_fi_manager_a0cfcbd298e69e1e3158fc5ffb0ea7ed1}{00855}}\ \ \ \ \ \ \ \ \ ap\_server.send(200,\ \textcolor{stringliteral}{"{}text/html"{}},\ html);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00856}00856\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00857}00857\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00858}\mbox{\hyperlink{wifi__manager_8cpp_a658cfcf42b587e39e02a496f6cd3dd6c}{00858}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}{handleAPConfig}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00859}00859\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ap\_server.hasArg(\textcolor{stringliteral}{"{}private\_key"{}})\ ||\ !ap\_server.hasArg(\textcolor{stringliteral}{"{}relay\_url"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00860}00860\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Missing\ required\ parameters"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00861}00861\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00862}00862\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00863}00863\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00864}00864\ \ \ \ \ \ \ \ \ String\ privateKey\ =\ ap\_server.arg(\textcolor{stringliteral}{"{}private\_key"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00865}00865\ \ \ \ \ \ \ \ \ String\ relayUrl\ =\ ap\_server.arg(\textcolor{stringliteral}{"{}relay\_url"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00866}00866\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00867}00867\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Configuring\ Remote\ Signer..."{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00868}00868\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Private\ Key\ length:\ "{}}\ +\ String(privateKey.length()));}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00869}00869\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Relay\ URL:\ "{}}\ +\ relayUrl);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00870}00870\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00871}00871\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ private\ key\ format}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00872}00872\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privateKey.length()\ !=\ 64\ \&\&\ !privateKey.startsWith(\textcolor{stringliteral}{"{}nsec1"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Invalid\ private\ key\ format"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00874}00874\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00875}00875\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00876}00876\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00877}00877\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ nsec\ to\ hex\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00878}00878\ \ \ \ \ \ \ \ \ String\ privateKeyHex\ =\ privateKey;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00879}00879\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (privateKey.startsWith(\textcolor{stringliteral}{"{}nsec1"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00880}00880\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Add\ nsec\ to\ hex\ conversion\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00881}00881\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WARNING:\ nsec\ format\ not\ yet\ supported,\ use\ hex\ format"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00882}00882\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Please\ use\ hex\ format\ for\ private\ key"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00884}00884\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00885}00885\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00886}00886\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Derive\ public\ key\ using\ nostr\ library}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00887}00887\ \ \ \ \ \ \ \ \ String\ publicKeyHex\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00888}00888\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00890}00890\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00892}00892\ \ \ \ \ \ \ \ \ \ \ \ \ PrivateKey\ privKey(privateKeyBytes);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00893}00893\ \ \ \ \ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privKey.publicKey();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00894}00894\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ pub.toString();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00895}00895\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remove\ leading\ 2\ bytes\ from\ public\ key}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \ \ publicKeyHex\ =\ publicKeyHex.substring(2);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Derived\ public\ key:\ "{}}\ +\ publicKeyHex);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00898}00898\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ derive\ public\ key"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00900}00900\ \ \ \ \ \ \ \ \ \ \ \ \ ap\_server.send(400,\ \textcolor{stringliteral}{"{}text/plain"{}},\ \textcolor{stringliteral}{"{}Invalid\ private\ key\ -\/\ could\ not\ derive\ public\ key"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00901}00901\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00902}00902\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00903}00903\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00904}00904\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ configuration\ to\ RemoteSigner}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00905}00905\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_ae07a3d95fc7458cb9af0edd6efc70f5c}{RemoteSigner::setRelayUrl}}(relayUrl);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00906}00906\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_remote_signer_ad9a6b64bfb464b0585b26bf6c4256e1e}{RemoteSigner::setPrivateKey}}(privateKeyHex);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00907}00907\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00908}00908\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ to\ preferences}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00909}00909\ \ \ \ \ \ \ \ \ Preferences\ prefs;}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00910}00910\ \ \ \ \ \ \ \ \ prefs.begin(\textcolor{stringliteral}{"{}signer"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00911}00911\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}private\_key"{}},\ privateKeyHex);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00912}00912\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}public\_key"{}},\ publicKeyHex);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00913}00913\ \ \ \ \ \ \ \ \ prefs.putString(\textcolor{stringliteral}{"{}relay\_url"{}},\ relayUrl);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00914}00914\ \ \ \ \ \ \ \ \ prefs.end();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00915}00915\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00916}00916\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Remote\ Signer\ configuration\ saved\ successfully"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00917}00917\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00918}00918\ \ \ \ \ \ \ \ \ String\ html\ =\ R\textcolor{stringliteral}{"{}(}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00919}00919\ \textcolor{stringliteral}{<!DOCTYPE\ html>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00920}00920\ \textcolor{stringliteral}{<html>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00921}00921\ \textcolor{stringliteral}{<head>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00922}00922\ \textcolor{stringliteral}{\ \ \ \ <title>Configuration\ Saved</title>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00923}00923\ \textcolor{stringliteral}{\ \ \ \ <meta\ name="{}viewport"{}\ content="{}width=device-\/width,\ initial-\/scale=1"{}>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00924}00924\ \textcolor{stringliteral}{\ \ \ \ <style>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00925}00925\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ body\ \{\ font-\/family:\ Arial,\ sans-\/serif;\ margin:\ 20px;\ text-\/align:\ center;\ background-\/color:\ \#f5f5f5;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00926}00926\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .container\ \{\ max-\/width:\ 500px;\ margin:\ 0\ auto;\ background:\ white;\ padding:\ 30px;\ border-\/radius:\ 8px;\ box-\/shadow:\ 0\ 2px\ 10px\ rgba(0,0,0,0.1);\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00927}00927\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .success\ \{\ color:\ \#4CAF50;\ font-\/size:\ 24px;\ margin:\ 20px\ 0;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00928}00928\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .info\ \{\ background-\/color:\ \#e7f3ff;\ padding:\ 15px;\ border-\/radius:\ 4px;\ margin:\ 20px\ 0;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00929}00929\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .back-\/btn\ \{\ background-\/color:\ \#2196F3;\ color:\ white;\ padding:\ 12px\ 24px;\ text-\/decoration:\ none;\ border-\/radius:\ 4px;\ display:\ inline-\/block;\ margin-\/top:\ 20px;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00930}00930\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/item\ \{\ margin:\ 10px\ 0;\ text-\/align:\ left;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00931}00931\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/label\ \{\ font-\/weight:\ bold;\ color:\ \#333;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00932}00932\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ .config-\/value\ \{\ font-\/family:\ monospace;\ font-\/size:\ 12px;\ word-\/break:\ break-\/all;\ color:\ \#666;\ \}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00933}00933\ \textcolor{stringliteral}{\ \ \ \ </style>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00934}00934\ \textcolor{stringliteral}{</head>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00935}00935\ \textcolor{stringliteral}{<body>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00936}00936\ \textcolor{stringliteral}{\ \ \ \ <div\ class="{}container"{}>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00937}00937\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <div\ class="{}success"{}>✓\ Configuration\ saved\ successfully!</div>}}
 \DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00938}00938\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00939}00939\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <p>Your\ remote\ signer\ is\ now\ configured\ and\ ready\ to\ use.</p>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00940}00940\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <a\ href="{}/"{}\ class="{}back-\/btn"{}>Back\ to\ Configuration</a>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00941}00941\ \textcolor{stringliteral}{\ \ \ \ </div>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00942}00942\ \textcolor{stringliteral}{</body>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00943}00943\ \textcolor{stringliteral}{</html>}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00944}00944\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ )"{};}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00945}00945\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00946}00946\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ap\_server.send(200,\ }\textcolor{stringliteral}{"{}text/html"{}},\ html);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00947}00947\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00948}00948\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00949}00949\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a42fcac4975c9a54e61aacee344294a87}{handleCurrentConfig}}()\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00950}00950\ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}\{"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00951}00951\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}bunker\_url\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{RemoteSigner::getBunkerUrl}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00952}00952\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}relay\_url\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{RemoteSigner::getRelayUrl}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00953}00953\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}public\_key\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab63e557eaa270158c31089485af13853}{RemoteSigner::getPublicKey}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00954}00954\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}private\_key\(\backslash\)"{}:\(\backslash\)"{}"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00955}00955\ \ \ \ \ \ \ \ \ response\ +=\ (\mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{RemoteSigner::getPrivateKey}}().length()\ >\ 0\ ?\ \textcolor{stringliteral}{"{}configured"{}}\ :\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00956}00956\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00957}00957\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\}"{}};}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00958}00958\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00959}00959\ \ \ \ \ \ \ \ \ ap\_server.send(200,\ \textcolor{stringliteral}{"{}application/json"{}},\ response);}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00960}00960\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00961}00961\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00962}00962\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}{updateSettingsScreenForAPMode}}()\ \{}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00963}00963\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI::loadScreen}}((\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{UI::screen\_state\_t}})1);\ \textcolor{comment}{//\ SCREEN\_SETTINGS}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00964}00964\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00965}00965\ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00939}00939\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <div\ class="{}info"{}>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00940}00940\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/item"{}>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00941}00941\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/label"{}>Public\ Key:</div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00942}00942\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/value"{}>)"{}\ +\ publicKeyHex\ +\ R}\textcolor{stringliteral}{"{}(</div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00943}00943\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00944}00944\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/item"{}>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00945}00945\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/label"{}>Relay:</div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00946}00946\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}config-\/value"{}>)"{}\ +\ relayUrl\ +\ R}\textcolor{stringliteral}{"{}(</div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00947}00947\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00948}00948\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00949}00949\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00950}00950\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <p>Your\ remote\ signer\ is\ now\ configured\ and\ ready\ to\ use.</p>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00951}00951\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <a\ href="{}/"{}\ class="{}back-\/btn"{}>Back\ to\ Configuration</a>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00952}00952\ \textcolor{stringliteral}{\ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00953}00953\ \textcolor{stringliteral}{</body>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00954}00954\ \textcolor{stringliteral}{</html>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00955}00955\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ )"{};}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00956}00956\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00957}00957\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ ap\_server.send(200,\ }\textcolor{stringliteral}{"{}text/html"{}},\ html);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00958}00958\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00959}00959\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00960}\mbox{\hyperlink{wifi__manager_8cpp_ab4c0897915e8cd54874cbf82beb2b9a8}{00960}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a42fcac4975c9a54e61aacee344294a87}{handleCurrentConfig}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00961}00961\ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}\{"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00962}00962\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}bunker\_url\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_a1c2a9624b2081159b7d455dfce957b76}{RemoteSigner::getBunkerUrl}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00963}00963\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}relay\_url\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab58a37e2b30a5193da7c05753a9ec21d}{RemoteSigner::getRelayUrl}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00964}00964\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}public\_key\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ \mbox{\hyperlink{namespace_remote_signer_ab63e557eaa270158c31089485af13853}{RemoteSigner::getPublicKey}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00965}00965\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}private\_key\(\backslash\)"{}:\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00966}00966\ \ \ \ \ \ \ \ \ response\ +=\ (\mbox{\hyperlink{namespace_remote_signer_ab7e521b5ed4cda1a61ab3ba0cb07faa1}{RemoteSigner::getPrivateKey}}().length()\ >\ 0\ ?\ \textcolor{stringliteral}{"{}configured"{}}\ :\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00967}00967\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00968}00968\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}\}"{}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00969}00969\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00970}00970\ \ \ \ \ \ \ \ \ ap\_server.send(200,\ \textcolor{stringliteral}{"{}application/json"{}},\ response);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00971}00971\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00972}00972\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00973}\mbox{\hyperlink{wifi__manager_8cpp_aeb0519c2d4163a0500cb72e453aa58fd}{00973}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}{updateSettingsScreenForAPMode}}()\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00974}00974\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI::loadScreen}}((\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{UI::screen\_state\_t}})1);\ \textcolor{comment}{//\ SCREEN\_SETTINGS}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00975}00975\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8cpp_source_l00976}00976\ \}}
 
 \end{DoxyCode}
