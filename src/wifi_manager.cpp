@@ -182,8 +182,6 @@ namespace WiFiManager {
                 String status_text = String(LV_SYMBOL_WIFI) + " " + WiFi.SSID();
                 lv_label_set_text(main_wifi_status_label, status_text.c_str());
                 lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x00FF00), 0);
-                
-                // NWC and Bitcoin price fetching will be handled by external modules
             } else {
                 unsigned long current_time = millis();
                 if (wifi_connection_attempted && (current_time - wifi_connect_start_time > WIFI_CONNECT_TIMEOUT)) {
@@ -193,8 +191,6 @@ namespace WiFiManager {
                     lv_label_set_text(main_wifi_status_label, LV_SYMBOL_WIFI " Not Connected");
                     lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x9E9E9E), 0);
                 }
-                
-                // NWC disconnection will be handled by external modules
             }
         }
         
@@ -537,7 +533,7 @@ namespace WiFiManager {
         Serial.println("Access Point started successfully");
         updateSettingsScreenForAPMode();
         
-        UI::showMessage("NWC Pairing Code", "Connect to the WiFi hotspot below to set your NWC pairing code.\nSSID: " + String(ap_ssid) + "\nPassword: " + Settings::getAPPassword() + "\nIP: " + String(ap_ip));
+        UI::showMessage("Bunker Pairing Code", "Connect to the WiFi hotspot below to set your Nostr key and prefered relay.\nSSID: " + String(ap_ssid) + "\nPassword: " + Settings::getAPPassword() + "\nIP: " + String(ap_ip));
     }
     
     void stopAPMode() {
@@ -583,21 +579,21 @@ namespace WiFiManager {
     
     void loadBunkerUrl() {
         preferences.begin("config", true);
-        String saved_url = preferences.getString("nwc_url", "");
+        String saved_url = preferences.getString("bunker_url", "");
         preferences.end();
         
         if (saved_url.length() > 0) {
             // Signer configuration loaded separately
             Serial.println("Signer config will be loaded from preferences");
-            Serial.println("Loaded NWC URL from preferences: " + saved_url);
+            Serial.println("Loaded Bunker URL from preferences: " + saved_url);
         } else {
-            Serial.println("No saved NWC URL found, using default");
+            Serial.println("No saved Bunker URL found, using default");
         }
     }
     
     void saveBunkerUrl(const String& url) {
         preferences.begin("config", false);
-        preferences.putString("nwc_url", url);
+        preferences.putString("bunker_url", url);
         preferences.end();
         Serial.println("Saved Bunker URL to preferences: " + url);
     }
