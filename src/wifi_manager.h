@@ -71,11 +71,11 @@ namespace WiFiManager {
     String getAPPassword();
     String getAPIP();
     
-    // NWC URL management
-    void loadNWCUrl();
-    void saveNWCUrl(const String& url);
-    String getNWCUrl();
-    void setNWCUrl(const String& url);
+    // Bunker URL management
+    void loadBunkerUrl();
+    void saveBunkerUrl(const String& url);
+    String getBunkerUrl();
+    void setBunkerUrl(const String& url);
     
     // Status monitoring
     void updateStatus();

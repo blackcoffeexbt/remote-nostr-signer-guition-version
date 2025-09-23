@@ -218,8 +218,8 @@ namespace WiFiManager {
         createTask();
         createStatusTimer();
         
-        // Load NWC URL
-        loadNWCUrl();
+        // Load Bunker URL
+        loadBunkerUrl();
         
         // Try to connect to saved WiFi if not in AP mode
         if (!ap_mode_active) {
@@ -501,9 +501,6 @@ namespace WiFiManager {
         Serial.println("Starting Access Point mode...");
         
         if (RemoteSigner::isInitialized()) {
-            // webSocket.disconnect();
-            // webSocket.setReconnectInterval(0);
-            // NWC disconnection handled by NWC module
             Serial.println("Disconnected from relay and disabled reconnection");
         }
         
@@ -584,7 +581,7 @@ namespace WiFiManager {
         return String(ap_ip);
     }
     
-    void loadNWCUrl() {
+    void loadBunkerUrl() {
         preferences.begin("nwc-config", true);
         String saved_url = preferences.getString("nwc_url", "");
         preferences.end();
@@ -598,21 +595,21 @@ namespace WiFiManager {
         }
     }
     
-    void saveNWCUrl(const String& url) {
+    void saveBunkerUrl(const String& url) {
         preferences.begin("nwc-config", false);
         preferences.putString("nwc_url", url);
         preferences.end();
-        Serial.println("Saved NWC URL to preferences: " + url);
+        Serial.println("Saved Bunker URL to preferences: " + url);
     }
     
-    String getNWCUrl() {
+    String getBunkerUrl() {
         return RemoteSigner::getBunkerUrl();
     }
     
-    void setNWCUrl(const String& url) {
+    void setBunkerUrl(const String& url) {
         // Signer configuration set separately
         Serial.println("Signer URL configuration: " + url);
-        saveNWCUrl(url);
+        saveBunkerUrl(url);
     }
     
     void updateStatus() {
