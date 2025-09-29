@@ -17,7 +17,7 @@ public:
     bool begin();
     bool touched();
     void setRotation(uint8_t);
-    void readData(uint16_t *, uint16_t *);
+    void readData(uint16_t *, uint16_t *) const;
     void enOffsetCorrection(bool);
     void setOffsets(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t);
 
@@ -32,7 +32,7 @@ private:
     uint16_t x_ideal_max, y_ideal_max;
 
     bool update();
-    void correctOffset(uint16_t *, uint16_t *);
+    void correctOffset(uint16_t *, uint16_t *) const;
     static void isrTouched();
     static AXS15231B_Touch* instance;
 };
