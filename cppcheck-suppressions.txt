@@ -1,2 +1,0 @@
-# Ignore everything under PlatformIO’s build + dependency dirs
-*:${project_dir}/.pio/*
