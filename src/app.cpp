@@ -26,11 +26,11 @@ namespace App
         try
         {
             // Initialize modules in dependency order
-            // Serial.println("Initializing Display module...");
-            // Display::init();
+            Serial.println("Initializing Display module...");
+            Display::init();
 
-            // Serial.println("Initializing Settings module...");
-            // Settings::init();
+            Serial.println("Initializing Settings module...");
+            Settings::init();
 
             Serial.println("Initializing WiFi Manager module...");
             WiFiManager::init();
@@ -103,7 +103,16 @@ namespace App
         } catch (...) {
             Serial.println("ERROR: WiFiManager::processLoop() threw exception");
         }
-        
+
+        // Process Remote Signer WebSocket events (with error handling)
+        try {
+            RemoteSigner::processLoop();
+        } catch (...) {
+            Serial.println("ERROR: RemoteSigner::processLoop() threw exception");
+        }
+
+        // Check backlight timeout
+        Display::checkBacklightTimeout();
         // Periodic health checks
         if (current_time - last_health_check >= Config::HEALTH_CHECK_INTERVAL)
         {
