@@ -402,6 +402,9 @@ namespace UI {
     }
     
     void createWiFiScreen() {
+        // Pause background operations for better touch performance
+        WiFiManager::pauseBackgroundOperations(true);
+        
         // Create main container
         lv_obj_t* main_container = lv_obj_create(lv_scr_act());
         lv_obj_set_size(main_container, lv_pct(100), lv_pct(100));
@@ -475,6 +478,9 @@ namespace UI {
     void createWiFiPasswordScreen(const char* ssid) {
         current_screen = SCREEN_WIFI_PASSWORD;
         
+        // Pause background operations for better touch performance
+        WiFiManager::pauseBackgroundOperations(true);
+        
         lv_obj_clean(lv_scr_act());
         cleanupGlobalPointers();
         
@@ -513,7 +519,7 @@ namespace UI {
         
         // Status label (hidden initially)
         lv_obj_t* status_label = lv_label_create(main_container);
-        // lv_obj_set_style_text_color(status_label, lv_color_hex(0xFFFFFF), 0);
+        lv_obj_set_style_text_color(status_label, lv_color_hex(0xFFFFFF), 0);
         lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 0);
         lv_obj_add_flag(status_label, LV_OBJ_FLAG_HIDDEN);
         WiFiManager::setStatusLabel(status_label);
@@ -811,6 +817,12 @@ namespace UI {
         if (code == LV_EVENT_CLICKED) {
             // Reset activity timer on navigation
             App::resetActivityTimer();
+            
+            // Resume background operations when leaving WiFi screens
+            if (current_screen == SCREEN_WIFI || current_screen == SCREEN_WIFI_PASSWORD) {
+                WiFiManager::pauseBackgroundOperations(false);
+            }
+            
             screen_state_t target_screen = (screen_state_t)(uintptr_t)lv_event_get_user_data(e);
             loadScreen(target_screen);
         }

@@ -3,6 +3,7 @@
 #include "ui.h"
 #include "app.h"
 #include "display.h"
+#include "wifi_manager.h"
 #include <Preferences.h>
 #include "lvgl.h"
 
@@ -675,7 +676,7 @@ namespace RemoteSigner {
     }
     
     void processLoop() {
-        if (!signer_initialized) {
+        if (!signer_initialized || WiFiManager::isBackgroundOperationsPaused()) {
             return;
         }
         
